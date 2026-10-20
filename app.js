@@ -703,8 +703,11 @@ function enter(user){
     catch(err){ if(uid === user.id){ entering = null; renderBoot(err); } return; }
     if(uid !== user.id) return;   // signed out while loading
     armBackGuard();
-    if(!state.onboard && !ob.name) ob.name = firstName(user);
-    go(state.onboard ? "v-system" : "v-onboard", {instant:true});
+    if(!state.onboard){
+      state.onboard = {name:firstName(user), level:"", exam:""};
+      save();
+    }
+    go("v-system", {instant:true});
   })();
   return entering;
 }
