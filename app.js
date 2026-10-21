@@ -109,7 +109,7 @@ function courseMark(course, size = ""){
 }
 const DIFFS = {mixed:"Mixed", easy:"Easy", standard:"Standard", hard:"Hard"};
 const DIFF_N = {easy:1, standard:2, hard:3};
-const DEFAULT_PREFS = {count:10, timer:0, diff:"mixed", focus:"all", explain:"each"};
+const DEFAULT_PREFS = {count:10, timer:0, diff:"mixed", focus:"all", source:"all", topic:"", explain:"each"};
 
 /* ===================== State ===================== */
 const LS_KEY = "orbit-cu-v2";
@@ -490,24 +490,37 @@ function layoutThumbs(root){
 function openSheet(code){
   activeCourse = code; const c = COURSES.find(x => x.code === code); const p = prefsFor(code);
   const weak = weakTopics(code); if(p.focus === "weak" && !weak.length) p.focus = "all";
+  const topics = [...new Set(bankFor(code).map(q => q.topic).filter(Boolean))].sort((a, b) => a.localeCompare(b));
+  if(p.source === "topic" && !topics.includes(p.topic)) p.topic = "";
+  if(p.source === "past" && !realBank[code]) p.source = "all";
   const sheet = $("sheet");
   sheet.innerHTML = `<div class="grab"></div>
     <div class="sheet-head">${courseMark(c, "course-mark--sheet")}<div><strong>${code}</strong><span>${realBank[code] ? banks[code].length + " past questions" : "Sample questions"}</span></div>
       <button class="close" id="sheetClose" aria-label="Close"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
     ${realBank[code] ? "" : `<p class="notice">No ${code} past questions have been added yet, so you’ll practise the sample set until they are.</p>`}
+    <div class="pref"><label>Questions from</label>${seg("source", [["all","All"],["past","Past questions"],["topic","A topic"]], p.source, realBank[code] ? [] : ["past"])}</div>
+    <label class="topic-select-wrap" id="topicSelectWrap" ${p.source === "topic" ? "" : "hidden"}><span>Choose a topic</span><select class="topic-select" id="topicSelect"><option value="">Select a topic</option>${topics.map(topic => `<option value="${esc(topic)}" ${p.topic === topic ? "selected" : ""}>${esc(topic)}</option>`).join("")}</select></label>
     <div class="pref"><label>Questions</label>${seg("count", [[5,"5"],[10,"10"],[15,"15"],[20,"20"]], p.count)}</div>
     <div class="pref"><label>Timer per question</label>${seg("timer", [[0,"Off"],[30,"30s"],[60,"60s"],[90,"90s"]], p.timer)}</div>
     <div class="pref"><label>Difficulty</label>${seg("diff", Object.entries(DIFFS), p.diff)}</div>
     <div class="pref"><label>Focus</label>${seg("focus", [["all","All topics"],["weak", "Weak spots"]], p.focus, weak.length ? [] : ["weak"])}</div>
     <div class="pref"><label>Explanations</label>${seg("explain", [["each","After each"],["end","At the end"]], p.explain)}</div>
-    <div class="sheet-actions"><button class="btn btn-primary" id="sheetStart">Start practice</button><button class="btn btn-soft" id="sheetDuel">Duel a friend</button></div>
+    <div class="sheet-actions"><button class="btn btn-primary" id="sheetStart" ${p.source === "topic" && !p.topic ? "disabled" : ""}>Start practice</button><button class="btn btn-soft" id="sheetDuel">Duel a friend</button></div>
     <button class="sheet-link" id="sheetDash">See weak spots for ${code}</button>`;
   sheet.querySelectorAll(".seg").forEach(s => s.addEventListener("click", e => {
     const b = e.target.closest("button"); if(!b || b.disabled) return;
     const key = s.dataset.key; let v = b.dataset.v; if(key === "count" || key === "timer") v = +v;
     cs(code).prefs = Object.assign(prefsFor(code), {[key]: v}); save();
     s.querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", x === b)); layoutThumbs(s.parentElement);
+    if(key === "source"){
+      $("topicSelectWrap").hidden = v !== "topic";
+      $("sheetStart").disabled = v === "topic" && !$("topicSelect").value;
+    }
   }));
+  $("topicSelect").addEventListener("change", event => {
+    cs(code).prefs = Object.assign(prefsFor(code), {topic:event.target.value}); save();
+    $("sheetStart").disabled = !event.target.value;
+  });
   $("sheetClose").onclick = closeSheet;
   $("sheetStart").onclick = () => { closeSheet(); startSolo(code); };
   $("sheetDuel").onclick = () => { closeSheet(); duel = null; duelTab = "live"; go("v-duel"); };
@@ -527,7 +540,9 @@ function diffOf(q){ return q.d || 2; }
 function buildSet(code, cfg){
   const bank = bankFor(code); const r = cfg.seed != null ? rng(cfg.seed) : Math.random;
   let pool = bank;
-  if(cfg.focus === "weak"){ const w = weakTopics(code); const f = bank.filter(q => w.includes(q.topic)); if(f.length) pool = f; }
+  if(cfg.source === "past") pool = realBank[code] ? banks[code] : [];
+  if(cfg.source === "topic" && cfg.topic) pool = pool.filter(q => q.topic === cfg.topic);
+  if(cfg.focus === "weak"){ const w = weakTopics(code); const f = pool.filter(q => w.includes(q.topic)); if(f.length) pool = f; }
   let ordered;
   if(cfg.seed != null){
     ordered = shuffleWith(pool.slice().sort((a, b) => String(a.id).localeCompare(String(b.id))), r);
