@@ -53,6 +53,10 @@ const COURSES = [
   {code:"PHY211",h:262},{code:"PHY232",h:32},{code:"MTH213",h:168},{code:"PHY215",h:345},{code:"PHY212",h:212},
   {code:"PHY218",h:12},{code:"GST211",h:140},{code:"DLD111",h:290},{code:"TMC211",h:48}
 ];
+const LANDING_COURSES = [
+  {name:"Maths",h:262},{name:"Physics",h:32},{name:"Computer Science",h:168},
+  {name:"Computer Engineering",h:345},{name:"Biology",h:212}
+];
 const DIFFS = {mixed:"Mixed", easy:"Easy", standard:"Standard", hard:"Hard"};
 const DIFF_N = {easy:1, standard:2, hard:3};
 const DEFAULT_PREFS = {count:10, timer:0, diff:"mixed", focus:"all", explain:"each"};
@@ -210,7 +214,10 @@ document.addEventListener("pointermove", e => {
   window.addEventListener("pointerup", () => { if(!down) return; down = false; rail.classList.remove("dragging"); });
 })();
 
-$("lineup").innerHTML = COURSES.map(c => `<div class="course-tile glass"><div class="planet" style="--h:${c.h}"></div><strong>${c.code}</strong></div>`).join("");
+$("lineup").innerHTML = [
+  ...LANDING_COURSES.map(c => `<article class="course-tile glass"><div class="course-mark" style="--h:${c.h}" aria-hidden="true"></div><strong>${c.name}</strong></article>`),
+  '<article class="course-tile course-more glass" aria-label="And more courses"><span class="more-dots" aria-hidden="true"><i></i><i></i><i></i></span><strong>And more</strong></article>'
+].join("");
 const landingRevealObserver = reduce ? null : new IntersectionObserver(es => es.forEach(e => {
   if(e.isIntersecting){ e.target.classList.add("in"); landingRevealObserver.unobserve(e.target); }
 }), {threshold:.12, rootMargin:"0px 0px -48px 0px"});
@@ -219,7 +226,27 @@ function observeLanding(el){
   el.classList.add("reveal");
   landingRevealObserver.observe(el);
 }
-document.querySelectorAll(".section-head h2, .statement h2, .statement p, .closing h2 span, .story, .course-tile").forEach(observeLanding);
+document.querySelectorAll(".section-head h2, .statement h2, .statement p, .closing h2 span, .story, .university-tile, .course-tile").forEach(observeLanding);
+document.querySelectorAll("[data-start]").forEach(button => button.addEventListener("click", event => {
+  if(typeof navigator.vibrate === "function") navigator.vibrate(12);
+  if(reduce) return;
+  const bounds = button.getBoundingClientRect();
+  const originX = event.clientX || bounds.left + bounds.width / 2;
+  const originY = event.clientY || bounds.top + bounds.height / 2;
+  for(let i = 0; i < 14; i++){
+    const particle = document.createElement("i");
+    const angle = (Math.PI * 2 * i) / 14;
+    const distance = 24 + Math.random() * 34;
+    particle.className = "button-confetti";
+    particle.style.left = `${originX}px`;
+    particle.style.top = `${originY}px`;
+    particle.style.setProperty("--x", `${Math.cos(angle) * distance}px`);
+    particle.style.setProperty("--y", `${Math.sin(angle) * distance}px`);
+    particle.style.setProperty("--h", `${(i * 29) % 360}`);
+    document.body.append(particle);
+    particle.addEventListener("animationend", () => particle.remove(), {once:true});
+  }
+}));
 
 /* ===================== Onboarding ===================== */
 let ob = {step:0, name:"", level:"", exam:""};

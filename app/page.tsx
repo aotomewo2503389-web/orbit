@@ -84,7 +84,30 @@ export default function HomePage() {
             <div id="phone-showcase-mount" />
           </section>
           <section className="section"><div className="statement"><h2>Question<br />first.</h2><h2 className="right">Explanation<br />after.</h2><p>Most study tools hand you a summary and hope it sticks. Orbit asks the exam question first. Get it wrong and you see why that specific answer was wrong, followed by the working. Then a similar question comes back later to check the fix held.</p></div></section>
-          <section className="section" id="courses"><div className="section-head"><h2>Courses in orbit</h2></div><div className="lineup" id="lineup" /></section>
+          <section className="section" id="universities">
+            <div className="section-head"><h2>Universities in orbit</h2></div>
+            <div className="university-list">
+              <article className="university-tile glass" aria-label="Covenant University, available now">
+                <div className="university-mark" aria-hidden="true">CU</div>
+                <h3>Covenant University</h3>
+                <span className="university-status">Available now</span>
+              </article>
+              <article className="university-tile glass coming-soon" tabIndex={0} aria-label="UNILAG, coming soon">
+                <div className="university-mark" aria-hidden="true">UL</div>
+                <h3>UNILAG</h3>
+                <span className="university-status" aria-hidden="true">Coming soon</span>
+              </article>
+              <article className="university-tile glass coming-soon" tabIndex={0} aria-label="Landmark University, coming soon">
+                <div className="university-mark" aria-hidden="true">LU</div>
+                <h3>Landmark University</h3>
+                <span className="university-status" aria-hidden="true">Coming soon</span>
+              </article>
+            </div>
+          </section>
+          <section className="section" id="courses">
+            <div className="section-head"><h2>Courses in orbit</h2></div>
+            <div className="lineup" id="lineup" aria-label="Courses" />
+          </section>
           <section className="section closing"><h2><span>Start</span><span>your orbit.</span></h2><button className="btn btn-primary" id="closingStart" data-start>Start practising</button></section>
           <footer className="glass">
             <div><div className="logo" style={{ marginBottom: 10 }}>orbit <small>by CU</small></div><p>Exam practice for Covenant University courses, built from past questions.</p></div>
