@@ -225,6 +225,7 @@ function go(id, opts = {}){
     current = id;
     document.body.classList.toggle("in-app", id !== "v-landing");
     $("navStart").hidden = id !== "v-landing" || !landingStartUnlocked;
+    $("navTheme").hidden = !authed;
     $("navOut").hidden = !authed;
     $("navBack").hidden = authed && (id === "v-system" || id === "v-onboard" || id === "v-boot");
     if(id === "v-signin") renderSignin();
@@ -245,12 +246,32 @@ $("navBack").addEventListener("click", () => {
   go(parentOf[current] || "v-landing");
 });
 $("logoHome").addEventListener("click", e => { e.preventDefault(); leaveDuel(); go("v-landing"); });
+function setTheme(theme, persist = true){
+  const selected = theme === "dark" ? "dark" : "light";
+  document.documentElement.dataset.theme = selected;
+  const toggle = $("navTheme"), dark = selected === "dark";
+  toggle.setAttribute("aria-pressed", String(dark));
+  toggle.setAttribute("aria-label", `Switch to ${dark ? "light" : "dark"} mode`);
+  toggle.title = `Switch to ${dark ? "light" : "dark"} mode`;
+  if(persist){
+    try{ localStorage.setItem("orbit-theme", selected); }
+    catch(error){ console.warn("Orbit couldn’t save the theme preference", error); }
+  }
+}
 document.querySelectorAll("[data-theme-set]").forEach(a => a.addEventListener("click", e => {
-  e.preventDefault(); const t = a.dataset.themeSet;
-  if(t) document.documentElement.dataset.theme = t; else delete document.documentElement.dataset.theme;
-  try{ localStorage.setItem("orbit-theme", t); }catch(err){}
+  e.preventDefault();
+  setTheme(a.dataset.themeSet);
 }));
-try{ const t = localStorage.getItem("orbit-theme"); if(t) document.documentElement.dataset.theme = t; }catch(e){}
+$("navTheme").addEventListener("click", () => {
+  setTheme(document.documentElement.dataset.theme === "dark" ? "light" : "dark");
+});
+try{
+  const savedTheme = localStorage.getItem("orbit-theme");
+  setTheme(savedTheme === "dark" ? "dark" : "light", false);
+}catch(error){
+  setTheme("light", false);
+  console.warn("Orbit couldn’t read the saved theme preference", error);
+}
 
 document.addEventListener("pointermove", e => {
   const g = e.target.closest && e.target.closest(".glass"); if(!g) return;

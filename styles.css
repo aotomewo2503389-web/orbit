@@ -93,11 +93,22 @@ img,svg{max-width:100%}
 .nav-links a{padding:10px 14px;border-radius:999px;color:var(--ink-2);text-decoration:none;font-weight:500;font-size:15px;transition:background .25s,color .25s}
 .nav-links a:hover{background:var(--line);color:var(--ink)}
 .nav .btn{min-height:42px}
+.theme-toggle{position:relative;display:inline-flex;align-items:center;justify-content:space-between;width:72px;height:42px;padding:0 10px;border:1px solid var(--line);border-radius:999px;background:linear-gradient(135deg,var(--glass-strong),var(--glass));color:var(--ink-2);box-shadow:inset 0 1px 0 var(--rim),0 5px 14px -10px var(--ink);transition:border-color .25s,box-shadow .25s,transform .3s var(--spring)}
+.theme-toggle:hover{border-color:var(--violet);box-shadow:inset 0 1px 0 var(--rim),0 6px 18px -9px var(--violet);transform:translateY(-1px)}
+.theme-toggle:active{transform:scale(.95)}
+.theme-toggle>span:not(.theme-toggle-thumb){z-index:1;display:grid;place-items:center;width:20px;height:20px;transition:color .25s,transform .35s var(--spring)}
+.theme-toggle svg{width:18px;height:18px}
+.theme-toggle-sun{color:var(--amber)}
+.theme-toggle-moon{color:var(--ink-2)}
+.theme-toggle-thumb{position:absolute;left:4px;top:4px;width:32px;height:32px;border-radius:50%;background:var(--glass-strong);box-shadow:0 2px 8px rgba(17,17,17,.18),inset 0 0 0 1px var(--rim);transition:transform .4s var(--spring),background .3s}
+.theme-toggle[aria-pressed="true"] .theme-toggle-thumb{transform:translateX(30px)}
+.theme-toggle[aria-pressed="true"] .theme-toggle-sun{color:var(--ink-2);transform:rotate(-25deg) scale(.82)}
+.theme-toggle[aria-pressed="true"] .theme-toggle-moon{color:var(--violet)}
 .nav-back{display:none;align-items:center;gap:6px;padding:10px 14px 10px 10px;border-radius:999px;font-weight:500;color:var(--ink-2)}
 .nav-back:hover{background:var(--line);color:var(--ink)}
 body.in-app .nav-links .land-only{display:none}
 body.in-app .nav-back{display:inline-flex}
-@media (max-width:720px){.nav-links .land-only{display:none}.nav .logo small{display:none}}
+@media (max-width:720px){.nav-links .land-only{display:none}.nav .logo small{display:none}.theme-toggle{width:64px}.theme-toggle[aria-pressed="true"] .theme-toggle-thumb{transform:translateX(22px)}}
 
 main{position:relative;z-index:1}
 .view{min-height:100vh}
@@ -269,7 +280,7 @@ body:not(.in-app) #v-landing footer.glass{box-shadow:none}
 .closing h2{margin:0 0 48px;font-family:var(--display);font-weight:700;font-size:clamp(52px,11vw,170px);line-height:.88;letter-spacing:-.05em}
 .closing h2 span{display:block}
 .closing h2 span:last-child{color:var(--violet)}
-footer{position:relative;z-index:1;margin:0 clamp(12px,3vw,40px) 20px;padding:36px clamp(20px,4vw,48px);border-radius:32px;display:grid;grid-template-columns:2fr 1fr 1fr;gap:28px}
+footer{position:relative;z-index:1;margin:0 clamp(12px,3vw,40px) 20px;padding:36px clamp(20px,4vw,48px);border-radius:32px;display:grid;grid-template-columns:2fr repeat(3,1fr);gap:28px}
 footer .logo{display:inline-flex;width:max-content;align-items:center;gap:8px;margin-bottom:10px!important}
 footer .logo small{display:inline;font-family:var(--body);font-weight:500;font-size:13px;color:var(--ink-2)}
 footer h4{margin:0 0 10px;font-size:14px;color:var(--ink-2);font-weight:600}

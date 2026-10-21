@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
   return (
-    <html lang="en">
+    <html lang="en" data-theme="light">
       <head>
         <Script
           src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
