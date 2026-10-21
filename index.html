@@ -50,7 +50,7 @@
     <h1><span class="ln"><span class="hero-line-mount"></span></span><span class="ln soft"><span class="hero-line-mount"></span></span><span class="ln"><span class="hero-line-mount"></span></span><span class="ln"><span class="hero-line-mount"></span></span></h1>
     <div class="hero-foot">
       <p>Past questions for your Covenant University courses, asked cold. Miss one and Orbit shows you the exact mistake you made, then brings it back until it sticks.</p>
-      <button class="btn btn-primary" data-start>Start practising</button>
+      <button class="btn btn-primary" id="heroStart" data-start>Start practising</button>
     </div>
   </header>
 
@@ -95,17 +95,17 @@
     <div class="section-head"><h2>Universities in orbit</h2></div>
     <div class="university-list">
       <article class="university-tile glass" aria-label="Covenant University, available now">
-        <div class="university-mark" aria-hidden="true">CU</div>
+        <img class="university-logo" src="public/universities/covenant-university.jpeg" alt="" aria-hidden="true">
         <h3>Covenant University</h3>
         <span class="university-status">Available now</span>
       </article>
       <article class="university-tile glass coming-soon" tabindex="0" aria-label="University of Lagos, coming soon">
-        <div class="university-mark" aria-hidden="true">UL</div>
+        <img class="university-logo" src="public/universities/unilag.jpeg" alt="" aria-hidden="true">
         <h3>UNILAG</h3>
         <span class="university-status" aria-hidden="true">Coming soon</span>
       </article>
       <article class="university-tile glass coming-soon" tabindex="0" aria-label="Landmark University, coming soon">
-        <div class="university-mark" aria-hidden="true">LU</div>
+        <img class="university-logo" src="public/universities/landmark-university.jpeg" alt="" aria-hidden="true">
         <h3>Landmark University</h3>
         <span class="university-status" aria-hidden="true">Coming soon</span>
       </article>
@@ -134,7 +134,15 @@
 <section class="view" id="v-system" hidden>
   <div class="app-wrap">
     <div class="sys-band" aria-hidden="true"><svg id="band" viewBox="0 0 760 180"></svg></div>
-    <div class="sys-head"><p class="eyebrow" id="sysHello">Your courses</p><h2 class="title">Pick a course</h2><p class="sub">Tap one to set up your session.</p></div>
+    <div class="sys-head">
+      <div class="course-university"><img src="public/universities/covenant-university.jpeg" alt=""><span>Covenant University</span></div>
+      <p class="eyebrow" id="sysHello">Your courses</p><h2 class="title">Pick a course</h2>
+      <p class="sub">Search Covenant University courses, then tap one to set up your session.</p>
+      <form class="course-search" id="courseSearchForm" role="search">
+        <input id="courseSearch" type="search" aria-label="Search Covenant University courses" placeholder="Search by course code or title">
+        <button class="btn btn-soft" type="submit">Search</button>
+      </form>
+    </div>
     <div class="grid" id="grid"></div>
   </div>
 </section>

@@ -50,13 +50,57 @@ const SAMPLE = [
   explain:"τ = L/R = 2.0/4.0 = 0.50 s. After one time constant the current reaches about 63% of its final value."}
 ];
 const COURSES = [
-  {code:"PHY211",h:262},{code:"PHY232",h:32},{code:"MTH213",h:168},{code:"PHY215",h:345},{code:"PHY212",h:212},
-  {code:"PHY218",h:12},{code:"GST211",h:140},{code:"DLD111",h:290},{code:"TMC211",h:48}
+  {code:"PHY211",name:"Elementary Modern Physics",credits:2,category:"C",h:262,icon:"physics"},
+  {code:"PHY232",name:"Electric Circuit and Electronics",credits:2,category:"C",h:32,icon:"physics"},
+  {code:"MTH213",name:"Elementary Differential Equations",credits:2,category:"C",h:168,icon:"maths"},
+  {code:"PHY215",name:"Thermal Physics",credits:2,category:"C",h:345,icon:"physics"},
+  {code:"PHY212",h:212,icon:"physics"},
+  {code:"PHY218",name:"Experimental Physics I",credits:1,category:"C",h:12,icon:"physics"},
+  {code:"GST211",name:"Philosophy, Logic and Human Existence",credits:2,category:"U",h:140,icon:"general"},
+  {code:"DLD111",name:"Introduction to Leadership Development",credits:0,category:"V",h:290,icon:"general"},
+  {code:"TMC211",name:"Success Parameters",credits:1,category:"V",h:48,icon:"general"},
+  {code:"CIT211",name:"Oracle - Java Foundations",credits:0,category:"V",h:196,icon:"computing"},
+  {code:"CSC233",name:"Programming with C++",credits:3,category:"C",h:220,icon:"computing"},
+  {code:"ENT211",name:"Entrepreneurial Development and Innovation",credits:2,category:"U",h:28,icon:"engineering"},
+  {code:"MTH111",name:"Elementary Mathematics I",credits:2,category:"C",h:185,icon:"maths"},
+  {code:"PHY111",name:"General Physics I",credits:2,category:"C",h:226,icon:"physics"},
+  {code:"PHY113",name:"General Physics III",credits:2,category:"C",h:244,icon:"physics"},
+  {code:"PHY213",name:"Thin Film Technology and Solar Energy Laboratory",credits:2,category:"C",h:34,icon:"chemistry"},
+  {code:"TMC212",h:52,icon:"general"}
 ];
+const UNIVERSITY_LOGOS = {
+  covenant:"covenant-university.jpeg",
+  unilag:"unilag.jpeg",
+  landmark:"landmark-university.jpeg"
+};
+function universityLogoPath(university){
+  const base = location.protocol === "file:" ? "public/universities/" : "/universities/";
+  return base + UNIVERSITY_LOGOS[university];
+}
 const LANDING_COURSES = [
-  {name:"Maths",h:262},{name:"Physics",h:32},{name:"Computer Science",h:168},
-  {name:"Computer Engineering",h:345},{name:"Biology",h:212}
+  {name:"Maths",h:262,icon:"maths"},{name:"Physics",h:32,icon:"physics"},{name:"Computer Science",h:168,icon:"computing"},
+  {name:"Computer Engineering",h:345,icon:"engineering"},{name:"Biology",h:212,icon:"biology"}
 ];
+const COURSE_ICONS = {
+  maths: '<svg viewBox="0 0 32 32"><text x="2" y="13">+</text><text x="18" y="13">−</text><text x="2" y="28">×</text><text x="18" y="28">÷</text></svg>',
+  chemistry: '<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4h8M14 4v9l-6.4 10.2A3 3 0 0 0 10.1 28h11.8a3 3 0 0 0 2.5-4.8L18 13V4"/><path d="M11 21h10"/><circle cx="15" cy="18" r=".8" fill="currentColor" stroke="none"/><circle cx="19" cy="16" r=".7" fill="currentColor" stroke="none"/></svg>',
+  physics: '<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><ellipse cx="16" cy="16" rx="12" ry="5"/><ellipse cx="16" cy="16" rx="12" ry="5" transform="rotate(60 16 16)"/><ellipse cx="16" cy="16" rx="12" ry="5" transform="rotate(120 16 16)"/><circle cx="16" cy="16" r="2.2" fill="currentColor" stroke="none"/></svg>',
+  computing: '<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="8" width="16" height="16" rx="3"/><path d="M12 12h8v8h-8zM12 3v5m8-5v5M12 24v5m8-5v5M3 12h5m-5 8h5m16-8h5m-5 8h5"/></svg>',
+  engineering: '<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 25 23 8l3 3L9 28H6zM19 7l3-3 6 6-3 3M5 21l6 6M8 18l3 3"/></svg>',
+  biology: '<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M26 5C15 5 7 9 7 18a9 9 0 0 0 9 9c9 0 10-11 10-22Z"/><path d="M5 28c4-8 9-12 17-17M11 20l-1-6m7 1 5 1"/></svg>',
+  general: '<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 9c-3-2-7-2-11-1v17c4-1 8-1 11 1 3-2 7-2 11-1V8c-4-1-8-1-11 1Z"/><path d="M16 9v17"/></svg>'
+};
+function courseIconKind(course){
+  if(course.icon) return course.icon;
+  if(/^(CHM|CHE|BCH)/i.test(course.code || course.name || "")) return "chemistry";
+  if(/^MTH|math/i.test(course.code || course.name || "")) return "maths";
+  if(/^PHY|physics/i.test(course.code || course.name || "")) return "physics";
+  return "general";
+}
+function courseMark(course, size = ""){
+  const icon = COURSE_ICONS[courseIconKind(course)] || COURSE_ICONS.general;
+  return `<span class="course-mark ${size}" style="--h:${course.h}" aria-hidden="true">${icon}</span>`;
+}
 const DIFFS = {mixed:"Mixed", easy:"Easy", standard:"Standard", hard:"Hard"};
 const DIFF_N = {easy:1, standard:2, hard:3};
 const DEFAULT_PREFS = {count:10, timer:0, diff:"mixed", focus:"all", explain:"each"};
@@ -155,14 +199,14 @@ async function connectRoom(){   // live duels still use the Claude room when the
 /* ===================== Router ===================== */
 let current = "v-boot", activeCourse = null;
 let landingStartUnlocked = false;
-const closingStartObserver = new IntersectionObserver(entries => {
+const heroStartObserver = new IntersectionObserver(entries => {
   if(entries.some(entry => entry.isIntersecting)){
     landingStartUnlocked = true;
     if(current === "v-landing") $("navStart").hidden = false;
-    closingStartObserver.disconnect();
+    heroStartObserver.disconnect();
   }
 }, {threshold:.15});
-closingStartObserver.observe($("closingStart"));
+heroStartObserver.observe($("heroStart"));
 const parentOf = {"v-signin":"v-landing","v-onboard":"v-landing","v-system":"v-landing","v-practice":"v-system","v-summary":"v-system","v-dash":"v-system","v-duel":"v-system"};
 const PUBLIC_VIEWS = ["v-landing", "v-signin", "v-boot"];
 function go(id, opts = {}){
@@ -215,7 +259,7 @@ document.addEventListener("pointermove", e => {
 })();
 
 $("lineup").innerHTML = [
-  ...LANDING_COURSES.map(c => `<article class="course-tile glass"><div class="course-mark" style="--h:${c.h}" aria-hidden="true"></div><strong>${c.name}</strong></article>`),
+  ...LANDING_COURSES.map(c => `<article class="course-tile glass">${courseMark(c)}<strong>${c.name}</strong></article>`),
   '<article class="course-tile course-more glass" aria-label="And more courses"><span class="more-dots" aria-hidden="true"><i></i><i></i><i></i></span><strong>And more</strong></article>'
 ].join("");
 const landingRevealObserver = reduce ? null : new IntersectionObserver(es => es.forEach(e => {
@@ -249,8 +293,9 @@ document.querySelectorAll("[data-start]").forEach(button => button.addEventListe
 }));
 
 /* ===================== Onboarding ===================== */
-let ob = {step:0, name:"", level:"", exam:""};
+let ob = {step:0, university:"", name:"", level:"", exam:""};
 const OB_STEPS = [
+  {key:"university", title:"Choose your university", sub:"Covenant University is available now. More universities are coming soon.", type:"university"},
   {key:"name", title:"What should we call you?", sub:"Just your first name is fine. Friends see it when you go head to head.", type:"text"},
   {key:"level", title:"Which level are you in?", sub:"This sets which courses come into orbit first.", type:"choice", options:["100 level","200 level","300 level","400 level"]},
   {key:"exam", title:"When’s your next exam?", sub:"Orbit paces your sessions around it.", type:"choice", options:["This week","This month","Later this semester","Not sure yet"]}
@@ -259,7 +304,7 @@ function renderOnboard(){
   const p = $("obPanel");
   if(ob.step >= OB_STEPS.length){
     p.innerHTML = `<div class="launch step-in"><div class="planet ringed"></div><h2 class="title">Building your orbit</h2><p class="sub">Lining up your courses, ${esc(ob.name || "there")}.</p></div>`;
-    state.onboard = {name:ob.name, level:ob.level, exam:ob.exam}; save();
+    state.onboard = {university:ob.university, name:ob.name, level:ob.level, exam:ob.exam}; save();
     setTimeout(() => go("v-system"), reduce ? 300 : 1500);
     return;
   }
@@ -267,7 +312,19 @@ function renderOnboard(){
   const dots = OB_STEPS.map((_, i) => `<i class="${i <= ob.step ? "on" : ""}"></i>`).join("");
   const body = s.type === "text"
     ? `<input class="field" id="obInput" type="text" autocomplete="given-name" maxlength="24" placeholder="Your name" value="${esc(ob[s.key])}">`
-    : `<div class="choices">${s.options.map(o => `<button class="choice" aria-pressed="${ob[s.key] === o}" data-v="${esc(o)}">${esc(o)}</button>`).join("")}</div>`;
+    : s.type === "university"
+      ? `<div class="university-choices">
+          <button class="university-choice" type="button" data-v="covenant" aria-pressed="${ob.university === "covenant"}">
+            <img src="${universityLogoPath("covenant")}" alt=""><span>Covenant University</span><small>Available now</small>
+          </button>
+          <button class="university-choice" type="button" disabled aria-label="UNILAG, unavailable">
+            <img src="${universityLogoPath("unilag")}" alt=""><span>UNILAG</span><small>Unavailable</small>
+          </button>
+          <button class="university-choice" type="button" disabled aria-label="Landmark University, unavailable">
+            <img src="${universityLogoPath("landmark")}" alt=""><span>Landmark University</span><small>Unavailable</small>
+          </button>
+        </div>`
+      : `<div class="choices">${s.options.map(o => `<button class="choice" aria-pressed="${ob[s.key] === o}" data-v="${esc(o)}">${esc(o)}</button>`).join("")}</div>`;
   p.innerHTML = `<div class="ob-dots">${dots}</div><div class="step-in"><h2 class="title">${s.title}</h2><p class="sub">${s.sub}</p>${body}
     <div class="ob-actions">${ob.step ? '<button class="ghost" id="obBack">Back</button>' : "<span></span>"}<button class="btn btn-primary" id="obNext" ${ob[s.key] ? "" : "disabled"}>${ob.step === OB_STEPS.length - 1 ? "Finish" : "Continue"}</button></div></div>`;
   const next = $("obNext");
@@ -275,6 +332,12 @@ function renderOnboard(){
     const inp = $("obInput"); setTimeout(() => inp.focus(), 50);
     inp.addEventListener("input", () => { ob.name = inp.value.trim(); next.disabled = !ob.name; });
     inp.addEventListener("keydown", e => { if(e.key === "Enter" && ob.name){ ob.step++; renderOnboard(); } });
+  } else if(s.type === "university"){
+    p.querySelectorAll(".university-choice:not(:disabled)").forEach(b => b.addEventListener("click", () => {
+      ob.university = b.dataset.v;
+      p.querySelectorAll(".university-choice").forEach(x => x.setAttribute("aria-pressed", String(x === b)));
+      next.disabled = false;
+    }));
   } else {
     p.querySelectorAll(".choice").forEach(b => b.addEventListener("click", () => {
       ob[s.key] = b.dataset.v; p.querySelectorAll(".choice").forEach(x => x.setAttribute("aria-pressed", x === b)); next.disabled = false;
@@ -310,13 +373,22 @@ function weakTopics(code){ return topicStats(code).filter(t => t.seen && t.acc <
 function courseAcc(code){ const st = topicStats(code); const s = st.reduce((x, t) => x + t.seen, 0), w = st.reduce((x, t) => x + t.wrong, 0); return s ? (s - w) / s : null; }
 function renderGrid(){
   $("sysHello").textContent = state.onboard && state.onboard.name ? `Welcome back, ${state.onboard.name}` : "Your courses";
-  $("grid").innerHTML = COURSES.map((c, i) => {
+  const query = $("courseSearch").value.trim().toLocaleLowerCase();
+  const filteredCourses = COURSES.filter(c => `${c.code} ${c.name || ""} ${c.category || ""}`.toLocaleLowerCase().includes(query));
+  $("grid").innerHTML = filteredCourses.length ? filteredCourses.map((c, i) => {
     const acc = courseAcc(c.code);
     const st = realBank[c.code] ? `${banks[c.code].length} past questions` : "Sample set for now";
-    return `<button class="ccard glass" data-code="${c.code}" style="animation-delay:${reduce ? 0 : i * 40}ms"><div class="planet ${i === 0 ? "ringed" : ""}" style="--h:${c.h}"></div><strong>${c.code}</strong><span class="st">${acc === null ? st : Math.round(acc * 100) + "% accuracy"}</span>${acc === null ? "" : `<div class="meter"><i style="width:${Math.round(acc * 100)}%;background:hsl(${c.h} 70% 55%)"></i></div>`}</button>`;
-  }).join("");
+    const details = [c.credits === undefined ? "" : `${c.credits} credits`, c.category || ""].filter(Boolean).join(" · ");
+    return `<button class="ccard glass" data-code="${c.code}" style="animation-delay:${reduce ? 0 : i * 40}ms">${courseMark(c, "course-mark--large")}<strong>${c.code}</strong>${c.name ? `<span class="course-name">${esc(c.name)}</span>` : ""}${details ? `<span class="course-details">${details}</span>` : ""}<span class="st">${acc === null ? st : Math.round(acc * 100) + "% accuracy"}</span>${acc === null ? "" : `<div class="meter"><i style="width:${Math.round(acc * 100)}%;background:hsl(${c.h} 70% 55%)"></i></div>`}</button>`;
+  }).join("") : `<p class="grid-empty">No Covenant University courses match “${esc($("courseSearch").value.trim())}”.</p>`;
   $("grid").querySelectorAll(".ccard").forEach(b => b.addEventListener("click", () => openSheet(b.dataset.code)));
 }
+function filterCourses(event){
+  event.preventDefault();
+  renderGrid();
+}
+$("courseSearchForm").addEventListener("submit", filterCourses);
+$("courseSearch").addEventListener("input", renderGrid);
 
 /* ===================== Preferences sheet ===================== */
 function seg(key, options, value, disabled = []){
@@ -334,7 +406,7 @@ function openSheet(code){
   const weak = weakTopics(code); if(p.focus === "weak" && !weak.length) p.focus = "all";
   const sheet = $("sheet");
   sheet.innerHTML = `<div class="grab"></div>
-    <div class="sheet-head"><div class="planet" style="--h:${c.h}"></div><div><strong>${code}</strong><span>${realBank[code] ? banks[code].length + " past questions" : "Sample questions"}</span></div>
+    <div class="sheet-head">${courseMark(c, "course-mark--sheet")}<div><strong>${code}</strong><span>${realBank[code] ? banks[code].length + " past questions" : "Sample questions"}</span></div>
       <button class="close" id="sheetClose" aria-label="Close"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
     ${realBank[code] ? "" : `<p class="notice">No ${code} past questions have been added yet, so you’ll practise the sample set until they are.</p>`}
     <div class="pref"><label>Questions</label>${seg("count", [[5,"5"],[10,"10"],[15,"15"],[20,"20"]], p.count)}</div>

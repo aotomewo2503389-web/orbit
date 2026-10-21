@@ -57,7 +57,7 @@ export default function HomePage() {
             <h1><span className="ln"><span className="hero-line-mount" /></span><span className="ln soft"><span className="hero-line-mount" /></span><span className="ln"><span className="hero-line-mount" /></span><span className="ln"><span className="hero-line-mount" /></span></h1>
             <div className="hero-foot">
               <p>Past questions for your Covenant University courses, asked cold. Miss one and Orbit shows you the exact mistake you made, then brings it back until it sticks.</p>
-              <button className="btn btn-primary" data-start>Start practising</button>
+              <button className="btn btn-primary" id="heroStart" data-start>Start practising</button>
             </div>
           </header>
           <section className="section" id="how">
@@ -88,17 +88,17 @@ export default function HomePage() {
             <div className="section-head"><h2>Universities in orbit</h2></div>
             <div className="university-list">
               <article className="university-tile glass" aria-label="Covenant University, available now">
-                <div className="university-mark" aria-hidden="true">CU</div>
+                <img className="university-logo" src="/universities/covenant-university.jpeg" alt="" aria-hidden="true" />
                 <h3>Covenant University</h3>
                 <span className="university-status">Available now</span>
               </article>
               <article className="university-tile glass coming-soon" tabIndex={0} aria-label="UNILAG, coming soon">
-                <div className="university-mark" aria-hidden="true">UL</div>
+                <img className="university-logo" src="/universities/unilag.jpeg" alt="" aria-hidden="true" />
                 <h3>UNILAG</h3>
                 <span className="university-status" aria-hidden="true">Coming soon</span>
               </article>
               <article className="university-tile glass coming-soon" tabIndex={0} aria-label="Landmark University, coming soon">
-                <div className="university-mark" aria-hidden="true">LU</div>
+                <img className="university-logo" src="/universities/landmark-university.jpeg" alt="" aria-hidden="true" />
                 <h3>Landmark University</h3>
                 <span className="university-status" aria-hidden="true">Coming soon</span>
               </article>
@@ -117,7 +117,7 @@ export default function HomePage() {
           </footer>
         </section>
         <section className="view" id="v-onboard" hidden><div className="app-wrap" style={{ justifyContent: "center" }}><div className="panel glass" id="obPanel" /></div></section>
-        <section className="view" id="v-system" hidden><div className="app-wrap"><div className="sys-band" aria-hidden="true"><svg id="band" viewBox="0 0 760 180" /></div><div className="sys-head"><p className="eyebrow" id="sysHello">Your courses</p><h2 className="title">Pick a course</h2><p className="sub">Tap one to set up your session.</p></div><div className="grid" id="grid" /></div></section>
+        <section className="view" id="v-system" hidden><div className="app-wrap"><div className="sys-band" aria-hidden="true"><svg id="band" viewBox="0 0 760 180" /></div><div className="sys-head"><div className="course-university"><img src="/universities/covenant-university.jpeg" alt="" /><span>Covenant University</span></div><p className="eyebrow" id="sysHello">Your courses</p><h2 className="title">Pick a course</h2><p className="sub">Search Covenant University courses, then tap one to set up your session.</p><form className="course-search" id="courseSearchForm" role="search"><input id="courseSearch" type="search" aria-label="Search Covenant University courses" placeholder="Search by course code or title" /><button className="btn btn-soft" type="submit">Search</button></form></div><div className="grid" id="grid" /></div></section>
         <section className="view" id="v-practice" hidden><div className="app-wrap"><div className="pq"><div className="pq-top"><div className="prog"><i id="progBar" style={{ width: 0 }} /></div><span className="pq-count" id="pqCount" /></div><div className="hud glass" id="hud" hidden /><div className="qcard glass" id="qcard" /><div className="pq-actions"><button className="btn btn-primary" id="nextBtn" hidden>Next question</button></div></div></div></section>
         <section className="view" id="v-summary" hidden><div className="app-wrap"><div className="panel glass" id="summaryPanel" style={{ textAlign: "center" }} /></div></section>
         <section className="view" id="v-dash" hidden><div className="app-wrap"><div className="panel glass" id="dashPanel" /></div></section>
