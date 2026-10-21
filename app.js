@@ -68,6 +68,12 @@ const COURSES = [
   {code:"PHY213",name:"Thin Film Technology and Solar Energy Laboratory",credits:2,category:"C",h:34,icon:"chemistry"},
   {code:"TMC212",h:52,icon:"general"}
 ];
+const COURSES_BY_PROGRAM_LEVEL = {
+  "Industrial Physics": {
+    "100 level": ["PHY111","PHY113","MTH111"],
+    "200 level": ["CIT211","CSC233","DLD111","ENT211","GST211","MTH213","PHY211","PHY213","PHY215","PHY218","PHY232","TMC211","TMC212"]
+  }
+};
 const UNIVERSITY_LOGOS = {
   covenant:"covenant-university.jpeg",
   unilag:"unilag.jpeg",
@@ -434,17 +440,33 @@ function topicStats(code){
 }
 function weakTopics(code){ return topicStats(code).filter(t => t.seen && t.acc < .85).sort((a, b) => a.acc - b.acc).slice(0, 2).map(t => t.topic); }
 function courseAcc(code){ const st = topicStats(code); const s = st.reduce((x, t) => x + t.seen, 0), w = st.reduce((x, t) => x + t.wrong, 0); return s ? (s - w) / s : null; }
+function comingSoonCard(program, level){
+  const label = [level, program].filter(Boolean).join(" · ");
+  return `<article class="catalog-coming glass">
+    <span class="catalog-coming-mark" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M25 5c-7 2-13 8-15 16l10 10c8-2 14-8 16-15l-11-11Z"/><path d="m10 21-5 3 8 8m14-5 3 8 3-5M17 34c-2 5-6 7-10 8 1-4 3-8 8-10"/><circle cx="27" cy="16" r="3"/></svg></span>
+    <span class="catalog-coming-label">Coming soon</span>
+    <h3>${esc(label || "More courses")}</h3>
+    <p>We’re preparing this course collection for Orbit. Check back soon for your courses.</p>
+  </article>`;
+}
 function renderGrid(){
   $("sysHello").textContent = state.onboard && state.onboard.name ? `Welcome back, ${state.onboard.name}` : "Your courses";
   $("sysProgramTag").innerHTML = profileProgramTag();
+  const program = state.onboard && state.onboard.program;
+  const level = state.onboard && state.onboard.level;
+  const availableCodes = COURSES_BY_PROGRAM_LEVEL[program] && COURSES_BY_PROGRAM_LEVEL[program][level];
+  if(!availableCodes){
+    $("grid").innerHTML = comingSoonCard(program, level);
+    return;
+  }
   const query = $("courseSearch").value.trim().toLocaleLowerCase();
-  const filteredCourses = COURSES.filter(c => `${c.code} ${c.name || ""} ${c.category || ""}`.toLocaleLowerCase().includes(query));
+  const filteredCourses = COURSES.filter(c => availableCodes.includes(c.code) && `${c.code} ${c.name || ""} ${c.category || ""}`.toLocaleLowerCase().includes(query));
   $("grid").innerHTML = filteredCourses.length ? filteredCourses.map((c, i) => {
     const acc = courseAcc(c.code);
     const st = realBank[c.code] ? `${banks[c.code].length} past questions` : "Sample set for now";
     const details = [c.credits === undefined ? "" : `${c.credits} credits`, c.category || ""].filter(Boolean).join(" · ");
     return `<button class="ccard glass" data-code="${c.code}" style="animation-delay:${reduce ? 0 : i * 40}ms">${courseMark(c, "course-mark--large")}<strong>${c.code}</strong>${c.name ? `<span class="course-name">${esc(c.name)}</span>` : ""}${details ? `<span class="course-details">${details}</span>` : ""}<span class="st">${acc === null ? st : Math.round(acc * 100) + "% accuracy"}</span>${acc === null ? "" : `<div class="meter"><i style="width:${Math.round(acc * 100)}%;background:hsl(${c.h} 70% 55%)"></i></div>`}</button>`;
-  }).join("") : `<p class="grid-empty">No Covenant University courses match “${esc($("courseSearch").value.trim())}”.</p>`;
+  }).join("") : `<p class="grid-empty">No Industrial Physics ${esc(level)} courses match “${esc($("courseSearch").value.trim())}”.</p>`;
   $("grid").querySelectorAll(".ccard").forEach(b => b.addEventListener("click", () => openSheet(b.dataset.code)));
 }
 function filterCourses(event){
