@@ -76,6 +76,13 @@ export default function HomePage() {
               <article className="story s5"><div className="art"><div className="vs"><div>You<s style={customWidth("70%")} /><b>7</b></div><div>Tolu<s style={customWidth("60%")} /><b>6</b></div></div></div><div className="cap glass"><span>Head to head</span><h3>Same questions as a friend, live or by challenge code</h3></div></article>
             </div>
           </section>
+          <section className="section phone-showcase" aria-labelledby="phone-showcase-title">
+            <div className="section-head">
+              <div><p className="eyebrow">A closer look</p><h2 id="phone-showcase-title">Made for the way you practise.</h2></div>
+              <p className="showcase-intro">Three small glimpses of a calmer, more useful study session.</p>
+            </div>
+            <div id="phone-showcase-mount" />
+          </section>
           <section className="section"><div className="statement"><h2>Question<br />first.</h2><h2 className="right">Explanation<br />after.</h2><p>Most study tools hand you a summary and hope it sticks. Orbit asks the exam question first. Get it wrong and you see why that specific answer was wrong, followed by the working. Then a similar question comes back later to check the fix held.</p></div></section>
           <section className="section" id="courses"><div className="section-head"><h2>Courses in orbit</h2></div><div className="lineup" id="lineup" /></section>
           <section className="section closing"><h2><span>Start</span><span>your orbit.</span></h2><button className="btn btn-primary" id="closingStart" data-start>Start practising</button></section>
