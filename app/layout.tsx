@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import Script from "next/script";
+import { Analytics } from "@vercel/analytics/next";
 import "../styles.css";
 
 export const metadata: Metadata = {
@@ -18,7 +19,10 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
           strategy="beforeInteractive"
         />
       </head>
-      <body className="in-app">{children}</body>
+      <body className="in-app">
+        {children}
+        <Analytics />
+      </body>
     </html>
   );
 }
