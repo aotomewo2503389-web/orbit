@@ -150,6 +150,15 @@ async function connectRoom(){   // live duels still use the Claude room when the
 
 /* ===================== Router ===================== */
 let current = "v-boot", activeCourse = null;
+let landingStartUnlocked = false;
+const closingStartObserver = new IntersectionObserver(entries => {
+  if(entries.some(entry => entry.isIntersecting)){
+    landingStartUnlocked = true;
+    if(current === "v-landing") $("navStart").hidden = false;
+    closingStartObserver.disconnect();
+  }
+}, {threshold:.15});
+closingStartObserver.observe($("closingStart"));
 const parentOf = {"v-signin":"v-landing","v-onboard":"v-landing","v-system":"v-landing","v-practice":"v-system","v-summary":"v-system","v-dash":"v-system","v-duel":"v-system"};
 const PUBLIC_VIEWS = ["v-landing", "v-signin", "v-boot"];
 function go(id, opts = {}){
@@ -160,7 +169,7 @@ function go(id, opts = {}){
     document.querySelectorAll(".view").forEach(v => v.hidden = v.id !== id);
     current = id;
     document.body.classList.toggle("in-app", id !== "v-landing");
-    $("navStart").hidden = id !== "v-landing";
+    $("navStart").hidden = id !== "v-landing" || !landingStartUnlocked;
     $("navOut").hidden = !authed;
     $("navBack").hidden = authed && (id === "v-system" || id === "v-onboard" || id === "v-boot");
     if(id === "v-signin") renderSignin();
@@ -202,6 +211,15 @@ document.addEventListener("pointermove", e => {
 })();
 
 $("lineup").innerHTML = COURSES.map(c => `<div class="course-tile glass"><div class="planet" style="--h:${c.h}"></div><strong>${c.code}</strong></div>`).join("");
+const landingRevealObserver = reduce ? null : new IntersectionObserver(es => es.forEach(e => {
+  if(e.isIntersecting){ e.target.classList.add("in"); landingRevealObserver.unobserve(e.target); }
+}), {threshold:.12, rootMargin:"0px 0px -48px 0px"});
+function observeLanding(el){
+  if(!landingRevealObserver) return;
+  el.classList.add("reveal");
+  landingRevealObserver.observe(el);
+}
+document.querySelectorAll(".section-head h2, .statement h2, .statement p, .closing h2 span, .story, .course-tile").forEach(observeLanding);
 
 /* ===================== Onboarding ===================== */
 let ob = {step:0, name:"", level:"", exam:""};
@@ -631,39 +649,6 @@ function leaveDuel(){
 }
 
 /* ===================== Landing text motion ===================== */
-function splitChars(el, baseDelay){
-  const txt = el.textContent; el.setAttribute("aria-label", txt);
-  el.innerHTML = [...txt].map((c, i) => `<span class="ch" aria-hidden="true" style="--i:${i};--d:${baseDelay}ms">${c === " " ? " " : esc(c)}</span>`).join("");
-}
-(function landingMotion(){
-  if(reduce) return;
-  const lines = document.querySelectorAll(".hero h1 .ln > span");
-  lines.forEach((el, li) => splitChars(el, 120 + li * 110));
-  const last = lines[lines.length - 1];
-  const words = ["your exam.", ...COURSES.map(c => "your " + c.code + ".")];
-  let w = 0;
-  setTimeout(() => setInterval(() => {
-    if(current !== "v-landing" || document.hidden) return;
-    last.querySelectorAll(".ch").forEach(c => c.classList.add("out"));
-    setTimeout(() => { w = (w + 1) % words.length; last.textContent = words[w]; splitChars(last, 0); }, 520);
-  }, 2600), 2400);
-  const io = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); } }), {threshold:.25});
-  document.querySelectorAll(".section-head h2, .statement h2, .closing h2 span, .story, .course-tile").forEach((el, i) => {
-    el.classList.add("reveal"); if(el.classList.contains("course-tile")) el.style.transitionDelay = (i % 9) * 50 + "ms"; io.observe(el);
-  });
-  const p = document.querySelector(".statement p");
-  p.innerHTML = p.textContent.split(/(\s+)/).map(t => /\s/.test(t) ? t : `<span class="word">${esc(t)}</span>`).join("");
-  const ws = [...p.querySelectorAll(".word")];
-  const scrub = () => {
-    if(current !== "v-landing") return;
-    const r = p.getBoundingClientRect(); const vh = innerHeight;
-    const prog = Math.min(1, Math.max(0, (vh * .85 - r.top) / (r.height + vh * .45)));
-    const lit = Math.round(prog * ws.length);
-    ws.forEach((el, i) => el.classList.toggle("lit", i < lit));
-  };
-  addEventListener("scroll", scrub, {passive:true}); scrub();
-})();
-
 /* ===================== Auth, route guards, boot ===================== */
 function renderBoot(err){
   const p = $("bootPanel");
