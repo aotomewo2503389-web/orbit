@@ -7,6 +7,17 @@ const root = document.querySelector("#rail-controls");
 const rail = document.querySelector("#rail");
 const cards = rail ? [...rail.querySelectorAll(".story")] : [];
 
+document.querySelectorAll(".hero-line-mount").forEach((mount, index) => {
+  const text = ["Don’t study", "your notes.", "Practise", "your exam."][index];
+  if (!text) return;
+  createRoot(mount).render(React.createElement(motion.span, {
+    className: "hero-line",
+    initial: { opacity: 0, y: 22 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 0.62, delay: index * 0.07, ease: [0.22, 1, 0.36, 1] }
+  }, text));
+});
+
 if (root && rail && cards.length) {
   function StoryGlow({ card }) {
     const [active, setActive] = useState(false);
