@@ -4,7 +4,7 @@ import Script from "next/script";
 import "../styles.css";
 
 export const metadata: Metadata = {
-  title: "Orbit by CU — Practise your exam",
+  title: "Orbit by SLAWN — Practise your exam",
   description: "Exam practice for Covenant University courses, built from past questions.",
   icons: { icon: "/orbit-icon.svg" },
 };

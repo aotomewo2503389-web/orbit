@@ -23,9 +23,9 @@ export default function HomePage() {
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 18l-6-6 6-6" /></svg>
           <span>Back</span>
         </button>
-        <a className="logo" href="#" id="logoHome" aria-label="Orbit by CU home">
+        <a className="logo" href="#" id="logoHome" aria-label="Orbit by SLAWN home">
           <svg width="28" height="28" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="7" fill="var(--violet)" /><ellipse cx="16" cy="16" rx="14" ry="5.2" fill="none" stroke="currentColor" strokeWidth="1.6" transform="rotate(-24 16 16)" /><circle cx="28" cy="10.6" r="2" fill="var(--ink-2)" /></svg>
-          orbit <small>by CU</small>
+          orbit <small>by SLAWN</small>
         </a>
         <div className="nav-links">
           <a href="#how" className="land-only">How it works</a>
@@ -110,10 +110,10 @@ export default function HomePage() {
           </section>
           <section className="section closing"><h2><span>Start</span><span>your orbit.</span></h2><button className="btn btn-primary" id="closingStart" data-start>Start practising</button></section>
           <footer className="glass">
-            <div><div className="logo" style={{ marginBottom: 10 }}>orbit <small>by CU</small></div><p>Exam practice for Covenant University courses, built from past questions.</p></div>
+            <div><div className="logo" style={{ marginBottom: 10 }}>orbit <small>by SLAWN</small></div><p>Exam practice for Covenant University courses, built from past questions.</p></div>
             <div><h4>Product</h4><a href="#how">How it works</a><a href="#courses">Courses</a><a href="#" data-start>Start practising</a></div>
             <div><h4>Theme</h4><a href="#" data-theme-set="light">Light</a><a href="#" data-theme-set="dark">Dark</a><a href="#" data-theme-set="">Match device</a></div>
-            <p className="fine">© 2026 Orbit by CU. Your progress is saved privately to your account.</p>
+            <p className="fine">© 2026 Orbit by SLAWN. Your progress is saved privately to your account.</p>
           </footer>
         </section>
         <section className="view" id="v-onboard" hidden><div className="app-wrap" style={{ justifyContent: "center" }}><div className="panel glass" id="obPanel" /></div></section>

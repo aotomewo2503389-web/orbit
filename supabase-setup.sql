@@ -1,4 +1,4 @@
--- Orbit by CU: database setup
+-- Orbit by SLAWN: database setup
 -- Run once in Supabase: SQL Editor -> New query -> paste -> Run.
 -- Safe to run again; it won't duplicate anything.
 
