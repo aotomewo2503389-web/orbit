@@ -294,18 +294,63 @@ document.querySelectorAll("[data-start]").forEach(button => button.addEventListe
 }));
 
 /* ===================== Onboarding ===================== */
-let ob = {step:0, university:"", name:"", level:"", exam:""};
+const PROGRAMS = [
+  "Industrial Physics",
+  "Industrial Maths",
+  "Industrial Chemistry",
+  "Computer Science",
+  "Biology",
+  "Microbiology",
+  "Management Information Systems (MIS)",
+  "Computer Engineering",
+  "Electrical Engineering",
+  "Mechanical Engineering",
+  "Civil Engineering",
+  "Petroleum Engineering",
+  "Mechatronics Engineering",
+  "Architecture",
+  "Building Technology",
+  "Estate Management",
+  "Accounting",
+  "Banking and Finance",
+  "Business Administration",
+  "Economics",
+  "Industrial Relations and Human Resources Management",
+  "Law",
+  "International Relations",
+  "Psychology",
+  "Political Science",
+  "English Language",
+  "Medicine and Surgery",
+  "Nursing Science",
+  "Medical Laboratory Science",
+  "Anatomy",
+  "Physiology"
+];
+let ob = {step:0, university:"", name:"", level:"", program:"", exam:""};
 const OB_STEPS = [
   {key:"university", title:"Choose your university", sub:"Covenant University is available now. More universities are coming soon.", type:"university"},
   {key:"name", title:"What should we call you?", sub:"Just your first name is fine. Friends see it when you go head to head.", type:"text"},
   {key:"level", title:"Which level are you in?", sub:"This sets which courses come into orbit first.", type:"choice", options:["100 level","200 level","300 level","400 level"]},
+  {key:"program", title:"What program are you offering?", sub:"Choose your Covenant University program. It’ll appear as a tag on your page.", type:"program"},
   {key:"exam", title:"When’s your next exam?", sub:"Orbit paces your sessions around it.", type:"choice", options:["This week","This month","Later this semester","Not sure yet"]}
 ];
+function saveOnboardingDraft(){
+  state.onboard = {
+    ...(state.onboard || {}),
+    university:ob.university,
+    name:ob.name,
+    level:ob.level,
+    program:ob.program,
+    exam:ob.exam
+  };
+  save();
+}
 function renderOnboard(){
   const p = $("obPanel");
   if(ob.step >= OB_STEPS.length){
     p.innerHTML = `<div class="launch step-in"><div class="planet ringed"></div><h2 class="title">Building your orbit</h2><p class="sub">Lining up your courses, ${esc(ob.name || "there")}.</p></div>`;
-    state.onboard = {university:ob.university, name:ob.name, level:ob.level, exam:ob.exam}; save();
+    saveOnboardingDraft();
     setTimeout(() => go("v-system"), reduce ? 300 : 1500);
     return;
   }
@@ -325,31 +370,44 @@ function renderOnboard(){
             <img src="${universityLogoPath("landmark")}" alt=""><span>Landmark University</span><small>Unavailable</small>
           </button>
         </div>`
+      : s.type === "program"
+        ? `<label class="program-select-label" for="obProgram">Your program</label><select class="field program-select" id="obProgram" required><option value="" disabled ${ob.program ? "" : "selected"}>Select your program</option>${PROGRAMS.map(program => `<option value="${esc(program)}" ${ob.program === program ? "selected" : ""}>${esc(program)}</option>`).join("")}</select>`
       : `<div class="choices">${s.options.map(o => `<button class="choice" aria-pressed="${ob[s.key] === o}" data-v="${esc(o)}">${esc(o)}</button>`).join("")}</div>`;
   p.innerHTML = `<div class="ob-dots">${dots}</div><div class="step-in"><h2 class="title">${s.title}</h2><p class="sub">${s.sub}</p>${body}
     <div class="ob-actions">${ob.step ? '<button class="ghost" id="obBack">Back</button>' : "<span></span>"}<button class="btn btn-primary" id="obNext" ${ob[s.key] ? "" : "disabled"}>${ob.step === OB_STEPS.length - 1 ? "Finish" : "Continue"}</button></div></div>`;
   const next = $("obNext");
   if(s.type === "text"){
     const inp = $("obInput"); setTimeout(() => inp.focus(), 50);
-    inp.addEventListener("input", () => { ob.name = inp.value.trim(); next.disabled = !ob.name; });
+    inp.addEventListener("input", () => { ob.name = inp.value.trim(); next.disabled = !ob.name; saveOnboardingDraft(); });
     inp.addEventListener("keydown", e => { if(e.key === "Enter" && ob.name){ ob.step++; renderOnboard(); } });
   } else if(s.type === "university"){
     p.querySelectorAll(".university-choice:not(:disabled)").forEach(b => b.addEventListener("click", () => {
       ob.university = b.dataset.v;
       p.querySelectorAll(".university-choice").forEach(x => x.setAttribute("aria-pressed", String(x === b)));
       next.disabled = false;
+      saveOnboardingDraft();
     }));
+  } else if(s.type === "program"){
+    $("obProgram").addEventListener("change", event => {
+      ob.program = event.target.value;
+      next.disabled = !ob.program;
+      saveOnboardingDraft();
+    });
   } else {
     p.querySelectorAll(".choice").forEach(b => b.addEventListener("click", () => {
-      ob[s.key] = b.dataset.v; p.querySelectorAll(".choice").forEach(x => x.setAttribute("aria-pressed", x === b)); next.disabled = false;
+      ob[s.key] = b.dataset.v; p.querySelectorAll(".choice").forEach(x => x.setAttribute("aria-pressed", x === b)); next.disabled = false; saveOnboardingDraft();
     }));
   }
-  next.addEventListener("click", () => { ob.step++; renderOnboard(); });
-  const bk = $("obBack"); if(bk) bk.addEventListener("click", () => { ob.step--; renderOnboard(); });
+  next.addEventListener("click", () => { saveOnboardingDraft(); ob.step++; renderOnboard(); });
+  const bk = $("obBack"); if(bk) bk.addEventListener("click", () => { saveOnboardingDraft(); ob.step--; renderOnboard(); });
 }
 function hasCompletedOnboarding(){
   const details = state.onboard;
-  return Boolean(details && details.university === "covenant" && details.name && details.level && details.exam);
+  return Boolean(details && details.university === "covenant" && details.name && details.level && details.program && details.exam);
+}
+function profileProgramTag(){
+  const program = state.onboard && state.onboard.program;
+  return program ? `<span class="program-tag">${esc(program)}</span>` : "";
 }
 
 /* ===================== Course grid + decorative orbit band ===================== */
@@ -378,6 +436,7 @@ function weakTopics(code){ return topicStats(code).filter(t => t.seen && t.acc <
 function courseAcc(code){ const st = topicStats(code); const s = st.reduce((x, t) => x + t.seen, 0), w = st.reduce((x, t) => x + t.wrong, 0); return s ? (s - w) / s : null; }
 function renderGrid(){
   $("sysHello").textContent = state.onboard && state.onboard.name ? `Welcome back, ${state.onboard.name}` : "Your courses";
+  $("sysProgramTag").innerHTML = profileProgramTag();
   const query = $("courseSearch").value.trim().toLocaleLowerCase();
   const filteredCourses = COURSES.filter(c => `${c.code} ${c.name || ""} ${c.category || ""}`.toLocaleLowerCase().includes(query));
   $("grid").innerHTML = filteredCourses.length ? filteredCourses.map((c, i) => {
@@ -607,7 +666,7 @@ function renderDash(){
   const color = a => a < .5 ? "var(--bad)" : a < .8 ? "var(--amber)" : "var(--good)";
   const weak = weakTopics(code);
   $("dashPanel").innerHTML = `
-    <p class="eyebrow">${esc(code)}</p><h2 class="title">Your weak spots</h2>
+    <div class="profile-program">${profileProgramTag()}</div><p class="eyebrow">${esc(code)}</p><h2 class="title">Your weak spots</h2>
     <div class="kpis"><div class="kpi"><b>${seen}</b><span>Answered</span></div><div class="kpi"><b>${acc}</b><span>Accuracy</span></div><div class="kpi"><b>${c.sessions || 0}</b><span>Sessions</span></div></div>
     <h3 class="h3">Accuracy by topic, weakest first</h3>
     ${tried.length ? tried.map(t => `<div class="topic-row"><span>${esc(t.topic)}</span><div class="meter"><i data-w="${Math.round(t.acc * 100)}" style="background:${color(t.acc)}"></i></div><span class="pct">${Math.round(t.acc * 100)}%</span></div>`).join("") : `<p class="empty">Answer a few questions and your topics will show up here.</p>`}
@@ -802,8 +861,10 @@ function enter(user){
       university: saved.university === "covenant" ? "covenant" : "",
       name: String(saved.name || firstName(user)).slice(0, 24),
       level: saved.level || "",
+      program: PROGRAMS.includes(saved.program) ? saved.program : "",
       exam: saved.exam || ""
     };
+    ob.step = !ob.university ? 0 : !ob.name ? 1 : !ob.level ? 2 : !ob.program ? 3 : !ob.exam ? 4 : 0;
     go("v-onboard", {instant:true});
   })();
   return entering;
@@ -812,7 +873,7 @@ function leave(){   // the only way back to the landing page: signing out
   if(!authed) return;
   clearTimeout(saveTimer); saveTimer = null;
   authed = false; uid = null; authUser = null; entering = null;
-  state = {onboard:null, courses:{}}; ob = {step:0, university:"", name:"", level:"", exam:""};
+  state = {onboard:null, courses:{}}; ob = {step:0, university:"", name:"", level:"", program:"", exam:""};
   Object.keys(banks).forEach(k => delete banks[k]); Object.keys(realBank).forEach(k => delete realBank[k]);
   stopTimer(); leaveDuel(); closeSheet(); session = null; activeCourse = null;
   go("v-landing", {instant:true});
