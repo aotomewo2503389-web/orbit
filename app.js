@@ -763,3 +763,5 @@ async function boot(){
 /* ===================== Boot ===================== */
 connectRoom();
 boot();
+
+export {};

@@ -4,7 +4,7 @@ Orbit runs as a Next.js App Router application with TypeScript and React.
 
 ## Development
 
-Requires Node.js 24.x (the version selected for Vercel deployments).
+Requires Node.js 18.18 or newer.
 
 ```sh
 npm install
