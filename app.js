@@ -211,7 +211,8 @@ const parentOf = {"v-signin":"v-landing","v-onboard":"v-landing","v-system":"v-l
 const PUBLIC_VIEWS = ["v-landing", "v-signin", "v-boot"];
 function go(id, opts = {}){
   // Signed-in users can never be sent to the landing or sign-in pages; signed-out users can never reach the app.
-  if(authed && (id === "v-landing" || id === "v-signin")) id = state.onboard ? "v-system" : "v-onboard";
+  if(authed && (id === "v-landing" || id === "v-signin")) id = hasCompletedOnboarding() ? "v-system" : "v-onboard";
+  if(authed && !hasCompletedOnboarding() && id !== "v-onboard" && id !== "v-boot") id = "v-onboard";
   if(!authed && !PUBLIC_VIEWS.includes(id)) id = "v-signin";
   const swap = () => {
     document.querySelectorAll(".view").forEach(v => v.hidden = v.id !== id);
@@ -230,7 +231,7 @@ function go(id, opts = {}){
   if(id !== "v-practice") stopTimer();
   if(!opts.instant && document.startViewTransition && !reduce) document.startViewTransition(swap); else swap();
 }
-function startFlow(){ go(authed ? (state.onboard ? "v-system" : "v-onboard") : "v-signin"); }
+function startFlow(){ go(authed ? (hasCompletedOnboarding() ? "v-system" : "v-onboard") : "v-signin"); }
 document.querySelectorAll("[data-start]").forEach(b => b.addEventListener("click", e => { e.preventDefault(); startFlow(); }));
 $("navStart").addEventListener("click", startFlow);
 $("navBack").addEventListener("click", () => {
@@ -345,6 +346,10 @@ function renderOnboard(){
   }
   next.addEventListener("click", () => { ob.step++; renderOnboard(); });
   const bk = $("obBack"); if(bk) bk.addEventListener("click", () => { ob.step--; renderOnboard(); });
+}
+function hasCompletedOnboarding(){
+  const details = state.onboard;
+  return Boolean(details && details.university === "covenant" && details.name && details.level && details.exam);
 }
 
 /* ===================== Course grid + decorative orbit band ===================== */
@@ -787,11 +792,19 @@ function enter(user){
     catch(err){ if(uid === user.id){ entering = null; renderBoot(err); } return; }
     if(uid !== user.id) return;   // signed out while loading
     armBackGuard();
-    if(!state.onboard){
-      state.onboard = {name:firstName(user), level:"", exam:""};
-      save();
+    if(hasCompletedOnboarding()){
+      go("v-system", {instant:true});
+      return;
     }
-    go("v-system", {instant:true});
+    const saved = state.onboard || {};
+    ob = {
+      step:0,
+      university: saved.university === "covenant" ? "covenant" : "",
+      name: String(saved.name || firstName(user)).slice(0, 24),
+      level: saved.level || "",
+      exam: saved.exam || ""
+    };
+    go("v-onboard", {instant:true});
   })();
   return entering;
 }
@@ -799,7 +812,7 @@ function leave(){   // the only way back to the landing page: signing out
   if(!authed) return;
   clearTimeout(saveTimer); saveTimer = null;
   authed = false; uid = null; authUser = null; entering = null;
-  state = {onboard:null, courses:{}}; ob = {step:0, name:"", level:"", exam:""};
+  state = {onboard:null, courses:{}}; ob = {step:0, university:"", name:"", level:"", exam:""};
   Object.keys(banks).forEach(k => delete banks[k]); Object.keys(realBank).forEach(k => delete realBank[k]);
   stopTimer(); leaveDuel(); closeSheet(); session = null; activeCourse = null;
   go("v-landing", {instant:true});
