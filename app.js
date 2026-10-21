@@ -265,6 +265,37 @@ document.querySelectorAll("[data-theme-set]").forEach(a => a.addEventListener("c
 $("navTheme").addEventListener("click", () => {
   setTheme(document.documentElement.dataset.theme === "dark" ? "light" : "dark");
 });
+let pendingInstallPrompt = null;
+const installButton = $("navInstall");
+window.addEventListener("beforeinstallprompt", event => {
+  event.preventDefault();
+  pendingInstallPrompt = event;
+  installButton.hidden = false;
+});
+window.addEventListener("appinstalled", () => {
+  pendingInstallPrompt = null;
+  installButton.hidden = true;
+});
+installButton.addEventListener("click", async () => {
+  if(!pendingInstallPrompt) return;
+  const prompt = pendingInstallPrompt;
+  pendingInstallPrompt = null;
+  installButton.disabled = true;
+  try{
+    await prompt.prompt();
+    await prompt.userChoice;
+    installButton.hidden = true;
+  }catch(error){
+    console.error("Orbit couldn’t open the install prompt.", error);
+  }finally{
+    installButton.disabled = false;
+  }
+});
+if("serviceWorker" in navigator && window.isSecureContext){
+  navigator.serviceWorker.register("/sw.js").catch(error => {
+    console.error("Orbit couldn’t register offline support.", error);
+  });
+}
 try{
   const savedTheme = localStorage.getItem("orbit-theme");
   setTheme(savedTheme === "dark" ? "dark" : "light", false);

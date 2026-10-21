@@ -93,6 +93,7 @@ img,svg{max-width:100%}
 .nav-links a{padding:10px 14px;border-radius:999px;color:var(--ink-2);text-decoration:none;font-weight:500;font-size:15px;transition:background .25s,color .25s}
 .nav-links a:hover{background:var(--line);color:var(--ink)}
 .nav .btn{min-height:42px}
+.nav-install{white-space:nowrap;padding-inline:1em}
 .theme-toggle{position:relative;display:inline-flex;align-items:center;justify-content:space-between;width:72px;height:42px;padding:0 10px;border:1px solid var(--line);border-radius:999px;background:linear-gradient(135deg,var(--glass-strong),var(--glass));color:var(--ink-2);box-shadow:inset 0 1px 0 var(--rim),0 5px 14px -10px var(--ink);transition:border-color .25s,box-shadow .25s,transform .3s var(--spring)}
 .theme-toggle:hover{border-color:var(--violet);box-shadow:inset 0 1px 0 var(--rim),0 6px 18px -9px var(--violet);transform:translateY(-1px)}
 .theme-toggle:active{transform:scale(.95)}
