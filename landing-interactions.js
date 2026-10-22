@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { createPortal } from "react-dom";
 import { createRoot } from "react-dom/client";
-import { motion, useMotionTemplate, useMotionValue, useReducedMotion } from "motion/react";
+import { motion, useReducedMotion } from "motion/react";
 
 const root = document.querySelector("#rail-controls");
 const rail = document.querySelector("#rail");
@@ -21,40 +20,6 @@ document.querySelectorAll(".hero-line-mount").forEach((mount, index) => {
 });
 
 if (root && rail && cards.length) {
-  function StoryGlow({ card }) {
-    const [active, setActive] = useState(false);
-    const x = useMotionValue(0);
-    const y = useMotionValue(0);
-    const reduceMotion = useReducedMotion();
-    const background = useMotionTemplate`radial-gradient(260px circle at ${x}px ${y}px, var(--motion-glow), transparent 72%)`;
-
-    useEffect(() => {
-      const updatePointer = event => {
-        const bounds = card.getBoundingClientRect();
-        x.set(event.clientX - bounds.left);
-        y.set(event.clientY - bounds.top);
-      };
-      const activate = () => setActive(true);
-      const clearPointer = () => setActive(false);
-      card.addEventListener("pointermove", updatePointer);
-      card.addEventListener("pointerenter", activate);
-      card.addEventListener("pointerleave", clearPointer);
-      return () => {
-        card.removeEventListener("pointermove", updatePointer);
-        card.removeEventListener("pointerenter", activate);
-        card.removeEventListener("pointerleave", clearPointer);
-      };
-    }, [card, x, y]);
-
-    return React.createElement(motion.div, {
-      className: "story-react-glow",
-      "aria-hidden": "true",
-      animate: { opacity: active && !reduceMotion ? 1 : 0 },
-      transition: { duration: 0.22, ease: "easeOut" },
-      style: { background }
-    });
-  }
-
   function RailControls() {
     const [active, setActive] = useState(0);
     const reduceMotion = useReducedMotion();
@@ -142,12 +107,7 @@ if (root && rail && cards.length) {
           ))
         ),
         arrow(1, "Next feature", active === cards.length - 1)
-      ),
-      cards.map((card, index) => createPortal(
-        React.createElement(StoryGlow, { card }),
-        card,
-        `story-glow-${index}`
-      ))
+      )
     );
   }
 

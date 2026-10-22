@@ -232,10 +232,6 @@ function go(id, opts = {}){
   if(authed && (id === "v-landing" || id === "v-signin")) id = hasCompletedOnboarding() ? "v-system" : "v-onboard";
   if(authed && !hasCompletedOnboarding() && id !== "v-onboard" && id !== "v-boot") id = "v-onboard";
   if(!authed && !PUBLIC_VIEWS.includes(id)) id = "v-signin";
-  if(current === "v-summary" && id !== "v-summary" && activePodSpeech){
-    window.speechSynthesis.cancel();
-    resetActivePod();
-  }
   const swap = () => {
     document.querySelectorAll(".view").forEach(v => v.hidden = v.id !== id);
     current = id;
@@ -488,15 +484,14 @@ function profileProgramTag(){
 (function buildBand(){
   const svg = $("band"); const cx = 380, cy = 90; const rings = [[160,46],[262,64],[362,84]];
   let out = rings.map(([rx, ry]) => `<ellipse cx="${cx}" cy="${cy}" rx="${rx}" ry="${ry}"/>`).join("");
-  out += `<defs><radialGradient id="sunG" cx="40%" cy="36%"><stop offset="0" stop-color="#FFF4D6"/><stop offset=".45" stop-color="#FFC857"/><stop offset="1" stop-color="#F2833A"/></radialGradient></defs>`;
-  out += `<circle cx="${cx}" cy="${cy}" r="26" fill="url(#sunG)" style="filter:drop-shadow(0 0 18px rgba(255,170,60,.6))"/>`;
+  out += `<circle cx="${cx}" cy="${cy}" r="26" fill="var(--ink)" opacity=".82"/>`;
   COURSES.forEach((c, i) => {
     const ring = i % 3, [rx, ry] = rings[ring], slot = Math.floor(i / 3);
     const dur = [26, 40, 58][ring], r = [7, 8.5, 10][ring];
     const path = `M ${cx + rx} ${cy} A ${rx} ${ry} 0 1 1 ${cx - rx} ${cy} A ${rx} ${ry} 0 1 1 ${cx + rx} ${cy}`;
     const start = (slot / 3 + ring * .11) % 1;
     const x = cx + rx * Math.cos(start * 2 * Math.PI), y = cy + ry * Math.sin(start * 2 * Math.PI);
-    out += `<circle r="${r}" fill="hsl(${c.h} 72% 58%)" ${reduce ? `cx="${x}" cy="${y}"` : ""}>` +
+    out += `<circle r="${r}" fill="var(--ink)" opacity=".62" ${reduce ? `cx="${x}" cy="${y}"` : ""}>` +
       (reduce ? "" : `<animateMotion dur="${dur}s" repeatCount="indefinite" begin="-${(start * dur).toFixed(2)}s" path="${path}"/>`) + `</circle>`;
   });
   svg.innerHTML = out;
@@ -533,7 +528,7 @@ function renderGrid(){
     const acc = courseAcc(c.code);
     const st = realBank[c.code] ? `${banks[c.code].length} past questions` : "Sample set for now";
     const details = [c.credits === undefined ? "" : `${c.credits} credits`, c.category || ""].filter(Boolean).join(" · ");
-    return `<button class="ccard glass" data-code="${c.code}" style="animation-delay:${reduce ? 0 : i * 40}ms">${courseMark(c, "course-mark--large")}<strong>${c.code}</strong>${c.name ? `<span class="course-name">${esc(c.name)}</span>` : ""}${details ? `<span class="course-details">${details}</span>` : ""}<span class="st">${acc === null ? st : Math.round(acc * 100) + "% accuracy"}</span>${acc === null ? "" : `<div class="meter"><i style="width:${Math.round(acc * 100)}%;background:hsl(${c.h} 70% 55%)"></i></div>`}</button>`;
+    return `<button class="ccard glass" data-code="${c.code}" style="animation-delay:${reduce ? 0 : i * 40}ms">${courseMark(c, "course-mark--large")}<strong>${c.code}</strong>${c.name ? `<span class="course-name">${esc(c.name)}</span>` : ""}${details ? `<span class="course-details">${esc(details)}</span>` : ""}<span class="st">${acc === null ? st : Math.round(acc * 100) + "% accuracy"}</span>${acc === null ? "" : `<div class="meter"><i style="width:${Math.round(acc * 100)}%;background:var(--ink)"></i></div>`}</button>`;
   }).join("") : `<p class="grid-empty">No Industrial Physics ${esc(level)} courses match “${esc($("courseSearch").value.trim())}”.</p>`;
   $("grid").querySelectorAll(".ccard").forEach(b => b.addEventListener("click", () => openSheet(b.dataset.code)));
 }
@@ -715,111 +710,47 @@ function finishSession(){
 }
 
 /* ===================== Summary ===================== */
-let activePodSpeech = null;
-function podScript(answer){
-  const correct = answer.q.options.find(option => option.ok);
-  const picked = answer.pick ? answer.pick.t : "No answer before time ran out";
-  return `Let’s review ${answer.q.topic}. The question asks: ${answer.q.prompt} You chose: ${picked}. ${answer.why || "That answer does not match the principle being tested."} The correct answer is: ${correct ? correct.t : "not available"}. Here is the working: ${answer.q.explain || "Review the key idea and apply it carefully."}`;
+function youtubeSearchUrl(answer){
+  const query = `${answer.q.topic || session.code} ${answer.q.prompt} explained`;
+  return `https://www.youtube.com/results?search_query=${encodeURIComponent(query)}`;
 }
-function voicePodsHtml(answers){
+function questionRecapsHtml(answers){
   if(!answers.length) return "";
-  return `<section class="explainer-pods" aria-labelledby="explainer-title">
-    <div class="explainer-heading"><p class="eyebrow">A second way to learn</p><h3 class="h3" id="explainer-title">Your voice explainers</h3>
-      <p class="sub">Each pod turns a missed question into a quick audio recap and a visual path from mistake to solution. Your browser reads each explainer aloud when you press play; no voice service or extra page is needed.</p></div>
+  return `<section class="question-recaps" aria-labelledby="recaps-title">
+    <div class="recaps-heading"><p class="eyebrow">Review your misses</p><h3 class="h3" id="recaps-title">Question recaps</h3>
+      <p class="sub">Review the key idea and working for each missed question, or search YouTube for a video explanation.</p></div>
     ${answers.map((answer, index) => {
       const correct = answer.q.options.find(option => option.ok);
       const picked = answer.pick ? answer.pick.t : "Time ran out";
       const keyIdea = answer.tag || answer.why || "Apply the core principle";
-      return `<article class="explainer-pod glass" data-explainer-pod>
-        <div class="pod-top"><span class="pod-number">Missed question ${index + 1}</span><span class="pod-topic">${esc(answer.q.topic || session.code)}</span></div>
+      return `<article class="question-recap glass" data-question-recap>
+        <div class="recap-top"><span class="recap-number">Missed question ${index + 1}</span><span class="recap-topic">${esc(answer.q.topic || session.code)}</span></div>
         <h4>${esc(answer.q.prompt)}</h4>
-        <div class="pod-visual" aria-label="Visual explanation: your answer, key idea, correct answer">
-          <svg class="pod-orbit" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="10" /><ellipse cx="16" cy="16" rx="15" ry="6" /><circle class="pod-orbit-dot" cx="28" cy="10" r="2.5" /></svg>
-          <div class="pod-flow">
-            <div class="pod-step"><span>Your answer</span><b>${esc(picked)}</b></div><span class="pod-connector" aria-hidden="true">→</span>
-            <div class="pod-step pod-step--idea"><span>Key idea</span><b>${esc(keyIdea)}</b></div><span class="pod-connector" aria-hidden="true">→</span>
-            <div class="pod-step pod-step--answer"><span>Correct answer</span><b>${esc(correct ? correct.t : "See working below")}</b></div>
+        <div class="recap-visual" aria-label="Visual recap: your answer, key idea, correct answer">
+          <svg class="recap-orbit" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="10" /><ellipse cx="16" cy="16" rx="15" ry="6" /><circle class="recap-orbit-dot" cx="28" cy="10" r="2.5" /></svg>
+          <div class="recap-flow">
+            <div class="recap-step"><span>Your answer</span><b>${esc(picked)}</b></div><span class="recap-connector" aria-hidden="true">→</span>
+            <div class="recap-step recap-step--idea"><span>Key idea</span><b>${esc(keyIdea)}</b></div><span class="recap-connector" aria-hidden="true">→</span>
+            <div class="recap-step recap-step--answer"><span>Correct answer</span><b>${esc(correct ? correct.t : "See working below")}</b></div>
           </div>
         </div>
-        ${answer.why ? `<p class="pod-mistake"><b>Why it missed:</b> ${esc(answer.why)}</p>` : ""}
-        <p class="pod-working"><b>Work it through:</b> ${esc(answer.q.explain || "Use the key idea above to check the correct answer.")}</p>
-        <div class="pod-controls"><button class="btn btn-primary pod-play" type="button" data-pod-play="${index}" aria-describedby="pod-status-${index}">Play voice explainer</button><span class="pod-status" id="pod-status-${index}" role="status" aria-live="polite">Ready when you are.</span></div>
+        ${answer.why ? `<p class="recap-mistake"><b>Why it missed:</b> ${esc(answer.why)}</p>` : ""}
+        <p class="recap-working"><b>Work it through:</b> ${esc(answer.q.explain || "Use the key idea above to check the correct answer.")}</p>
+        <a class="youtube-link" href="${youtubeSearchUrl(answer)}" target="_blank" rel="noopener noreferrer">Search YouTube for a video explanation <span aria-hidden="true">↗</span></a>
       </article>`;
     }).join("")}
   </section>`;
 }
-function resetActivePod(){
-  if(!activePodSpeech) return;
-  const {button, status} = activePodSpeech;
-  if(button.isConnected) button.textContent = "Play voice explainer";
-  if(status.isConnected) status.textContent = "Ready when you are.";
-  activePodSpeech = null;
-}
-function playPod(answer, button){
-  const pod = button.closest("[data-explainer-pod]");
-  const status = pod.querySelector(".pod-status");
-  if(!("speechSynthesis" in window) || typeof SpeechSynthesisUtterance === "undefined"){
-    status.textContent = "Voice playback is not supported by this browser.";
-    return;
-  }
-  if(activePodSpeech && activePodSpeech.button === button){
-    if(window.speechSynthesis.paused){
-      window.speechSynthesis.resume();
-      button.textContent = "Pause voice explainer";
-      status.textContent = "Playing your explainer.";
-    }else{
-      window.speechSynthesis.pause();
-      button.textContent = "Resume voice explainer";
-      status.textContent = "Paused.";
-    }
-    return;
-  }
-  if(activePodSpeech){
-    window.speechSynthesis.cancel();
-    resetActivePod();
-  }
-  const utterance = new SpeechSynthesisUtterance(podScript(answer));
-  utterance.lang = "en-US";
-  utterance.rate = 0.95;
-  const voices = window.speechSynthesis.getVoices();
-  const englishVoice = voices.find(voice => voice.lang.toLowerCase().startsWith("en"));
-  if(englishVoice) utterance.voice = englishVoice;
-  const playback = {button, status, utterance};
-  activePodSpeech = playback;
-  button.textContent = "Pause voice explainer";
-  status.textContent = "Playing your explainer.";
-  utterance.onend = () => {
-    if(activePodSpeech !== playback) return;
-    activePodSpeech = null;
-    if(button.isConnected) button.textContent = "Play voice explainer again";
-    if(status.isConnected) status.textContent = "Explainer finished.";
-  };
-  utterance.onerror = event => {
-    if(activePodSpeech !== playback) return;
-    activePodSpeech = null;
-    if(button.isConnected) button.textContent = "Try voice explainer again";
-    if(status.isConnected) status.textContent = "Voice playback failed. Tap to try again.";
-    console.error("Orbit couldn’t play this voice explainer.", event.error);
-  };
-  try{
-    window.speechSynthesis.speak(utterance);
-  }catch(error){
-    activePodSpeech = null;
-    button.textContent = "Try voice explainer again";
-    status.textContent = "Voice playback failed. Tap to try again.";
-    console.error("Orbit couldn’t start this voice explainer.", error);
-  }
-}
-async function animateVoicePods(){
+async function animateQuestionRecaps(){
   if(reduce) return;
   try{
     const {animate, stagger} = await import("motion");
-    document.querySelectorAll("[data-explainer-pod]").forEach(pod => {
-      animate(pod.querySelectorAll(".pod-step"), {opacity:[0,1], y:[12,0], scale:[.97,1]}, {delay:stagger(.1), duration:.42, ease:"easeOut"});
-      animate(pod.querySelector(".pod-orbit"), {rotate:360}, {duration:18, repeat:Infinity, ease:"linear"});
+    document.querySelectorAll("[data-question-recap]").forEach(recap => {
+      animate(recap.querySelectorAll(".recap-step"), {opacity:[0,1], y:[12,0]}, {delay:stagger(.1), duration:.42, ease:"easeOut"});
+      animate(recap.querySelector(".recap-orbit"), {rotate:360}, {duration:18, repeat:Infinity, ease:"linear"});
     });
   }catch(error){
-    console.error("Orbit couldn’t animate the voice explainer graphics.", error);
+    console.error("Orbit couldn’t animate the question recaps.", error);
   }
 }
 function reviewHtml(){
@@ -845,16 +776,13 @@ function renderSummary(){
     ${session.mode === "live" || session.mode === "code-accept" ? "" : `<div class="ring-score"><svg width="150" height="150" viewBox="0 0 150 150"><circle class="bg" cx="75" cy="75" r="62"/><circle class="fg" id="ringFg" cx="75" cy="75" r="62" stroke-dasharray="${C}" stroke-dashoffset="${C}"/></svg><b>${pct}%</b></div>`}
     ${duelBlock}
     ${tags.length ? `<p class="sub" style="margin:18px 0 10px">Mistakes to watch</p><div class="tag-list" style="justify-content:center">${tags.map(([t, k]) => `<span class="mtag">${esc(t)}${k > 1 ? ` <em>×${k}</em>` : ""}</span>`).join("")}</div>` : ""}
-    ${voicePodsHtml(failedAnswers)}
+    ${questionRecapsHtml(failedAnswers)}
     ${session.explainEnd ? reviewHtml() : ""}
     <div class="stack" style="text-align:left">
       <button class="action glass" id="sumAgain"><div><strong>Practise again</strong><span>A fresh ${esc(session.code)} set, weighted to what you missed</span></div><i class="go">${arrow}</i></button>
       <button class="action glass secondary" id="sumDash"><div><strong>See weak spots</strong><span>Accuracy by topic and repeat mistakes</span></div><i class="go">${arrow}</i></button>
     </div>`;
-  $("summaryPanel").querySelectorAll("[data-pod-play]").forEach(button => {
-    button.addEventListener("click", () => playPod(failedAnswers[+button.dataset.podPlay], button));
-  });
-  animateVoicePods();
+  animateQuestionRecaps();
   setTimeout(() => { const f = $("ringFg"); if(f) f.style.strokeDashoffset = C * (1 - (n ? c / n : 0)); }, 350);
   $("sumAgain").onclick = () => { leaveDuel(); startSolo(session.code); };
   $("sumDash").onclick = () => { activeCourse = session.code; go("v-dash"); };
