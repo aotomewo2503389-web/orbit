@@ -421,6 +421,12 @@ footer .fine{grid-column:1 / -1;border-top:1px solid var(--line);padding-top:18p
 .profile-tools{margin-top:22px;padding-top:18px;border-top:1px solid var(--line)}
 .profile-tools>.btn{width:100%}
 .profile-tools>[role="status"],.profile-form-status{display:block;min-height:20px;margin:8px 0;color:var(--ink-2);font-size:13px}
+.profile-delete{margin-top:24px;padding-top:18px;border-top:1px solid var(--line)}
+.profile-delete .h3{margin:0 0 6px}
+.profile-delete>.sub{margin-bottom:12px;font-size:13px;line-height:1.5}
+.profile-delete .btn{width:100%}
+.btn-danger{border:1px solid rgba(201,54,62,.42);background:rgba(201,54,62,.08);color:var(--bad)}
+.btn-danger:hover{background:rgba(201,54,62,.14)}
 .profile-share-link{width:100%;min-height:44px;margin-top:8px;padding:8px 10px;border:1px solid var(--line);border-radius:12px;background:var(--glass-strong);color:var(--ink);font-size:12px}
 .profile-result-import{margin-top:22px}
 .profile-result-import .h3{margin:0 0 6px}

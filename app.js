@@ -268,13 +268,14 @@ const heroStartObserver = new IntersectionObserver(entries => {
   }
 }, {threshold:.15});
 heroStartObserver.observe($("heroStart"));
-const parentOf = {"v-signin":"v-landing","v-onboard":"v-landing","v-system":"v-landing","v-profile":"v-system","v-practice":"v-system","v-summary":"v-system","v-dash":"v-system","v-duel":"v-system"};
 const PUBLIC_VIEWS = ["v-landing", "v-signin", "v-boot", "v-profile"];
+const viewHistory = [];
 function go(id, opts = {}){
   // Signed-in users can never be sent to the landing or sign-in pages; signed-out users can never reach the app.
   if(authed && (id === "v-landing" || id === "v-signin")) id = hasCompletedOnboarding() ? "v-system" : "v-onboard";
   if(authed && !hasCompletedOnboarding() && id !== "v-onboard" && id !== "v-boot" && id !== "v-profile") id = "v-onboard";
   if(!authed && !PUBLIC_VIEWS.includes(id)) id = "v-signin";
+  if(id !== current && !opts.fromHistory && !opts.replaceHistory && current !== "v-boot") viewHistory.push(current);
   const swap = () => {
     document.querySelectorAll(".view").forEach(v => v.hidden = v.id !== id);
     current = id;
@@ -283,7 +284,7 @@ function go(id, opts = {}){
     $("navTheme").hidden = !authed;
     $("navOut").hidden = !authed;
     $("navProfile").hidden = !authed || !hasCompletedOnboarding() || id === "v-practice" || id === "v-duel";
-    $("navBack").hidden = authed && (id === "v-system" || id === "v-onboard" || id === "v-boot");
+    $("navBack").hidden = !viewHistory.length || id === "v-boot";
     if(id === "v-signin") renderSignin();
     window.scrollTo(0, 0);
     if(id === "v-onboard") renderOnboard();
@@ -299,8 +300,7 @@ document.querySelectorAll("[data-start]").forEach(b => b.addEventListener("click
 $("navStart").addEventListener("click", startFlow);
 $("navProfile").addEventListener("click", () => renderProfile());
 $("navBack").addEventListener("click", () => {
-  if(current === "v-practice" || current === "v-duel" || current === "v-summary") leaveDuel();
-  go(current === "v-profile" && !authed ? "v-landing" : parentOf[current] || "v-landing");
+  appBack();
 });
 $("logoHome").addEventListener("click", e => { e.preventDefault(); leaveDuel(); go("v-landing"); });
 function setTheme(theme, persist = true){
@@ -466,7 +466,7 @@ function renderOnboard(){
   if(ob.step >= OB_STEPS.length){
     p.innerHTML = `<div class="launch step-in"><div class="planet ringed"></div><h2 class="title">Building your orbit</h2><p class="sub">Lining up your courses, ${esc(ob.name || "there")}.</p></div>`;
     saveOnboardingDraft();
-    setTimeout(() => go("v-system"), reduce ? 300 : 1500);
+    setTimeout(() => go("v-system", {replaceHistory:true}), reduce ? 300 : 1500);
     return;
   }
   const s = OB_STEPS[ob.step];
@@ -875,6 +875,7 @@ function renderProfile(sharedProfile = null){
     ${personal ? `<div class="profile-tools"><button class="btn btn-primary" id="shareProfile">Copy shareable profile link</button><span id="profileShareStatus" role="status" aria-live="polite"></span><input id="profileShareLink" class="profile-share-link" type="url" readonly aria-label="Shareable profile link" hidden>
       <p class="profile-snapshot-note">The link contains your display name and challenge stats as a snapshot. Only share it if you’re comfortable making those details public.</p>
       <div class="profile-result-import"><h3 class="h3">Record a challenge you created</h3><p class="sub">After your friend finishes your challenge code, ask them to send you their result code. Enter it here to update your win rate and rank.</p><label for="profileResultCode">Challenge result code</label><div class="profile-import-row"><input id="profileResultCode" class="field code" placeholder="R-PHY211-…" autocomplete="off"><button class="btn btn-soft" id="importChallengeResult" type="button">Record result</button></div><p id="profileResultStatus" class="profile-form-status" role="status" aria-live="polite"></p></div>
+      <section class="profile-delete"><h3 class="h3">Delete account</h3><p class="sub">Permanently delete your Orbit account and cloud progress. This can’t be undone.</p><button class="btn btn-danger" id="deleteAccount" type="button">Delete my account</button><p id="deleteAccountStatus" class="profile-form-status" role="status" aria-live="polite"></p></section>
     </div>` : ""}
     <div class="stack"><button class="action glass" id="profileHome"><div><strong>${personal ? "Back to courses" : "Open Orbit"}</strong><span>${personal ? "Keep practising and building your record" : "Practise with Orbit"}</span></div><i class="go">${arrow}</i></button></div>`;
   if(personal){
@@ -917,8 +918,42 @@ function renderProfile(sharedProfile = null){
       renderProfile();
       $("profileResultStatus").textContent = `Result recorded: ${outcome === "win" ? "you won" : outcome === "loss" ? "your friend won" : "draw"}.`;
     };
+    $("deleteAccount").onclick = async () => {
+      const button = $("deleteAccount"), status = $("deleteAccountStatus");
+      if(!window.confirm("Permanently delete your Orbit account and all cloud progress? This cannot be undone.")) return;
+      if(!sb){ status.textContent = "Account deletion is unavailable because sign-in is not connected."; return; }
+      button.disabled = true;
+      status.textContent = "Deleting your account…";
+      try{
+        const {data, error} = await sb.auth.getSession();
+        if(error) throw error;
+        const accessToken = data.session && data.session.access_token;
+        if(!accessToken) throw new Error("Your sign-in session expired. Sign in again and retry.");
+        const response = await fetch("/api/account/delete", {
+          method:"POST",
+          headers:{"Content-Type":"application/json", Authorization:`Bearer ${accessToken}`},
+          body:JSON.stringify({confirmation:"DELETE"})
+        });
+        if(!response.ok){
+          const result = await response.json().catch(() => ({}));
+          throw new Error(result.error || "The account could not be deleted. Please try again.");
+        }
+        localStorage.removeItem(lsKey());
+        const {error: signOutError} = await sb.auth.signOut({scope:"local"});
+        if(signOutError) console.error("Orbit deleted the account but couldn’t clear the local sign-in session.", signOutError);
+        leave();
+      }catch(error){
+        console.error("Orbit couldn’t delete the account.", error);
+        status.textContent = error instanceof Error ? error.message : "The account could not be deleted. Please try again.";
+        button.disabled = false;
+      }
+    };
   }
-  $("profileHome").onclick = () => personal ? go("v-system") : go("v-landing");
+  $("profileHome").onclick = () => {
+    if(!personal){ go("v-landing", {replaceHistory:true}); return; }
+    if(viewHistory.length){ appBack(); return; }
+    go("v-system", {replaceHistory:true});
+  };
   go("v-profile");
 }
 function parseChallengeResultCode(value){
@@ -1183,9 +1218,10 @@ function firstName(u){
 
 function enter(user){
   if(uid === user.id && entering) return entering;
+  viewHistory.length = 0;
   uid = user.id; authUser = user; authed = true;
   entering = (async () => {
-    renderBoot(); go("v-boot", {instant:true});
+    renderBoot(); go("v-boot", {instant:true, replaceHistory:true});
     try{ await Promise.all([loadProgress(), loadBanks()]); }
     catch(err){ if(uid === user.id){ entering = null; renderBoot(err); } return; }
     if(uid !== user.id) return;   // signed out while loading
@@ -1193,7 +1229,7 @@ function enter(user){
     const sharedProfile = readSharedProfile();
     if(sharedProfile){ renderProfile(sharedProfile); return; }
     if(hasCompletedOnboarding()){
-      go("v-system", {instant:true});
+      go("v-system", {instant:true, replaceHistory:true});
       return;
     }
     const saved = state.onboard || {};
@@ -1206,18 +1242,19 @@ function enter(user){
       exam: saved.exam || ""
     };
     ob.step = !ob.university ? 0 : !ob.name ? 1 : !ob.level ? 2 : !ob.program ? 3 : !ob.exam ? 4 : 0;
-    go("v-onboard", {instant:true});
+    go("v-onboard", {instant:true, replaceHistory:true});
   })();
   return entering;
 }
 function leave(){   // the only way back to the landing page: signing out
   if(!authed) return;
   clearTimeout(saveTimer); saveTimer = null;
+  viewHistory.length = 0;
   authed = false; uid = null; authUser = null; entering = null;
   state = {onboard:null, courses:{}}; ob = {step:0, university:"", name:"", level:"", program:"", exam:""};
   Object.keys(banks).forEach(k => delete banks[k]); Object.keys(realBank).forEach(k => delete realBank[k]);
   stopTimer(); leaveDuel(); closeSheet(); session = null; activeCourse = null;
-  go("v-landing", {instant:true});
+  go("v-landing", {instant:true, replaceHistory:true});
 }
 async function syncSession(){
   if(!sb) return;
@@ -1237,9 +1274,10 @@ function armBackGuard(){
   else { addEventListener("pointerdown", push, {once:true, passive:true}); addEventListener("keydown", push, {once:true}); }
 }
 function appBack(){
-  if(current === "v-system" || current === "v-onboard" || current === "v-boot") return;
-  if(current === "v-practice" || current === "v-duel" || current === "v-summary") leaveDuel();
-  go(parentOf[current] || "v-system");
+  if(!viewHistory.length) return;
+  if(current === "v-practice" || current === "v-duel") leaveDuel();
+  const previous = viewHistory.pop();
+  go(previous, {fromHistory:true});
 }
 addEventListener("popstate", () => {
   if(!authed) return;
