@@ -1,0 +1,3656 @@
+[
+  {
+    "id": "MTH213-IDE-001",
+    "course": "MTH213",
+    "topic": "Introduction to Differential Equations",
+    "prompt": "The derivative dy/dx of y = f(x) represents:",
+    "d": 1,
+    "options": [
+      {
+        "t": "The area under the curve",
+        "tag": "Confused derivative with integral",
+        "why": "An integral can represent area. The derivative describes the rate of change."
+      },
+      {
+        "t": "The rate at which y changes with respect to x",
+        "ok": true
+      },
+      {
+        "t": "The value of y when x = 0",
+        "tag": "Confused derivative with initial value",
+        "why": "The derivative is a rate of change, not the value of the function at a point."
+      },
+      {
+        "t": "The integral of f(x)",
+        "tag": "Confused derivative with integral",
+        "why": "The derivative and integral are different operations."
+      }
+    ],
+    "explain": "dy/dx gives the rate at which y changes with respect to x."
+  },
+  {
+    "id": "MTH213-IDE-002",
+    "course": "MTH213",
+    "topic": "Introduction to Differential Equations",
+    "prompt": "A differential equation is an equation containing:",
+    "d": 1,
+    "options": [
+      {
+        "t": "Only constants and integrals",
+        "tag": "Missed the derivative requirement",
+        "why": "A differential equation is defined by the presence of derivatives."
+      },
+      {
+        "t": "Only algebraic terms in x and y",
+        "tag": "Missed the derivative requirement",
+        "why": "An algebraic equation without derivatives is not a differential equation."
+      },
+      {
+        "t": "Derivatives of one or more dependent variables with respect to one or more independent variables",
+        "ok": true
+      },
+      {
+        "t": "Only partial sums of a series",
+        "tag": "Confused unrelated concepts",
+        "why": "Series sums are not part of the definition of a differential equation."
+      }
+    ],
+    "explain": "A differential equation relates variables and their derivatives."
+  },
+  {
+    "id": "MTH213-IDE-003",
+    "course": "MTH213",
+    "topic": "Introduction to Differential Equations",
+    "prompt": "An ordinary differential equation contains derivatives with respect to:",
+    "d": 1,
+    "options": [
+      {
+        "t": "Two or more independent variables",
+        "tag": "Confused ODE with PDE",
+        "why": "Derivatives with respect to multiple independent variables indicate a PDE."
+      },
+      {
+        "t": "Exactly one independent variable",
+        "ok": true
+      },
+      {
+        "t": "No independent variable",
+        "tag": "Ignored the independent variable",
+        "why": "An ODE describes derivatives with respect to one independent variable."
+      },
+      {
+        "t": "Time only",
+        "tag": "Overly restricted the definition",
+        "why": "The independent variable can be any variable, not only time."
+      }
+    ],
+    "explain": "An ODE has derivatives with respect to exactly one independent variable."
+  },
+  {
+    "id": "MTH213-IDE-004",
+    "course": "MTH213",
+    "topic": "Introduction to Differential Equations",
+    "prompt": "Which of these is a partial differential equation?",
+    "d": 1,
+    "options": [
+      {
+        "t": "dy/dx = x + cos x",
+        "tag": "Mistook an ODE for a PDE",
+        "why": "This uses an ordinary derivative with respect to one independent variable, x."
+      },
+      {
+        "t": "m d²u/dt² = F",
+        "tag": "Mistook an ODE for a PDE",
+        "why": "This has an ordinary derivative with respect to the single independent variable, t."
+      },
+      {
+        "t": "∂²u/∂x² + ∂²u/∂y² = 0",
+        "ok": true
+      },
+      {
+        "t": "d³y/dx³ + y = 0",
+        "tag": "Mistook an ODE for a PDE",
+        "why": "This uses ordinary derivatives with respect to x only."
+      }
+    ],
+    "explain": "The equation uses partial derivatives with respect to x and y, so it is a PDE."
+  },
+  {
+    "id": "MTH213-IDE-005",
+    "course": "MTH213",
+    "topic": "Introduction to Differential Equations",
+    "prompt": "Equation ∂²u/∂x² = ∂²u/∂t² − 2∂u/∂t is written in subscript notation as:",
+    "d": 2,
+    "options": [
+      {
+        "t": "u_xx = u_tt − 2u_t",
+        "ok": true
+      },
+      {
+        "t": "u_x = u_t − 2u",
+        "tag": "Dropped derivative orders",
+        "why": "The equation contains second partial derivatives with respect to x and t."
+      },
+      {
+        "t": "u_xx = u_tt + 2u_t",
+        "tag": "Changed the sign",
+        "why": "The original equation has −2∂u/∂t, so the subscript form also has −2u_t."
+      },
+      {
+        "t": "u″ = u′ − 2u",
+        "tag": "Used ordinary derivative notation",
+        "why": "This is a PDE, so its partial derivatives are denoted with subscripts here."
+      }
+    ],
+    "explain": "The subscript notation is u_xx = u_tt − 2u_t."
+  },
+  {
+    "id": "MTH213-IDE-006",
+    "course": "MTH213",
+    "topic": "Introduction to Differential Equations",
+    "prompt": "What is the order of d³y/dx³ + d²y/dx² + (dy/dx)⁴ = x²?",
+    "d": 1,
+    "options": [
+      {
+        "t": "1",
+        "tag": "Selected the first derivative",
+        "why": "Order is determined by the highest derivative present, not the first derivative."
+      },
+      {
+        "t": "2",
+        "tag": "Selected the second derivative",
+        "why": "A third derivative is present, so the order is higher than two."
+      },
+      {
+        "t": "3",
+        "ok": true
+      },
+      {
+        "t": "4",
+        "tag": "Confused degree with order",
+        "why": "The first derivative is raised to the fourth power, but the highest derivative is third order."
+      }
+    ],
+    "explain": "The highest derivative is the third derivative, so the equation is third order."
+  },
+  {
+    "id": "MTH213-IDE-007",
+    "course": "MTH213",
+    "topic": "Introduction to Differential Equations",
+    "prompt": "What is the degree of d³y/dx³ + d²y/dx² + (dy/dx)⁴ = x²?",
+    "d": 1,
+    "options": [
+      {
+        "t": "4",
+        "tag": "Used the power of a lower derivative",
+        "why": "The first derivative is raised to the fourth power, but degree uses the highest-order derivative."
+      },
+      {
+        "t": "3",
+        "tag": "Used the order as the degree",
+        "why": "The third derivative appears to the first power."
+      },
+      {
+        "t": "2",
+        "tag": "Used the power of the second derivative",
+        "why": "The second derivative is not the highest-order derivative."
+      },
+      {
+        "t": "1",
+        "ok": true
+      }
+    ],
+    "explain": "The highest-order derivative, d³y/dx³, is to the first power, so the degree is one."
+  },
+  {
+    "id": "MTH213-IDE-008",
+    "course": "MTH213",
+    "topic": "Introduction to Differential Equations",
+    "prompt": "The order and degree of y = x dy/dx + (dy/dx)² are:",
+    "d": 1,
+    "options": [
+      {
+        "t": "Order 2, degree 1",
+        "tag": "Misread the derivative order",
+        "why": "Only first derivatives occur."
+      },
+      {
+        "t": "Order 2, degree 2",
+        "tag": "Misread the derivative order",
+        "why": "The derivative is first order, even though it is squared."
+      },
+      {
+        "t": "Order 1, degree 1",
+        "tag": "Ignored the derivative power",
+        "why": "The first derivative is squared, so the degree is two."
+      },
+      {
+        "t": "Order 1, degree 2",
+        "ok": true
+      }
+    ],
+    "explain": "The highest derivative is first order and it is squared, giving order one and degree two."
+  },
+  {
+    "id": "MTH213-IDE-009",
+    "course": "MTH213",
+    "topic": "Introduction to Differential Equations",
+    "prompt": "What is the order of sin y · d²y/dx² = (1 − y) dy/dx + y²?",
+    "d": 1,
+    "options": [
+      {
+        "t": "0",
+        "tag": "Ignored the derivatives",
+        "why": "The equation contains first and second derivatives."
+      },
+      {
+        "t": "1",
+        "tag": "Selected the lower derivative",
+        "why": "A second derivative is present, so the order is at least two."
+      },
+      {
+        "t": "2",
+        "ok": true
+      },
+      {
+        "t": "3",
+        "tag": "Counted terms instead of derivative order",
+        "why": "Order is the highest derivative order, which is two."
+      }
+    ],
+    "explain": "The highest derivative is d²y/dx², so the equation is second order."
+  },
+  {
+    "id": "MTH213-IDE-010",
+    "course": "MTH213",
+    "topic": "Introduction to Differential Equations",
+    "prompt": "Which of these equations is linear?",
+    "d": 2,
+    "options": [
+      {
+        "t": "y″ + y y′ = x",
+        "tag": "Dependent variable multiplies a derivative",
+        "why": "The product y y′ makes the equation nonlinear."
+      },
+      {
+        "t": "(y′)² + 4y = cos x",
+        "tag": "Derivative has a power greater than one",
+        "why": "A derivative appears squared, so the equation is nonlinear."
+      },
+      {
+        "t": "y⁗ + y″ + y² = 5",
+        "tag": "Dependent variable is squared",
+        "why": "The term y² makes the equation nonlinear."
+      },
+      {
+        "t": "x³y‴ + 5xy′ + 6y = eˣ",
+        "ok": true
+      }
+    ],
+    "explain": "The equation is linear because y and its derivatives appear only to the first power and are not multiplied together."
+  },
+  {
+    "id": "MTH213-IDE-011",
+    "course": "MTH213",
+    "topic": "Introduction to Differential Equations",
+    "prompt": "y d²y/dx² + ½ sin x = 0 is nonlinear because:",
+    "d": 1,
+    "options": [
+      {
+        "t": "It is second order",
+        "tag": "Order does not determine linearity",
+        "why": "A second-order differential equation can be linear or nonlinear."
+      },
+      {
+        "t": "It contains the product of y and d²y/dx²",
+        "ok": true
+      },
+      {
+        "t": "It contains sin x",
+        "tag": "Confused a coefficient function with nonlinearity",
+        "why": "A function of the independent variable alone does not make the equation nonlinear."
+      },
+      {
+        "t": "It contains the constant ½",
+        "tag": "Constants do not determine linearity",
+        "why": "A constant coefficient does not make a differential equation nonlinear."
+      }
+    ],
+    "explain": "The dependent variable y multiplies one of its derivatives, violating linearity."
+  },
+  {
+    "id": "MTH213-IDE-012",
+    "course": "MTH213",
+    "topic": "Introduction to Differential Equations",
+    "prompt": "Which term would make a differential equation nonlinear?",
+    "d": 1,
+    "options": [
+      {
+        "t": "5x dy/dx",
+        "tag": "Coefficient depends only on x",
+        "why": "A coefficient depending on the independent variable is allowed in a linear equation."
+      },
+      {
+        "t": "eˣ standing alone",
+        "tag": "Independent-variable term",
+        "why": "A term depending only on x does not make the equation nonlinear."
+      },
+      {
+        "t": "y dy/dx",
+        "ok": true
+      },
+      {
+        "t": "x³ d³y/dx³",
+        "tag": "Coefficient depends only on x",
+        "why": "A coefficient depending on x is allowed when the dependent variable and derivatives remain first degree."
+      }
+    ],
+    "explain": "The product of the dependent variable and its derivative makes the equation nonlinear."
+  },
+  {
+    "id": "MTH213-IDE-013",
+    "course": "MTH213",
+    "topic": "Introduction to Differential Equations",
+    "prompt": "In dy/dt + dx/dt = 2x + 3y:",
+    "d": 1,
+    "options": [
+      {
+        "t": "There is one dependent variable and two independent variables",
+        "tag": "Confused variables and roles",
+        "why": "Both x and y vary with respect to t."
+      },
+      {
+        "t": "There are two dependent variables (x and y) and one independent variable (t)",
+        "ok": true
+      },
+      {
+        "t": "There are two independent variables and no dependent variable",
+        "tag": "Reversed dependent and independent variables",
+        "why": "The derivatives show x and y depend on t."
+      },
+      {
+        "t": "There is no dependent variable",
+        "tag": "Missed the variables being differentiated",
+        "why": "x and y are both dependent variables."
+      }
+    ],
+    "explain": "Both x and y depend on the single independent variable t."
+  },
+  {
+    "id": "MTH213-IDE-014",
+    "course": "MTH213",
+    "topic": "Introduction to Differential Equations",
+    "prompt": "The equation dy/dx = 2x is:",
+    "d": 1,
+    "options": [
+      {
+        "t": "First order, first degree",
+        "ok": true
+      },
+      {
+        "t": "Second order, first degree",
+        "tag": "Misread the highest derivative",
+        "why": "Only the first derivative appears."
+      },
+      {
+        "t": "First order, second degree",
+        "tag": "Misread the derivative power",
+        "why": "The first derivative is to the first power."
+      },
+      {
+        "t": "Second order, second degree",
+        "tag": "Misread order and degree",
+        "why": "The equation contains only a first derivative to the first power."
+      }
+    ],
+    "explain": "The highest derivative is first order and appears to the first power."
+  },
+  {
+    "id": "MTH213-IDE-015",
+    "course": "MTH213",
+    "topic": "Introduction to Differential Equations",
+    "prompt": "Eliminating m from y = mx gives:",
+    "d": 1,
+    "options": [
+      {
+        "t": "y + x dy/dx = 0",
+        "tag": "Sign error",
+        "why": "Differentiating gives dy/dx = m. Substituting m into y = mx gives y = x dy/dx."
+      },
+      {
+        "t": "dy/dx = x",
+        "tag": "Did not eliminate m correctly",
+        "why": "The derivative equals m, not x."
+      },
+      {
+        "t": "y = dy/dx",
+        "tag": "Dropped the factor x",
+        "why": "Substitution into y = mx retains the factor x."
+      },
+      {
+        "t": "y − x dy/dx = 0",
+        "ok": true
+      }
+    ],
+    "explain": "Differentiate to get dy/dx = m, then substitute into y = mx to obtain y − x dy/dx = 0."
+  },
+  {
+    "id": "MTH213-IDE-016",
+    "course": "MTH213",
+    "topic": "Introduction to Differential Equations",
+    "prompt": "Eliminating A from y = Ax + A² gives:",
+    "d": 2,
+    "options": [
+      {
+        "t": "y = x y′ + (y′)²",
+        "ok": true
+      },
+      {
+        "t": "y = x y′ − (y′)²",
+        "tag": "Sign error",
+        "why": "Since y′ = A, substituting A into A² gives +(y′)²."
+      },
+      {
+        "t": "y″ = 0",
+        "tag": "Differentiated unnecessarily",
+        "why": "One derivative gives y′ = A, allowing A to be eliminated directly."
+      },
+      {
+        "t": "y′ = A²",
+        "tag": "Incorrect differentiation",
+        "why": "Differentiating y = Ax + A² with respect to x gives y′ = A."
+      }
+    ],
+    "explain": "Differentiate to get y′ = A, then substitute A = y′ into the original family."
+  },
+  {
+    "id": "MTH213-IDE-017",
+    "course": "MTH213",
+    "topic": "Introduction to Differential Equations",
+    "prompt": "The differential equation for y = A cos x + B sin x is:",
+    "d": 1,
+    "options": [
+      {
+        "t": "y″ − y = 0",
+        "tag": "Sign error",
+        "why": "The second derivative is y″ = −A cos x − B sin x = −y."
+      },
+      {
+        "t": "y″ + y = 0",
+        "ok": true
+      },
+      {
+        "t": "y′ + y = 0",
+        "tag": "Wrong derivative order",
+        "why": "The family requires two derivatives to eliminate both arbitrary constants."
+      },
+      {
+        "t": "y″ + y′ = 0",
+        "tag": "Combined unrelated derivatives",
+        "why": "Differentiating twice gives y″ = −y."
+      }
+    ],
+    "explain": "The second derivative is y″ = −y, hence y″ + y = 0."
+  },
+  {
+    "id": "MTH213-IDE-018",
+    "course": "MTH213",
+    "topic": "Introduction to Differential Equations",
+    "prompt": "To eliminate the constants from y = A cos x + B sin x, you differentiate:",
+    "d": 1,
+    "options": [
+      {
+        "t": "0 times",
+        "tag": "Constants remain",
+        "why": "The constants A and B must be eliminated from the family."
+      },
+      {
+        "t": "1 time",
+        "tag": "Not enough differentiations",
+        "why": "One differentiation does not give enough independent equations to eliminate both constants."
+      },
+      {
+        "t": "2 times",
+        "ok": true
+      },
+      {
+        "t": "3 times",
+        "tag": "Differentiated more than necessary",
+        "why": "The family has two arbitrary constants, so two differentiations are sufficient."
+      }
+    ],
+    "explain": "There are two arbitrary constants, so differentiate twice to form the second-order equation."
+  },
+  {
+    "id": "MTH213-IDE-019",
+    "course": "MTH213",
+    "topic": "Introduction to Differential Equations",
+    "prompt": "The differential equation y′ = f(x, y) satisfied by y = 4e²ˣ + 3 is:",
+    "d": 2,
+    "options": [
+      {
+        "t": "y′ = 2y + 6",
+        "tag": "Sign/algebra error",
+        "why": "Since y − 3 = 4e²ˣ, the derivative is y′ = 2(y − 3) = 2y − 6."
+      },
+      {
+        "t": "y′ = y − 3",
+        "tag": "Missed the exponent factor",
+        "why": "Differentiating e²ˣ contributes a factor of 2."
+      },
+      {
+        "t": "y′ = 4y − 3",
+        "tag": "Incorrect substitution",
+        "why": "Substitute 4e²ˣ = y − 3 into y′ = 8e²ˣ."
+      },
+      {
+        "t": "y′ = 2y − 6",
+        "ok": true
+      }
+    ],
+    "explain": "Differentiate y to get y′ = 8e²ˣ. Since 4e²ˣ = y − 3, this becomes y′ = 2y − 6."
+  },
+  {
+    "id": "MTH213-IDE-020",
+    "course": "MTH213",
+    "topic": "Introduction to Differential Equations",
+    "prompt": "The differential equation y′ = f(x, y) satisfied by y = 3e³ˣ is:",
+    "d": 1,
+    "options": [
+      {
+        "t": "y′ = 3y",
+        "ok": true
+      },
+      {
+        "t": "y′ = y",
+        "tag": "Missed the exponent factor",
+        "why": "Differentiating e³ˣ contributes a factor of 3."
+      },
+      {
+        "t": "y′ = 9y",
+        "tag": "Multiplied by the coefficient twice",
+        "why": "The derivative is 9e³ˣ, which equals 3y."
+      },
+      {
+        "t": "y′ = 3y + 1",
+        "tag": "Added an unrelated constant",
+        "why": "Differentiating gives a homogeneous relation y′ = 3y."
+      }
+    ],
+    "explain": "Differentiating gives y′ = 9e³ˣ = 3y."
+  },
+  {
+    "id": "MTH213-IDE-021",
+    "course": "MTH213",
+    "topic": "Introduction to Differential Equations",
+    "prompt": "The differential equation y′ = f(x, y) satisfied by y = 4e⁻⁴ˣ + 1/2 is:",
+    "d": 2,
+    "options": [
+      {
+        "t": "y′ = −4y − 2",
+        "tag": "Sign/algebra error",
+        "why": "Using 4e⁻⁴ˣ = y − 1/2 gives y′ = −4(y − 1/2) = −4y + 2."
+      },
+      {
+        "t": "y′ = 4y − 2",
+        "tag": "Missed the negative exponent",
+        "why": "Differentiating e⁻⁴ˣ contributes a factor of −4."
+      },
+      {
+        "t": "y′ = −4y + 2",
+        "ok": true
+      },
+      {
+        "t": "y′ = −16y",
+        "tag": "Did not remove the constant term",
+        "why": "Substitute e⁻⁴ˣ = (y − 1/2)/4 into the derivative."
+      }
+    ],
+    "explain": "Differentiating gives y′ = −16e⁻⁴ˣ. Substituting e⁻⁴ˣ = (y − 1/2)/4 yields y′ = −4y + 2."
+  },
+  {
+    "id": "MTH213-IDE-022",
+    "course": "MTH213",
+    "topic": "Introduction to Differential Equations",
+    "prompt": "The differential equation for y = c₁eˣ + c₂xeˣ + c₃x²eˣ is:",
+    "d": 2,
+    "options": [
+      {
+        "t": "y‴ + 3y″ + 3y′ + y = 0",
+        "tag": "Used the wrong characteristic polynomial",
+        "why": "The repeated characteristic root is 1, giving (r − 1)³."
+      },
+      {
+        "t": "y‴ − 3y″ + 3y′ − y = 0",
+        "ok": true
+      },
+      {
+        "t": "y‴ − y = 0",
+        "tag": "Ignored the repeated root",
+        "why": "The family has a triple root at r = 1, not roots satisfying r³ − 1 = 0."
+      },
+      {
+        "t": "y″ − 2y′ + y = 0",
+        "tag": "Used a second-order equation",
+        "why": "Three independent constants require a third-order differential equation."
+      }
+    ],
+    "explain": "The family corresponds to the repeated characteristic root r = 1 of multiplicity three, giving (D − 1)³y = 0."
+  },
+  {
+    "id": "MTH213-IDE-023",
+    "course": "MTH213",
+    "topic": "Introduction to Differential Equations",
+    "prompt": "The differential equation for y = eˣ(A cos x + B sin x) is:",
+    "d": 2,
+    "options": [
+      {
+        "t": "y″ − 2y′ + 2y = 0",
+        "ok": true
+      },
+      {
+        "t": "y″ + 2y′ + 2y = 0",
+        "tag": "Wrong sign on the real part",
+        "why": "The characteristic roots are 1 ± i, giving r² − 2r + 2."
+      },
+      {
+        "t": "y″ + y = 0",
+        "tag": "Ignored the exponential factor",
+        "why": "The exponential factor shifts the characteristic roots from ±i to 1 ± i."
+      },
+      {
+        "t": "y″ − 2y′ + y = 0",
+        "tag": "Ignored the imaginary part",
+        "why": "The characteristic polynomial for roots 1 ± i is r² − 2r + 2."
+      }
+    ],
+    "explain": "The characteristic roots are 1 ± i, so the equation is y″ − 2y′ + 2y = 0."
+  },
+  {
+    "id": "MTH213-IDE-024",
+    "course": "MTH213",
+    "topic": "Introduction to Differential Equations",
+    "prompt": "If y = x^(−1/2), then y″ equals:",
+    "d": 1,
+    "options": [
+      {
+        "t": "−(1/2)x^(−3/2)",
+        "tag": "Stopped after the first derivative",
+        "why": "This is y′, not y″."
+      },
+      {
+        "t": "(3/4)x^(−5/2)",
+        "ok": true
+      },
+      {
+        "t": "(3/4)x^(−3/2)",
+        "tag": "Used the wrong power",
+        "why": "Differentiating y′ = −(1/2)x^(−3/2) lowers the exponent by one more."
+      },
+      {
+        "t": "−(3/4)x^(−5/2)",
+        "tag": "Sign error",
+        "why": "Differentiating the negative first derivative gives a positive second derivative."
+      }
+    ],
+    "explain": "y′ = −(1/2)x^(−3/2), so y″ = (3/4)x^(−5/2)."
+  },
+  {
+    "id": "MTH213-IDE-025",
+    "course": "MTH213",
+    "topic": "Introduction to Differential Equations",
+    "prompt": "Which function is a solution of y′ + 20y = 24?",
+    "d": 2,
+    "options": [
+      {
+        "t": "y = 24e⁻²⁰ˣ",
+        "tag": "Checked only the derivative term",
+        "why": "Substitution gives y′ + 20y = 0, not 24."
+      },
+      {
+        "t": "y = 6/5 + (6/5)e²⁰ˣ",
+        "tag": "Exponential term has the wrong sign",
+        "why": "This does not satisfy the equation after substitution."
+      },
+      {
+        "t": "y = 20x + 24",
+        "tag": "Substitution does not yield 24",
+        "why": "Its derivative plus twenty times the function depends on x."
+      },
+      {
+        "t": "y = 6/5 − (6/5)e⁻²⁰ˣ",
+        "ok": true
+      }
+    ],
+    "explain": "For y = 6/5 − (6/5)e⁻²⁰ˣ, y′ = 24e⁻²⁰ˣ and y′ + 20y = 24."
+  },
+  {
+    "id": "MTH213-IDE-026",
+    "course": "MTH213",
+    "topic": "Introduction to Differential Equations",
+    "prompt": "An initial condition has the form:",
+    "d": 1,
+    "options": [
+      {
+        "t": "y′ = f(x, y)",
+        "tag": "This is a differential equation",
+        "why": "An initial condition specifies a value of the solution at a given point."
+      },
+      {
+        "t": "y = mx",
+        "tag": "This is a family of functions",
+        "why": "An initial condition gives a function value at a specified point."
+      },
+      {
+        "t": "y(x₀) = y₀",
+        "ok": true
+      },
+      {
+        "t": "y(x) = C",
+        "tag": "This is a constant-function form",
+        "why": "An initial condition specifies the solution at a particular input value."
+      }
+    ],
+    "explain": "A standard initial condition specifies the solution value as y(x₀) = y₀."
+  },
+  {
+    "id": "MTH213-IDE-027",
+    "course": "MTH213",
+    "topic": "Introduction to Differential Equations",
+    "prompt": "An initial value problem is:",
+    "d": 1,
+    "options": [
+      {
+        "t": "A differential equation together with an appropriate number of initial conditions",
+        "ok": true
+      },
+      {
+        "t": "Any differential equation with a constant",
+        "tag": "A constant is not an initial condition",
+        "why": "An IVP must include specified initial values."
+      },
+      {
+        "t": "A differential equation with arbitrary constants only",
+        "tag": "Confused general solutions with IVPs",
+        "why": "An IVP includes conditions that determine a particular solution."
+      },
+      {
+        "t": "A partial differential equation in two variables",
+        "tag": "Overly restricted the definition",
+        "why": "An IVP can be formed from an ODE and its initial conditions."
+      }
+    ],
+    "explain": "An IVP consists of a differential equation and enough initial conditions."
+  },
+  {
+    "id": "MTH213-IDE-028",
+    "course": "MTH213",
+    "topic": "Introduction to Differential Equations",
+    "prompt": "A general solution of an ODE:",
+    "d": 1,
+    "options": [
+      {
+        "t": "Contains an initial condition",
+        "tag": "Confused general and particular solutions",
+        "why": "Initial conditions select particular values for the arbitrary constants."
+      },
+      {
+        "t": "Contains no constants",
+        "tag": "Confused general and particular solutions",
+        "why": "A general solution normally contains arbitrary constants."
+      },
+      {
+        "t": "Is always unique",
+        "tag": "Ignored the arbitrary constants",
+        "why": "A family of solutions is represented by the general solution."
+      },
+      {
+        "t": "Contains arbitrary constants",
+        "ok": true
+      }
+    ],
+    "explain": "A general solution represents a family of solutions using arbitrary constants."
+  },
+  {
+    "id": "MTH213-IDE-029",
+    "course": "MTH213",
+    "topic": "Introduction to Differential Equations",
+    "prompt": "A particular solution is:",
+    "d": 1,
+    "options": [
+      {
+        "t": "Any solution containing arbitrary constants",
+        "tag": "This describes a general solution",
+        "why": "A particular solution has the arbitrary constants fixed."
+      },
+      {
+        "t": "The solution of an IVP, containing no arbitrary constants",
+        "ok": true
+      },
+      {
+        "t": "The differential equation itself",
+        "tag": "Confused equation with solution",
+        "why": "A solution is a function satisfying the differential equation."
+      },
+      {
+        "t": "Always y = 0",
+        "tag": "Overly restricted the definition",
+        "why": "A particular solution depends on the equation and any specified conditions."
+      }
+    ],
+    "explain": "A particular solution has no arbitrary constants; an IVP selects one using its initial conditions."
+  },
+  {
+    "id": "MTH213-IDE-030",
+    "course": "MTH213",
+    "topic": "Introduction to Differential Equations",
+    "prompt": "The solution of y′ = −3y + 1, y(0) = 1 is:",
+    "d": 2,
+    "options": [
+      {
+        "t": "y = 1/3 + (2/3)e³ˣ",
+        "tag": "Exponential sign is wrong",
+        "why": "The homogeneous solution decays as e⁻³ˣ because the coefficient is −3."
+      },
+      {
+        "t": "y = 1 − e⁻³ˣ",
+        "tag": "Fails the initial value",
+        "why": "At x = 0 this gives y = 0, not y = 1."
+      },
+      {
+        "t": "y = 1/3 + (2/3)e⁻³ˣ",
+        "ok": true
+      },
+      {
+        "t": "y = 3e⁻³ˣ + 1",
+        "tag": "Does not satisfy the initial value or equation",
+        "why": "Substituting x = 0 gives y = 4, not y = 1."
+      }
+    ],
+    "explain": "The solution is y = 1/3 + Ce⁻³ˣ. Applying y(0) = 1 gives C = 2/3."
+  },
+  {
+    "id": "MTH213-IDE-031",
+    "course": "MTH213",
+    "topic": "Introduction to Differential Equations",
+    "prompt": "The steps for forming a differential equation are:",
+    "d": 1,
+    "options": [
+      {
+        "t": "Integrate the equation once",
+        "tag": "Wrong operation",
+        "why": "Forming a differential equation from a family involves differentiating to eliminate arbitrary constants."
+      },
+      {
+        "t": "Substitute x = 0",
+        "tag": "Does not eliminate arbitrary constants",
+        "why": "A fixed value of x does not generally remove all arbitrary constants."
+      },
+      {
+        "t": "Solve for y",
+        "tag": "This does not form the required equation",
+        "why": "The family is differentiated and its arbitrary constants are eliminated."
+      },
+      {
+        "t": "Differentiate as many times as there are arbitrary constants, then eliminate the constants",
+        "ok": true
+      }
+    ],
+    "explain": "Differentiate enough times to obtain equations for eliminating the arbitrary constants."
+  },
+  {
+    "id": "MTH213-IDE-032",
+    "course": "MTH213",
+    "topic": "Introduction to Differential Equations",
+    "prompt": "What is the order of the differential equation obtained from y² = Ax² + Bx + C?",
+    "d": 1,
+    "options": [
+      {
+        "t": "3",
+        "ok": true
+      },
+      {
+        "t": "1",
+        "tag": "Used too few differentiations",
+        "why": "There are three arbitrary constants, so eliminating them leads to a third-order equation."
+      },
+      {
+        "t": "2",
+        "tag": "Counted one fewer than the arbitrary constants",
+        "why": "The family contains three arbitrary constants."
+      },
+      {
+        "t": "4",
+        "tag": "Differentiated more than necessary",
+        "why": "Three arbitrary constants lead to a third-order equation."
+      }
+    ],
+    "explain": "The family contains three arbitrary constants, so the resulting differential equation is third order."
+  },
+  {
+    "id": "MTH213-NOTE-001",
+    "course": "MTH213",
+    "topic": "Introduction to Differential Equations",
+    "prompt": "A general solution of a second-order linear ODE normally contains how many arbitrary constants?",
+    "d": 1,
+    "options": [
+      {
+        "t": "One",
+        "tag": "Confused order and constants",
+        "why": "A second-order equation generally needs two independent constants."
+      },
+      {
+        "t": "Two",
+        "ok": true
+      },
+      {
+        "t": "Three",
+        "tag": "Counted one extra constant",
+        "why": "The number of arbitrary constants in the general solution normally equals the order."
+      },
+      {
+        "t": "No arbitrary constants",
+        "tag": "Confused general and particular solutions",
+        "why": "A general solution represents a family of solutions."
+      }
+    ],
+    "explain": "A second-order ODE generally has a two-parameter family of solutions, written with two arbitrary constants."
+  },
+  {
+    "id": "MTH213-NOTE-002",
+    "course": "MTH213",
+    "topic": "Introduction to Differential Equations",
+    "prompt": "Which equation is nonlinear in y?",
+    "d": 1,
+    "options": [
+      {
+        "t": "y'' + x y' + y = 0",
+        "tag": "Mistook variable coefficients for nonlinearity",
+        "why": "Variable coefficients are allowed in a linear ODE."
+      },
+      {
+        "t": "y'' + 3y' - 2y = e^x",
+        "tag": "Mistook a forcing term for nonlinearity",
+        "why": "A forcing function depending only on x does not make the equation nonlinear."
+      },
+      {
+        "t": "y'' + sin(y) = x",
+        "ok": true
+      },
+      {
+        "t": "y' + (1/x)y = 0",
+        "tag": "Mistook a variable coefficient for nonlinearity",
+        "why": "The dependent variable and its derivative still appear linearly."
+      }
+    ],
+    "explain": "A linear equation cannot contain nonlinear functions of the dependent variable; sin(y) makes this equation nonlinear."
+  },
+  {
+    "id": "MTH213-NOTE-003",
+    "course": "MTH213",
+    "topic": "Introduction to Differential Equations",
+    "prompt": "For y'' + (y')^3 + y = 0, what are the order and degree?",
+    "d": 2,
+    "options": [
+      {
+        "t": "Order 3, degree 2",
+        "tag": "Confused derivative power with order",
+        "why": "The highest derivative present is y'', not the first derivative."
+      },
+      {
+        "t": "Order 2, degree 3",
+        "tag": "Used the power of a lower derivative",
+        "why": "Degree uses the power of the highest-order derivative, y'', which is one."
+      },
+      {
+        "t": "Order 2, degree 1",
+        "ok": true
+      },
+      {
+        "t": "Order 1, degree 3",
+        "tag": "Used the power of y'",
+        "why": "The equation contains the second derivative, so its order is two."
+      }
+    ],
+    "explain": "The highest derivative is y'', so the order is 2. It appears to the first power, so the degree is 1."
+  },
+  {
+    "id": "MTH213-NOTE-004",
+    "course": "MTH213",
+    "topic": "Introduction to Differential Equations",
+    "prompt": "What initial data is normally needed to specify a solution of a second-order ODE at x = x0?",
+    "d": 1,
+    "options": [
+      {
+        "t": "Only y(x0)",
+        "tag": "Omitted one initial condition",
+        "why": "A second-order initial-value problem normally specifies both the function and its first derivative."
+      },
+      {
+        "t": "y(x0) and y'(x0)",
+        "ok": true
+      },
+      {
+        "t": "y'(x0) and y''(x0)",
+        "tag": "Specified the wrong derivative pair",
+        "why": "The standard initial data are the value of y and its first derivative."
+      },
+      {
+        "t": "Only the value of the independent variable",
+        "tag": "Confused the point with initial data",
+        "why": "The point x0 alone does not select a particular solution."
+      }
+    ],
+    "explain": "For a regular second-order ODE, specifying y(x0) and y'(x0) supplies the two initial conditions needed to determine a particular solution."
+  },
+  {
+    "id": "MTH213-NOTE-005",
+    "course": "MTH213",
+    "topic": "Separable Equations",
+    "prompt": "Solve dy/dx = x y for y(x).",
+    "d": 2,
+    "options": [
+      {
+        "t": "y = C e^(x^2/2)",
+        "ok": true
+      },
+      {
+        "t": "y = C e^x",
+        "tag": "Integrated x incorrectly",
+        "why": "Separating gives dy/y = x dx, whose integral is ln|y| = x^2/2 + C."
+      },
+      {
+        "t": "y = x^2/2 + C",
+        "tag": "Did not separate y",
+        "why": "The dependent variable appears multiplicatively, so the solution is exponential in x^2."
+      },
+      {
+        "t": "y = C e^(x^2)",
+        "tag": "Lost the factor of one-half",
+        "why": "The integral of x is x^2/2."
+      }
+    ],
+    "explain": "Separate variables: dy/y = x dx. Integrating gives ln|y| = x^2/2 + C, hence y = C e^(x^2/2)."
+  },
+  {
+    "id": "MTH213-NOTE-006",
+    "course": "MTH213",
+    "topic": "Separable Equations",
+    "prompt": "A solution of dy/dx = y cos(x) satisfies y(0) = 2. What is y(x)?",
+    "d": 2,
+    "options": [
+      {
+        "t": "2e^cos(x)",
+        "tag": "Used the antiderivative of cos(x) incorrectly",
+        "why": "The integral of cos(x) is sin(x), and the initial value must be applied."
+      },
+      {
+        "t": "2e^sin(x)",
+        "ok": true
+      },
+      {
+        "t": "2sin(x)",
+        "tag": "Lost the dependent variable",
+        "why": "Separating gives dy/y = cos(x) dx, producing an exponential solution."
+      },
+      {
+        "t": "2e^(x cos(x))",
+        "tag": "Integrated a product",
+        "why": "The exponent is the integral of cos(x), which is sin(x)."
+      }
+    ],
+    "explain": "Integrate dy/y = cos(x)dx to obtain y = C e^sin(x). Since y(0)=2, C=2."
+  },
+  {
+    "id": "MTH213-NOTE-007",
+    "course": "MTH213",
+    "topic": "Separable Equations",
+    "prompt": "Which step correctly separates dy/dx = x/y?",
+    "d": 1,
+    "options": [
+      {
+        "t": "y dy = x dx",
+        "ok": true
+      },
+      {
+        "t": "dy/y = x dx",
+        "tag": "Placed y in the wrong factor",
+        "why": "Multiplying both sides by y dx gives y dy = x dx."
+      },
+      {
+        "t": "dy = xy dx",
+        "tag": "Did not divide by y",
+        "why": "The y in the denominator must be moved to the left side."
+      },
+      {
+        "t": "y dx = x dy",
+        "tag": "Swapped differentials",
+        "why": "Multiplying by y dx gives y dy = x dx, not y dx = x dy."
+      }
+    ],
+    "explain": "Multiply both sides of dy/dx = x/y by y dx to obtain y dy = x dx."
+  },
+  {
+    "id": "MTH213-NOTE-008",
+    "course": "MTH213",
+    "topic": "Separable Equations",
+    "prompt": "Solve dy/dx = 3x^2 y with y(0) = 4.",
+    "d": 2,
+    "options": [
+      {
+        "t": "y = 4e^(x^3)",
+        "ok": true
+      },
+      {
+        "t": "y = 4e^(3x^2)",
+        "tag": "Did not integrate x^2",
+        "why": "The integral of 3x^2 is x^3."
+      },
+      {
+        "t": "y = 4 + x^3",
+        "tag": "Ignored the factor y",
+        "why": "Separating dy/y gives an exponential, not an additive polynomial."
+      },
+      {
+        "t": "y = e^(x^3) + 4",
+        "tag": "Applied the initial value outside the constant factor",
+        "why": "The condition y(0)=4 fixes the multiplicative constant as 4."
+      }
+    ],
+    "explain": "Integrating dy/y = 3x^2 dx gives y = C e^(x^3). The initial condition gives C=4."
+  },
+  {
+    "id": "MTH213-NOTE-009",
+    "course": "MTH213",
+    "topic": "Separable Equations",
+    "prompt": "For dy/dx = y(1-y), which values are equilibrium solutions?",
+    "d": 1,
+    "options": [
+      {
+        "t": "y = 0 and y = 1",
+        "ok": true
+      },
+      {
+        "t": "y = -1 and y = 1",
+        "tag": "Solved the wrong factor equation",
+        "why": "Equilibria satisfy y(1-y)=0."
+      },
+      {
+        "t": "Only y = 1",
+        "tag": "Missed the zero solution",
+        "why": "Both factors y and 1-y can equal zero."
+      },
+      {
+        "t": "There are no equilibrium solutions",
+        "tag": "Did not set the derivative to zero",
+        "why": "A constant solution occurs wherever the right-hand side is zero."
+      }
+    ],
+    "explain": "For a constant solution, dy/dx=0, so y(1-y)=0. Thus y=0 or y=1."
+  },
+  {
+    "id": "MTH213-NOTE-010",
+    "course": "MTH213",
+    "topic": "Separable Equations",
+    "prompt": "The equation dy/dx = (1+x^2)/(1+y^2) is separated by which relation?",
+    "d": 2,
+    "options": [
+      {
+        "t": "(1+y^2)dy = (1+x^2)dx",
+        "ok": true
+      },
+      {
+        "t": "(1+x^2)dy = (1+y^2)dx",
+        "tag": "Swapped the x and y factors",
+        "why": "Multiply by (1+y^2)dx to put y terms with dy and x terms with dx."
+      },
+      {
+        "t": "dy/(1+y^2) = dx/(1+x^2)",
+        "tag": "Moved both denominators incorrectly",
+        "why": "The factors are in the numerator on opposite sides; multiply by 1+y^2."
+      },
+      {
+        "t": "dy/(1+x^2) = dx/(1+y^2)",
+        "tag": "Mixed the variables",
+        "why": "Separation groups each dependent-variable expression with dy and each x expression with dx."
+      }
+    ],
+    "explain": "Multiplying the equation by (1+y^2)dx gives (1+y^2)dy=(1+x^2)dx."
+  },
+  {
+    "id": "MTH213-NOTE-011",
+    "course": "MTH213",
+    "topic": "First-Order Linear Equations",
+    "prompt": "What is the integrating factor for y' + 3y = e^x?",
+    "d": 1,
+    "options": [
+      {
+        "t": "e^(3x)",
+        "ok": true
+      },
+      {
+        "t": "e^x",
+        "tag": "Used the forcing term",
+        "why": "The integrating factor is formed from the coefficient of y, not the right-hand side."
+      },
+      {
+        "t": "3x",
+        "tag": "Omitted the exponential",
+        "why": "The integrating factor is exp(integral of 3 dx)."
+      },
+      {
+        "t": "e^(-3x)",
+        "tag": "Used the wrong sign",
+        "why": "The standard equation has coefficient +3, so the factor is e^(3x)."
+      }
+    ],
+    "explain": "For y'+p(x)y=g(x), the integrating factor is mu=e^(integral p dx). Here p=3, so mu=e^(3x)."
+  },
+  {
+    "id": "MTH213-NOTE-012",
+    "course": "MTH213",
+    "topic": "First-Order Linear Equations",
+    "prompt": "Solve y' + 2y = 0.",
+    "d": 1,
+    "options": [
+      {
+        "t": "y = Ce^(-2x)",
+        "ok": true
+      },
+      {
+        "t": "y = Ce^(2x)",
+        "tag": "Sign error in the exponent",
+        "why": "Substitution into y'+2y=0 requires a decaying exponential e^(-2x)."
+      },
+      {
+        "t": "y = -2x + C",
+        "tag": "Integrated the coefficient directly",
+        "why": "The equation is separable as dy/y=-2dx, giving an exponential."
+      },
+      {
+        "t": "y = 2e^(-x) + C",
+        "tag": "Added an unsupported particular term",
+        "why": "The homogeneous first-order equation has solutions proportional to e^(-2x)."
+      }
+    ],
+    "explain": "Separating gives dy/y=-2dx, so ln|y|=-2x+C and y=Ce^(-2x)."
+  },
+  {
+    "id": "MTH213-NOTE-013",
+    "course": "MTH213",
+    "topic": "First-Order Linear Equations",
+    "prompt": "Solve y' + y = 0 with y(0)=5.",
+    "d": 1,
+    "options": [
+      {
+        "t": "y = 5e^(-x)",
+        "ok": true
+      },
+      {
+        "t": "y = 5e^x",
+        "tag": "Sign error in the exponent",
+        "why": "The equation y'+y=0 has exponential rate -1."
+      },
+      {
+        "t": "y = e^(-x)+5",
+        "tag": "Applied the initial value additively",
+        "why": "The initial condition sets the multiplicative constant in the homogeneous solution."
+      },
+      {
+        "t": "y = 5-x",
+        "tag": "Used a linear function",
+        "why": "A solution must satisfy y'=-y, which produces exponential decay."
+      }
+    ],
+    "explain": "The general solution is y=Ce^(-x); y(0)=5 gives C=5."
+  },
+  {
+    "id": "MTH213-NOTE-014",
+    "course": "MTH213",
+    "topic": "First-Order Linear Equations",
+    "prompt": "What is the integrating factor for y' + (2/x)y = x, on x > 0?",
+    "d": 2,
+    "options": [
+      {
+        "t": "x^2",
+        "ok": true
+      },
+      {
+        "t": "2x",
+        "tag": "Did not exponentiate the integral",
+        "why": "The integrating factor is exp(integral 2/x dx)=exp(2 ln x)."
+      },
+      {
+        "t": "e^(2x)",
+        "tag": "Integrated 2/x as 2",
+        "why": "The integral of 2/x is 2 ln x."
+      },
+      {
+        "t": "1/x^2",
+        "tag": "Used the opposite sign",
+        "why": "The coefficient is +2/x, so the factor is x^2."
+      }
+    ],
+    "explain": "mu(x)=exp(integral 2/x dx)=exp(2 ln x)=x^2 for x>0."
+  },
+  {
+    "id": "MTH213-NOTE-015",
+    "course": "MTH213",
+    "topic": "First-Order Linear Equations",
+    "prompt": "After multiplying y' + p(x)y = g(x) by its integrating factor mu(x), what is the left side?",
+    "d": 2,
+    "options": [
+      {
+        "t": "(mu(x)y(x))'",
+        "ok": true
+      },
+      {
+        "t": "mu'(x)y(x)",
+        "tag": "Dropped the product-rule term",
+        "why": "The product derivative is mu y' + mu' y, and mu'=p mu."
+      },
+      {
+        "t": "mu(x)y'(x)",
+        "tag": "Omitted the derivative of the factor",
+        "why": "The integrating factor converts both terms into a product derivative."
+      },
+      {
+        "t": "y'(x)+mu'(x)",
+        "tag": "Added unrelated terms",
+        "why": "Multiplication gives mu y' + mu p y, which equals (mu y)'."
+      }
+    ],
+    "explain": "Because mu'=p mu, mu y' + mu p y = mu y' + mu' y = (mu y)'."
+  },
+  {
+    "id": "MTH213-NOTE-016",
+    "course": "MTH213",
+    "topic": "First-Order Linear Equations",
+    "prompt": "Solve y' - 2y = 0 with y(1)=3.",
+    "d": 2,
+    "options": [
+      {
+        "t": "y = 3e^(2x-2)",
+        "ok": true
+      },
+      {
+        "t": "y = 3e^(-2x+2)",
+        "tag": "Reversed the sign",
+        "why": "The equation gives y'=2y, so the solution grows as e^(2x)."
+      },
+      {
+        "t": "y = 3e^(2x)",
+        "tag": "Did not apply the initial value at x=1",
+        "why": "At x=1 this expression equals 3e^2, not 3."
+      },
+      {
+        "t": "y = 3+2x",
+        "tag": "Used a linear solution",
+        "why": "The equation y'=2y has an exponential solution."
+      }
+    ],
+    "explain": "The general solution is y=Ce^(2x). Setting y(1)=3 gives C=3e^(-2), hence y=3e^(2x-2)."
+  },
+  {
+    "id": "MTH213-NOTE-017",
+    "course": "MTH213",
+    "topic": "First-Order Linear Equations",
+    "prompt": "Which operation must be done first to use the standard integrating-factor formula?",
+    "d": 1,
+    "options": [
+      {
+        "t": "Write the equation as y' + p(x)y = g(x)",
+        "ok": true
+      },
+      {
+        "t": "Differentiate the forcing function",
+        "tag": "Started with an unnecessary derivative",
+        "why": "The coefficient p(x) is read from the standard first-order linear form."
+      },
+      {
+        "t": "Set the right-hand side to zero",
+        "tag": "Removed the forcing term",
+        "why": "A nonhomogeneous first-order linear equation keeps its right-hand side."
+      },
+      {
+        "t": "Assume y is constant",
+        "tag": "Restricted the solution incorrectly",
+        "why": "The method solves for a general function y(x)."
+      }
+    ],
+    "explain": "Divide through by the coefficient of y' if needed, then identify p(x) in the standard form before calculating mu."
+  },
+  {
+    "id": "MTH213-NOTE-018",
+    "course": "MTH213",
+    "topic": "Homogeneous First-Order Equations",
+    "prompt": "A first-order equation y'=F(x,y) is homogeneous in the standard first-order sense when its right side can be written as:",
+    "d": 1,
+    "options": [
+      {
+        "t": "A function of y/x",
+        "ok": true
+      },
+      {
+        "t": "A function of x+y only",
+        "tag": "Used the wrong combined variable",
+        "why": "The substitution y=vx applies when the right side depends on the ratio y/x."
+      },
+      {
+        "t": "A constant",
+        "tag": "Overly restricted the definition",
+        "why": "The function may vary, but it must depend on y/x."
+      },
+      {
+        "t": "A function of y' only",
+        "tag": "Confused an equation with its derivative",
+        "why": "The homogeneous first-order form is a function of y/x."
+      }
+    ],
+    "explain": "When the right-hand side depends on y/x, set y=vx to reduce the equation to a separable equation in v and x."
+  },
+  {
+    "id": "MTH213-NOTE-019",
+    "course": "MTH213",
+    "topic": "Homogeneous First-Order Equations",
+    "prompt": "For the substitution y=vx, how is dy/dx expressed?",
+    "d": 1,
+    "options": [
+      {
+        "t": "v + x dv/dx",
+        "ok": true
+      },
+      {
+        "t": "x dv/dx",
+        "tag": "Omitted the product-rule term",
+        "why": "Differentiating vx gives v + x v'."
+      },
+      {
+        "t": "v' + x",
+        "tag": "Differentiated the wrong factor",
+        "why": "The product rule gives v + x v'."
+      },
+      {
+        "t": "v/x",
+        "tag": "Divided rather than differentiated",
+        "why": "The substitution is a product y=vx."
+      }
+    ],
+    "explain": "Differentiate y=v(x)x using the product rule: dy/dx=v+x dv/dx."
+  },
+  {
+    "id": "MTH213-NOTE-020",
+    "course": "MTH213",
+    "topic": "Homogeneous First-Order Equations",
+    "prompt": "Which substitution is appropriate for dy/dx = (x+y)/x?",
+    "d": 1,
+    "options": [
+      {
+        "t": "y=vx",
+        "ok": true
+      },
+      {
+        "t": "x=vy^2",
+        "tag": "Used an unrelated substitution",
+        "why": "The right side can be written as 1+y/x, so y/x is the natural variable."
+      },
+      {
+        "t": "y=e^v",
+        "tag": "Used a logarithmic substitution without need",
+        "why": "The equation is homogeneous in x and y and is reduced by y=vx."
+      },
+      {
+        "t": "v=y+x",
+        "tag": "Used a sum instead of a ratio",
+        "why": "The equation depends on y/x, so set y=vx."
+      }
+    ],
+    "explain": "Rewrite the right side as 1+y/x. Setting y=vx makes it a function of v and permits separation."
+  },
+  {
+    "id": "MTH213-NOTE-021",
+    "course": "MTH213",
+    "topic": "Homogeneous First-Order Equations",
+    "prompt": "If M(x,y) and N(x,y) are homogeneous functions of the same degree, the equation M dx + N dy = 0 can usually be reduced using:",
+    "d": 2,
+    "options": [
+      {
+        "t": "y=vx",
+        "ok": true
+      },
+      {
+        "t": "y=x+v",
+        "tag": "Used a translation instead of a ratio",
+        "why": "Equal-degree homogeneous functions naturally depend on the ratio y/x."
+      },
+      {
+        "t": "y=v^x",
+        "tag": "Used an exponential substitution",
+        "why": "The standard reduction is the ratio substitution y=vx."
+      },
+      {
+        "t": "x=0",
+        "tag": "Removed the independent variable",
+        "why": "The substitution must preserve both variables to reduce the equation."
+      }
+    ],
+    "explain": "Equal-degree homogeneous terms reduce to functions of y/x after setting y=vx."
+  },
+  {
+    "id": "MTH213-NOTE-022",
+    "course": "MTH213",
+    "topic": "Exact Differential Equations",
+    "prompt": "For M(x,y)dx + N(x,y)dy = 0, what condition is used to test exactness?",
+    "d": 1,
+    "options": [
+      {
+        "t": "Partial M/partial y = partial N/partial x",
+        "ok": true
+      },
+      {
+        "t": "Partial M/partial x = partial N/partial y",
+        "tag": "Compared derivatives in the wrong directions",
+        "why": "Exactness compares the cross-partials M_y and N_x."
+      },
+      {
+        "t": "M=N",
+        "tag": "Compared the functions instead of their derivatives",
+        "why": "The exactness test is a condition on cross-partial derivatives."
+      },
+      {
+        "t": "M_x + N_y = 0",
+        "tag": "Used a divergence condition",
+        "why": "The exactness condition is M_y=N_x."
+      }
+    ],
+    "explain": "If a potential function F satisfies F_x=M and F_y=N, equality of mixed partials requires M_y=N_x."
+  },
+  {
+    "id": "MTH213-NOTE-023",
+    "course": "MTH213",
+    "topic": "Exact Differential Equations",
+    "prompt": "Is (2xy+3x^2)dx + (x^2+4y)dy = 0 exact?",
+    "d": 2,
+    "options": [
+      {
+        "t": "Yes, because M_y=N_x=2x",
+        "ok": true
+      },
+      {
+        "t": "No, because M_y=2y",
+        "tag": "Differentiated M incorrectly",
+        "why": "Differentiating 2xy+3x^2 with respect to y gives 2x."
+      },
+      {
+        "t": "No, because N_x=4",
+        "tag": "Differentiated N incorrectly",
+        "why": "Differentiating x^2+4y with respect to x gives 2x."
+      },
+      {
+        "t": "Yes, because M=N",
+        "tag": "Used the wrong criterion",
+        "why": "Exactness follows from equality of cross-partials, not equality of M and N."
+      }
+    ],
+    "explain": "Here M_y=2x and N_x=2x, so the equation is exact."
+  },
+  {
+    "id": "MTH213-NOTE-024",
+    "course": "MTH213",
+    "topic": "Exact Differential Equations",
+    "prompt": "Solve (2xy+3x^2)dx + (x^2+4y)dy = 0.",
+    "d": 3,
+    "options": [
+      {
+        "t": "x^2y + x^3 + 2y^2 = C",
+        "ok": true
+      },
+      {
+        "t": "2xy + 3x^2 + 4y = C",
+        "tag": "Did not integrate the differential form",
+        "why": "A potential function is found by integrating M with respect to x and matching its y derivative to N."
+      },
+      {
+        "t": "x^2y + 3x^3 + 4y^2 = C",
+        "tag": "Integrated coefficients incorrectly",
+        "why": "The x integral of 3x^2 is x^3, and the y integral of 4y is 2y^2."
+      },
+      {
+        "t": "xy^2 + x^3 + 2y = C",
+        "tag": "Integrated with respect to the wrong variable",
+        "why": "Integrating M with respect to x gives x^2y+x^3 plus a function of y."
+      }
+    ],
+    "explain": "Integrating M with respect to x gives F=x^2y+x^3+g(y). Matching F_y=x^2+g'(y) to N=x^2+4y gives g=2y^2, hence F=C."
+  },
+  {
+    "id": "MTH213-NOTE-025",
+    "course": "MTH213",
+    "topic": "Exact Differential Equations",
+    "prompt": "For (kx+y)dx + (x+3y)dy = 0, which value of k makes the equation exact?",
+    "d": 2,
+    "options": [
+      {
+        "t": "Every real value of k",
+        "ok": true
+      },
+      {
+        "t": "k=1 only",
+        "tag": "Mistook k for a cross-partial",
+        "why": "M_y=1 and N_x=1, independent of k."
+      },
+      {
+        "t": "k=3 only",
+        "tag": "Compared diagonal coefficients",
+        "why": "Exactness compares M_y to N_x, both of which equal 1."
+      },
+      {
+        "t": "No value",
+        "tag": "Missed the equal cross-partials",
+        "why": "The cross-partials match for every k."
+      }
+    ],
+    "explain": "M_y=1 and N_x=1, so the exactness condition holds for all k."
+  },
+  {
+    "id": "MTH213-NOTE-026",
+    "course": "MTH213",
+    "topic": "Exact Differential Equations",
+    "prompt": "Which is the potential-function solution of (kx+y)dx+(x+3y)dy=0?",
+    "d": 2,
+    "options": [
+      {
+        "t": "(k/2)x^2 + xy + (3/2)y^2 = C",
+        "ok": true
+      },
+      {
+        "t": "kx + y + 3y = C",
+        "tag": "Did not integrate M and N",
+        "why": "The potential is obtained by integrating the differential coefficients."
+      },
+      {
+        "t": "kx^2 + xy + 3y^2 = C",
+        "tag": "Missed integration factors",
+        "why": "Integrating kx gives (k/2)x^2, and integrating 3y gives (3/2)y^2."
+      },
+      {
+        "t": "(k/2)x^2 + 2xy + 3y^2 = C",
+        "tag": "Counted the cross term twice",
+        "why": "The potential cross term xy differentiates to y in x and x in y."
+      }
+    ],
+    "explain": "Integrating M=kx+y in x gives F=(k/2)x^2+xy+g(y). From F_y=x+g'(y)=x+3y, g=(3/2)y^2."
+  },
+  {
+    "id": "MTH213-NOTE-027",
+    "course": "MTH213",
+    "topic": "Bernoulli Equations",
+    "prompt": "Which equation has Bernoulli form with n different from 0 and 1?",
+    "d": 1,
+    "options": [
+      {
+        "t": "y' + p(x)y = q(x)y^n, n not 0 or 1",
+        "ok": true
+      },
+      {
+        "t": "y' + p(x)y = q(x)",
+        "tag": "This is linear",
+        "why": "A Bernoulli equation has a power y^n on the right with n not 0 or 1."
+      },
+      {
+        "t": "y'' + p(x)y' + q(x)y = 0",
+        "tag": "This is a second-order linear form",
+        "why": "Bernoulli equations are first-order equations with a nonlinear power of y."
+      },
+      {
+        "t": "y' = q(x)y",
+        "tag": "This is linear",
+        "why": "The exponent n=1 gives a linear equation, excluded from Bernoulli form."
+      }
+    ],
+    "explain": "A Bernoulli equation is y'+p(x)y=q(x)y^n, where n is neither 0 nor 1; a substitution converts it to a linear equation."
+  },
+  {
+    "id": "MTH213-NOTE-028",
+    "course": "MTH213",
+    "topic": "Bernoulli Equations",
+    "prompt": "For y' + p(x)y = q(x)y^n, which substitution linearizes the Bernoulli equation?",
+    "d": 2,
+    "options": [
+      {
+        "t": "v = y^(1-n)",
+        "ok": true
+      },
+      {
+        "t": "v = y^n",
+        "tag": "Used the original nonlinear power",
+        "why": "The derivative of y^(1-n) cancels the y^n factor after division."
+      },
+      {
+        "t": "v = ln(y)",
+        "tag": "Used a substitution not suited to general n",
+        "why": "The standard Bernoulli substitution is y^(1-n)."
+      },
+      {
+        "t": "v = x^(1-n)",
+        "tag": "Changed the independent variable",
+        "why": "The substitution is made on the dependent variable y."
+      }
+    ],
+    "explain": "Set v=y^(1-n). Then v'=(1-n)y^(-n)y', which produces a first-order linear equation in v."
+  },
+  {
+    "id": "MTH213-NOTE-029",
+    "course": "MTH213",
+    "topic": "Bernoulli Equations",
+    "prompt": "After setting v=y^(1-n), what is the resulting linear equation for a Bernoulli equation?",
+    "d": 3,
+    "options": [
+      {
+        "t": "v' + (1-n)p(x)v = (1-n)q(x)",
+        "ok": true
+      },
+      {
+        "t": "v' + p(x)v = q(x)",
+        "tag": "Omitted the factor 1-n",
+        "why": "The substitution derivative contributes a factor of 1-n."
+      },
+      {
+        "t": "v' - (1-n)p(x)v = q(x)",
+        "tag": "Lost the coefficient and forcing factor",
+        "why": "Both the linear coefficient and forcing term are scaled by 1-n."
+      },
+      {
+        "t": "v' + n p(x)v = n q(x)",
+        "tag": "Used n instead of 1-n",
+        "why": "Differentiating y^(1-n) gives the factor 1-n."
+      }
+    ],
+    "explain": "Dividing by y^n and substituting v=y^(1-n) gives v'+(1-n)p(x)v=(1-n)q(x)."
+  },
+  {
+    "id": "MTH213-NOTE-030",
+    "course": "MTH213",
+    "topic": "Bernoulli Equations",
+    "prompt": "For y' + y = y^2, the Bernoulli substitution v=1/y gives which linear equation?",
+    "d": 2,
+    "options": [
+      {
+        "t": "v' - v = -1",
+        "ok": true
+      },
+      {
+        "t": "v' + v = 1",
+        "tag": "Sign error from differentiating 1/y",
+        "why": "Since v'=-y'/y^2, division by y^2 gives -v'+v=1."
+      },
+      {
+        "t": "v' - 2v = -1",
+        "tag": "Used the exponent as the linear coefficient",
+        "why": "Here 1-n=-1, so the coefficient is -1."
+      },
+      {
+        "t": "v' + v = -1",
+        "tag": "Changed the sign of the y term",
+        "why": "Rearranging -v'+v=1 gives v'-v=-1."
+      }
+    ],
+    "explain": "Divide by y^2 and set v=1/y. Then -v'+v=1, or v'-v=-1."
+  },
+  {
+    "id": "MTH213-NOTE-031",
+    "course": "MTH213",
+    "topic": "Bernoulli Equations",
+    "prompt": "Which procedure correctly completes a Bernoulli solution after solving the transformed equation?",
+    "d": 1,
+    "options": [
+      {
+        "t": "Replace v with y^(1-n) and solve for y",
+        "ok": true
+      },
+      {
+        "t": "Keep v as the final dependent variable",
+        "tag": "Did not return to the original variable",
+        "why": "The transformed variable is an intermediate substitution."
+      },
+      {
+        "t": "Differentiate the transformed solution again",
+        "tag": "Added an unnecessary step",
+        "why": "After solving for v, invert the substitution to obtain y."
+      },
+      {
+        "t": "Set the integration constant to zero",
+        "tag": "Discarded valid solutions",
+        "why": "The integration constant is retained unless an initial condition determines it."
+      }
+    ],
+    "explain": "After solving the linear equation for v, use v=y^(1-n) to recover the solution in the original variable."
+  },
+  {
+    "id": "MTH213-NOTE-032",
+    "course": "MTH213",
+    "topic": "First-Order Models",
+    "prompt": "A population satisfies dP/dt=kP with k>0 and P(0)=P0. Which model solution follows?",
+    "d": 1,
+    "options": [
+      {
+        "t": "P(t)=P0 e^(kt)",
+        "ok": true
+      },
+      {
+        "t": "P(t)=P0+kt",
+        "tag": "Used constant rather than proportional growth",
+        "why": "A rate proportional to the current population yields exponential growth."
+      },
+      {
+        "t": "P(t)=P0 e^(-kt)",
+        "tag": "Used the decay sign",
+        "why": "With k>0, the model describes growth."
+      },
+      {
+        "t": "P(t)=k e^(P0 t)",
+        "tag": "Swapped the model parameters",
+        "why": "The initial amount is the multiplicative constant and k is the exponential rate."
+      }
+    ],
+    "explain": "Separate dP/P=k dt and apply P(0)=P0 to obtain P=P0 e^(kt)."
+  },
+  {
+    "id": "MTH213-NOTE-033",
+    "course": "MTH213",
+    "topic": "First-Order Models",
+    "prompt": "A radioactive sample follows m'=-km, k>0. What is its half-life?",
+    "d": 2,
+    "options": [
+      {
+        "t": "ln(2)/k",
+        "ok": true
+      },
+      {
+        "t": "k/ln(2)",
+        "tag": "Inverted the decay constant",
+        "why": "Set m/m0=1/2 in e^(-kt)=1/2 and solve for t."
+      },
+      {
+        "t": "2/k",
+        "tag": "Used a linear approximation",
+        "why": "The half-life equation involves the natural logarithm of 2."
+      },
+      {
+        "t": "ln(k)/2",
+        "tag": "Applied the logarithm to the wrong quantity",
+        "why": "Solving e^(-kt)=1/2 gives kt=ln 2."
+      }
+    ],
+    "explain": "From m/m0=e^(-kt), half-life t satisfies e^(-kt)=1/2, so t=ln(2)/k."
+  },
+  {
+    "id": "MTH213-NOTE-034",
+    "course": "MTH213",
+    "topic": "First-Order Models",
+    "prompt": "An object at temperature T0 cools in surroundings at constant temperature Ta according to T'=-k(T-Ta). Which is the solution?",
+    "d": 2,
+    "options": [
+      {
+        "t": "T(t)=Ta+(T0-Ta)e^(-kt)",
+        "ok": true
+      },
+      {
+        "t": "T(t)=T0 e^(-kt)",
+        "tag": "Ignored ambient temperature",
+        "why": "The decay is in the temperature difference T-Ta, not in T itself."
+      },
+      {
+        "t": "T(t)=Ta+(T0-Ta)e^(kt)",
+        "tag": "Used the growth sign",
+        "why": "For k>0, the temperature difference decays."
+      },
+      {
+        "t": "T(t)=T0-k(Ta)t",
+        "tag": "Used a linear change",
+        "why": "Newton's cooling model gives exponential relaxation toward Ta."
+      }
+    ],
+    "explain": "Set U=T-Ta. Then U'=-kU, so U=(T0-Ta)e^(-kt), giving the stated temperature."
+  },
+  {
+    "id": "MTH213-NOTE-035",
+    "course": "MTH213",
+    "topic": "First-Order Models",
+    "prompt": "In Newton's law of cooling, what happens to T(t) as t becomes large when k>0?",
+    "d": 1,
+    "options": [
+      {
+        "t": "It approaches the ambient temperature Ta",
+        "ok": true
+      },
+      {
+        "t": "It approaches zero for every ambient temperature",
+        "tag": "Ignored the equilibrium temperature",
+        "why": "The model decays the difference T-Ta, not the temperature itself."
+      },
+      {
+        "t": "It grows without bound",
+        "tag": "Used the wrong sign",
+        "why": "For k>0, the exponential factor e^(-kt) tends to zero."
+      },
+      {
+        "t": "It remains at T0",
+        "tag": "Ignored the cooling term",
+        "why": "The temperature difference from ambient decays over time."
+      }
+    ],
+    "explain": "Since e^(-kt) tends to zero, T(t)=Ta+(T0-Ta)e^(-kt) tends to Ta."
+  },
+  {
+    "id": "MTH213-NOTE-036",
+    "course": "MTH213",
+    "topic": "First-Order Models",
+    "prompt": "A quantity grows according to N'=kN. If it doubles in time t_d, which relation determines k?",
+    "d": 2,
+    "options": [
+      {
+        "t": "k=ln(2)/t_d",
+        "ok": true
+      },
+      {
+        "t": "k=2/t_d",
+        "tag": "Used a linear doubling model",
+        "why": "The exponential law gives e^(k t_d)=2."
+      },
+      {
+        "t": "k=t_d ln(2)",
+        "tag": "Multiplied instead of divided",
+        "why": "Solving k t_d=ln 2 requires division by t_d."
+      },
+      {
+        "t": "k=ln(t_d)/2",
+        "tag": "Took the logarithm of the wrong variable",
+        "why": "The doubling factor is 2, so ln 2 sets the growth over t_d."
+      }
+    ],
+    "explain": "N(t_d)/N(0)=e^(k t_d)=2, hence k t_d=ln 2 and k=ln(2)/t_d."
+  },
+  {
+    "id": "MTH213-NOTE-037",
+    "course": "MTH213",
+    "topic": "Second-Order Homogeneous Equations",
+    "prompt": "What is the characteristic equation of y'' - 3y' + 2y = 0?",
+    "d": 1,
+    "options": [
+      {
+        "t": "r^2 - 3r + 2 = 0",
+        "ok": true
+      },
+      {
+        "t": "r^2 + 3r + 2 = 0",
+        "tag": "Changed the sign of y'",
+        "why": "The coefficient of y' is -3, so the characteristic polynomial contains -3r."
+      },
+      {
+        "t": "r^2 - 3 + 2r = 0",
+        "tag": "Attached coefficients to the wrong powers",
+        "why": "The y' term contributes -3r and the y term contributes 2."
+      },
+      {
+        "t": "r^2 - 3r = 2",
+        "tag": "Did not set the polynomial equal to zero",
+        "why": "The characteristic equation is r^2-3r+2=0."
+      }
+    ],
+    "explain": "Substituting y=e^(rx) gives r^2-3r+2=0."
+  },
+  {
+    "id": "MTH213-NOTE-038",
+    "course": "MTH213",
+    "topic": "Second-Order Homogeneous Equations",
+    "prompt": "Solve y'' - 3y' + 2y = 0.",
+    "d": 2,
+    "options": [
+      {
+        "t": "y=C1e^x+C2e^(2x)",
+        "ok": true
+      },
+      {
+        "t": "y=C1e^(-x)+C2e^(-2x)",
+        "tag": "Used negative roots",
+        "why": "The characteristic polynomial factors as (r-1)(r-2)."
+      },
+      {
+        "t": "y=(C1+C2x)e^x",
+        "tag": "Used the repeated-root form",
+        "why": "The roots 1 and 2 are distinct."
+      },
+      {
+        "t": "y=C1cos(x)+C2sin(x)",
+        "tag": "Used the complex-root form",
+        "why": "The characteristic roots are real and distinct."
+      }
+    ],
+    "explain": "The roots of r^2-3r+2=(r-1)(r-2) are 1 and 2, so the solution is C1e^x+C2e^(2x)."
+  },
+  {
+    "id": "MTH213-NOTE-039",
+    "course": "MTH213",
+    "topic": "Second-Order Homogeneous Equations",
+    "prompt": "What solution form corresponds to a repeated characteristic root r=2?",
+    "d": 1,
+    "options": [
+      {
+        "t": "(C1+C2x)e^(2x)",
+        "ok": true
+      },
+      {
+        "t": "C1e^(2x)+C2e^(-2x)",
+        "tag": "Used distinct roots",
+        "why": "A repeated root needs the second independent solution x e^(2x)."
+      },
+      {
+        "t": "C1cos(2x)+C2sin(2x)",
+        "tag": "Used imaginary roots",
+        "why": "A real repeated root produces exponential solutions."
+      },
+      {
+        "t": "C1e^(2x)+C2e^(4x)",
+        "tag": "Invented a second root",
+        "why": "For a repeated root r, the second independent solution is x e^(rx)."
+      }
+    ],
+    "explain": "For a double characteristic root r, independent solutions are e^(rx) and x e^(rx)."
+  },
+  {
+    "id": "MTH213-NOTE-040",
+    "course": "MTH213",
+    "topic": "Second-Order Homogeneous Equations",
+    "prompt": "The characteristic roots are -1+2i and -1-2i. What is the real general solution?",
+    "d": 2,
+    "options": [
+      {
+        "t": "e^(-x)(C1cos(2x)+C2sin(2x))",
+        "ok": true
+      },
+      {
+        "t": "e^x(C1cos(2x)+C2sin(2x))",
+        "tag": "Used the wrong real part",
+        "why": "The real part of each root is -1."
+      },
+      {
+        "t": "C1e^(-x)+C2e^(2x)",
+        "tag": "Treated complex roots as real roots",
+        "why": "A conjugate pair alpha±beta i gives e^(alpha x) times sine and cosine."
+      },
+      {
+        "t": "e^(-2x)(C1cos(x)+C2sin(x))",
+        "tag": "Swapped real and imaginary parts",
+        "why": "The real part is -1 and the imaginary part is 2."
+      }
+    ],
+    "explain": "For roots alpha±beta i, the real solution is e^(alpha x)(C1cos(beta x)+C2sin(beta x))."
+  },
+  {
+    "id": "MTH213-NOTE-041",
+    "course": "MTH213",
+    "topic": "Second-Order Homogeneous Equations",
+    "prompt": "Solve y'' + 9y = 0 with y(0)=0 and y'(0)=6.",
+    "d": 2,
+    "options": [
+      {
+        "t": "y=2sin(3x)",
+        "ok": true
+      },
+      {
+        "t": "y=6sin(3x)",
+        "tag": "Did not divide by the frequency",
+        "why": "The derivative of A sin(3x) at zero is 3A, so 3A=6."
+      },
+      {
+        "t": "y=2cos(3x)",
+        "tag": "Did not satisfy y(0)=0",
+        "why": "A cosine term is nonzero at x=0."
+      },
+      {
+        "t": "y=2sin(9x)",
+        "tag": "Used the coefficient as the frequency",
+        "why": "The frequency is sqrt(9)=3."
+      }
+    ],
+    "explain": "The solution is A cos(3x)+B sin(3x). y(0)=0 gives A=0, and y'(0)=3B=6 gives B=2."
+  },
+  {
+    "id": "MTH213-NOTE-042",
+    "course": "MTH213",
+    "topic": "Second-Order Homogeneous Equations",
+    "prompt": "Which pair of roots produces solutions e^(alpha x)cos(beta x) and e^(alpha x)sin(beta x)?",
+    "d": 1,
+    "options": [
+      {
+        "t": "alpha+beta i and alpha-beta i",
+        "ok": true
+      },
+      {
+        "t": "alpha and beta",
+        "tag": "Used two real roots",
+        "why": "The sine-cosine form comes from a complex-conjugate pair."
+      },
+      {
+        "t": "alpha repeated twice",
+        "tag": "Used a repeated real root",
+        "why": "A repeated real root gives e^(alpha x) and x e^(alpha x)."
+      },
+      {
+        "t": "beta and -beta",
+        "tag": "Omitted the imaginary unit and real part",
+        "why": "The complex roots must have real part alpha and imaginary part beta."
+      }
+    ],
+    "explain": "A conjugate pair alpha±beta i yields the real independent solutions e^(alpha x)cos(beta x) and e^(alpha x)sin(beta x)."
+  },
+  {
+    "id": "MTH213-NOTE-043",
+    "course": "MTH213",
+    "topic": "Second-Order Homogeneous Equations",
+    "prompt": "A free undamped mass-spring system has mass m and spring constant k. What is its natural angular frequency?",
+    "d": 2,
+    "options": [
+      {
+        "t": "sqrt(k/m)",
+        "ok": true
+      },
+      {
+        "t": "sqrt(m/k)",
+        "tag": "Inverted the mass-to-stiffness ratio",
+        "why": "The equation m x''+kx=0 gives x''+(k/m)x=0."
+      },
+      {
+        "t": "k/m",
+        "tag": "Did not take the square root",
+        "why": "The coefficient of x is omega squared."
+      },
+      {
+        "t": "m k",
+        "tag": "Multiplied rather than divided",
+        "why": "Dividing the equation by m gives omega^2=k/m."
+      }
+    ],
+    "explain": "From m x''+kx=0, divide by m to get x''+(k/m)x=0, so omega=sqrt(k/m)."
+  },
+  {
+    "id": "MTH213-NOTE-044",
+    "course": "MTH213",
+    "topic": "Second-Order Homogeneous Equations",
+    "prompt": "In m x'' + c x' + kx = F(t), which term represents damping?",
+    "d": 1,
+    "options": [
+      {
+        "t": "c x'",
+        "ok": true
+      },
+      {
+        "t": "m x''",
+        "tag": "Selected the inertial term",
+        "why": "The mass times acceleration is the inertial term."
+      },
+      {
+        "t": "kx",
+        "tag": "Selected the restoring-force term",
+        "why": "The spring term kx is the restoring force."
+      },
+      {
+        "t": "F(t)",
+        "tag": "Selected the external force",
+        "why": "F(t) is the applied forcing, not damping."
+      }
+    ],
+    "explain": "The c x' term opposes motion and dissipates energy; m x'' is inertia and kx is the restoring force."
+  },
+  {
+    "id": "MTH213-NOTE-045",
+    "course": "MTH213",
+    "topic": "Second-Order Non-Homogeneous Equations",
+    "prompt": "For a linear non-homogeneous equation L[y]=r(x), what is the general solution structure?",
+    "d": 1,
+    "options": [
+      {
+        "t": "y=yc+yp",
+        "ok": true
+      },
+      {
+        "t": "y=yc yp",
+        "tag": "Multiplied the two solutions",
+        "why": "A particular solution is added to the complementary solution."
+      },
+      {
+        "t": "y=yp-yc",
+        "tag": "Used the wrong combination",
+        "why": "The general solution is the complementary solution plus one particular solution."
+      },
+      {
+        "t": "y=yc only",
+        "tag": "Omitted the forcing response",
+        "why": "The complementary solution alone solves only the associated homogeneous equation."
+      }
+    ],
+    "explain": "The complementary solution solves L[y]=0, and adding any particular solution of L[y]=r gives the general solution."
+  },
+  {
+    "id": "MTH213-NOTE-046",
+    "course": "MTH213",
+    "topic": "Second-Order Non-Homogeneous Equations",
+    "prompt": "For y''+4y'+3y=3x, what trial form should be used for a particular solution by undetermined coefficients?",
+    "d": 2,
+    "options": [
+      {
+        "t": "Ax+B",
+        "ok": true
+      },
+      {
+        "t": "Ae^(3x)",
+        "tag": "Matched the characteristic factor, not the forcing",
+        "why": "A polynomial forcing of degree one needs a degree-one polynomial trial."
+      },
+      {
+        "t": "A sin(3x)+B cos(3x)",
+        "tag": "Used a trigonometric trial for a polynomial forcing",
+        "why": "The trial should match the type of the forcing term."
+      },
+      {
+        "t": "A/x",
+        "tag": "Used a reciprocal trial",
+        "why": "A linear polynomial forcing calls for Ax+B."
+      }
+    ],
+    "explain": "The forcing 3x is a degree-one polynomial, so choose yp=Ax+B and determine A and B by substitution."
+  },
+  {
+    "id": "MTH213-NOTE-047",
+    "course": "MTH213",
+    "topic": "Second-Order Non-Homogeneous Equations",
+    "prompt": "For y''+4y'+3y=3x, which particular solution is correct?",
+    "d": 3,
+    "options": [
+      {
+        "t": "yp=x-4/3",
+        "ok": true
+      },
+      {
+        "t": "yp=3x",
+        "tag": "Did not account for derivative and y terms",
+        "why": "Substituting a linear trial requires matching both the x coefficient and the constant term."
+      },
+      {
+        "t": "yp=x+4/3",
+        "tag": "Sign error in the constant",
+        "why": "Substitution gives 4A+3B=0, so B=-4/3 when A=1."
+      },
+      {
+        "t": "yp=Ax^2+Bx+C",
+        "tag": "Used a higher-degree trial than needed",
+        "why": "The forcing is degree one, and a linear trial already matches it."
+      }
+    ],
+    "explain": "With yp=Ax+B, L[yp]=3Ax+4A+3B. Matching 3x gives A=1 and B=-4/3."
+  },
+  {
+    "id": "MTH213-NOTE-048",
+    "course": "MTH213",
+    "topic": "Second-Order Non-Homogeneous Equations",
+    "prompt": "For y''-y'-2y=3e^(3x), what trial form is appropriate for yp?",
+    "d": 2,
+    "options": [
+      {
+        "t": "Ae^(3x)",
+        "ok": true
+      },
+      {
+        "t": "Axe^(3x)",
+        "tag": "Added a resonance factor unnecessarily",
+        "why": "The characteristic roots are 2 and -1, so e^(3x) is not part of the complementary solution."
+      },
+      {
+        "t": "Ax+B",
+        "tag": "Used a polynomial trial",
+        "why": "The forcing is exponential, so use an exponential trial with the same exponent."
+      },
+      {
+        "t": "A sin(3x)+B cos(3x)",
+        "tag": "Used a trigonometric trial",
+        "why": "The forcing is e^(3x), not a sine or cosine."
+      }
+    ],
+    "explain": "The characteristic polynomial is (r-2)(r+1), so 3 is not a root. The trial Ae^(3x) does not overlap yc."
+  },
+  {
+    "id": "MTH213-NOTE-049",
+    "course": "MTH213",
+    "topic": "Second-Order Non-Homogeneous Equations",
+    "prompt": "For y''+4y=sin(2x), why must the usual sine-cosine trial be multiplied by x?",
+    "d": 2,
+    "options": [
+      {
+        "t": "sin(2x) and cos(2x) already solve the homogeneous equation",
+        "ok": true
+      },
+      {
+        "t": "The forcing is a polynomial",
+        "tag": "Misidentified the forcing",
+        "why": "The forcing is trigonometric; the issue is overlap with the complementary solution."
+      },
+      {
+        "t": "The equation is first order",
+        "tag": "Misidentified the equation order",
+        "why": "It is a second-order equation with resonance in the trial."
+      },
+      {
+        "t": "The coefficient of y is zero",
+        "tag": "Misread the equation",
+        "why": "The coefficient is 4, and the homogeneous solutions have frequency 2."
+      }
+    ],
+    "explain": "The homogeneous solution contains sin(2x) and cos(2x). Multiplying the trial by x creates a linearly independent form."
+  },
+  {
+    "id": "MTH213-NOTE-050",
+    "course": "MTH213",
+    "topic": "Second-Order Non-Homogeneous Equations",
+    "prompt": "A particular solution of y''+4y=cos(2x) is:",
+    "d": 3,
+    "options": [
+      {
+        "t": "yp=(x/4)sin(2x)",
+        "ok": true
+      },
+      {
+        "t": "yp=(1/4)cos(2x)",
+        "tag": "Used a homogeneous function as the trial",
+        "why": "cos(2x) solves the associated homogeneous equation, so a resonant factor is needed."
+      },
+      {
+        "t": "yp=x cos(2x)",
+        "tag": "Used the wrong resonant phase and scale",
+        "why": "Applying D^2+4 to x sin(2x) gives 4cos(2x), so the coefficient must be 1/4."
+      },
+      {
+        "t": "yp=(x/2)sin(2x)",
+        "tag": "Coefficient is twice as large",
+        "why": "The operator applied to x sin(2x) produces 4cos(2x)."
+      }
+    ],
+    "explain": "For L=D^2+4, L[x sin(2x)]=4cos(2x), so multiplying by 1/4 gives the required forcing."
+  },
+  {
+    "id": "MTH213-NOTE-051",
+    "course": "MTH213",
+    "topic": "Second-Order Non-Homogeneous Equations",
+    "prompt": "Which forcing term is generally suitable for undetermined coefficients?",
+    "d": 1,
+    "options": [
+      {
+        "t": "A polynomial times an exponential",
+        "ok": true
+      },
+      {
+        "t": "ln(x)",
+        "tag": "Outside the standard trial-function family",
+        "why": "Undetermined coefficients is designed for polynomial, exponential, sine, cosine, and their finite products or sums."
+      },
+      {
+        "t": "tan(x)",
+        "tag": "Not a standard finite trial form",
+        "why": "Variation of parameters is more general for forcing functions such as tan(x)."
+      },
+      {
+        "t": "An arbitrary continuous function",
+        "tag": "Method has limited forcing types",
+        "why": "Undetermined coefficients requires a forcing term with a predictable derivative family."
+      }
+    ],
+    "explain": "Polynomial, exponential, sine, cosine, and finite combinations/products of them have finite predictable trial forms."
+  },
+  {
+    "id": "MTH213-NOTE-052",
+    "course": "MTH213",
+    "topic": "Second-Order Non-Homogeneous Equations",
+    "prompt": "For y''+4y=8, which constant particular solution works?",
+    "d": 1,
+    "options": [
+      {
+        "t": "yp=2",
+        "ok": true
+      },
+      {
+        "t": "yp=8",
+        "tag": "Did not divide by the coefficient of y",
+        "why": "For a constant c, y''+4y=4c."
+      },
+      {
+        "t": "yp=4",
+        "tag": "Substitution gives 16, not 8",
+        "why": "The constant must satisfy 4c=8."
+      },
+      {
+        "t": "yp=2x",
+        "tag": "Used a nonconstant trial unnecessarily",
+        "why": "A constant forcing has a constant particular solution when the constant is not in yc."
+      }
+    ],
+    "explain": "For yp=c, y''+4y=4c. Setting 4c=8 gives c=2."
+  },
+  {
+    "id": "MTH213-NOTE-053",
+    "course": "MTH213",
+    "topic": "Wronskian and Variation of Parameters",
+    "prompt": "What is the Wronskian of y1 and y2?",
+    "d": 1,
+    "options": [
+      {
+        "t": "W=y1 y2' - y2 y1'",
+        "ok": true
+      },
+      {
+        "t": "W=y1 y2 - y1' y2'",
+        "tag": "Used products instead of the determinant",
+        "why": "The Wronskian is the determinant formed from the functions and their first derivatives."
+      },
+      {
+        "t": "W=y1' y2 - y1 y2'",
+        "tag": "Reversed the determinant sign",
+        "why": "Expanding the determinant with rows [y1,y2] and [y1',y2'] gives y1y2'-y2y1'."
+      },
+      {
+        "t": "W=y1+y2",
+        "tag": "Did not use derivatives",
+        "why": "The Wronskian uses both functions and their first derivatives."
+      }
+    ],
+    "explain": "The determinant |y1 y2; y1' y2'| expands to y1y2'-y2y1'."
+  },
+  {
+    "id": "MTH213-NOTE-054",
+    "course": "MTH213",
+    "topic": "Wronskian and Variation of Parameters",
+    "prompt": "Compute the Wronskian of y1=e^x and y2=e^(-x).",
+    "d": 2,
+    "options": [
+      {
+        "t": "-2",
+        "ok": true
+      },
+      {
+        "t": "2",
+        "tag": "Reversed the determinant order",
+        "why": "W=e^x(-e^(-x))-e^(-x)e^x=-1-1."
+      },
+      {
+        "t": "0",
+        "tag": "Treated the functions as dependent",
+        "why": "Their derivatives differ in sign, producing a nonzero Wronskian."
+      },
+      {
+        "t": "-1",
+        "tag": "Omitted one determinant product",
+        "why": "Both products equal 1 in magnitude and are subtracted."
+      }
+    ],
+    "explain": "W=e^x(-e^(-x))-e^(-x)e^x=-1-1=-2."
+  },
+  {
+    "id": "MTH213-NOTE-055",
+    "course": "MTH213",
+    "topic": "Wronskian and Variation of Parameters",
+    "prompt": "Two solutions of the same second-order linear homogeneous equation have a nonzero Wronskian at one point. What follows?",
+    "d": 1,
+    "options": [
+      {
+        "t": "They are linearly independent",
+        "ok": true
+      },
+      {
+        "t": "They are scalar multiples",
+        "tag": "Reversed the Wronskian test",
+        "why": "A nonzero Wronskian certifies independence."
+      },
+      {
+        "t": "The equation must be nonhomogeneous",
+        "tag": "Confused the test with forcing",
+        "why": "The Wronskian test applies to solutions of a homogeneous equation."
+      },
+      {
+        "t": "The solutions are both constant",
+        "tag": "Overinterpreted the determinant",
+        "why": "The Wronskian only tests linear independence."
+      }
+    ],
+    "explain": "For solutions of the same second-order linear homogeneous equation, a nonzero Wronskian at a point implies linear independence."
+  },
+  {
+    "id": "MTH213-NOTE-056",
+    "course": "MTH213",
+    "topic": "Wronskian and Variation of Parameters",
+    "prompt": "For y''+P(x)y'+Q(x)y=g(x) with fundamental solutions y1,y2, which is the variation-of-parameters expression for yp?",
+    "d": 3,
+    "options": [
+      {
+        "t": "-y1 integral(y2 g/W) dx + y2 integral(y1 g/W) dx",
+        "ok": true
+      },
+      {
+        "t": "y1 integral(y2 W/g) dx + y2 integral(y1 W/g) dx",
+        "tag": "Inverted the integrands",
+        "why": "The forcing is divided by the Wronskian in each integral."
+      },
+      {
+        "t": "y1 integral(y1 g/W) dx - y2 integral(y2 g/W) dx",
+        "tag": "Paired each solution with itself",
+        "why": "Each integral uses the other fundamental solution, with a minus sign on the y1 term."
+      },
+      {
+        "t": "-y1 integral(y1 g/W) dx + y2 integral(y2 g/W) dx",
+        "tag": "Used the wrong functions in the integrals",
+        "why": "The formula pairs y1 with y2 and y2 with y1."
+      }
+    ],
+    "explain": "Variation of parameters gives yp=-y1∫(y2g/W)dx+y2∫(y1g/W)dx for the normalized equation."
+  },
+  {
+    "id": "MTH213-NOTE-057",
+    "course": "MTH213",
+    "topic": "Wronskian and Variation of Parameters",
+    "prompt": "Which method is appropriate for y''+y=sec(x) on an interval where sec(x) is defined?",
+    "d": 2,
+    "options": [
+      {
+        "t": "Variation of parameters",
+        "ok": true
+      },
+      {
+        "t": "Undetermined coefficients",
+        "tag": "Forcing is outside its standard family",
+        "why": "sec(x) is not a polynomial, exponential, sine, cosine, or a finite combination of them."
+      },
+      {
+        "t": "Characteristic roots alone",
+        "tag": "Ignored the nonzero forcing",
+        "why": "Characteristic roots solve only the associated homogeneous equation."
+      },
+      {
+        "t": "Separation of variables",
+        "tag": "Applied a first-order method",
+        "why": "This is a second-order nonhomogeneous linear equation."
+      }
+    ],
+    "explain": "Variation of parameters works for general continuous forcing functions; sec(x) is not a standard undetermined-coefficients forcing."
+  },
+  {
+    "id": "MTH213-NOTE-058",
+    "course": "MTH213",
+    "topic": "Wronskian and Variation of Parameters",
+    "prompt": "Why must a particular solution found by undetermined coefficients not duplicate a term in yc?",
+    "d": 2,
+    "options": [
+      {
+        "t": "A duplicated trial is annihilated by the homogeneous operator, so multiply the trial by x",
+        "ok": true
+      },
+      {
+        "t": "The forcing term must be zero",
+        "tag": "Changed the original equation",
+        "why": "The forcing remains; the trial form is adjusted to avoid overlap with yc."
+      },
+      {
+        "t": "The complementary solution must be discarded",
+        "tag": "Removed valid homogeneous solutions",
+        "why": "The general solution still includes yc; only the particular trial needs adjustment."
+      },
+      {
+        "t": "Every trial must be multiplied by e^x",
+        "tag": "Used an arbitrary adjustment",
+        "why": "Multiply by x only as needed to remove duplication with the complementary solution."
+      }
+    ],
+    "explain": "If the trial overlaps the complementary solution, the differential operator maps it to zero; multiplying by x (or a higher power when needed) creates an independent trial."
+  },
+  {
+    "id": "MTH213-NOTE-059",
+    "course": "MTH213",
+    "topic": "Wronskian and Variation of Parameters",
+    "prompt": "For two functions that solve the same regular second-order linear homogeneous ODE, what does W(x)=0 throughout an interval imply?",
+    "d": 2,
+    "options": [
+      {
+        "t": "The functions are linearly dependent on that interval",
+        "ok": true
+      },
+      {
+        "t": "They are linearly independent",
+        "tag": "Reversed the Wronskian test",
+        "why": "For solutions of the same regular equation, an identically zero Wronskian means dependence."
+      },
+      {
+        "t": "The functions are both zero",
+        "tag": "Overstated the conclusion",
+        "why": "Dependence allows one nonzero function to be a constant multiple of the other."
+      },
+      {
+        "t": "The equation has no solutions",
+        "tag": "Confused dependence with existence",
+        "why": "A zero Wronskian indicates dependence, not nonexistence."
+      }
+    ],
+    "explain": "For solutions of the same regular second-order linear homogeneous equation, an identically zero Wronskian implies linear dependence."
+  },
+  {
+    "id": "MTH213-NOTE-060",
+    "course": "MTH213",
+    "topic": "Systems of Differential Equations",
+    "prompt": "To convert an nth-order scalar ODE into a first-order system, how many state variables are normally introduced?",
+    "d": 1,
+    "options": [
+      {
+        "t": "n",
+        "ok": true
+      },
+      {
+        "t": "n-1",
+        "tag": "Omitted the original dependent variable",
+        "why": "The state includes y and derivatives through y^(n-1), making n variables."
+      },
+      {
+        "t": "2n",
+        "tag": "Doubled the state unnecessarily",
+        "why": "One state variable is used for each derivative order from zero through n-1."
+      },
+      {
+        "t": "One for every independent variable",
+        "tag": "Confused state dimension with independent variables",
+        "why": "The number of state variables is tied to the ODE order."
+      }
+    ],
+    "explain": "An nth-order ODE is rewritten using y, y', ..., y^(n-1) as n first-order state variables."
+  },
+  {
+    "id": "MTH213-NOTE-061",
+    "course": "MTH213",
+    "topic": "Systems of Differential Equations",
+    "prompt": "For y''-4y'+4y=0, let u=y and v=y'. Which first-order system is equivalent?",
+    "d": 2,
+    "options": [
+      {
+        "t": "u'=v, v'=4v-4u",
+        "ok": true
+      },
+      {
+        "t": "u'=v, v'=4u-4v",
+        "tag": "Rearranged the ODE with incorrect signs",
+        "why": "Solving for y'' gives y''=4y'-4y."
+      },
+      {
+        "t": "u'=4v-4u, v'=u",
+        "tag": "Swapped the state equations",
+        "why": "The first equation must express u'=y'=v."
+      },
+      {
+        "t": "u'=v, v'=4v+4u",
+        "tag": "Changed the sign of the y term",
+        "why": "The equation gives y''=4y'-4y."
+      }
+    ],
+    "explain": "Since u=y and v=y', u'=v. Rearranging gives y''=4y'-4y, so v'=4v-4u."
+  },
+  {
+    "id": "MTH213-NOTE-062",
+    "course": "MTH213",
+    "topic": "Systems of Differential Equations",
+    "prompt": "For y''''+2y''+5y=e^t, set z1=y, z2=y', z3=y'', z4=y'''. What is z4'?",
+    "d": 3,
+    "options": [
+      {
+        "t": "e^t-2z3-5z1",
+        "ok": true
+      },
+      {
+        "t": "e^t+2z3+5z1",
+        "tag": "Did not isolate the highest derivative",
+        "why": "Rearrange the ODE to y''''=e^t-2y''-5y."
+      },
+      {
+        "t": "e^t-2z2-5z1",
+        "tag": "Used y' instead of y''",
+        "why": "The coefficient 2 multiplies y'', which is z3."
+      },
+      {
+        "t": "e^t-2z3-5z4",
+        "tag": "Used y''' instead of y",
+        "why": "The coefficient 5 multiplies y, which is z1."
+      }
+    ],
+    "explain": "Isolate y''''=e^t-2y''-5y. With z3=y'' and z1=y, z4'=e^t-2z3-5z1."
+  },
+  {
+    "id": "MTH213-NOTE-063",
+    "course": "MTH213",
+    "topic": "Systems of Differential Equations",
+    "prompt": "A second-order ODE with specified y(0) and y'(0) becomes how many initial values for its equivalent first-order system?",
+    "d": 1,
+    "options": [
+      {
+        "t": "Two, one for each state variable",
+        "ok": true
+      },
+      {
+        "t": "One, because it is one scalar ODE",
+        "tag": "Omitted derivative initial data",
+        "why": "The system states are y and y', each with an initial value."
+      },
+      {
+        "t": "Three, including y''(0)",
+        "tag": "Added an unnecessary initial value",
+        "why": "A second-order initial-value problem needs two initial conditions."
+      },
+      {
+        "t": "Four",
+        "tag": "Doubled the state dimension",
+        "why": "A second-order equation becomes a two-dimensional first-order system."
+      }
+    ],
+    "explain": "The states are u=y and v=y'; their initial values are u(0)=y(0) and v(0)=y'(0)."
+  },
+  {
+    "id": "MTH213-NOTE-064",
+    "course": "MTH213",
+    "topic": "Laplace Transforms",
+    "prompt": "What is the definition of the Laplace transform of f(t)?",
+    "d": 1,
+    "options": [
+      {
+        "t": "F(s)=integral from 0 to infinity of e^(-st)f(t) dt",
+        "ok": true
+      },
+      {
+        "t": "F(s)=integral from -infinity to infinity of e^(st)f(t) dt",
+        "tag": "Used a bilateral transform and wrong sign",
+        "why": "The one-sided Laplace transform integrates from zero to infinity with kernel e^(-st)."
+      },
+      {
+        "t": "F(s)=e^(-st)f(t)",
+        "tag": "Omitted integration",
+        "why": "The transform is an integral over t."
+      },
+      {
+        "t": "F(s)=integral from 0 to s of e^(-st)f(s) ds",
+        "tag": "Used the wrong integration variable and limits",
+        "why": "The transform integrates with respect to t from zero to infinity."
+      }
+    ],
+    "explain": "The one-sided Laplace transform is F(s)=L{f(t)}=integral_0^infinity e^(-st)f(t)dt, when the integral converges."
+  },
+  {
+    "id": "MTH213-NOTE-065",
+    "course": "MTH213",
+    "topic": "Laplace Transforms",
+    "prompt": "What is L{1}(s) for s>0?",
+    "d": 1,
+    "options": [
+      {
+        "t": "1/s",
+        "ok": true
+      },
+      {
+        "t": "s",
+        "tag": "Inverted the transform",
+        "why": "Integrating e^(-st) from zero to infinity gives 1/s."
+      },
+      {
+        "t": "1/s^2",
+        "tag": "Used the transform of t",
+        "why": "The transform of 1 is 1/s; t transforms to 1/s^2."
+      },
+      {
+        "t": "0",
+        "tag": "Ignored the integral",
+        "why": "The integral of e^(-st) is nonzero for s>0."
+      }
+    ],
+    "explain": "L{1}=integral_0^infinity e^(-st)dt=1/s for s>0."
+  },
+  {
+    "id": "MTH213-NOTE-066",
+    "course": "MTH213",
+    "topic": "Laplace Transforms",
+    "prompt": "What is L{t^2}(s)?",
+    "d": 2,
+    "options": [
+      {
+        "t": "2/s^3",
+        "ok": true
+      },
+      {
+        "t": "1/s^3",
+        "tag": "Missed the factorial",
+        "why": "L{t^n}=n!/s^(n+1), so t^2 contributes 2!."
+      },
+      {
+        "t": "2/s^2",
+        "tag": "Used the wrong power of s",
+        "why": "The denominator power is n+1=3."
+      },
+      {
+        "t": "1/(2s^3)",
+        "tag": "Inverted the factorial",
+        "why": "The transform multiplies by 2!, not divides by it."
+      }
+    ],
+    "explain": "Using L{t^n}=n!/s^(n+1), L{t^2}=2!/s^3=2/s^3."
+  },
+  {
+    "id": "MTH213-NOTE-067",
+    "course": "MTH213",
+    "topic": "Laplace Transforms",
+    "prompt": "What is L{e^(at)}(s)?",
+    "d": 1,
+    "options": [
+      {
+        "t": "1/(s-a)",
+        "ok": true
+      },
+      {
+        "t": "1/(s+a)",
+        "tag": "Reversed the exponential shift",
+        "why": "Multiplication by e^(at) shifts s to s-a."
+      },
+      {
+        "t": "s/(s^2+a^2)",
+        "tag": "Gave the cosine transform",
+        "why": "The transform of e^(at) is a simple shifted reciprocal."
+      },
+      {
+        "t": "a/(s^2+a^2)",
+        "tag": "Gave the sine transform",
+        "why": "The sine transform has a/(s^2+a^2); an exponential gives 1/(s-a)."
+      }
+    ],
+    "explain": "Integrating e^(-(s-a)t) from zero to infinity gives 1/(s-a), for s>a."
+  },
+  {
+    "id": "MTH213-NOTE-068",
+    "course": "MTH213",
+    "topic": "Laplace Transforms",
+    "prompt": "What is L{sin(at)}(s)?",
+    "d": 1,
+    "options": [
+      {
+        "t": "a/(s^2+a^2)",
+        "ok": true
+      },
+      {
+        "t": "s/(s^2+a^2)",
+        "tag": "Gave the cosine transform",
+        "why": "The transform of cosine has s in the numerator."
+      },
+      {
+        "t": "1/(s-a)",
+        "tag": "Gave the exponential transform",
+        "why": "A sine transform has a quadratic denominator."
+      },
+      {
+        "t": "s/(s^2-a^2)",
+        "tag": "Changed the denominator sign",
+        "why": "The denominator is s^2+a^2."
+      }
+    ],
+    "explain": "The standard transform pair is L{sin(at)}=a/(s^2+a^2)."
+  },
+  {
+    "id": "MTH213-NOTE-069",
+    "course": "MTH213",
+    "topic": "Laplace Transforms",
+    "prompt": "If Y(s)=L{y(t)}, what is L{y'(t)}?",
+    "d": 2,
+    "options": [
+      {
+        "t": "sY(s)-y(0)",
+        "ok": true
+      },
+      {
+        "t": "sY(s)",
+        "tag": "Omitted the initial value",
+        "why": "The derivative transform includes the boundary term -y(0)."
+      },
+      {
+        "t": "Y(s)/s-y(0)",
+        "tag": "Divided by s unnecessarily",
+        "why": "The transform of the first derivative is sY-y(0)."
+      },
+      {
+        "t": "sY(s)+y(0)",
+        "tag": "Used the wrong boundary-term sign",
+        "why": "Integration by parts produces -y(0)."
+      }
+    ],
+    "explain": "Taking the Laplace transform of a derivative gives L{y'}=sY(s)-y(0)."
+  },
+  {
+    "id": "MTH213-NOTE-070",
+    "course": "MTH213",
+    "topic": "Laplace Transforms",
+    "prompt": "What is L{e^(at)f(t)} in terms of F(s)=L{f(t)}?",
+    "d": 2,
+    "options": [
+      {
+        "t": "F(s-a)",
+        "ok": true
+      },
+      {
+        "t": "F(s+a)",
+        "tag": "Reversed the shift direction",
+        "why": "Multiplication by e^(at) replaces s by s-a."
+      },
+      {
+        "t": "e^(a s)F(s)",
+        "tag": "Moved the exponential to the transform variable",
+        "why": "The exponential factor shifts the s argument."
+      },
+      {
+        "t": "F(a-s)",
+        "tag": "Reflected the transform variable",
+        "why": "The first shifting property gives F(s-a)."
+      }
+    ],
+    "explain": "The first shifting theorem states L{e^(at)f(t)}=F(s-a)."
+  },
+  {
+    "id": "MTH213-NOTE-071",
+    "course": "MTH213",
+    "topic": "Laplace Transforms",
+    "prompt": "What is the inverse Laplace transform of 1/(s-2)?",
+    "d": 1,
+    "options": [
+      {
+        "t": "e^(2t)",
+        "ok": true
+      },
+      {
+        "t": "e^(-2t)",
+        "tag": "Reversed the shift sign",
+        "why": "1/(s-a) corresponds to e^(at)."
+      },
+      {
+        "t": "2e^t",
+        "tag": "Used the wrong numerator",
+        "why": "The numerator is 1, so this is the transform of e^(2t)."
+      },
+      {
+        "t": "t e^(2t)",
+        "tag": "Used a repeated pole",
+        "why": "A simple pole gives an exponential without the factor t."
+      }
+    ],
+    "explain": "Since L{e^(at)}=1/(s-a), the inverse of 1/(s-2) is e^(2t)."
+  },
+  {
+    "id": "MTH213-NOTE-072",
+    "course": "MTH213",
+    "topic": "Laplace Transforms",
+    "prompt": "When solving an initial-value problem by Laplace transforms, what information is especially useful when transforming derivatives?",
+    "d": 1,
+    "options": [
+      {
+        "t": "The initial conditions",
+        "ok": true
+      },
+      {
+        "t": "Only the roots of the characteristic equation",
+        "tag": "Ignored the transform boundary terms",
+        "why": "Initial values appear directly in transforms of derivatives."
+      },
+      {
+        "t": "Boundary values at spatial endpoints only",
+        "tag": "Confused an IVP with a boundary-value problem",
+        "why": "Laplace transforms use the time initial data in the derivative formulas."
+      },
+      {
+        "t": "The value of the forcing function at infinity",
+        "tag": "Used irrelevant data",
+        "why": "The derivative transform formulas require values at t=0."
+      }
+    ],
+    "explain": "The formulas L{y'}=sY-y(0) and L{y''}=s^2Y-sy(0)-y'(0) incorporate initial conditions."
+  },
+  {
+    "id": "MTH213-NOTE-073",
+    "course": "MTH213",
+    "topic": "PDEs and Separation of Variables",
+    "prompt": "For A u_xx + B u_xy + C u_yy + lower-order terms = 0, what discriminant classifies the second-order PDE?",
+    "d": 2,
+    "options": [
+      {
+        "t": "B^2-4AC",
+        "ok": true
+      },
+      {
+        "t": "A^2-4BC",
+        "tag": "Used the wrong coefficients",
+        "why": "The cross-partial coefficient is B in the standard form."
+      },
+      {
+        "t": "B^2+4AC",
+        "tag": "Used the wrong sign",
+        "why": "The standard discriminant is B^2-4AC."
+      },
+      {
+        "t": "A+B+C",
+        "tag": "Used a linear sum",
+        "why": "Classification depends on the quadratic-form discriminant."
+      }
+    ],
+    "explain": "The sign of B^2-4AC determines whether the second-order PDE is hyperbolic, parabolic, or elliptic."
+  },
+  {
+    "id": "MTH213-NOTE-074",
+    "course": "MTH213",
+    "topic": "PDEs and Separation of Variables",
+    "prompt": "How is the one-dimensional heat equation u_t=k u_xx classified for k>0?",
+    "d": 1,
+    "options": [
+      {
+        "t": "Parabolic",
+        "ok": true
+      },
+      {
+        "t": "Hyperbolic",
+        "tag": "Confused heat with wave behavior",
+        "why": "The heat equation is the standard parabolic PDE."
+      },
+      {
+        "t": "Elliptic",
+        "tag": "Confused heat with Laplace's equation",
+        "why": "The heat equation has a first-order time derivative and second-order spatial derivative."
+      },
+      {
+        "t": "It is an ODE",
+        "tag": "Ignored the partial derivatives",
+        "why": "The equation contains derivatives with respect to both time and space."
+      }
+    ],
+    "explain": "The heat equation is parabolic; its standard form contains one first-order time derivative and a second-order spatial derivative."
+  },
+  {
+    "id": "MTH213-NOTE-075",
+    "course": "MTH213",
+    "topic": "PDEs and Separation of Variables",
+    "prompt": "How is the one-dimensional wave equation u_tt=c^2 u_xx classified for c>0?",
+    "d": 1,
+    "options": [
+      {
+        "t": "Hyperbolic",
+        "ok": true
+      },
+      {
+        "t": "Parabolic",
+        "tag": "Confused the wave equation with the heat equation",
+        "why": "The wave equation is the standard hyperbolic PDE."
+      },
+      {
+        "t": "Elliptic",
+        "tag": "Confused the wave equation with Laplace's equation",
+        "why": "The wave equation has hyperbolic type."
+      },
+      {
+        "t": "It is an ODE",
+        "tag": "Ignored the spatial variable",
+        "why": "The equation has partial derivatives with respect to time and space."
+      }
+    ],
+    "explain": "The wave equation is hyperbolic; it models propagation of waves."
+  },
+  {
+    "id": "MTH213-NOTE-076",
+    "course": "MTH213",
+    "topic": "PDEs and Separation of Variables",
+    "prompt": "For the heat equation u_t=k u_xx, use u(x,t)=X(x)T(t). Which separated relation is correct?",
+    "d": 3,
+    "options": [
+      {
+        "t": "T'/(kT)=X''/X",
+        "ok": true
+      },
+      {
+        "t": "T'/T=kX''/X",
+        "tag": "Placed k on the wrong side",
+        "why": "Substitution gives X T'=k X'' T, then divide by kXT."
+      },
+      {
+        "t": "T''/T=X'/X",
+        "tag": "Used the wrong derivative orders",
+        "why": "The heat equation has T' and X''."
+      },
+      {
+        "t": "T'/X=kT/X''",
+        "tag": "Did not divide the separated product",
+        "why": "Divide X T'=k X'' T by kXT to separate the t and x terms."
+      }
+    ],
+    "explain": "Substitute XT into u_t=k u_xx: XT'=kX''T. Dividing by kXT gives T'/(kT)=X''/X."
+  },
+  {
+    "id": "MTH213-NOTE-077",
+    "course": "MTH213",
+    "topic": "PDEs and Separation of Variables",
+    "prompt": "For a heat equation on 0<x<L with zero-temperature ends, which spatial eigenfunction satisfies X(0)=X(L)=0 for mode n?",
+    "d": 2,
+    "options": [
+      {
+        "t": "sin(n pi x/L)",
+        "ok": true
+      },
+      {
+        "t": "cos(n pi x/L)",
+        "tag": "Does not vanish at x=0",
+        "why": "A cosine mode equals 1 at x=0, violating the zero boundary condition."
+      },
+      {
+        "t": "e^(n pi x/L)",
+        "tag": "Used an exponential spatial form",
+        "why": "The zero-endpoint eigenfunctions are sine modes."
+      },
+      {
+        "t": "sin(n pi t/L)",
+        "tag": "Used time in the spatial factor",
+        "why": "X is a function of x, not t."
+      }
+    ],
+    "explain": "The sine modes vanish at x=0 and x=L for integer n, matching homogeneous endpoint conditions."
+  },
+  {
+    "id": "MTH213-NOTE-078",
+    "course": "MTH213",
+    "topic": "PDEs and Separation of Variables",
+    "prompt": "Which PDE type corresponds to B^2-4AC<0 in the standard second-order form?",
+    "d": 2,
+    "options": [
+      {
+        "t": "Elliptic",
+        "ok": true
+      },
+      {
+        "t": "Parabolic",
+        "tag": "Used the zero-discriminant case",
+        "why": "Parabolic equations have B^2-4AC=0."
+      },
+      {
+        "t": "Hyperbolic",
+        "tag": "Used the positive-discriminant case",
+        "why": "Hyperbolic equations have B^2-4AC>0."
+      },
+      {
+        "t": "Ordinary",
+        "tag": "Confused classification with equation type",
+        "why": "The sign classifies a second-order PDE as elliptic, parabolic, or hyperbolic."
+      }
+    ],
+    "explain": "A negative discriminant B^2-4AC corresponds to elliptic type."
+  },
+  {
+    "id": "MTH213-NOTE-079",
+    "course": "MTH213",
+    "topic": "First-Order Models",
+    "prompt": "For the logistic model P'=kP(1-P/K), where k>0 and K>0, what is the carrying capacity?",
+    "d": 1,
+    "options": [
+      {
+        "t": "K",
+        "ok": true
+      },
+      {
+        "t": "k",
+        "tag": "Confused growth rate with capacity",
+        "why": "k controls the growth rate; the nonzero equilibrium population is K."
+      },
+      {
+        "t": "1/k",
+        "tag": "Inverted the growth rate",
+        "why": "The carrying capacity is the population level K."
+      },
+      {
+        "t": "kK",
+        "tag": "Multiplied unrelated parameters",
+        "why": "The equilibria are found by setting P'=0, giving P=0 and P=K."
+      }
+    ],
+    "explain": "The logistic model has equilibria P=0 and P=K; K is the stable limiting population, or carrying capacity."
+  },
+  {
+    "id": "MTH213-NOTE-080",
+    "course": "MTH213",
+    "topic": "First-Order Models",
+    "prompt": "A well-mixed tank has constant volume V, inflow and outflow rate q, and inflow concentration Cin. If its initial concentration is C0, which concentration model is correct?",
+    "d": 3,
+    "options": [
+      {
+        "t": "C(t)=Cin+(C0-Cin)e^(-qt/V)",
+        "ok": true
+      },
+      {
+        "t": "C(t)=C0+q(Cin-C0)t",
+        "tag": "Used a linear interpolation",
+        "why": "The concentration difference decays exponentially in a constant-volume mixing model."
+      },
+      {
+        "t": "C(t)=C0e^(-qt/V)",
+        "tag": "Ignored the incoming solute",
+        "why": "The solution must approach the inflow concentration Cin."
+      },
+      {
+        "t": "C(t)=Cin+(C0-Cin)e^(qt/V)",
+        "tag": "Used the growth sign",
+        "why": "The tank concentration approaches Cin, so the difference decays."
+      }
+    ],
+    "explain": "The solute balance gives C'=(q/V)(Cin-C). Solving this linear equation gives C=Cin+(C0-Cin)e^(-qt/V)."
+  },
+  {
+    "id": "MTH213-NOTE-081",
+    "course": "MTH213",
+    "topic": "Mechanical Vibrations",
+    "prompt": "A free undamped spring-mass system has m=1.5 kg, k=24 N/m, x(0)=0.2 m, and initial velocity -0.1 m/s. Which displacement is correct?",
+    "d": 3,
+    "options": [
+      {
+        "t": "x(t)=0.2cos(4t)-0.025sin(4t)",
+        "ok": true
+      },
+      {
+        "t": "x(t)=0.2cos(4t)+0.025sin(4t)",
+        "tag": "Used the wrong initial-velocity direction",
+        "why": "The derivative at zero of this expression is +0.1 m/s, but the given velocity is -0.1 m/s."
+      },
+      {
+        "t": "x(t)=0.2cos(16t)-0.1sin(16t)",
+        "tag": "Used omega squared as the frequency",
+        "why": "The angular frequency is sqrt(k/m)=4, not 16."
+      },
+      {
+        "t": "x(t)=0.2sin(4t)-0.025cos(4t)",
+        "tag": "Did not satisfy the initial displacement",
+        "why": "At t=0, the cosine term must equal 0.2 and the sine term must vanish."
+      }
+    ],
+    "explain": "The frequency is sqrt(24/1.5)=4. Write x=Acos(4t)+Bsin(4t); x(0)=0.2 gives A=0.2, and x'(0)=4B=-0.1 gives B=-0.025."
+  },
+  {
+    "id": "MTH213-NOTE-082",
+    "course": "MTH213",
+    "topic": "Mechanical Vibrations",
+    "prompt": "For m x''+c x'+kx=0 with positive m, c, and k, the motion is underdamped when:",
+    "d": 2,
+    "options": [
+      {
+        "t": "c^2<4mk",
+        "ok": true
+      },
+      {
+        "t": "c^2=4mk",
+        "tag": "Selected the critically damped condition",
+        "why": "Equality gives a repeated characteristic root and critical damping."
+      },
+      {
+        "t": "c^2>4mk",
+        "tag": "Selected the overdamped condition",
+        "why": "A discriminant greater than zero gives two real roots and overdamped motion."
+      },
+      {
+        "t": "c=0 only",
+        "tag": "Restricted underdamping to no damping",
+        "why": "Underdamped motion permits positive damping below the critical threshold."
+      }
+    ],
+    "explain": "The characteristic discriminant is c^2-4mk. A negative discriminant, c^2<4mk, gives complex roots and oscillatory underdamped motion."
+  },
+  {
+    "id": "MTH213-NOTE-083",
+    "course": "MTH213",
+    "topic": "Second-Order Non-Homogeneous Equations",
+    "prompt": "For y''-2y'+y=e^x, the characteristic root r=1 is repeated. Which trial form avoids overlap with the homogeneous solution?",
+    "d": 3,
+    "options": [
+      {
+        "t": "Ax^2e^x",
+        "ok": true
+      },
+      {
+        "t": "Ae^x",
+        "tag": "Duplicates a homogeneous solution",
+        "why": "e^x is already a homogeneous solution."
+      },
+      {
+        "t": "Axe^x",
+        "tag": "Still duplicates the repeated-root solution",
+        "why": "Both e^x and xe^x are in the complementary solution, so a second power of x is needed."
+      },
+      {
+        "t": "Acos(x)",
+        "tag": "Does not match the forcing",
+        "why": "The forcing is exponential, so the trial must contain e^x."
+      }
+    ],
+    "explain": "The complementary solution is (C1+C2x)e^x. Since the forcing e^x overlaps with a repeated root, multiply the exponential trial by x^2."
+  },
+  {
+    "id": "MTH213-NOTE-084",
+    "course": "MTH213",
+    "topic": "Second-Order Non-Homogeneous Equations",
+    "prompt": "For y''-2y=e^x ln(x) on x>0, which particular-solution method is appropriate?",
+    "d": 2,
+    "options": [
+      {
+        "t": "Variation of parameters",
+        "ok": true
+      },
+      {
+        "t": "Undetermined coefficients with a finite polynomial trial",
+        "tag": "Forcing is not in the standard trial family",
+        "why": "e^x ln(x) does not have the finite derivative pattern required by undetermined coefficients."
+      },
+      {
+        "t": "Characteristic roots alone",
+        "tag": "Ignored the nonzero forcing",
+        "why": "Characteristic roots produce the complementary solution only."
+      },
+      {
+        "t": "Separation of variables",
+        "tag": "Used a first-order method",
+        "why": "This is a second-order nonhomogeneous linear equation."
+      }
+    ],
+    "explain": "Variation of parameters accommodates general forcing functions such as e^x ln(x), unlike the finite trial forms of undetermined coefficients."
+  },
+  {
+    "id": "MTH213-NOTE-085",
+    "course": "MTH213",
+    "topic": "Boundary-Value Problems",
+    "prompt": "Solve y''+4y=cos(2x), with y(0)=0 and y(pi/4)=1/2.",
+    "d": 3,
+    "options": [
+      {
+        "t": "y=(1/2-pi/16)sin(2x)+(x/4)sin(2x)",
+        "ok": true
+      },
+      {
+        "t": "y=(1/2+pi/16)sin(2x)+(x/4)sin(2x)",
+        "tag": "Used the wrong sign when applying the second boundary value",
+        "why": "At x=pi/4, the particular term contributes pi/16, which must be subtracted from 1/2."
+      },
+      {
+        "t": "y=(1/2-pi/16)cos(2x)+(x/4)sin(2x)",
+        "tag": "Did not satisfy y(0)=0",
+        "why": "The cosine homogeneous term is nonzero at x=0."
+      },
+      {
+        "t": "y=(1/2)sin(2x)+(x/4)cos(2x)",
+        "tag": "Used an incorrect resonant particular solution",
+        "why": "Applying d^2/dx^2+4 to x sin(2x)/4 gives cos(2x)."
+      }
+    ],
+    "explain": "The resonant particular solution is xp=(x/4)sin(2x). The general solution is C1cos(2x)+C2sin(2x)+xp. The first condition gives C1=0; the second gives C2+pi/16=1/2."
+  },
+  {
+    "id": "MTH213-NOTE-086",
+    "course": "MTH213",
+    "topic": "Laplace Transforms",
+    "prompt": "Solve y'-2y=4 with y(0)=1.",
+    "d": 2,
+    "options": [
+      {
+        "t": "y=3e^(2t)-2",
+        "ok": true
+      },
+      {
+        "t": "y=3e^(-2t)+2",
+        "tag": "Reversed the characteristic sign and equilibrium",
+        "why": "The homogeneous factor is e^(2t), and the constant particular solution is -2."
+      },
+      {
+        "t": "y=2e^(2t)+1",
+        "tag": "Did not satisfy the differential equation",
+        "why": "A constant particular solution must satisfy -2yp=4, so yp=-2."
+      },
+      {
+        "t": "y=4e^(2t)-3",
+        "tag": "Applied the initial value incorrectly",
+        "why": "At t=0 the coefficient of e^(2t) must be 3 for y(0)=1."
+      }
+    ],
+    "explain": "A constant particular solution is -2 and the homogeneous solution is Ce^(2t). The initial value gives C=3. This is also the solution obtained by transforming the IVP."
+  },
+  {
+    "id": "MTH213-NOTE-087",
+    "course": "MTH213",
+    "topic": "Laplace Transforms",
+    "prompt": "If Y(s)=L{y(t)}, what is L{y''(t)}?",
+    "d": 2,
+    "options": [
+      {
+        "t": "s^2Y(s)-s y(0)-y'(0)",
+        "ok": true
+      },
+      {
+        "t": "s^2Y(s)-y(0)",
+        "tag": "Omitted the first-derivative initial value term",
+        "why": "The second derivative transform includes both y(0) and y'(0)."
+      },
+      {
+        "t": "sY(s)-y'(0)",
+        "tag": "Used the first-derivative formula",
+        "why": "A second derivative contributes s^2Y and two initial-value terms."
+      },
+      {
+        "t": "s^2Y(s)+s y(0)+y'(0)",
+        "tag": "Used incorrect signs",
+        "why": "Both initial-value terms are subtracted."
+      }
+    ],
+    "explain": "Applying the derivative property twice gives L{y''}=s^2Y(s)-s y(0)-y'(0)."
+  },
+  {
+    "id": "MTH213-NOTE-088",
+    "course": "MTH213",
+    "topic": "Homogeneous First-Order Equations",
+    "prompt": "Solve dy/dx=(x+y)/x on x>0.",
+    "d": 3,
+    "options": [
+      {
+        "t": "y=x(ln(x)+C)",
+        "ok": true
+      },
+      {
+        "t": "y=ln(x)+C",
+        "tag": "Did not return from v=y/x",
+        "why": "The substitution is y=vx, so the final solution must include the factor x."
+      },
+      {
+        "t": "y=x(e^x+C)",
+        "tag": "Integrated the reduced equation exponentially",
+        "why": "The reduced equation is x dv/dx=1, so v=ln(x)+C."
+      },
+      {
+        "t": "y=x(C-ln(x))",
+        "tag": "Sign error in integrating 1/x",
+        "why": "Integrating dv/dx=1/x gives v=ln(x)+C."
+      }
+    ],
+    "explain": "Set y=vx. Then v+xv'=1+v, so xv'=1 and v=ln(x)+C. Hence y=x(ln(x)+C)."
+  },
+  {
+    "id": "MTH213-NOTE-089",
+    "course": "MTH213",
+    "topic": "Bernoulli Equations",
+    "prompt": "For nonzero solutions, solve y'+y=y^2.",
+    "d": 3,
+    "options": [
+      {
+        "t": "y=1/(1+Ce^x)",
+        "ok": true
+      },
+      {
+        "t": "y=1/(1+Ce^(-x))",
+        "tag": "Sign error in the transformed equation",
+        "why": "The substitution v=1/y gives v'-v=-1, whose homogeneous term is Ce^x."
+      },
+      {
+        "t": "y=Ce^(-x)",
+        "tag": "Solved only the associated linear equation",
+        "why": "The original equation contains the nonlinear term y^2."
+      },
+      {
+        "t": "y=1+Ce^x",
+        "tag": "Did not invert v=1/y",
+        "why": "The transformed solution is v=1+Ce^x, and y=1/v."
+      }
+    ],
+    "explain": "Let v=1/y. Then v'-v=-1, so v=1+Ce^x. Therefore y=1/(1+Ce^x), with the zero solution handled separately."
+  },
+  {
+    "id": "MTH213-NOTE-090",
+    "course": "MTH213",
+    "topic": "First-Order Linear Equations",
+    "prompt": "Solve y'+2y=4 with y(0)=1.",
+    "d": 2,
+    "options": [
+      {
+        "t": "y=2-e^(-2x)",
+        "ok": true
+      },
+      {
+        "t": "y=2+e^(-2x)",
+        "tag": "Did not apply the initial value with the correct sign",
+        "why": "At x=0, the exponential coefficient must be -1 to give y(0)=1."
+      },
+      {
+        "t": "y=4-e^(-2x)",
+        "tag": "Used the forcing as the equilibrium",
+        "why": "A constant particular solution satisfies 2y=4, so the equilibrium is 2."
+      },
+      {
+        "t": "y=e^(-2x)-2",
+        "tag": "Used the wrong constant particular solution",
+        "why": "The constant particular solution is 2, not -2."
+      }
+    ],
+    "explain": "A constant particular solution is 2, and the homogeneous solution is Ce^(-2x). Applying y(0)=1 gives C=-1."
+  },
+  {
+    "id": "MTH213-NOTE-091",
+    "course": "MTH213",
+    "topic": "Laplace Transforms",
+    "prompt": "Which linearity property does the Laplace transform satisfy?",
+    "d": 1,
+    "options": [
+      {
+        "t": "L{af+bg}=aL{f}+bL{g}",
+        "ok": true
+      },
+      {
+        "t": "L{af+bg}=L{a}L{f}+L{b}L{g}",
+        "tag": "Treated constants as functions to transform",
+        "why": "Constant factors pass through the transform by linearity."
+      },
+      {
+        "t": "L{af+bg}=ab(L{f}+L{g})",
+        "tag": "Combined independent constants",
+        "why": "Each coefficient multiplies only its corresponding transform."
+      },
+      {
+        "t": "L{af+bg}=L{f}+L{g}",
+        "tag": "Dropped the coefficients",
+        "why": "The transform preserves the scalar multipliers a and b."
+      }
+    ],
+    "explain": "The Laplace transform is linear: scalar multiplication and addition pass through the integral."
+  },
+  {
+    "id": "MTH213-NOTE-092",
+    "course": "MTH213",
+    "topic": "Laplace Transforms",
+    "prompt": "Find the inverse Laplace transform of (2s+5)/(s^2+4s+13).",
+    "d": 3,
+    "options": [
+      {
+        "t": "2e^(-2t)cos(3t)+(1/3)e^(-2t)sin(3t)",
+        "ok": true
+      },
+      {
+        "t": "2e^(2t)cos(3t)+(1/3)e^(2t)sin(3t)",
+        "tag": "Used a positive exponential shift",
+        "why": "Completing the square gives (s+2)^2+9, so the shift is e^(-2t)."
+      },
+      {
+        "t": "2e^(-2t)cos(3t)+3e^(-2t)sin(3t)",
+        "tag": "Did not divide by the sine frequency",
+        "why": "The numerator remainder 1 over the quadratic contributes (1/3)sin(3t)."
+      },
+      {
+        "t": "e^(-2t)cos(3t)+(1/3)e^(-2t)sin(3t)",
+        "tag": "Lost a factor of two in the cosine term",
+        "why": "The numerator contains 2(s+2)+1, so the cosine coefficient is 2."
+      }
+    ],
+    "explain": "Write the denominator as (s+2)^2+9 and the numerator as 2(s+2)+1. Use the shifted cosine and sine transform pairs."
+  },
+  {
+    "id": "MTH213-NOTE-093",
+    "course": "MTH213",
+    "topic": "Wronskian and Variation of Parameters",
+    "prompt": "A variation-of-parameters solution of y''+y=sec(x), on an interval where cos(x) is nonzero, has which particular solution?",
+    "d": 3,
+    "options": [
+      {
+        "t": "yp=cos(x)ln|cos(x)|+x sin(x)",
+        "ok": true
+      },
+      {
+        "t": "yp=sin(x)ln|sin(x)|+x cos(x)",
+        "tag": "Paired the wrong fundamental solutions",
+        "why": "For y1=cos(x), y2=sin(x), the Wronskian is 1 and the integrals pair each solution with the other."
+      },
+      {
+        "t": "yp=cos(x)ln|sin(x)|+x cos(x)",
+        "tag": "Used incorrect integrands and second basis term",
+        "why": "The second variation function is x, which multiplies y2=sin(x)."
+      },
+      {
+        "t": "yp=sec(x)",
+        "tag": "Copied the forcing as a solution",
+        "why": "The particular solution must satisfy y''+y=sec(x), not simply equal the forcing."
+      }
+    ],
+    "explain": "With y1=cos(x), y2=sin(x), W=1. Variation of parameters gives u1'=-tan(x), u2'=1; thus u1=ln|cos(x)|, u2=x, and yp=u1y1+u2y2."
+  },
+  {
+    "id": "MTH213-NOTE-094",
+    "course": "MTH213",
+    "topic": "Systems of Differential Equations",
+    "prompt": "Solve the system u'=2u, v'=-v with u(0)=1 and v(0)=2.",
+    "d": 1,
+    "options": [
+      {
+        "t": "u=e^(2t), v=2e^(-t)",
+        "ok": true
+      },
+      {
+        "t": "u=e^(-2t), v=2e^t",
+        "tag": "Reversed both growth rates",
+        "why": "Each scalar equation has the exponential rate shown by its coefficient."
+      },
+      {
+        "t": "u=2e^(2t), v=e^(-t)",
+        "tag": "Swapped initial values",
+        "why": "The initial conditions set the multiplicative constants separately."
+      },
+      {
+        "t": "u=1+2t, v=2-t",
+        "tag": "Used linear functions for exponential equations",
+        "why": "Equations u'=2u and v'=-v have exponential solutions."
+      }
+    ],
+    "explain": "Solve the scalar equations independently: u=Ce^(2t) and v=De^(-t). The initial conditions give C=1 and D=2."
+  }
+]

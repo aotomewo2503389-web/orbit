@@ -182,20 +182,32 @@ async function loadProgress(){
 async function loadBanks(){
   Object.keys(banks).forEach(k => delete banks[k]); Object.keys(realBank).forEach(k => delete realBank[k]);
   const size = 1000; let from = 0;
+  const loadedIds = new Set();
+  const addQuestion = q => {
+    if(!q || !q.id || !q.prompt || !Array.isArray(q.options) || q.options.length < 2 || !q.options.some(o => o && o.ok)) return;
+    q.topic = q.topic || "General"; q.explain = q.explain || "";
+    const code = String(q.course || "").toUpperCase();
+    if(!code || loadedIds.has(String(q.id))) return;
+    loadedIds.add(String(q.id));
+    (banks[code] = banks[code] || []).push(q);
+    realBank[code] = true;
+  };
   try{
     for(;;){
       const {data, error} = await sb.from("questions").select("id,course,topic,prompt,d,options,explain").order("id").range(from, from + size - 1);
       if(error) throw error;
-      (data || []).forEach(q => {
-        if(!q.prompt || !Array.isArray(q.options) || q.options.length < 2 || !q.options.some(o => o && o.ok)) return;
-        q.topic = q.topic || "General"; q.explain = q.explain || "";
-        const code = String(q.course || "").toUpperCase();
-        (banks[code] = banks[code] || []).push(q); realBank[code] = true;
-      });
+      (data || []).forEach(addQuestion);
       if(!data || data.length < size) break;
       from += size;
     }
   }catch(e){ console.warn("Orbit: couldn’t load questions, using the sample set", e); }
+  try{
+    const response = await fetch("questions/mth213.json");
+    if(!response.ok) throw new Error(`Question bank request failed (${response.status})`);
+    const localQuestions = await response.json();
+    if(!Array.isArray(localQuestions)) throw new Error("MTH213 question bank must be a JSON array");
+    localQuestions.forEach(addQuestion);
+  }catch(e){ console.warn("Orbit: couldn’t load the bundled MTH213 question bank", e); }
 }
 async function connectRoom(){   // live duels still use the Claude room when the page runs inside Claude; otherwise challenge codes
   if(!window.claude || typeof window.claude.use !== "function") return;

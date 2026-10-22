@@ -1,6 +1,6 @@
-const CACHE_NAME = "orbit-shell-v1";
+const CACHE_NAME = "orbit-shell-v2";
 const APP_SHELL = ["/", "/manifest.webmanifest", "/orbit-pwa-icon-192.png", "/orbit-pwa-icon-512.png", "/orbit-pwa-icon-maskable-512.png"];
-const STATIC_ASSET = /\.(?:css|js|svg|png|jpe?g|webmanifest|woff2?)$/i;
+const STATIC_ASSET = /\.(?:css|js|json|svg|png|jpe?g|webmanifest|woff2?)$/i;
 
 self.addEventListener("install", event => {
   event.waitUntil(
@@ -32,6 +32,22 @@ self.addEventListener("fetch", event => {
         return response;
       }catch(error){
         const cached = await cache.match("/");
+        if(cached) return cached;
+        throw error;
+      }
+    })());
+    return;
+  }
+
+  if(url.pathname.endsWith(".json")){
+    event.respondWith((async () => {
+      const cache = await caches.open(CACHE_NAME);
+      try{
+        const response = await fetch(request);
+        if(response.ok) await cache.put(request, response.clone());
+        return response;
+      }catch(error){
+        const cached = await cache.match(request);
         if(cached) return cached;
         throw error;
       }
