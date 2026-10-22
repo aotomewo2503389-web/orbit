@@ -700,10 +700,11 @@ function renderQuestion(){
     <div class="opts" id="opts">${it.opts.map((o, i) => `<button class="opt${saved && o.ok ? " right" : ""}${saved && saved.pick === o ? " chosen" : ""}${saved && saved.pick === o && !saved.ok ? " wrong" : ""}" data-i="${i}"><kbd>${"ABCDE"[i]}</kbd><span>${esc(o.t)}</span></button>`).join("")}</div><div id="fb">${saved && !session.explainEnd ? answerFeedback(saved) : ""}</div>`;
   card.classList.remove("step-in"); void card.offsetWidth; card.classList.add("step-in");
   card.querySelectorAll(".opt").forEach(b => b.addEventListener("click", () => answer(+b.dataset.i)));
-  $("prevBtn").hidden = session.i === 0;
-  const next = $("nextBtn");
-  next.hidden = !saved;
-  next.textContent = session.i === n - 1 ? "See results" : "Next question";
+  const prev = $("prevBtn"); if(prev) prev.hidden = session.i === 0;
+  const next = $("nextBtn"); if(next){
+    next.hidden = !saved;
+    next.textContent = session.i === n - 1 ? "See results" : "Next question";
+  }
 }
 function answerFeedback(response){
   return response.ok
@@ -768,8 +769,8 @@ function previousQuestion(){
   session.i--;
   renderQuestion(); window.scrollTo({top:0, behavior: reduce ? "auto" : "smooth"});
 }
-$("nextBtn").addEventListener("click", nextQuestion);
-$("prevBtn").addEventListener("click", previousQuestion);
+if($("nextBtn")) $("nextBtn").addEventListener("click", nextQuestion);
+if($("prevBtn")) $("prevBtn").addEventListener("click", previousQuestion);
 document.addEventListener("keydown", e => {
   if(current !== "v-practice" || e.metaKey || e.ctrlKey) return;
   if(e.target && e.target.tagName === "INPUT") return;
