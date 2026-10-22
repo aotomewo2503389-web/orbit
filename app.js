@@ -486,7 +486,7 @@ function renderOnboard(){
           </button>
         </div>`
       : s.type === "program"
-        ? `<label class="program-select-label" for="obProgram">Your program</label><select class="field program-select" id="obProgram" required><option value="" disabled ${ob.program ? "" : "selected"}>Select your program</option>${PROGRAMS.map(program => `<option value="${esc(program)}" ${ob.program === program ? "selected" : ""}>${esc(program)}</option>`).join("")}</select>`
+        ? `<label class="program-select-label" for="obProgram">Your program</label><div class="program-select-wrap"><select class="field program-select" id="obProgram" required><option value="" disabled ${ob.program ? "" : "selected"}>Select your program</option>${PROGRAMS.map(program => `<option value="${esc(program)}" ${ob.program === program ? "selected" : ""}>${esc(program)}</option>`).join("")}</select></div>`
       : `<div class="choices">${s.options.map(o => `<button class="choice" aria-pressed="${ob[s.key] === o}" data-v="${esc(o)}">${esc(o)}</button>`).join("")}</div>`;
   p.innerHTML = `<div class="ob-dots">${dots}</div><div class="step-in"><h2 class="title">${s.title}</h2><p class="sub">${s.sub}</p>${body}
     <div class="ob-actions">${ob.step ? '<button class="ghost" id="obBack">Back</button>' : "<span></span>"}<button class="btn btn-primary" id="obNext" ${ob[s.key] ? "" : "disabled"}>${ob.step === OB_STEPS.length - 1 ? "Finish" : "Continue"}</button></div></div>`;
