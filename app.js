@@ -142,7 +142,6 @@ function ensureProfile(){
   if(!state.profile || typeof state.profile !== "object") state.profile = {};
   const profile = state.profile;
   if(!profile.challengeResults || typeof profile.challengeResults !== "object" || Array.isArray(profile.challengeResults)) profile.challengeResults = {};
-  if(!profile.createdChallenges || typeof profile.createdChallenges !== "object" || Array.isArray(profile.createdChallenges)) profile.createdChallenges = {};
   if(!PROFILE_EQUIPMENT.some(item => item.id === profile.equipped)) profile.equipped = PROFILE_EQUIPMENT[0].id;
   if(!Number.isSafeInteger(profile.avatarSeed)){
     let seed = 2166136261;
@@ -749,20 +748,17 @@ document.addEventListener("keydown", e => {
   const box = $("opts"); if(i >= 0 && box && !box.classList.contains("locked") && box.children[i]) answer(i);
 });
 function finishSession(){
+  if(!session || session.done) return;
   stopTimer(); cs(session.code).sessions++; save();
   session.done = true; recordChallengeOutcome(); pushDuelProgress();
   go("v-summary"); renderSummary();
+  if(session.mode === "code-create" || session.mode === "code-accept") syncCodeChallenge(session);
 }
 
 /* ===================== Summary ===================== */
-function challengeRecordKey(course, seed){ return `${course}:${seed}`; }
 function recordChallengeOutcome(){
-  if(session.mode === "code-create") return;
   let key, outcome;
-  if(session.mode === "code-accept" && session.challenge){
-    key = challengeRecordKey(session.code, session.challenge.seed);
-    outcome = session.correct > session.challenge.score ? "win" : session.correct < session.challenge.score ? "loss" : "draw";
-  }else if(session.mode === "live" && duel){
+  if(session.mode === "live" && duel){
     const other = opponent();
     if(!other || other.presence.phase !== "done") return;
     key = `live:${duel.code}`;
@@ -772,6 +768,62 @@ function recordChallengeOutcome(){
   if(profile.challengeResults[key]) return;
   profile.challengeResults[key] = outcome;
   save();
+}
+let challengeSyncPromise = null, challengePollTimer = null;
+function applyChallengeResult(match){
+  if(!uid || match.status !== "completed") return false;
+  const mineIsCreator = match.creator_user_id === uid;
+  if(!mineIsCreator && match.opponent_user_id !== uid) return false;
+  const myScore = mineIsCreator ? match.creator_score : match.opponent_score;
+  const theirScore = mineIsCreator ? match.opponent_score : match.creator_score;
+  if(!Number.isSafeInteger(myScore) || !Number.isSafeInteger(theirScore)) return false;
+  const outcome = myScore > theirScore ? "win" : myScore < theirScore ? "loss" : "draw";
+  const profile = ensureProfile();
+  const key = `match:${match.id}`;
+  if(profile.challengeResults[key]) return false;
+  profile.challengeResults[key] = outcome;
+  save();
+  return true;
+}
+function syncChallengeResults(){
+  if(challengeSyncPromise) return challengeSyncPromise;
+  if(!sb || !uid) return Promise.resolve(false);
+  const owner = uid;
+  challengeSyncPromise = (async () => {
+    const {data, error} = await sb.from("challenge_matches")
+      .select("id,creator_user_id,opponent_user_id,creator_score,opponent_score,status")
+      .eq("status", "completed")
+      .or(`creator_user_id.eq.${owner},opponent_user_id.eq.${owner}`);
+    if(error) throw error;
+    if(uid !== owner) return false;
+    return (data || []).reduce((changed, match) => applyChallengeResult(match) || changed, false);
+  })().finally(() => { challengeSyncPromise = null; });
+  return challengeSyncPromise;
+}
+function watchChallengeResult(matchId){
+  clearInterval(challengePollTimer);
+  const watchSession = session;
+  challengePollTimer = setInterval(async () => {
+    if(session !== watchSession || uid !== watchSession.challengeOwnerId){
+      clearInterval(challengePollTimer);
+      challengePollTimer = null;
+      return;
+    }
+    try{
+      const {data, error} = await sb.from("challenge_matches")
+        .select("id,creator_user_id,opponent_user_id,creator_score,opponent_score,opponent_name,status")
+        .eq("id", matchId).maybeSingle();
+      if(error){ console.warn("Orbit couldn’t check the challenge result yet.", error); return; }
+      if(!data || data.status !== "completed") return;
+      applyChallengeResult(data);
+      watchSession.challengeResult = data;
+      clearInterval(challengePollTimer);
+      challengePollTimer = null;
+      if(current === "v-summary") renderSummary();
+    }catch(error){
+      console.warn("Orbit couldn’t check the challenge result yet.", error);
+    }
+  }, 3500);
 }
 function youtubeSearchUrl(answer){
   const query = `${answer.q.topic || session.code} ${answer.q.prompt} explained`;
@@ -874,7 +926,7 @@ function renderProfile(sharedProfile = null){
     </section>
     ${personal ? `<div class="profile-tools"><button class="btn btn-primary" id="shareProfile">Copy shareable profile link</button><span id="profileShareStatus" role="status" aria-live="polite"></span><input id="profileShareLink" class="profile-share-link" type="url" readonly aria-label="Shareable profile link" hidden>
       <p class="profile-snapshot-note">The link contains your display name and challenge stats as a snapshot. Only share it if you’re comfortable making those details public.</p>
-      <div class="profile-result-import"><h3 class="h3">Record a challenge you created</h3><p class="sub">After your friend finishes your challenge code, ask them to send you their result code. Enter it here to update your win rate and rank.</p><label for="profileResultCode">Challenge result code</label><div class="profile-import-row"><input id="profileResultCode" class="field code" placeholder="R-PHY211-…" autocomplete="off"><button class="btn btn-soft" id="importChallengeResult" type="button">Record result</button></div><p id="profileResultStatus" class="profile-form-status" role="status" aria-live="polite"></p></div>
+      <p class="profile-snapshot-note">Challenge results update automatically for both players when a shared challenge is finished.</p>
       <section class="profile-delete"><h3 class="h3">Delete account</h3><p class="sub">Permanently delete your Orbit account and cloud progress. This can’t be undone.</p><button class="btn btn-danger" id="deleteAccount" type="button">Delete my account</button><p id="deleteAccountStatus" class="profile-form-status" role="status" aria-live="polite"></p></section>
     </div>` : ""}
     <div class="stack"><button class="action glass" id="profileHome"><div><strong>${personal ? "Back to courses" : "Open Orbit"}</strong><span>${personal ? "Keep practising and building your record" : "Practise with Orbit"}</span></div><i class="go">${arrow}</i></button></div>`;
@@ -901,22 +953,6 @@ function renderProfile(sharedProfile = null){
         status.textContent = "Select and copy the link to share your profile.";
         console.warn("Orbit couldn’t copy the profile link automatically.", error);
       }
-    };
-    $("importChallengeResult").onclick = () => {
-      const status = $("profileResultStatus");
-      const parsed = parseChallengeResultCode($("profileResultCode").value);
-      if(!parsed){ status.textContent = "That result code is invalid, already recorded, or not one of your challenge codes."; return; }
-      const challenge = profile.createdChallenges[parsed.key];
-      if(!challenge || challenge.score !== parsed.hostScore || parsed.guestScore > challenge.count){
-        status.textContent = "This result doesn’t match a challenge you created.";
-        return;
-      }
-      const outcome = challenge.score > parsed.guestScore ? "win" : challenge.score < parsed.guestScore ? "loss" : "draw";
-      profile.challengeResults[parsed.key] = outcome;
-      challenge.resultRecorded = true;
-      save();
-      renderProfile();
-      $("profileResultStatus").textContent = `Result recorded: ${outcome === "win" ? "you won" : outcome === "loss" ? "your friend won" : "draw"}.`;
     };
     $("deleteAccount").onclick = async () => {
       const button = $("deleteAccount"), status = $("deleteAccountStatus");
@@ -955,27 +991,9 @@ function renderProfile(sharedProfile = null){
     go("v-system", {replaceHistory:true});
   };
   go("v-profile");
-}
-function parseChallengeResultCode(value){
-  const match = /^R-([A-Z0-9]+)-([A-Z0-9]+)-(\d+)-(\d+)$/i.exec(String(value || "").trim());
-  if(!match) return null;
-  const [, course, seed36, host, guest] = match;
-  const seed = parseInt(seed36, 36), hostScore = Number(host), guestScore = Number(guest);
-  if(!Number.isSafeInteger(seed) || !Number.isSafeInteger(hostScore) || !Number.isSafeInteger(guestScore)) return null;
-  const key = challengeRecordKey(course.toUpperCase(), seed);
-  const created = ensureProfile().createdChallenges[key];
-  if(!created || created.resultRecorded) return null;
-  return {key, hostScore, guestScore};
-}
-function makeChallengeResultCode(){
-  return `R-${session.code}-${session.seed.toString(36).toUpperCase()}-${session.challenge.score}-${session.correct}`;
-}
-function rememberChallengeCode(){
-  if(session.mode !== "code-create") return;
-  const profile = ensureProfile();
-  const key = challengeRecordKey(session.code, session.seed);
-  if(!profile.createdChallenges[key]) profile.createdChallenges[key] = {score:session.correct, count:session.items.length, resultRecorded:false};
-  save();
+  if(personal) syncChallengeResults().then(changed => {
+    if(changed && current === "v-profile") renderProfile();
+  }).catch(error => console.error("Orbit couldn’t sync challenge results.", error));
 }
 function reviewHtml(){
   return `<div class="review"><p class="sub" style="margin-bottom:6px">Review your answers</p>${session.answers.map((a, i) => `
@@ -989,14 +1007,21 @@ function renderSummary(){
   const tags = Object.entries(session.tags).sort((a, b) => b[1] - a[1]);
   let duelBlock = "";
   if(session.mode === "live") duelBlock = `<div id="liveResult">${liveResultHtml()}</div>`;
-  if(session.mode === "code-accept") duelBlock = `${versusHtml(c, session.challenge.name, session.challenge.score, true)}
-    <p class="sub challenge-result-copy">Send this result code to the friend who created the challenge so they can record the match.</p>
-    <div class="codebox"><code id="resultCode">${esc(makeChallengeResultCode())}</code><button class="btn btn-primary" id="copyResult" style="min-height:40px">Copy result</button></div>`;
+  if(session.mode === "code-accept"){
+    const result = session.challengeResult;
+    duelBlock = `${result
+      ? versusHtml(c, result.creator_name, result.creator_score, true)
+      : versusHtml(c, session.challenge.creatorName, session.challenge.creatorScore, true)}
+      <p class="sub challenge-result-copy" id="challengeUploadStatus">${session.challengeSyncError ? esc(session.challengeSyncError) : result ? "Challenge result saved for both players." : "Saving your result for both players…"}</p>
+      ${session.challengeSyncError ? `<button class="btn btn-soft" id="retryChallengeSync" type="button">Retry result sync</button>` : ""}`;
+  }
   if(session.mode === "code-create"){
-    rememberChallengeCode();
-    const code = makeChallengeCode(session, c);
-    duelBlock = `<p class="sub" style="margin-top:6px">Send this code to a friend. They enter it under Duel a friend and get the same ${n} questions, then see your score against theirs.</p>
-      <div class="codebox"><code id="chCode">${esc(code)}</code><button class="btn btn-primary" id="copyCode" style="min-height:40px">Copy</button></div>`;
+    const code = session.challengeCode;
+    const result = session.challengeResult;
+    duelBlock = `${result ? versusHtml(c, result.opponent_name, result.opponent_score, true) : ""}
+      <p class="sub" style="margin-top:6px" id="challengeUploadStatus">${session.challengeSyncError ? esc(session.challengeSyncError) : code ? "Send this code to a friend. Their result will update here and on both profiles automatically." : "Making your brainrot code…"}</p>
+      ${session.challengeSyncError ? `<button class="btn btn-soft" id="retryChallengeSync" type="button">Retry challenge sync</button>` : ""}
+      ${code ? `<div class="codebox"><code id="chCode">${esc(code)}</code><button class="btn btn-primary" id="copyCode" style="min-height:40px">Copy</button></div>` : ""}`;
   }
   $("summaryPanel").innerHTML = `
     <p class="eyebrow">${esc(session.code)} ${session.mode === "solo" ? "session" : "duel"} complete</p><h2 class="title">${c} of ${n} correct</h2>
@@ -1014,7 +1039,7 @@ function renderSummary(){
   $("sumAgain").onclick = () => { leaveDuel(); startSolo(session.code); };
   $("sumDash").onclick = () => { activeCourse = session.code; go("v-dash"); };
   const cp = $("copyCode"); if(cp) cp.onclick = () => copyText($("chCode").textContent, cp);
-  const resultCopy = $("copyResult"); if(resultCopy) resultCopy.onclick = () => copyText($("resultCode").textContent, resultCopy, "resultCode");
+  const retry = $("retryChallengeSync"); if(retry) retry.onclick = () => syncCodeChallenge(session);
 }
 const arrow = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg>`;
 function versusHtml(mine, oppName, oppScore, oppFinished){
@@ -1027,7 +1052,7 @@ function versusHtml(mine, oppName, oppScore, oppFinished){
 async function copyText(t, btn, targetId = "chCode"){
   try{ await navigator.clipboard.writeText(t); btn.textContent = "Copied"; }
   catch(e){ const target = $(targetId); const r = document.createRange(); r.selectNodeContents(target); const s = getSelection(); s.removeAllRanges(); s.addRange(r); btn.textContent = "Selected"; }
-  setTimeout(() => btn.textContent = targetId === "resultCode" ? "Copy result" : "Copy", 1600);
+  setTimeout(() => btn.textContent = "Copy", 1600);
 }
 
 /* ===================== Dashboard ===================== */
@@ -1054,19 +1079,73 @@ function renderDash(){
 
 /* ===================== Head to head ===================== */
 let duel = null, duelTab = "live", duelRoom = null, duelUnsub = null;
-const DIFF_CH = {mixed:"M", easy:"E", standard:"S", hard:"H"}, CH_DIFF = {M:"mixed", E:"easy", S:"standard", H:"hard"};
-function randCode(){ const a = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"; let s = ""; for(let i = 0; i < 4; i++) s += a[Math.floor(Math.random() * a.length)]; return s; }
+const BRAINROT_CODES = ["RIZZ","GYAT","SKIB","OHIO","SIGM","MOGG","FANU","YAPP","AURA","GOAT","YEET","LORE","COOK","MAXX","CHAD","BOZO","DRIP","VIBE","SIMP","NPCS","BETA","SUSY","DUPE","WILD","BAWK","BEEP","BOPP","YOIN","SLAY","ZOOM"];
+function randCode(){ return Math.random() < .85 ? BRAINROT_CODES[Math.floor(Math.random() * BRAINROT_CODES.length)] : String(1000 + Math.floor(Math.random() * 9000)); }
+function makeChallengeCode(attempt = 0){
+  return attempt < 4
+    ? BRAINROT_CODES[Math.floor(Math.random() * BRAINROT_CODES.length)]
+    : String(1000 + Math.floor(Math.random() * 9000));
+}
 function randSeed(){ return Math.floor(Math.random() * 1679615) + 1; }
 function cleanName(n){ return String(n || "Friend").replace(/[^\p{L}\p{N} ]/gu, "").trim().slice(0, 16) || "Friend"; }
-function makeChallengeCode(s, score){
-  return [s.code, s.seed.toString(36).toUpperCase(), `${s.items.length}${DIFF_CH[s.diff] || "M"}${Math.round(s.timer / 30)}`, score, cleanName(myName()).replace(/ /g, "_")].join("-");
+function makeRequestId(){
+  if(crypto.randomUUID) return crypto.randomUUID();
+  return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, char => {
+    const random = Math.random() * 16 | 0;
+    return (char === "x" ? random : (random & 3 | 8)).toString(16);
+  });
 }
-function parseChallenge(str){
-  const parts = String(str).trim().split("-"); if(parts.length < 5) return null;
-  const [code, seed36, cfg, score, ...nm] = parts; const c = COURSES.find(x => x.code === code.toUpperCase()); if(!c) return null;
-  const m = /^(\d+)([MESH])(\d)$/i.exec(cfg); if(!m) return null;
-  const seed = parseInt(seed36, 36); if(!seed) return null;
-  return {code:c.code, seed, count:+m[1], diff:CH_DIFF[m[2].toUpperCase()], timer:+m[3] * 30, score:+score || 0, name:cleanName(nm.join("-").replace(/_/g, " "))};
+async function syncCodeChallenge(target){
+  if(target.challengeSyncPromise) return target.challengeSyncPromise;
+  target.challengeSyncError = "";
+  target.challengeSyncPromise = (async () => {
+    try{
+      if(!sb || !uid) throw new Error("Sign in again before syncing this challenge.");
+      if(target.mode === "code-create"){
+        target.challengeRequestId = target.challengeRequestId || makeRequestId();
+        let created = null;
+        for(let attempt = 0; attempt < 12 && !created; attempt++){
+          const {data, error} = await sb.rpc("orbit_create_challenge", {
+            p_request_id:target.challengeRequestId,
+            p_code:makeChallengeCode(attempt),
+            p_course:target.code,
+            p_seed:target.seed,
+            p_question_count:target.items.length,
+            p_difficulty:target.diff,
+            p_timer_seconds:target.timer,
+            p_creator_score:target.correct,
+            p_creator_name:cleanName(myName())
+          });
+          if(error) throw error;
+          if(data && data.id && data.code) created = data;
+        }
+        if(!created) throw new Error("Couldn’t find an unused brainrot code. Try syncing again.");
+        target.challengeId = created.id;
+        target.challengeCode = created.code;
+        target.challengeOwnerId = uid;
+        if(current === "v-summary" && session === target) renderSummary();
+        watchChallengeResult(target.challengeId);
+      }else{
+        const {data, error} = await sb.rpc("orbit_submit_challenge_score", {
+          p_match_id:target.challenge.id,
+          p_score:target.correct,
+          p_opponent_name:cleanName(myName())
+        });
+        if(error) throw error;
+        if(!data || data.status !== "completed") throw new Error("The result wasn’t confirmed. Try syncing again.");
+        target.challengeResult = data;
+        applyChallengeResult(data);
+        if(current === "v-summary" && session === target) renderSummary();
+      }
+    }catch(error){
+      console.error("Orbit couldn’t sync the challenge result.", error);
+      target.challengeSyncError = error instanceof Error ? error.message : "Challenge sync failed. Check your connection and retry.";
+      if(current === "v-summary" && session === target) renderSummary();
+    }finally{
+      target.challengeSyncPromise = null;
+    }
+  })();
+  return target.challengeSyncPromise;
 }
 function sessionFrom(cfg, mode, extra = {}){
   const {items, note} = buildSet(cfg.code, {count:cfg.count, diff:cfg.diff, focus:"all", seed:cfg.seed});
@@ -1079,12 +1158,12 @@ function renderDuel(){
   if(duel && duel.kind === "live"){ renderLobby(); return; }
   const liveBody = roomNS
     ? `<p class="sub">Play the same questions at the same time. Your friend needs access to this Orbit page to join.</p>
-       <div class="stack"><button class="action glass" id="hostLive"><div><strong>Create a live duel</strong><span>Get a 4-letter code to share</span></div><i class="go">${arrow}</i></button></div>
-       <div class="pref"><label>Or join with a code</label><div style="display:flex;gap:8px"><input class="field code" id="joinCode" maxlength="4" placeholder="ABCD" style="margin:0;text-transform:uppercase" autocomplete="off"><button class="btn btn-primary" id="joinLive">Join</button></div></div><p class="err" id="duelErr"></p>`
+       <div class="stack"><button class="action glass" id="hostLive"><div><strong>Create a live duel</strong><span>Get a short brainrot code to share</span></div><i class="go">${arrow}</i></button></div>
+       <div class="pref"><label>Or join with a code</label><div style="display:flex;gap:8px"><input class="field code" id="joinCode" maxlength="4" placeholder="RIZZ or 4826" style="margin:0;text-transform:uppercase" autocomplete="off"><button class="btn btn-primary" id="joinLive">Join</button></div></div><p class="err" id="duelErr"></p>`
     : `<p class="notice">Live duels aren’t available in this view. Use a challenge code instead: it works anywhere, even if your friend plays later.</p>`;
-  const codeBody = `<p class="sub">Play first, then send your friend a code. They get the exact same questions and see your score against theirs.</p>
+  const codeBody = `<p class="sub">Play first, then share a short brainrot code. Your friend gets the same questions, and results sync to both profiles automatically.</p>
     <div class="stack"><button class="action glass" id="createCh"><div><strong>Play and create a code</strong><span>Uses your ${esc(code)} settings, exam style</span></div><i class="go">${arrow}</i></button></div>
-    <div class="pref"><label>Got a code from a friend?</label><div style="display:flex;gap:8px"><input class="field code" id="chInput" placeholder="PHY211-…" style="margin:0" autocomplete="off"><button class="btn btn-primary" id="acceptCh">Play</button></div></div><p class="err" id="chErr"></p>`;
+    <div class="pref"><label>Got a code from a friend?</label><div style="display:flex;gap:8px"><input class="field code" id="chInput" maxlength="4" placeholder="RIZZ or 4826" style="margin:0;text-transform:uppercase" autocomplete="off"><button class="btn btn-primary" id="acceptCh">Play</button></div></div><p class="err" id="chErr"></p>`;
   panel.innerHTML = `<p class="eyebrow">${esc(code)}</p><h2 class="title">Duel a friend</h2>
     <div class="tabs">${seg("tab", [["live","Live"],["code","Challenge code"]], duelTab)}</div>
     <div class="step-in">${duelTab === "live" ? liveBody : codeBody}</div>
@@ -1098,7 +1177,33 @@ function renderDuel(){
   }
   if(duelTab === "code"){
     $("createCh").onclick = () => sessionFrom({code, seed:randSeed(), count:p.count, diff:p.diff, timer:p.timer}, "code-create");
-    const accept = () => { const ch = parseChallenge($("chInput").value); if(!ch){ $("chErr").textContent = "That code doesn’t look right. Check it was copied in full."; return; } sessionFrom(ch, "code-accept", {challenge:ch}); };
+    const accept = async () => {
+      const input = $("chInput"), button = $("acceptCh"), errorNode = $("chErr");
+      const codeValue = String(input.value || "").trim().toUpperCase();
+      if(!/^[A-Z0-9]{4}$/.test(codeValue)){ errorNode.textContent = "Enter the 4-character brainrot code."; return; }
+      if(!sb){ errorNode.textContent = "Challenge sync is unavailable. Try again later."; return; }
+      button.disabled = true; errorNode.textContent = "Finding that challenge…";
+      try{
+        const {data, error} = await sb.rpc("orbit_join_challenge", {p_code:codeValue, p_opponent_name:cleanName(myName())});
+        if(error) throw error;
+        const course = COURSES.find(item => item.code === data?.course);
+        const diff = data && ["mixed","easy","standard","hard"].includes(data.difficulty) ? data.difficulty : null;
+        if(!data || !data.id || !course || !diff || !Number.isSafeInteger(data.seed) ||
+          !Number.isSafeInteger(data.question_count) || !Number.isSafeInteger(data.timer_seconds) ||
+          !Number.isSafeInteger(data.creator_score) || data.creator_score < 0 || data.creator_score > data.question_count){
+          throw new Error("That code is invalid, expired, or already joined.");
+        }
+        sessionFrom({code:course.code, seed:data.seed, count:data.question_count, diff, timer:data.timer_seconds}, "code-accept", {
+          challenge:{id:data.id, creatorName:cleanName(data.creator_name), creatorScore:data.creator_score}
+        });
+      }catch(error){
+        console.error("Orbit couldn’t join the challenge.", error);
+        errorNode.textContent = error instanceof Error && error.message
+          ? error.message
+          : "That code is invalid, expired, or already joined.";
+        button.disabled = false;
+      }
+    };
     $("acceptCh").onclick = accept;
     $("chInput").addEventListener("keydown", e => { if(e.key === "Enter") accept(); });
   }
@@ -1118,7 +1223,7 @@ async function hostLive(code, p){
 }
 async function joinLive(raw){
   const c = String(raw || "").trim().toUpperCase();
-  if(!/^[A-Z0-9]{4}$/.test(c)){ $("duelErr").textContent = "Enter the 4-letter code your friend sees."; return; }
+  if(!/^[A-Z0-9]{4}$/.test(c)){ $("duelErr").textContent = "Enter the 4-character brainrot code."; return; }
   try{ duelRoom = await roomNS.join("duel-" + c.toLowerCase()); }
   catch(e){ $("duelErr").textContent = "Couldn’t join that duel. Check the code and try again."; return; }
   duel = {kind:"live", role:"guest", code:c, cfg:null, started:false};
@@ -1133,7 +1238,10 @@ function watchRoom(){
     if(duel.role === "guest" && o && o.presence.phase === "play" && !duel.started) startLive();
     if(current === "v-duel") renderLobby();
     if(current === "v-practice") renderHud();
-    if(current === "v-summary" && $("liveResult")) $("liveResult").innerHTML = liveResultHtml();
+    if(current === "v-summary" && session && session.mode === "live" && oppDone()){
+      recordChallengeOutcome();
+      $("liveResult").innerHTML = liveResultHtml();
+    }
   }, () => {});
 }
 function renderLobby(){
@@ -1169,7 +1277,7 @@ function renderHud(){
   if(!session || session.mode === "solo" || session.mode === "code-create"){ hud.hidden = true; return; }
   const n = session.items.length; let oName, oI, oScore;
   if(session.mode === "live"){ const o = opponent(); oName = o ? cleanName(o.presence.name) : "Friend"; oI = o ? (o.presence.i || 0) : 0; oScore = o ? (o.presence.score || 0) : 0; }
-  else { oName = session.challenge.name; oI = n; oScore = session.challenge.score; }
+  else { oName = session.challenge.creatorName; oI = n; oScore = session.challenge.creatorScore; }
   hud.hidden = false;
   hud.innerHTML = `<div><span>${esc(myName())}</span><div class="meter"><i style="width:${session.answers.length / n * 100}%"></i></div><b>${session.correct}</b></div>
     <div class="opp"><span>${esc(oName)}</span><div class="meter"><i style="width:${Math.min(1, oI / n) * 100}%"></i></div><b>${session.mode === "code-accept" ? oScore : oScore}</b></div>`;
@@ -1226,6 +1334,7 @@ function enter(user){
     catch(err){ if(uid === user.id){ entering = null; renderBoot(err); } return; }
     if(uid !== user.id) return;   // signed out while loading
     armBackGuard();
+    syncChallengeResults().catch(error => console.error("Orbit couldn’t sync challenge results.", error));
     const sharedProfile = readSharedProfile();
     if(sharedProfile){ renderProfile(sharedProfile); return; }
     if(hasCompletedOnboarding()){
@@ -1249,6 +1358,7 @@ function enter(user){
 function leave(){   // the only way back to the landing page: signing out
   if(!authed) return;
   clearTimeout(saveTimer); saveTimer = null;
+  clearInterval(challengePollTimer); challengePollTimer = null;
   viewHistory.length = 0;
   authed = false; uid = null; authUser = null; entering = null;
   state = {onboard:null, courses:{}}; ob = {step:0, university:"", name:"", level:"", program:"", exam:""};

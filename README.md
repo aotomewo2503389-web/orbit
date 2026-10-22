@@ -22,3 +22,7 @@ Vercel is configured to use the Next.js framework preset. If the Vercel project 
 The profile page can permanently delete the signed-in Supabase Auth account. The server verifies the caller's access token before using the Supabase Admin API; deleting the Auth user also removes their `public.progress` row through its `ON DELETE CASCADE` foreign key.
 
 Configure `SUPABASE_SERVICE_ROLE_KEY` as a server-only environment variable in local development and the deployment platform. Use the service-role key from the Supabase project settings; never expose it through a `NEXT_PUBLIC_` variable or client code. `SUPABASE_URL` and `SUPABASE_PUBLISHABLE_KEY` may be set to override the existing project defaults.
+
+## Automatic challenge results
+
+Run the updated `supabase-setup.sql` in the Supabase SQL Editor to create the participant-only challenge table and authenticated RPCs. Short challenge codes (brainrot words or four digits) admit one opponent and expire after 30 days if unfinished. Once the second player finishes, both profiles receive the result automatically; no result code needs to be copied back.
