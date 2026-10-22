@@ -125,6 +125,49 @@ function cs(code){ state.courses[code] = state.courses[code] || {attempts:{}, ta
 function prefsFor(code){ return Object.assign({}, DEFAULT_PREFS, cs(code).prefs); }
 function bankFor(code){ return banks[code] && banks[code].length ? banks[code] : SAMPLE; }
 function myName(){ return (state.onboard && state.onboard.name) || "You"; }
+const PROFILE_EQUIPMENT = [
+  {id:"hint-potion", name:"Hint Potion", description:"A hint-themed loadout cosmetic"},
+  {id:"study-compass", name:"Study Compass", description:"A suggestion-themed loadout cosmetic"},
+  {id:"focus-lens", name:"Focus Lens", description:"A focus-themed loadout cosmetic"}
+];
+const PROFILE_RANKS = [
+  {name:"Recruit", matches:0},
+  {name:"Cadet", matches:3},
+  {name:"Specialist", matches:8},
+  {name:"Sergeant", matches:15},
+  {name:"Captain", matches:25},
+  {name:"Elite", matches:50}
+];
+function ensureProfile(){
+  if(!state.profile || typeof state.profile !== "object") state.profile = {};
+  const profile = state.profile;
+  if(!profile.challengeResults || typeof profile.challengeResults !== "object" || Array.isArray(profile.challengeResults)) profile.challengeResults = {};
+  if(!profile.createdChallenges || typeof profile.createdChallenges !== "object" || Array.isArray(profile.createdChallenges)) profile.createdChallenges = {};
+  if(!PROFILE_EQUIPMENT.some(item => item.id === profile.equipped)) profile.equipped = PROFILE_EQUIPMENT[0].id;
+  if(!Number.isSafeInteger(profile.avatarSeed)){
+    let seed = 2166136261;
+    for(const char of String(uid || myName())) seed = Math.imul(seed ^ char.charCodeAt(0), 16777619);
+    profile.avatarSeed = seed >>> 0;
+  }
+  return profile;
+}
+function challengeProfileStats(results = ensureProfile().challengeResults){
+  const isSnapshot = results && results.snapshot === true;
+  const values = isSnapshot ? [] : Object.values(results).filter(value => ["win","loss","draw"].includes(value));
+  const count = key => isSnapshot && Number.isSafeInteger(results[key]) ? Math.max(0, Math.min(1000000, results[key])) : 0;
+  const wins = isSnapshot ? count("wins") : values.filter(value => value === "win").length;
+  const losses = isSnapshot ? count("losses") : values.filter(value => value === "loss").length;
+  const draws = isSnapshot ? count("draws") : values.filter(value => value === "draw").length;
+  const matches = isSnapshot ? wins + losses + draws : values.length;
+  const decisive = wins + losses;
+  const winRate = decisive ? wins / decisive * 100 : null;
+  const plaidScore = Math.round((winRate || 0) * .8 + Math.min(wins / 100, 1) * 20);
+  const rankIndex = PROFILE_RANKS.reduce((rank, item, index) => matches >= item.matches ? index : rank, 0);
+  const rank = PROFILE_RANKS[rankIndex];
+  const nextRank = PROFILE_RANKS[rankIndex + 1] || null;
+  const progress = nextRank ? (matches - rank.matches) / (nextRank.matches - rank.matches) * 100 : 100;
+  return {wins, losses, draws, matches, winRate, plaidScore, rank, nextRank, progress};
+}
 
 /* ===================== Supabase: auth + data ===================== */
 const SUPABASE_URL = "https://mwipfbehdmeeainlumgx.supabase.co";
@@ -225,12 +268,12 @@ const heroStartObserver = new IntersectionObserver(entries => {
   }
 }, {threshold:.15});
 heroStartObserver.observe($("heroStart"));
-const parentOf = {"v-signin":"v-landing","v-onboard":"v-landing","v-system":"v-landing","v-practice":"v-system","v-summary":"v-system","v-dash":"v-system","v-duel":"v-system"};
-const PUBLIC_VIEWS = ["v-landing", "v-signin", "v-boot"];
+const parentOf = {"v-signin":"v-landing","v-onboard":"v-landing","v-system":"v-landing","v-profile":"v-system","v-practice":"v-system","v-summary":"v-system","v-dash":"v-system","v-duel":"v-system"};
+const PUBLIC_VIEWS = ["v-landing", "v-signin", "v-boot", "v-profile"];
 function go(id, opts = {}){
   // Signed-in users can never be sent to the landing or sign-in pages; signed-out users can never reach the app.
   if(authed && (id === "v-landing" || id === "v-signin")) id = hasCompletedOnboarding() ? "v-system" : "v-onboard";
-  if(authed && !hasCompletedOnboarding() && id !== "v-onboard" && id !== "v-boot") id = "v-onboard";
+  if(authed && !hasCompletedOnboarding() && id !== "v-onboard" && id !== "v-boot" && id !== "v-profile") id = "v-onboard";
   if(!authed && !PUBLIC_VIEWS.includes(id)) id = "v-signin";
   const swap = () => {
     document.querySelectorAll(".view").forEach(v => v.hidden = v.id !== id);
@@ -239,6 +282,7 @@ function go(id, opts = {}){
     $("navStart").hidden = id !== "v-landing" || !landingStartUnlocked;
     $("navTheme").hidden = !authed;
     $("navOut").hidden = !authed;
+    $("navProfile").hidden = !authed || !hasCompletedOnboarding() || id === "v-practice" || id === "v-duel";
     $("navBack").hidden = authed && (id === "v-system" || id === "v-onboard" || id === "v-boot");
     if(id === "v-signin") renderSignin();
     window.scrollTo(0, 0);
@@ -253,9 +297,10 @@ function go(id, opts = {}){
 function startFlow(){ go(authed ? (hasCompletedOnboarding() ? "v-system" : "v-onboard") : "v-signin"); }
 document.querySelectorAll("[data-start]").forEach(b => b.addEventListener("click", e => { e.preventDefault(); startFlow(); }));
 $("navStart").addEventListener("click", startFlow);
+$("navProfile").addEventListener("click", () => renderProfile());
 $("navBack").addEventListener("click", () => {
   if(current === "v-practice" || current === "v-duel" || current === "v-summary") leaveDuel();
-  go(parentOf[current] || "v-landing");
+  go(current === "v-profile" && !authed ? "v-landing" : parentOf[current] || "v-landing");
 });
 $("logoHome").addEventListener("click", e => { e.preventDefault(); leaveDuel(); go("v-landing"); });
 function setTheme(theme, persist = true){
@@ -705,11 +750,29 @@ document.addEventListener("keydown", e => {
 });
 function finishSession(){
   stopTimer(); cs(session.code).sessions++; save();
-  session.done = true; pushDuelProgress();
+  session.done = true; recordChallengeOutcome(); pushDuelProgress();
   go("v-summary"); renderSummary();
 }
 
 /* ===================== Summary ===================== */
+function challengeRecordKey(course, seed){ return `${course}:${seed}`; }
+function recordChallengeOutcome(){
+  if(session.mode === "code-create") return;
+  let key, outcome;
+  if(session.mode === "code-accept" && session.challenge){
+    key = challengeRecordKey(session.code, session.challenge.seed);
+    outcome = session.correct > session.challenge.score ? "win" : session.correct < session.challenge.score ? "loss" : "draw";
+  }else if(session.mode === "live" && duel){
+    const other = opponent();
+    if(!other || other.presence.phase !== "done") return;
+    key = `live:${duel.code}`;
+    outcome = session.correct > (other.presence.score || 0) ? "win" : session.correct < (other.presence.score || 0) ? "loss" : "draw";
+  }else return;
+  const profile = ensureProfile();
+  if(profile.challengeResults[key]) return;
+  profile.challengeResults[key] = outcome;
+  save();
+}
 function youtubeSearchUrl(answer){
   const query = `${answer.q.topic || session.code} ${answer.q.prompt} explained`;
   return `https://www.youtube.com/results?search_query=${encodeURIComponent(query)}`;
@@ -753,6 +816,132 @@ async function animateQuestionRecaps(){
     console.error("Orbit couldn’t animate the question recaps.", error);
   }
 }
+function profileAvatar(seed, label){
+  let squares = "";
+  for(let y = 0; y < 5; y++){
+    for(let x = 0; x < 3; x++){
+      const cellSeed = Math.imul((seed ^ Math.imul(y + 1, 0x45d9f3b)) ^ Math.imul(x + 1, 0x27d4eb2d), 0x45d9f3b) >>> 0;
+      if((cellSeed >>> 28) % 2){
+        squares += `<rect x="${x * 12 + 2}" y="${y * 12 + 2}" width="9" height="9" rx="2"/><rect x="${(4 - x) * 12 + 2}" y="${y * 12 + 2}" width="9" height="9" rx="2"/>`;
+      }
+    }
+  }
+  return `<svg class="profile-avatar" viewBox="0 0 64 64" role="img" aria-label="${esc(label)}’s default profile picture"><rect class="avatar-bg" width="64" height="64" rx="18"/><g class="avatar-cells">${squares}</g></svg>`;
+}
+function readSharedProfile(){
+  const raw = new URLSearchParams(location.search).get("profile");
+  if(!raw) return null;
+  try{
+    const data = JSON.parse(raw);
+    if(!data || data.version !== 1 || typeof data.name !== "string") return null;
+    const name = data.name.trim().slice(0, 24);
+    if(!name) return null;
+    const rawStats = data.challengeStats || {};
+    const results = {snapshot:true};
+    for(const key of ["wins","losses","draws"]){
+      if(!Number.isSafeInteger(rawStats[key]) || rawStats[key] < 0 || rawStats[key] > 1000000) return null;
+      results[key] = rawStats[key];
+    }
+    const avatarSeed = Number.isSafeInteger(data.avatarSeed) && data.avatarSeed >= 0 && data.avatarSeed <= 4294967295 ? data.avatarSeed : 1;
+    return {name, avatarSeed, challengeResults:results};
+  }catch(error){
+    console.warn("Orbit couldn’t read this shared profile.", error);
+    return null;
+  }
+}
+function renderProfile(sharedProfile = null){
+  const personal = !sharedProfile;
+  const profile = personal ? ensureProfile() : sharedProfile;
+  const stats = challengeProfileStats(profile.challengeResults);
+  const name = personal ? myName() : profile.name;
+  const equipped = personal ? profile.equipped : "";
+  const nextRankText = stats.nextRank
+    ? `${stats.nextRank.matches - stats.matches} more completed challenge${stats.nextRank.matches - stats.matches === 1 ? "" : "s"} to ${stats.nextRank.name}`
+    : "Top rank reached";
+  $("profilePanel").innerHTML = `
+    <div class="profile-hero">${profileAvatar(profile.avatarSeed, name)}<div class="profile-identity"><p class="eyebrow">${personal ? "Your player profile" : "Shared player profile"}</p><h2 class="title">${esc(name)}</h2><span class="profile-rank">${stats.rank.name} · Level ${PROFILE_RANKS.indexOf(stats.rank) + 1}</span></div></div>
+    ${sharedProfile ? `<p class="profile-snapshot-note">Shared snapshot · Stats reflect when this link was created.</p>` : ""}
+    <div class="profile-stats">
+      <div class="profile-stat"><b>${stats.winRate === null ? "—" : `${Math.round(stats.winRate)}%`}</b><span>Challenge win rate</span></div>
+      <div class="profile-stat"><b>${stats.wins}</b><span>Players defeated</span></div>
+      <div class="profile-stat"><b>${stats.plaidScore}%</b><span>Plaid Score</span></div>
+    </div>
+    <div class="plaid-explainer"><strong>Plaid Score</strong><span>80% of your challenge win rate + up to 20 points for 100 wins.</span><small>${stats.matches} decided challenge${stats.matches === 1 ? "" : "s"}${stats.draws ? ` · ${stats.draws} drawn` : ""}</small></div>
+    <div class="profile-level"><div class="profile-level-heading"><strong>${stats.rank.name}</strong><span>${nextRankText}</span></div><div class="meter"><i style="width:${Math.round(stats.progress)}%"></i></div></div>
+    <section class="profile-loadout"><p class="eyebrow">${personal ? "Equipped loadout" : "Loadout"}</p><h3 class="h3">Study equipment</h3>
+      <p class="sub">Equipment is cosmetic only and does not change questions or challenge results.</p>
+      <div class="equipment-list">${PROFILE_EQUIPMENT.map(item => `<button class="equipment-item" type="button" data-equipment="${item.id}" ${personal ? "" : "disabled"} aria-pressed="${equipped === item.id}"><span class="equipment-mark" aria-hidden="true">${item.id === "hint-potion" ? "H" : item.id === "study-compass" ? "S" : "F"}</span><span><b>${item.name}</b><small>${item.description}</small></span>${personal ? `<i>${equipped === item.id ? "Equipped" : "Equip"}</i>` : ""}</button>`).join("")}</div>
+    </section>
+    ${personal ? `<div class="profile-tools"><button class="btn btn-primary" id="shareProfile">Copy shareable profile link</button><span id="profileShareStatus" role="status" aria-live="polite"></span><input id="profileShareLink" class="profile-share-link" type="url" readonly aria-label="Shareable profile link" hidden>
+      <p class="profile-snapshot-note">The link contains your display name and challenge stats as a snapshot. Only share it if you’re comfortable making those details public.</p>
+      <div class="profile-result-import"><h3 class="h3">Record a challenge you created</h3><p class="sub">After your friend finishes your challenge code, ask them to send you their result code. Enter it here to update your win rate and rank.</p><label for="profileResultCode">Challenge result code</label><div class="profile-import-row"><input id="profileResultCode" class="field code" placeholder="R-PHY211-…" autocomplete="off"><button class="btn btn-soft" id="importChallengeResult" type="button">Record result</button></div><p id="profileResultStatus" class="profile-form-status" role="status" aria-live="polite"></p></div>
+    </div>` : ""}
+    <div class="stack"><button class="action glass" id="profileHome"><div><strong>${personal ? "Back to courses" : "Open Orbit"}</strong><span>${personal ? "Keep practising and building your record" : "Practise with Orbit"}</span></div><i class="go">${arrow}</i></button></div>`;
+  if(personal){
+    $("profilePanel").querySelectorAll("[data-equipment]").forEach(button => button.addEventListener("click", () => {
+      profile.equipped = button.dataset.equipment;
+      save();
+      renderProfile();
+    }));
+    $("shareProfile").onclick = async () => {
+      const currentStats = challengeProfileStats(profile.challengeResults);
+      const snapshot = {version:1, name, avatarSeed:profile.avatarSeed, challengeStats:{wins:currentStats.wins, losses:currentStats.losses, draws:currentStats.draws}};
+      const url = new URL(location.origin + location.pathname);
+      url.searchParams.set("profile", JSON.stringify(snapshot));
+      const input = $("profileShareLink"), status = $("profileShareStatus");
+      input.value = url.href;
+      input.hidden = false;
+      try{
+        await navigator.clipboard.writeText(url.href);
+        status.textContent = "Profile link copied.";
+      }catch(error){
+        input.focus();
+        input.select();
+        status.textContent = "Select and copy the link to share your profile.";
+        console.warn("Orbit couldn’t copy the profile link automatically.", error);
+      }
+    };
+    $("importChallengeResult").onclick = () => {
+      const status = $("profileResultStatus");
+      const parsed = parseChallengeResultCode($("profileResultCode").value);
+      if(!parsed){ status.textContent = "That result code is invalid, already recorded, or not one of your challenge codes."; return; }
+      const challenge = profile.createdChallenges[parsed.key];
+      if(!challenge || challenge.score !== parsed.hostScore || parsed.guestScore > challenge.count){
+        status.textContent = "This result doesn’t match a challenge you created.";
+        return;
+      }
+      const outcome = challenge.score > parsed.guestScore ? "win" : challenge.score < parsed.guestScore ? "loss" : "draw";
+      profile.challengeResults[parsed.key] = outcome;
+      challenge.resultRecorded = true;
+      save();
+      renderProfile();
+      $("profileResultStatus").textContent = `Result recorded: ${outcome === "win" ? "you won" : outcome === "loss" ? "your friend won" : "draw"}.`;
+    };
+  }
+  $("profileHome").onclick = () => personal ? go("v-system") : go("v-landing");
+  go("v-profile");
+}
+function parseChallengeResultCode(value){
+  const match = /^R-([A-Z0-9]+)-([A-Z0-9]+)-(\d+)-(\d+)$/i.exec(String(value || "").trim());
+  if(!match) return null;
+  const [, course, seed36, host, guest] = match;
+  const seed = parseInt(seed36, 36), hostScore = Number(host), guestScore = Number(guest);
+  if(!Number.isSafeInteger(seed) || !Number.isSafeInteger(hostScore) || !Number.isSafeInteger(guestScore)) return null;
+  const key = challengeRecordKey(course.toUpperCase(), seed);
+  const created = ensureProfile().createdChallenges[key];
+  if(!created || created.resultRecorded) return null;
+  return {key, hostScore, guestScore};
+}
+function makeChallengeResultCode(){
+  return `R-${session.code}-${session.seed.toString(36).toUpperCase()}-${session.challenge.score}-${session.correct}`;
+}
+function rememberChallengeCode(){
+  if(session.mode !== "code-create") return;
+  const profile = ensureProfile();
+  const key = challengeRecordKey(session.code, session.seed);
+  if(!profile.createdChallenges[key]) profile.createdChallenges[key] = {score:session.correct, count:session.items.length, resultRecorded:false};
+  save();
+}
 function reviewHtml(){
   return `<div class="review"><p class="sub" style="margin-bottom:6px">Review your answers</p>${session.answers.map((a, i) => `
     <details class="${a.ok ? "r" : "w"}"><summary><i>${a.ok ? "✓" : "✕"}</i><span>${i + 1}. ${esc(a.q.prompt)}</span></summary>
@@ -765,8 +954,11 @@ function renderSummary(){
   const tags = Object.entries(session.tags).sort((a, b) => b[1] - a[1]);
   let duelBlock = "";
   if(session.mode === "live") duelBlock = `<div id="liveResult">${liveResultHtml()}</div>`;
-  if(session.mode === "code-accept") duelBlock = versusHtml(c, session.challenge.name, session.challenge.score, true);
+  if(session.mode === "code-accept") duelBlock = `${versusHtml(c, session.challenge.name, session.challenge.score, true)}
+    <p class="sub challenge-result-copy">Send this result code to the friend who created the challenge so they can record the match.</p>
+    <div class="codebox"><code id="resultCode">${esc(makeChallengeResultCode())}</code><button class="btn btn-primary" id="copyResult" style="min-height:40px">Copy result</button></div>`;
   if(session.mode === "code-create"){
+    rememberChallengeCode();
     const code = makeChallengeCode(session, c);
     duelBlock = `<p class="sub" style="margin-top:6px">Send this code to a friend. They enter it under Duel a friend and get the same ${n} questions, then see your score against theirs.</p>
       <div class="codebox"><code id="chCode">${esc(code)}</code><button class="btn btn-primary" id="copyCode" style="min-height:40px">Copy</button></div>`;
@@ -787,6 +979,7 @@ function renderSummary(){
   $("sumAgain").onclick = () => { leaveDuel(); startSolo(session.code); };
   $("sumDash").onclick = () => { activeCourse = session.code; go("v-dash"); };
   const cp = $("copyCode"); if(cp) cp.onclick = () => copyText($("chCode").textContent, cp);
+  const resultCopy = $("copyResult"); if(resultCopy) resultCopy.onclick = () => copyText($("resultCode").textContent, resultCopy, "resultCode");
 }
 const arrow = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg>`;
 function versusHtml(mine, oppName, oppScore, oppFinished){
@@ -796,10 +989,10 @@ function versusHtml(mine, oppName, oppScore, oppFinished){
     <div class="${oppFinished && mine > oppScore ? "win" : ""}"><b>${mine}</b><span>${esc(myName())}</span></div><em>vs</em>
     <div class="${oppFinished && oppScore > mine ? "win" : ""}"><b>${oppFinished ? oppScore : (oppScore || 0)}</b><span>${esc(oppName)}${oppFinished ? "" : " (playing)"}</span></div></div><p class="sub" style="font-size:14px">Out of ${n} questions</p>`;
 }
-async function copyText(t, btn){
+async function copyText(t, btn, targetId = "chCode"){
   try{ await navigator.clipboard.writeText(t); btn.textContent = "Copied"; }
-  catch(e){ const r = document.createRange(); r.selectNodeContents($("chCode")); const s = getSelection(); s.removeAllRanges(); s.addRange(r); btn.textContent = "Selected"; }
-  setTimeout(() => btn.textContent = "Copy", 1600);
+  catch(e){ const target = $(targetId); const r = document.createRange(); r.selectNodeContents(target); const s = getSelection(); s.removeAllRanges(); s.addRange(r); btn.textContent = "Selected"; }
+  setTimeout(() => btn.textContent = targetId === "resultCode" ? "Copy result" : "Copy", 1600);
 }
 
 /* ===================== Dashboard ===================== */
@@ -997,6 +1190,8 @@ function enter(user){
     catch(err){ if(uid === user.id){ entering = null; renderBoot(err); } return; }
     if(uid !== user.id) return;   // signed out while loading
     armBackGuard();
+    const sharedProfile = readSharedProfile();
+    if(sharedProfile){ renderProfile(sharedProfile); return; }
     if(hasCompletedOnboarding()){
       go("v-system", {instant:true});
       return;
@@ -1071,6 +1266,8 @@ if(sb) sb.auth.onAuthStateChange((event, sess) => {
 });
 
 async function boot(){
+  const sharedProfile = readSharedProfile();
+  if(sharedProfile){ renderProfile(sharedProfile); return; }
   if(!sb){ go("v-landing", {instant:true}); return; }
   try{ await syncSession(); }catch(e){ console.warn("Orbit: couldn’t check the session", e); }
   try{ if(/[?&#](code|error|error_description|access_token)=/.test(location.search + location.hash)) history.replaceState(null, "", location.pathname); }catch(e){}
