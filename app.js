@@ -607,8 +607,8 @@ function openSheet(code){
     ${realBank[code] ? "" : `<p class="notice">No ${code} past questions have been added yet, so you’ll practise the sample set until they are.</p>`}
     <div class="pref"><label>Questions from</label>${seg("source", [["all","All"],["past","Past questions"],["topic","A topic"]], p.source, realBank[code] ? [] : ["past"])}</div>
     <label class="topic-select-wrap" id="topicSelectWrap" ${p.source === "topic" ? "" : "hidden"}><span>Choose a topic</span><select class="topic-select" id="topicSelect"><option value="">Select a topic</option>${topics.map(topic => `<option value="${esc(topic)}" ${p.topic === topic ? "selected" : ""}>${esc(topic)}</option>`).join("")}</select></label>
-    <div class="pref"><label>Questions</label>${seg("count", [[5,"5"],[10,"10"],[15,"15"],[20,"20"]], p.count)}</div>
-    <div class="pref"><label>Timer per question</label>${seg("timer", [[0,"Off"],[30,"30s"],[60,"60s"],[90,"90s"]], p.timer)}</div>
+    <div class="pref"><label>Questions</label>${seg("count", [[5,"5"],[10,"10"],[15,"15"],[20,"20"],[60,"60"]], p.count)}</div>
+    <div class="pref"><label>Session timer</label>${seg("timer", [[0,"Off"],[600,"10m"],[1200,"20m"],[1800,"30m"],[3600,"60m"]], p.timer)}</div>
     <div class="pref"><label>Difficulty</label>${seg("diff", Object.entries(DIFFS), p.diff)}</div>
     <div class="pref"><label>Focus</label>${seg("focus", [["all","All topics"],["weak", "Weak spots"]], p.focus, weak.length ? [] : ["weak"])}</div>
     <div class="pref"><label>Explanations</label>${seg("explain", [["each","After each"],["end","At the end"]], p.explain)}</div>
@@ -676,63 +676,86 @@ let session = null, timerInt = null;
 function startSolo(code){
   const p = prefsFor(code);
   const {items, note} = buildSet(code, p);
-  session = {mode:"solo", code, items, note, i:0, correct:0, tags:{}, answers:[], timer:p.timer, explainEnd:p.explain === "end"};
+  session = {mode:"solo", code, items, note, i:0, correct:0, tags:{}, answers:[], timer:p.timer, timerEndsAt:null, explainEnd:p.explain === "end"};
   beginSession();
 }
-function beginSession(){ go("v-practice"); renderQuestion(); renderHud(); }
+function beginSession(){
+  if(session.timer) session.timerEndsAt = Date.now() + session.timer * 1000;
+  go("v-practice"); renderQuestion(); renderHud();
+  if(session.timer) startTimer();
+}
+function sessionTimeText(seconds){
+  const minutes = Math.floor(seconds / 60), remainder = seconds % 60;
+  return minutes ? `${minutes}:${String(remainder).padStart(2, "0")}` : `${remainder}s`;
+}
 function renderQuestion(){
   const it = session.items[session.i], n = session.items.length;
+  const saved = session.answers[session.i];
   $("progBar").style.width = (session.i / n * 100) + "%";
   $("pqCount").textContent = `${session.i + 1} of ${n}`;
   const card = $("qcard");
   card.innerHTML = `${session.i === 0 && session.note ? `<p class="notice" style="margin:0 0 16px">${esc(session.note)}</p>` : ""}
-    <div class="qmeta"><span class="qtopic">${esc(session.code)} · ${esc(it.q.topic)}</span>${session.timer ? `<span class="timer" id="timer"><svg width="26" height="26" viewBox="0 0 26 26"><circle class="bg" cx="13" cy="13" r="10"/><circle class="fg" id="timerFg" cx="13" cy="13" r="10" stroke-dasharray="62.83" stroke-dashoffset="0"/></svg><span id="timerTxt">${session.timer}s</span></span>` : ""}</div>
+    <div class="qmeta"><span class="qtopic">${esc(session.code)} · ${esc(it.q.topic)}</span>${session.timer ? `<span class="timer" id="timer" aria-label="Session time remaining"><svg width="26" height="26" viewBox="0 0 26 26"><circle class="bg" cx="13" cy="13" r="10"/><circle class="fg" id="timerFg" cx="13" cy="13" r="10" stroke-dasharray="62.83" stroke-dashoffset="0"/></svg><span id="timerTxt">${sessionTimeText(Math.max(0, Math.ceil((session.timerEndsAt - Date.now()) / 1000)))}</span></span>` : ""}</div>
     <p class="qprompt">${esc(it.q.prompt)}</p>
-    <div class="opts" id="opts">${it.opts.map((o, i) => `<button class="opt" data-i="${i}"><kbd>${"ABCDE"[i]}</kbd><span>${esc(o.t)}</span></button>`).join("")}</div><div id="fb"></div>`;
+    <div class="opts" id="opts">${it.opts.map((o, i) => `<button class="opt${saved && o.ok ? " right" : ""}${saved && saved.pick === o ? " chosen" : ""}${saved && saved.pick === o && !saved.ok ? " wrong" : ""}" data-i="${i}"><kbd>${"ABCDE"[i]}</kbd><span>${esc(o.t)}</span></button>`).join("")}</div><div id="fb">${saved && !session.explainEnd ? answerFeedback(saved) : ""}</div>`;
   card.classList.remove("step-in"); void card.offsetWidth; card.classList.add("step-in");
   card.querySelectorAll(".opt").forEach(b => b.addEventListener("click", () => answer(+b.dataset.i)));
-  $("nextBtn").hidden = true;
-  if(session.timer) startTimer(session.timer);
+  $("prevBtn").hidden = session.i === 0;
+  const next = $("nextBtn");
+  next.hidden = !saved;
+  next.textContent = session.i === n - 1 ? "See results" : "Next question";
 }
-function startTimer(sec){
-  stopTimer(); const end = Date.now() + sec * 1000;
+function answerFeedback(response){
+  return response.ok
+    ? `<div class="feedback ok glass"><h4>Correct</h4><p class="working" style="border:0;padding:0;margin:0"><b>The working:</b> ${esc(response.q.explain)}</p></div>`
+    : `<div class="feedback no glass"><h4>${response.pick ? "Not quite" : "Time’s up"}</h4>${response.tag ? `<p><span class="mtag">${esc(response.tag)}</span></p>` : ""}<p>${esc(response.why || "")}</p><p class="working"><b>The working:</b> ${esc(response.q.explain)}</p></div>`;
+}
+function startTimer(){
+  stopTimer();
+  const total = session.timer;
   timerInt = setInterval(() => {
-    const left = Math.max(0, end - Date.now()); const fg = $("timerFg"), tx = $("timerTxt"), tm = $("timer");
-    if(!fg){ stopTimer(); return; }
-    fg.style.strokeDashoffset = 62.83 * (1 - left / (sec * 1000));
-    tx.textContent = Math.ceil(left / 1000) + "s"; tm.classList.toggle("low", left < 10000);
-    if(left <= 0){ stopTimer(); answer(null); }
+    if(current !== "v-practice"){ stopTimer(); return; }
+    const left = Math.max(0, session.timerEndsAt - Date.now());
+    const fg = $("timerFg"), tx = $("timerTxt"), tm = $("timer");
+    if(fg && tx && tm){
+      fg.style.strokeDashoffset = 62.83 * (1 - left / (total * 1000));
+      tx.textContent = sessionTimeText(Math.ceil(left / 1000));
+      tm.classList.toggle("low", left < 60 * 1000);
+    }
+    if(left <= 0){
+      stopTimer();
+      if(!session.answers[session.i]) answer(null);
+      finishSession();
+    }
   }, 100);
 }
 function stopTimer(){ clearInterval(timerInt); timerInt = null; }
 function answer(idx){
-  const box = $("opts"); if(!box || box.classList.contains("locked")) return;
-  stopTimer(); box.classList.add("locked");
+  const box = $("opts"); if(!box) return;
   const it = session.items[session.i], q = it.q, pick = idx == null ? null : it.opts[idx];
   const ok = !!(pick && pick.ok);
   const tag = pick ? pick.tag : "Ran out of time";
   const why = pick ? pick.why : "The timer ran out before you picked an answer.";
-  const c = cs(session.code); const a = c.attempts[q.id] || {seen:0, wrong:0};
-  a.seen++; a.last = Date.now();
-  if(ok){ session.correct++; a.lastWrong = false; }
-  else { a.wrong++; a.lastWrong = true; if(tag){ c.tags[tag] = (c.tags[tag] || 0) + 1; session.tags[tag] = (session.tags[tag] || 0) + 1; } }
+  const previous = session.answers[session.i];
+  const c = cs(session.code), a = c.attempts[q.id] || {seen:0, wrong:0};
+  if(!previous) a.seen++;
+  if(previous && previous.ok !== ok) a.wrong = Math.max(0, a.wrong + (ok ? -1 : 1));
+  if(previous && !previous.ok && previous.tag && (ok || previous.tag !== tag)) c.tags[previous.tag] = Math.max(0, (c.tags[previous.tag] || 0) - 1);
+  if(!ok && tag && (!previous || previous.ok || previous.tag !== tag)) c.tags[tag] = (c.tags[tag] || 0) + 1;
+  a.last = Date.now(); a.lastWrong = !ok;
+  if(!ok && !previous) a.wrong++;
   c.attempts[q.id] = a; save();
-  session.answers.push({q, pick, ok, tag, why});
+  session.answers[session.i] = {q, pick, ok, tag, why};
+  session.correct = session.answers.reduce((score, answer) => score + (answer && answer.ok ? 1 : 0), 0);
+  session.tags = session.answers.reduce((tags, answer) => {
+    if(answer && !answer.ok && answer.tag) tags[answer.tag] = (tags[answer.tag] || 0) + 1;
+    return tags;
+  }, {});
   pushDuelProgress();
   renderHud();
-  const btns = box.querySelectorAll(".opt"); const last = session.i === session.items.length - 1;
-  if(session.explainEnd){
-    if(idx != null) btns[idx].classList.add("chosen");
-    setTimeout(nextQuestion, reduce ? 150 : 520);
-    return;
-  }
-  it.opts.forEach((o, i) => { if(o.ok) btns[i].classList.add("right"); });
-  if(!ok && idx != null) btns[idx].classList.add("wrong");
-  $("fb").innerHTML = ok
-    ? `<div class="feedback ok glass"><h4>Correct</h4><p class="working" style="border:0;padding:0;margin:0"><b>The working:</b> ${esc(q.explain)}</p></div>`
-    : `<div class="feedback no glass"><h4>${pick ? "Not quite" : "Time’s up"}</h4>${tag ? `<p><span class="mtag">${esc(tag)}</span></p>` : ""}<p>${esc(why || "")}</p><p class="working"><b>The working:</b> ${esc(q.explain)}</p></div>`;
-  const next = $("nextBtn"); next.textContent = last ? "See results" : "Next question"; next.hidden = false; next.focus({preventScroll:true});
-  setTimeout(() => $("fb").scrollIntoView({behavior: reduce ? "auto" : "smooth", block:"nearest"}), 120);
+  renderQuestion();
+  $("nextBtn").focus({preventScroll:true});
+  if(!session.explainEnd) setTimeout(() => $("fb").scrollIntoView({behavior: reduce ? "auto" : "smooth", block:"nearest"}), 120);
 }
 function nextQuestion(){
   if(current !== "v-practice") return;
@@ -740,7 +763,13 @@ function nextQuestion(){
   if(session.i >= session.items.length){ finishSession(); return; }
   renderQuestion(); window.scrollTo({top:0, behavior: reduce ? "auto" : "smooth"});
 }
+function previousQuestion(){
+  if(current !== "v-practice" || session.i === 0) return;
+  session.i--;
+  renderQuestion(); window.scrollTo({top:0, behavior: reduce ? "auto" : "smooth"});
+}
 $("nextBtn").addEventListener("click", nextQuestion);
+$("prevBtn").addEventListener("click", previousQuestion);
 document.addEventListener("keydown", e => {
   if(current !== "v-practice" || e.metaKey || e.ctrlKey) return;
   if(e.target && e.target.tagName === "INPUT") return;
