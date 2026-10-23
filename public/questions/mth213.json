@@ -3652,5 +3652,643 @@
       }
     ],
     "explain": "Solve the scalar equations independently: u=Ce^(2t) and v=De^(-t). The initial conditions give C=1 and D=2."
+  },
+  {
+    "id": "MTH213-NOTE-095",
+    "course": "MTH213",
+    "topic": "Separable Equations",
+    "prompt": "Solve y' = x y^3/sqrt(1+x^2), y(0)=1, taking the positive solution near x=0.",
+    "d": 3,
+    "options": [
+      {
+        "t": "y=1/sqrt(3-2sqrt(1+x^2))",
+        "ok": true
+      },
+      {
+        "t": "y=sqrt(3-2sqrt(1+x^2))",
+        "tag": "Inverted the reciprocal after integration",
+        "why": "Separation gives an equation for 1/y^2; solve for y by taking the reciprocal square root."
+      },
+      {
+        "t": "y=1/sqrt(1+2sqrt(1+x^2))",
+        "tag": "Lost the integration constant sign",
+        "why": "Using y(0)=1 gives the constant that produces 3-2sqrt(1+x^2)."
+      },
+      {
+        "t": "y=1/(3-2sqrt(1+x^2))",
+        "tag": "Forgot the square root",
+        "why": "The separated integral determines y^(-2), so recovering y requires a square root."
+      }
+    ],
+    "explain": "Separate to y^(-3)dy=x/sqrt(1+x^2)dx. Integration gives -1/(2y^2)=sqrt(1+x^2)+C; y(0)=1 gives C=-3/2. Take the positive branch near x=0."
+  },
+  {
+    "id": "MTH213-NOTE-096",
+    "course": "MTH213",
+    "topic": "First-Order Linear Equations",
+    "prompt": "Find the general solution of y'+2y=x^3e^(-2x).",
+    "d": 2,
+    "options": [
+      {
+        "t": "y=e^(-2x)(x^4/4+C)",
+        "ok": true
+      },
+      {
+        "t": "y=e^(2x)(x^4/4+C)",
+        "tag": "Used the wrong integrating factor",
+        "why": "The integrating factor for coefficient +2 is e^(2x), so the final solution is multiplied by e^(-2x)."
+      },
+      {
+        "t": "y=x^4e^(-2x)/4+C",
+        "tag": "Did not apply the integrating factor to the constant",
+        "why": "The integration constant appears inside e^(-2x)(x^4/4+C)."
+      },
+      {
+        "t": "y=e^(-2x)(x^3/3+C)",
+        "tag": "Integrated the wrong power",
+        "why": "After multiplying by e^(2x), the right side is x^3, whose integral is x^4/4."
+      }
+    ],
+    "explain": "The integrating factor is e^(2x). Thus (e^(2x)y)'=x^3; integrate and multiply by e^(-2x) to obtain y=e^(-2x)(x^4/4+C)."
+  },
+  {
+    "id": "MTH213-NOTE-097",
+    "course": "MTH213",
+    "topic": "Homogeneous First-Order Equations",
+    "prompt": "Solve (2xy+x^2)y'=3y^2+2xy using the substitution v=y/x.",
+    "d": 3,
+    "options": [
+      {
+        "t": "y^2+xy=Cx^3",
+        "ok": true
+      },
+      {
+        "t": "y^2+xy=Cx^2",
+        "tag": "Lost a factor of x when returning to y",
+        "why": "The integrated relation is v^2+v=Cx; substituting v=y/x and multiplying by x^2 gives Cx^3."
+      },
+      {
+        "t": "y^2-xy=Cx^3",
+        "tag": "Changed the sign in the substitution",
+        "why": "With v=y/x, the separated integral contains ln|v|+ln|v+1|."
+      },
+      {
+        "t": "y^2+xy=Cx",
+        "tag": "Did not clear the denominators",
+        "why": "Substituting v=y/x introduces a denominator x^2; multiply the relation by x^2."
+      }
+    ],
+    "explain": "Set y=vx, so y'=v+xv'. Substitution reduces the equation to (2v+1)/(v(v+1))dv=dx/x. Integrating gives v(v+1)=Cx; replace v by y/x to obtain y^2+xy=Cx^3."
+  },
+  {
+    "id": "MTH213-NOTE-098",
+    "course": "MTH213",
+    "topic": "Exact Differential Equations",
+    "prompt": "Solve (6xy^2+4x^3y)dx+(6x^2y+x^4+e^y)dy=0.",
+    "d": 3,
+    "options": [
+      {
+        "t": "3x^2y^2+x^4y+e^y=C",
+        "ok": true
+      },
+      {
+        "t": "6x^2y^2+4x^4y+e^y=C",
+        "tag": "Integrated with incorrect powers and coefficients",
+        "why": "Integrating M with respect to x gives 3x^2y^2+x^4y, not M multiplied by x."
+      },
+      {
+        "t": "3x^2y^2+x^4y+ye^y=C",
+        "tag": "Integrated e^y incorrectly",
+        "why": "The integral of e^y with respect to y is e^y."
+      },
+      {
+        "t": "3xy^2+x^4y+e^y=C",
+        "tag": "Integrated the first term with respect to the wrong variable",
+        "why": "The potential is first found by integrating M with respect to x."
+      }
+    ],
+    "explain": "Here M_y=N_x=12xy+4x^3, so the equation is exact. Integrate M with respect to x to get F=3x^2y^2+x^4y+g(y); matching F_y to N gives g(y)=e^y."
+  },
+  {
+    "id": "MTH213-NOTE-099",
+    "course": "MTH213",
+    "topic": "Exact Differential Equations",
+    "prompt": "For xy dx+(2x^2+3y^2-20)dy=0, which integrating factor depending only on y makes the equation exact?",
+    "d": 3,
+    "options": [
+      {
+        "t": "mu(y)=y^3",
+        "ok": true
+      },
+      {
+        "t": "mu(y)=e^(3y)",
+        "tag": "Integrated 3/y as 3y",
+        "why": "The exactness test gives 3/y, whose integral is 3 ln|y|."
+      },
+      {
+        "t": "mu(y)=1/y^3",
+        "tag": "Reversed the integrating-factor exponent",
+        "why": "The test gives a positive 3/y, so the factor is proportional to y^3."
+      },
+      {
+        "t": "mu(y)=y",
+        "tag": "Used the wrong power",
+        "why": "Integrating 3/y gives 3 ln|y|, and exponentiating gives y^3."
+      }
+    ],
+    "explain": "For M=xy and N=2x^2+3y^2-20, (N_x-M_y)/M=(4x-x)/(xy)=3/y. Hence mu(y)=exp(∫3/y dy)=y^3 on an interval where y is nonzero."
+  },
+  {
+    "id": "MTH213-NOTE-100",
+    "course": "MTH213",
+    "topic": "Bernoulli Equations",
+    "prompt": "For y'+p(x)y=q(x)y^n, with n different from 0 and 1, which substitution gives a linear equation?",
+    "d": 2,
+    "options": [
+      {
+        "t": "v=y^(1-n)",
+        "ok": true
+      },
+      {
+        "t": "v=y^n",
+        "tag": "Used the original nonlinear power",
+        "why": "Dividing by y^n produces the derivative of y^(1-n), which is the useful substitution."
+      },
+      {
+        "t": "v=ln(y)",
+        "tag": "Used a substitution for a different equation type",
+        "why": "The Bernoulli transformation specifically uses the power y^(1-n)."
+      },
+      {
+        "t": "v=1/y^n",
+        "tag": "Used the wrong exponent",
+        "why": "The exponent must be 1-n; it is not generally -n."
+      }
+    ],
+    "explain": "Divide by y^n and set v=y^(1-n). Since v'=(1-n)y^(-n)y', the equation becomes v'+(1-n)p(x)v=(1-n)q(x), which is linear."
+  },
+  {
+    "id": "MTH213-NOTE-101",
+    "course": "MTH213",
+    "topic": "Bernoulli Equations",
+    "prompt": "For y'+y=xy^2, let v=1/y. Which linear equation does v satisfy?",
+    "d": 2,
+    "options": [
+      {
+        "t": "v'-v=-x",
+        "ok": true
+      },
+      {
+        "t": "v'+v=x",
+        "tag": "Missed the negative derivative of 1/y",
+        "why": "v'=-y'/y^2; applying that identity gives v'-v=-x."
+      },
+      {
+        "t": "v'-v=x",
+        "tag": "Lost the minus sign on the forcing term",
+        "why": "After dividing by y^2, the substitution v'=-y'/y^2 changes the sign of x."
+      },
+      {
+        "t": "v'+v=-x",
+        "tag": "Used the wrong sign for the linear coefficient",
+        "why": "The term y/y^2 becomes v, leaving v'-v on the left."
+      }
+    ],
+    "explain": "Divide by y^2: y'/y^2+1/y=x. With v=1/y and v'=-y'/y^2, this becomes -v'+v=x, or v'-v=-x."
+  },
+  {
+    "id": "MTH213-NOTE-102",
+    "course": "MTH213",
+    "topic": "Second-Order Homogeneous Equations",
+    "prompt": "Solve y''-3y'-10y=0 with y(0)=0 and y'(0)=7.",
+    "d": 3,
+    "options": [
+      {
+        "t": "y=e^(5x)-e^(-2x)",
+        "ok": true
+      },
+      {
+        "t": "y=e^(5x)+e^(-2x)",
+        "tag": "Did not satisfy the zero initial displacement",
+        "why": "At x=0, the two exponential terms must cancel."
+      },
+      {
+        "t": "y=e^(-5x)-e^(2x)",
+        "tag": "Used the negatives of the characteristic roots",
+        "why": "The characteristic polynomial factors as (r-5)(r+2)."
+      },
+      {
+        "t": "y=7(e^(5x)-e^(-2x))",
+        "tag": "Did not scale for the initial velocity",
+        "why": "The derivative at zero of e^(5x)-e^(-2x) is 5+2=7, so no extra factor is needed."
+      }
+    ],
+    "explain": "The characteristic roots are 5 and -2, so y=C1e^(5x)+C2e^(-2x). The conditions give C1+C2=0 and 5C1-2C2=7, hence C1=1 and C2=-1."
+  },
+  {
+    "id": "MTH213-NOTE-103",
+    "course": "MTH213",
+    "topic": "Boundary-Value Problems",
+    "prompt": "Solve y''+y=0 with y(0)=0 and y(pi/4)=1.",
+    "d": 3,
+    "options": [
+      {
+        "t": "y=sqrt(2)sin(x)",
+        "ok": true
+      },
+      {
+        "t": "y=sin(x)",
+        "tag": "Did not satisfy the second boundary condition",
+        "why": "At x=pi/4, sin(pi/4)=sqrt(2)/2, so the coefficient must be sqrt(2)."
+      },
+      {
+        "t": "y=sqrt(2)cos(x)",
+        "tag": "Did not satisfy the first boundary condition",
+        "why": "A cosine term is nonzero at x=0."
+      },
+      {
+        "t": "y=2sin(x)",
+        "tag": "Used the reciprocal of sin(pi/4) incorrectly",
+        "why": "The required coefficient is 1/(sqrt(2)/2)=sqrt(2), not 2."
+      }
+    ],
+    "explain": "The general solution is C1 cos(x)+C2 sin(x). The first boundary condition gives C1=0; the second gives C2(sqrt(2)/2)=1, so C2=sqrt(2)."
+  },
+  {
+    "id": "MTH213-NOTE-104",
+    "course": "MTH213",
+    "topic": "Second-Order Non-Homogeneous Equations",
+    "prompt": "For y''+4y'+3y=3x, what is a suitable undetermined-coefficients trial for a particular solution?",
+    "d": 2,
+    "options": [
+      {
+        "t": "yp=Ax+B",
+        "ok": true
+      },
+      {
+        "t": "yp=Ae^x",
+        "tag": "Matched the wrong forcing-function type",
+        "why": "The forcing is a first-degree polynomial, so use a first-degree polynomial trial."
+      },
+      {
+        "t": "yp=Acos(3x)+Bsin(3x)",
+        "tag": "Used a trigonometric trial without a trigonometric forcing",
+        "why": "The right-hand side is 3x, not a sine or cosine."
+      },
+      {
+        "t": "yp=Ax^2+Bx+C",
+        "tag": "Used a polynomial of unnecessarily high degree",
+        "why": "The forcing polynomial has degree one, so the trial should have degree one."
+      }
+    ],
+    "explain": "For polynomial forcing of degree one, try yp=Ax+B. Substituting into the differential equation then determines A and B."
+  },
+  {
+    "id": "MTH213-NOTE-105",
+    "course": "MTH213",
+    "topic": "Second-Order Non-Homogeneous Equations",
+    "prompt": "A particular solution of y''+4y'+3y=3x is:",
+    "d": 3,
+    "options": [
+      {
+        "t": "yp=x-4/3",
+        "ok": true
+      },
+      {
+        "t": "yp=x+4/3",
+        "tag": "Used the wrong sign when matching constants",
+        "why": "Substitution gives 3x+4+3B=3x, so B=-4/3."
+      },
+      {
+        "t": "yp=3x-4/3",
+        "tag": "Did not match the coefficient of x",
+        "why": "The coefficient of x in the left side is 3A, so A must be 1."
+      },
+      {
+        "t": "yp=x",
+        "tag": "Did not cancel the constant term",
+        "why": "Substituting yp=x leaves a constant 4; the term -4/3 cancels it."
+      }
+    ],
+    "explain": "Try yp=Ax+B. Then yp'=A and yp''=0, so the left side is 3Ax+(4A+3B). Matching 3x gives A=1 and B=-4/3."
+  },
+  {
+    "id": "MTH213-NOTE-106",
+    "course": "MTH213",
+    "topic": "Second-Order Non-Homogeneous Equations",
+    "prompt": "For y''-y'-2y=3e^(3x), what particular solution is obtained by undetermined coefficients?",
+    "d": 3,
+    "options": [
+      {
+        "t": "yp=(3/4)e^(3x)",
+        "ok": true
+      },
+      {
+        "t": "yp=3e^(3x)",
+        "tag": "Did not divide by the operator coefficient",
+        "why": "Substitution multiplies A by 9-3-2=4, so 4A=3."
+      },
+      {
+        "t": "yp=(3/2)e^(3x)",
+        "tag": "Used the wrong characteristic polynomial value",
+        "why": "For exponent 3, the operator multiplier is 3^2-3-2=4."
+      },
+      {
+        "t": "yp=(3/4)e^(2x)",
+        "tag": "Used the wrong exponent",
+        "why": "The trial must match the forcing exponential e^(3x), since 3 is not a characteristic root."
+      }
+    ],
+    "explain": "Try yp=Ae^(3x). Substitution gives (9-3-2)Ae^(3x)=3e^(3x), hence 4A=3 and A=3/4."
+  },
+  {
+    "id": "MTH213-NOTE-107",
+    "course": "MTH213",
+    "topic": "Second-Order Non-Homogeneous Equations",
+    "prompt": "A particular solution of y''+4y'+5y=7cos(2x) is:",
+    "d": 3,
+    "options": [
+      {
+        "t": "yp=(7/65)cos(2x)+(56/65)sin(2x)",
+        "ok": true
+      },
+      {
+        "t": "yp=(7/65)cos(2x)-(56/65)sin(2x)",
+        "tag": "Used the wrong sign when matching sine terms",
+        "why": "The sine coefficient equation is -8A+B=0, so B=8A is positive."
+      },
+      {
+        "t": "yp=7cos(2x)",
+        "tag": "Copied the forcing without substituting",
+        "why": "The derivative terms change both sine and cosine coefficients; solve for A and B."
+      },
+      {
+        "t": "yp=(56/65)cos(2x)+(7/65)sin(2x)",
+        "tag": "Interchanged the solved coefficients",
+        "why": "Matching gives A=7/65 for cosine and B=56/65 for sine."
+      }
+    ],
+    "explain": "Try yp=Acos(2x)+Bsin(2x). Matching coefficients gives A+8B=7 and -8A+B=0. Thus A=7/65 and B=56/65."
+  },
+  {
+    "id": "MTH213-NOTE-108",
+    "course": "MTH213",
+    "topic": "Second-Order Non-Homogeneous Equations",
+    "prompt": "For y''-3y'+2y=e^(2x), the forcing duplicates a homogeneous solution. Which trial avoids the overlap?",
+    "d": 3,
+    "options": [
+      {
+        "t": "yp=Axe^(2x)",
+        "ok": true
+      },
+      {
+        "t": "yp=Ae^(2x)",
+        "tag": "Repeated a term in the complementary solution",
+        "why": "e^(2x) already solves the homogeneous equation, so multiply the trial by x."
+      },
+      {
+        "t": "yp=Ax^2e^(2x)",
+        "tag": "Multiplied by an unnecessary extra power",
+        "why": "The root 2 occurs once in the characteristic polynomial, so one factor of x removes the overlap."
+      },
+      {
+        "t": "yp=Axe^x",
+        "tag": "Changed the forcing exponent",
+        "why": "The trial keeps the forcing factor e^(2x) and adds x to make it independent."
+      }
+    ],
+    "explain": "The characteristic polynomial is (r-1)(r-2), so e^(2x) is already in yc. Multiply the exponential trial by x once to get yp=Axe^(2x)."
+  },
+  {
+    "id": "MTH213-NOTE-109",
+    "course": "MTH213",
+    "topic": "Second-Order Non-Homogeneous Equations",
+    "prompt": "For y''-3y'+2y=x^2+e^(3x), which trial combines both forcing types?",
+    "d": 2,
+    "options": [
+      {
+        "t": "yp=Ax^2+Bx+C+De^(3x)",
+        "ok": true
+      },
+      {
+        "t": "yp=Ax^2+De^(3x)",
+        "tag": "Omitted lower-degree polynomial terms",
+        "why": "Differentiating the quadratic produces lower-degree terms, so include Bx+C."
+      },
+      {
+        "t": "yp=Ae^(2x)+Bx^2+Cx+D",
+        "tag": "Changed the exponential forcing",
+        "why": "The exponential part of the trial must match e^(3x), not e^(2x)."
+      },
+      {
+        "t": "yp=Acos(3x)+Bx^2+C",
+        "tag": "Used a trigonometric trial for an exponential term",
+        "why": "The forcing includes e^(3x), so the trial needs an exponential term."
+      }
+    ],
+    "explain": "Use a degree-two polynomial for x^2 and an exponential term for e^(3x). Since 3 is not a characteristic root, no extra factor of x is needed."
+  },
+  {
+    "id": "MTH213-NOTE-110",
+    "course": "MTH213",
+    "topic": "Wronskian and Variation of Parameters",
+    "prompt": "Compute the Wronskian of y1=e^(2x) and y2=e^(-2x).",
+    "d": 2,
+    "options": [
+      {
+        "t": "-4",
+        "ok": true
+      },
+      {
+        "t": "4",
+        "tag": "Reversed the determinant order",
+        "why": "W=y1y2'-y2y1'; with y2'=-2e^(-2x), the result is negative."
+      },
+      {
+        "t": "-2",
+        "tag": "Omitted one derivative contribution",
+        "why": "Both terms contribute: -2e^(2x)e^(-2x)-2e^(-2x)e^(2x)."
+      },
+      {
+        "t": "0",
+        "tag": "Treated the functions as multiples",
+        "why": "e^(2x) and e^(-2x) are independent; their Wronskian is nonzero."
+      }
+    ],
+    "explain": "W=y1y2'-y2y1'=e^(2x)(-2e^(-2x))-e^(-2x)(2e^(2x))=-2-2=-4."
+  },
+  {
+    "id": "MTH213-NOTE-111",
+    "course": "MTH213",
+    "topic": "Boundary-Value Problems",
+    "prompt": "Solve y''+2y'+y=0 with y(0)=1 and y(1)=3.",
+    "d": 3,
+    "options": [
+      {
+        "t": "y=(1+(3e-1)x)e^(-x)",
+        "ok": true
+      },
+      {
+        "t": "y=(1+(3e+1)x)e^(-x)",
+        "tag": "Solved the second boundary condition with the wrong sign",
+        "why": "At x=1, (1+C2)e^(-1)=3 gives C2=3e-1."
+      },
+      {
+        "t": "y=(1+(3e-1)x)e^x",
+        "tag": "Used the wrong repeated root",
+        "why": "The characteristic root is -1, so the repeated-root solution contains e^(-x)."
+      },
+      {
+        "t": "y=(1+3ex)e^(-x)",
+        "tag": "Did not account for the constant term at x=1",
+        "why": "The boundary condition gives 1+C2=3e, so C2=3e-1."
+      }
+    ],
+    "explain": "The characteristic equation is (r+1)^2=0, so y=(C1+C2x)e^(-x). From y(0)=1, C1=1; y(1)=3 gives (1+C2)e^(-1)=3 and C2=3e-1."
+  },
+  {
+    "id": "MTH213-NOTE-112",
+    "course": "MTH213",
+    "topic": "Second-Order Non-Homogeneous Equations",
+    "prompt": "For which forcing functions is undetermined coefficients appropriate in the course method?",
+    "d": 2,
+    "options": [
+      {
+        "t": "Polynomials, exponentials, and sine or cosine functions and their finite combinations",
+        "ok": true
+      },
+      {
+        "t": "Every continuous function without exception",
+        "tag": "Overstated the method's applicability",
+        "why": "Undetermined coefficients is limited to standard function families; more general forcing may require variation of parameters."
+      },
+      {
+        "t": "Only constant forcing functions",
+        "tag": "Restricted the method too much",
+        "why": "The method also handles polynomial, exponential, and trigonometric forcing."
+      },
+      {
+        "t": "Only functions that are already homogeneous solutions",
+        "tag": "Confused forcing with the complementary solution",
+        "why": "The trial is chosen from the forcing type and adjusted if it overlaps the homogeneous solution."
+      }
+    ],
+    "explain": "The lecture's standard undetermined-coefficients cases are polynomial, exponential, sine/cosine, and combinations of these. Forcing outside these families generally calls for another method."
+  },
+  {
+    "id": "MTH213-NOTE-113",
+    "course": "MTH213",
+    "topic": "Second-Order Non-Homogeneous Equations",
+    "prompt": "For y''+y=sec(x), which method from the notes applies on an interval where sec(x) is continuous?",
+    "d": 2,
+    "options": [
+      {
+        "t": "Variation of parameters",
+        "ok": true
+      },
+      {
+        "t": "Undetermined coefficients with a secant trial",
+        "tag": "Used an unsupported forcing family",
+        "why": "Secant is not one of the standard polynomial, exponential, or trigonometric forcing forms for this method."
+      },
+      {
+        "t": "Characteristic equation alone",
+        "tag": "Ignored the forcing term",
+        "why": "The characteristic equation finds the complementary solution, not a particular solution for sec(x)."
+      },
+      {
+        "t": "Separation of variables",
+        "tag": "Applied a first-order technique",
+        "why": "This is a second-order non-homogeneous linear ODE."
+      }
+    ],
+    "explain": "Variation of parameters handles general continuous forcing on an interval where the coefficients and forcing are defined; sec(x) is not a standard undetermined-coefficients forcing."
+  },
+  {
+    "id": "MTH213-NOTE-114",
+    "course": "MTH213",
+    "topic": "Exact Differential Equations",
+    "prompt": "If M(x,y)dx+N(x,y)dy=0 is exact and F_x=M, what must be true of its potential function F?",
+    "d": 2,
+    "options": [
+      {
+        "t": "F_y=N, and the implicit solution is F(x,y)=C",
+        "ok": true
+      },
+      {
+        "t": "F_y=M, and the solution is F_x=C",
+        "tag": "Swapped the partial derivatives",
+        "why": "The potential's x-partial matches M and its y-partial matches N."
+      },
+      {
+        "t": "F_y=0, and the solution is F=N",
+        "tag": "Ignored the second component of the equation",
+        "why": "The potential must reproduce both M and N through its partial derivatives."
+      },
+      {
+        "t": "F_x=N, and the solution is F_y=C",
+        "tag": "Interchanged M and N",
+        "why": "By definition F_x=M and F_y=N."
+      }
+    ],
+    "explain": "An exact equation is the total differential dF=F_x dx+F_y dy. Matching terms requires F_x=M and F_y=N, so F(x,y)=C is the implicit solution."
+  },
+  {
+    "id": "MTH213-NOTE-115",
+    "course": "MTH213",
+    "topic": "First-Order Linear Equations",
+    "prompt": "Before applying the integrating-factor formula to a first-order linear ODE, what should you do?",
+    "d": 1,
+    "options": [
+      {
+        "t": "Write it in standard form y'+p(x)y=g(x)",
+        "ok": true
+      },
+      {
+        "t": "Set the right-hand side to zero",
+        "tag": "Removed the forcing term",
+        "why": "The standard form retains the given right-hand side g(x)."
+      },
+      {
+        "t": "Differentiate both sides",
+        "tag": "Added an unnecessary derivative",
+        "why": "The integrating-factor method begins by isolating y' and normalizing its coefficient."
+      },
+      {
+        "t": "Multiply by y",
+        "tag": "Applied an unrelated substitution",
+        "why": "First divide by the coefficient of y' if necessary, then identify p(x) and g(x)."
+      }
+    ],
+    "explain": "Normalize the equation so the coefficient of y' is one and the equation reads y'+p(x)y=g(x). Then use mu(x)=e^(∫p(x)dx)."
+  },
+  {
+    "id": "MTH213-NOTE-116",
+    "course": "MTH213",
+    "topic": "Homogeneous First-Order Equations",
+    "prompt": "For a homogeneous first-order equation, after setting y=vx, what is dy/dx?",
+    "d": 1,
+    "options": [
+      {
+        "t": "v+x dv/dx",
+        "ok": true
+      },
+      {
+        "t": "x dv/dx",
+        "tag": "Omitted the product-rule term",
+        "why": "Differentiating y=vx gives v+xv'."
+      },
+      {
+        "t": "v dv/dx",
+        "tag": "Differentiated as a quotient",
+        "why": "Use the product rule because y is the product of v(x) and x."
+      },
+      {
+        "t": "v+x",
+        "tag": "Did not differentiate v",
+        "why": "Since v depends on x, differentiating vx gives x dv/dx as well as v."
+      }
+    ],
+    "explain": "With v=v(x), the product rule gives dy/dx=d(vx)/dx=v+x dv/dx."
   }
 ]

@@ -376,8 +376,6 @@ footer .fine{grid-column:1 / -1;border-top:1px solid var(--line);padding-top:18p
 .seg .thumb{position:absolute;z-index:0;top:4px;left:0;height:calc(100% - 8px);border-radius:12px;background:var(--glass-strong);box-shadow:0 4px 14px -6px rgba(14,21,48,.35),inset 0 1px 0 var(--rim);transition:transform .5s var(--spring),width .5s var(--spring)}
 .sheet-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:24px}
 .sheet-link{display:block;margin:14px auto 0;color:var(--violet);font-weight:600;font-size:15px}
-.sheet-paper-link{display:block;margin:18px 0 2px;padding:12px 14px;border:1px solid var(--line);border-radius:14px;color:var(--violet);font-size:14px;font-weight:600;text-align:center;text-decoration:none;background:var(--glass)}
-.sheet-paper-link:hover{border-color:var(--violet);}
 .notice{margin-top:16px;padding:12px 14px;border-radius:16px;background:var(--violet-soft);color:var(--ink);font-size:14px}
 
 /* Meters, dashboard */

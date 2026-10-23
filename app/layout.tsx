@@ -5,7 +5,7 @@ import "../styles.css";
 
 export const metadata: Metadata = {
   title: "Orbit by SLAWN — Practise your exam",
-  description: "Exam practice for Covenant University courses, built from past questions.",
+  description: "Exam practice for Covenant University courses, built from course papers and lecture notes.",
   icons: { icon: "/orbit-icon.svg", apple: "/apple-touch-icon.png" },
   manifest: "/manifest.webmanifest",
   appleWebApp: { capable: true, title: "Orbit" },

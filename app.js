@@ -225,20 +225,20 @@ async function loadBanks(){
   Object.keys(banks).forEach(k => delete banks[k]); Object.keys(realBank).forEach(k => delete realBank[k]);
   const size = 1000; let from = 0;
   const loadedIds = new Set();
-  const addQuestion = q => {
+  const addQuestion = (q, pastQuestion = true) => {
     if(!q || !q.id || !q.prompt || !Array.isArray(q.options) || q.options.length < 2 || !q.options.some(o => o && o.ok)) return;
     q.topic = q.topic || "General"; q.explain = q.explain || "";
     const code = String(q.course || "").toUpperCase();
     if(!code || loadedIds.has(String(q.id))) return;
     loadedIds.add(String(q.id));
     (banks[code] = banks[code] || []).push(q);
-    realBank[code] = true;
+    if(pastQuestion) realBank[code] = true;
   };
   try{
     for(;;){
       const {data, error} = await sb.from("questions").select("id,course,topic,prompt,d,options,explain").order("id").range(from, from + size - 1);
       if(error) throw error;
-      (data || []).forEach(addQuestion);
+      (data || []).forEach(q => addQuestion(q, String(q.course || "").toUpperCase() !== "MTH213"));
       if(!data || data.length < size) break;
       from += size;
     }
@@ -248,7 +248,7 @@ async function loadBanks(){
     if(!response.ok) throw new Error(`Question bank request failed (${response.status})`);
     const localQuestions = await response.json();
     if(!Array.isArray(localQuestions)) throw new Error("MTH213 question bank must be a JSON array");
-    localQuestions.forEach(addQuestion);
+    localQuestions.forEach(q => addQuestion(q, false));
   }catch(e){ console.warn("Orbit: couldn’t load the bundled MTH213 question bank", e); }
 }
 async function connectRoom(){   // live duels still use the Claude room when the page runs inside Claude; otherwise challenge codes
@@ -570,7 +570,8 @@ function renderGrid(){
   const filteredCourses = COURSES.filter(c => availableCodes.includes(c.code) && `${c.code} ${c.name || ""} ${c.category || ""}`.toLocaleLowerCase().includes(query));
   $("grid").innerHTML = filteredCourses.length ? filteredCourses.map((c, i) => {
     const acc = courseAcc(c.code);
-    const st = realBank[c.code] ? `${banks[c.code].length} past questions` : "Sample set for now";
+    const count = banks[c.code] ? banks[c.code].length : 0;
+    const st = count ? `${count} ${c.code === "MTH213" ? "practice questions" : "past questions"}` : "Sample set for now";
     const details = [c.credits === undefined ? "" : `${c.credits} credits`, c.category || ""].filter(Boolean).join(" · ");
     return `<button class="ccard glass" data-code="${c.code}" style="animation-delay:${reduce ? 0 : i * 40}ms">${courseMark(c, "course-mark--large")}<strong>${c.code}</strong>${c.name ? `<span class="course-name">${esc(c.name)}</span>` : ""}${details ? `<span class="course-details">${esc(details)}</span>` : ""}<span class="st">${acc === null ? st : Math.round(acc * 100) + "% accuracy"}</span>${acc === null ? "" : `<div class="meter"><i style="width:${Math.round(acc * 100)}%;background:var(--ink)"></i></div>`}</button>`;
   }).join("") : `<p class="grid-empty">No Industrial Physics ${esc(level)} courses match “${esc($("courseSearch").value.trim())}”.</p>`;
@@ -600,13 +601,19 @@ function openSheet(code){
   const topics = [...new Set(bankFor(code).map(q => q.topic).filter(Boolean))].sort((a, b) => a.localeCompare(b));
   if(p.source === "topic" && !topics.includes(p.topic)) p.topic = "";
   if(p.source === "past" && !realBank[code]) p.source = "all";
+  const questionCount = banks[code] ? banks[code].length : 0;
+  const questionSummary = questionCount
+    ? `${questionCount} ${code === "MTH213" ? "practice questions" : "past questions"}`
+    : "Sample questions";
+  const sourceOptions = code === "MTH213"
+    ? [["all","All questions"],["topic","A topic"]]
+    : [["all","All"],["past","Past questions"],["topic","A topic"]];
   const sheet = $("sheet");
   sheet.innerHTML = `<div class="grab"></div>
-    <div class="sheet-head">${courseMark(c, "course-mark--sheet")}<div><strong>${code}</strong><span>${realBank[code] ? banks[code].length + " past questions" : "Sample questions"}</span></div>
+    <div class="sheet-head">${courseMark(c, "course-mark--sheet")}<div><strong>${code}</strong><span>${questionSummary}</span></div>
       <button class="close" id="sheetClose" aria-label="Close"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
-    ${realBank[code] ? "" : `<p class="notice">No ${code} past questions have been added yet, so you’ll practise the sample set until they are.</p>`}
-    ${code === "MTH213" ? `<a class="sheet-paper-link" href="/questions/papers/MAT213-2023-2024-Alpha.pdf" target="_blank" rel="noopener noreferrer">Open the original MAT213 2023/2024 Alpha paper (PDF)</a>` : ""}
-    <div class="pref"><label>Questions from</label>${seg("source", [["all","All"],["past","Past questions"],["topic","A topic"]], p.source, realBank[code] ? [] : ["past"])}</div>
+    ${code === "MTH213" ? `<p class="notice">Original practice questions based on your MTH213 lecture notes.</p>` : realBank[code] ? "" : `<p class="notice">No ${code} past questions have been added yet, so you’ll practise the sample set until they are.</p>`}
+    <div class="pref"><label>Questions from</label>${seg("source", sourceOptions, p.source, realBank[code] || code === "MTH213" ? [] : ["past"])}</div>
     <label class="topic-select-wrap" id="topicSelectWrap" ${p.source === "topic" ? "" : "hidden"}><span>Choose a topic</span><select class="topic-select" id="topicSelect"><option value="">Select a topic</option>${topics.map(topic => `<option value="${esc(topic)}" ${p.topic === topic ? "selected" : ""}>${esc(topic)}</option>`).join("")}</select></label>
     <div class="pref"><label>Questions</label>${seg("count", [[5,"5"],[10,"10"],[15,"15"],[20,"20"],[60,"60"]], p.count)}</div>
     <div class="pref"><label>Session timer</label>${seg("timer", [[0,"Off"],[600,"10m"],[1200,"20m"],[1800,"30m"],[3600,"60m"]], p.timer)}</div>

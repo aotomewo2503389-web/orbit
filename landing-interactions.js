@@ -120,7 +120,7 @@ if (showcaseRoot) {
       number: "01",
       eyebrow: "Practice first",
       title: "Real questions. No warm-up.",
-      copy: "Jump straight into course-specific past questions. Choose an answer, build exam confidence, and keep moving at your pace.",
+      copy: "Jump straight into course-specific questions. Choose an answer, build exam confidence, and keep moving at your pace.",
       kind: "question"
     },
     {
