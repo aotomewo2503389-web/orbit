@@ -605,6 +605,7 @@ function openSheet(code){
     <div class="sheet-head">${courseMark(c, "course-mark--sheet")}<div><strong>${code}</strong><span>${realBank[code] ? banks[code].length + " past questions" : "Sample questions"}</span></div>
       <button class="close" id="sheetClose" aria-label="Close"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
     ${realBank[code] ? "" : `<p class="notice">No ${code} past questions have been added yet, so you’ll practise the sample set until they are.</p>`}
+    ${code === "MTH213" ? `<a class="sheet-paper-link" href="/questions/papers/MAT213-2023-2024-Alpha.pdf" target="_blank" rel="noopener noreferrer">Open the original MAT213 2023/2024 Alpha paper (PDF)</a>` : ""}
     <div class="pref"><label>Questions from</label>${seg("source", [["all","All"],["past","Past questions"],["topic","A topic"]], p.source, realBank[code] ? [] : ["past"])}</div>
     <label class="topic-select-wrap" id="topicSelectWrap" ${p.source === "topic" ? "" : "hidden"}><span>Choose a topic</span><select class="topic-select" id="topicSelect"><option value="">Select a topic</option>${topics.map(topic => `<option value="${esc(topic)}" ${p.topic === topic ? "selected" : ""}>${esc(topic)}</option>`).join("")}</select></label>
     <div class="pref"><label>Questions</label>${seg("count", [[5,"5"],[10,"10"],[15,"15"],[20,"20"],[60,"60"]], p.count)}</div>
