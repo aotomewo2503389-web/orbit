@@ -7,7 +7,30 @@ const customWidth = (width: string): WidthStyle => ({ "--w": width });
 
 export default function HomePage() {
   useEffect(() => {
-    Promise.all([import("../app.js"), import("../landing-interactions.js")]).catch((error: unknown) => {
+    const loadOrbit = async () => {
+      const globalWindow = window as Window & { supabase?: unknown };
+
+      if (!globalWindow.supabase) {
+        await new Promise<void>((resolve) => {
+          let attempts = 0;
+
+          const tick = () => {
+            attempts += 1;
+            if ((window as Window & { supabase?: unknown }).supabase || attempts >= 50) {
+              resolve();
+              return;
+            }
+            setTimeout(tick, 100);
+          };
+
+          tick();
+        });
+      }
+
+      await Promise.all([import("../app.js"), import("../landing-interactions.js")]);
+    };
+
+    loadOrbit().catch((error: unknown) => {
       console.error("Orbit could not initialize.", error);
     });
   }, []);
