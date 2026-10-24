@@ -1,0 +1,857 @@
+[
+  {
+    "id": "PHY211-NOTE-001",
+    "course": "PHY211",
+    "topic": "Special Relativity",
+    "prompt": "A reference frame is inertial when:",
+    "d": 1,
+    "options": [
+      {"t": "Newton's laws hold in it, and a force-free body moves at constant velocity", "ok": true},
+      {"t": "It is at rest relative to the centre of the universe", "tag": "Assumed an absolute frame", "why": "Relativity does not privilege a fixed absolute frame; inertial frames move uniformly relative to one another."},
+      {"t": "It rotates at a constant angular speed", "tag": "Confused uniform translation with rotation", "why": "A rotating frame is generally non-inertial because fictitious forces are needed to describe motion."},
+      {"t": "It is attached to any accelerating object", "tag": "Ignored acceleration", "why": "An accelerating frame is non-inertial in the usual Newtonian description."}
+    ],
+    "explain": "An inertial frame is one in which Newton's first law holds: a body with no net force remains at rest or moves uniformly in a straight line."
+  },
+  {
+    "id": "PHY211-NOTE-002",
+    "course": "PHY211",
+    "topic": "Special Relativity",
+    "prompt": "Which statement is one of Einstein's special-relativity postulates?",
+    "d": 1,
+    "options": [
+      {"t": "The laws of physics have the same form in all inertial frames", "ok": true},
+      {"t": "The laws of mechanics apply only in the frame where a body starts", "tag": "Restricted the principle of relativity", "why": "The postulate applies to all inertial frames, not one preferred starting frame."},
+      {"t": "Absolute rest can be detected by measuring light in one direction", "tag": "Introduced a preferred frame", "why": "Special relativity has no preferred inertial frame in which absolute motion can be measured."},
+      {"t": "Time is absolute and independent of the observer", "tag": "Used the Newtonian view of time", "why": "In special relativity, measurements of time and simultaneity can depend on the inertial observer."}
+    ],
+    "explain": "Einstein's first postulate states that all laws of physics are the same in every inertial reference frame. His second postulate states that light in vacuum has the same speed for all inertial observers."
+  },
+  {
+    "id": "PHY211-NOTE-003",
+    "course": "PHY211",
+    "topic": "Special Relativity",
+    "prompt": "Frame K' moves at speed v in the positive x direction relative to K. What is the Galilean coordinate transformation for x'?",
+    "d": 1,
+    "options": [
+      {"t": "x'=x-vt", "ok": true},
+      {"t": "x'=x+vt", "tag": "Used the inverse transformation", "why": "For K' moving in the positive direction, subtract its displacement vt from x to obtain x'."},
+      {"t": "x'=gamma(x-vt)", "tag": "Used the Lorentz transformation", "why": "The gamma factor belongs to the Lorentz transformation, not the Galilean transformation."},
+      {"t": "x'=x-v/t", "tag": "Mishandled velocity and time", "why": "The displacement of the moving frame is vt, not v/t."}
+    ],
+    "explain": "For the stated direction of motion, the Galilean transformation is x'=x-vt. It also assumes t'=t; the inverse relation is x=x'+vt."
+  },
+  {
+    "id": "PHY211-NOTE-004",
+    "course": "PHY211",
+    "topic": "Special Relativity",
+    "prompt": "What is the Lorentz factor for an object moving at 0.8c?",
+    "d": 2,
+    "options": [
+      {"t": "5/3", "ok": true},
+      {"t": "3/5", "tag": "Inverted the Lorentz factor", "why": "gamma=1/sqrt(1-v^2/c^2), so it is greater than one for nonzero speed."},
+      {"t": "4/3", "tag": "Used 1/sqrt(1-v/c)", "why": "The expression uses the square of v/c: gamma=1/sqrt(1-v^2/c^2)."},
+      {"t": "1", "tag": "Ignored the speed", "why": "gamma approaches one only when v is much smaller than c."}
+    ],
+    "explain": "gamma=1/sqrt(1-0.8^2)=1/sqrt(0.36)=1/0.6=5/3."
+  },
+  {
+    "id": "PHY211-NOTE-005",
+    "course": "PHY211",
+    "topic": "Special Relativity",
+    "prompt": "A spaceship has a proper length of 10 m and passes an observer at 0.8c. What length does that observer measure along the direction of motion?",
+    "d": 2,
+    "options": [
+      {"t": "6 m", "ok": true},
+      {"t": "10 m", "tag": "Ignored length contraction", "why": "The moving length parallel to the motion is L=L0/gamma, which is shorter than its proper length."},
+      {"t": "16.7 m", "tag": "Multiplied instead of divided by gamma", "why": "Length contraction divides the proper length by gamma."},
+      {"t": "8 m", "tag": "Used 1-v/c as the contraction factor", "why": "Length contraction uses 1/gamma=sqrt(1-v^2/c^2), not 1-v/c."}
+    ],
+    "explain": "At 0.8c, gamma=5/3. The measured length is L=L0/gamma=10/(5/3)=6 m."
+  },
+  {
+    "id": "PHY211-NOTE-006",
+    "course": "PHY211",
+    "topic": "Special Relativity",
+    "prompt": "A clock measures 2.0 s between two events that occur at the same place in the clock's rest frame. How much time elapses according to an observer for whom the clock moves at 0.8c?",
+    "d": 3,
+    "options": [
+      {"t": "10/3 s", "ok": true},
+      {"t": "1.2 s", "tag": "Applied length contraction to a time interval", "why": "The moving clock runs slow: the observer measures the dilated interval gamma times the proper time."},
+      {"t": "2.0 s", "tag": "Ignored time dilation", "why": "The interval measured in the clock's rest frame is the proper time; a moving observer measures a longer interval."},
+      {"t": "5/3 s", "tag": "Reported gamma instead of elapsed time", "why": "Multiply the proper time, 2.0 s, by gamma=5/3."}
+    ],
+    "explain": "The proper time is 2.0 s and gamma=5/3, so the moving observer measures Delta t=gamma Delta tau=(5/3)(2.0)=10/3 s."
+  },
+  {
+    "id": "PHY211-NOTE-007",
+    "course": "PHY211",
+    "topic": "Special Relativity",
+    "prompt": "Two events are simultaneous in one inertial frame. Which statement is generally correct?",
+    "d": 2,
+    "options": [
+      {"t": "They need not be simultaneous in a frame moving relative to the first", "ok": true},
+      {"t": "They are simultaneous in every inertial frame", "tag": "Assumed absolute simultaneity", "why": "Relativity of simultaneity means observers in relative motion can disagree about whether separated events occurred at the same time."},
+      {"t": "They become simultaneous only if both occur at the same position", "tag": "Confused simultaneity with coincidence", "why": "The events can be spatially separated; simultaneity can still depend on the frame."},
+      {"t": "Their order is reversed in every moving frame", "tag": "Overstated the frame dependence", "why": "Relativity permits different time assignments for separated events, but does not require a reversal in every frame."}
+    ],
+    "explain": "For spatially separated events, simultaneity depends on the inertial frame. Observers in relative motion can disagree about whether the events occurred at the same time."
+  },
+  {
+    "id": "PHY211-NOTE-008",
+    "course": "PHY211",
+    "topic": "Special Relativity",
+    "prompt": "When is the Galilean transformation a good approximation to the Lorentz transformation?",
+    "d": 1,
+    "options": [
+      {"t": "When the relative speed is much smaller than the speed of light", "ok": true},
+      {"t": "Only when the relative speed equals the speed of light", "tag": "Used an impossible frame speed", "why": "The Galilean limit is v/c much less than one, not v=c."},
+      {"t": "When the moving frame accelerates rapidly", "tag": "Confused frame acceleration with speed", "why": "The approximation concerns relative speed compared with c; an accelerating frame is a separate issue."},
+      {"t": "At every speed if the time coordinates are set equal", "tag": "Assumed absolute time at relativistic speeds", "why": "At speeds approaching c, Lorentz time and space transformations cannot generally be replaced by Galilean ones."}
+    ],
+    "explain": "For v much smaller than c, gamma is approximately one and the Lorentz transformations reduce to the Galilean transformations."
+  },
+  {
+    "id": "PHY211-NOTE-009",
+    "course": "PHY211",
+    "topic": "Relativistic Energy and Momentum",
+    "prompt": "What is the relativistic momentum of a particle with rest mass m and speed v?",
+    "d": 1,
+    "options": [
+      {"t": "p=gamma mv", "ok": true},
+      {"t": "p=mv/gamma", "tag": "Placed gamma in the denominator", "why": "Relativistic momentum is gamma times the Newtonian expression mv."},
+      {"t": "p=gamma mc^2", "tag": "Confused momentum with energy", "why": "Momentum has units of mass times speed; total energy is gamma mc^2."},
+      {"t": "p=m v^2", "tag": "Used speed squared", "why": "Momentum is proportional to velocity, not velocity squared."}
+    ],
+    "explain": "The relativistic momentum is p=gamma mv, with gamma=1/sqrt(1-v^2/c^2). At low speed gamma approaches one and p approaches mv."
+  },
+  {
+    "id": "PHY211-NOTE-010",
+    "course": "PHY211",
+    "topic": "Relativistic Energy and Momentum",
+    "prompt": "A particle moves at 0.6c. What is its relativistic momentum in terms of its rest mass m?",
+    "d": 2,
+    "options": [
+      {"t": "0.75mc", "ok": true},
+      {"t": "0.60mc", "tag": "Used Newtonian momentum", "why": "At 0.6c the Lorentz factor is 1.25, so p=gamma m(0.6c)."},
+      {"t": "1.25mc", "tag": "Reported gamma times mc only", "why": "The momentum also includes the speed factor 0.6c."},
+      {"t": "0.48mc", "tag": "Multiplied by 1/gamma", "why": "Relativistic momentum uses gamma, not its reciprocal."}
+    ],
+    "explain": "gamma=1/sqrt(1-0.6^2)=1.25. Therefore p=gamma mv=1.25m(0.6c)=0.75mc."
+  },
+  {
+    "id": "PHY211-NOTE-011",
+    "course": "PHY211",
+    "topic": "Relativistic Energy and Momentum",
+    "prompt": "Which expression gives a particle's total relativistic energy?",
+    "d": 1,
+    "options": [
+      {"t": "E=gamma mc^2", "ok": true},
+      {"t": "E=gamma mv", "tag": "Gave the momentum formula", "why": "gamma mv is relativistic momentum; total energy has units and form gamma mc^2."},
+      {"t": "E=mc", "tag": "Omitted a factor of c", "why": "Rest energy is mc^2, not mc."},
+      {"t": "E=(gamma-1)mc^2", "tag": "Gave kinetic energy only", "why": "(gamma-1)mc^2 is relativistic kinetic energy; total energy also includes rest energy."}
+    ],
+    "explain": "The total energy is E=gamma mc^2. At rest gamma=1, so the energy is the rest energy E0=mc^2."
+  },
+  {
+    "id": "PHY211-NOTE-012",
+    "course": "PHY211",
+    "topic": "Relativistic Energy and Momentum",
+    "prompt": "A particle moves at 0.6c. What is its kinetic energy in terms of its rest energy mc^2?",
+    "d": 2,
+    "options": [
+      {"t": "0.25mc^2", "ok": true},
+      {"t": "1.25mc^2", "tag": "Reported total energy factor", "why": "The total energy is 1.25mc^2; subtract the rest energy mc^2 to get kinetic energy."},
+      {"t": "0.60mc^2", "tag": "Used v/c instead of gamma-1", "why": "Relativistic kinetic energy is (gamma-1)mc^2, not (v/c)mc^2."},
+      {"t": "0.36mc^2", "tag": "Used the squared speed fraction", "why": "The exact relativistic kinetic energy uses gamma-1, not v^2/c^2."}
+    ],
+    "explain": "For v=0.6c, gamma=1.25. Thus K=(gamma-1)mc^2=0.25mc^2."
+  },
+  {
+    "id": "PHY211-NOTE-013",
+    "course": "PHY211",
+    "topic": "Relativistic Energy and Momentum",
+    "prompt": "What is the relativistic kinetic energy of a particle at rest?",
+    "d": 1,
+    "options": [
+      {"t": "Zero; its total energy is still mc^2", "ok": true},
+      {"t": "mc^2", "tag": "Confused rest energy with kinetic energy", "why": "Rest energy is part of total energy, but kinetic energy is zero when the particle is at rest."},
+      {"t": "gamma mc^2 with gamma equal to zero", "tag": "Used the wrong Lorentz factor", "why": "At rest gamma=1, not zero."},
+      {"t": "Infinite", "tag": "Applied the light-speed limit at rest", "why": "The Lorentz factor is finite and equals one when v=0."}
+    ],
+    "explain": "K=(gamma-1)mc^2. At rest v=0 and gamma=1, so K=0 while total energy remains E0=mc^2."
+  },
+  {
+    "id": "PHY211-NOTE-014",
+    "course": "PHY211",
+    "topic": "Blackbody Radiation",
+    "prompt": "Which idealized property defines a blackbody?",
+    "d": 1,
+    "options": [
+      {"t": "It absorbs all incident radiation and reflects none", "ok": true},
+      {"t": "It reflects all wavelengths equally", "tag": "Described a perfect reflector", "why": "A blackbody is an ideal absorber, not a perfect reflector."},
+      {"t": "It emits radiation at one wavelength only", "tag": "Confused a spectrum with a spectral line", "why": "A blackbody emits a continuous spectrum whose distribution depends on temperature."},
+      {"t": "Its radiation depends on the chemical material of the cavity", "tag": "Missed the universal character", "why": "At thermal equilibrium, the blackbody spectrum is universal and independent of the cavity material."}
+    ],
+    "explain": "A blackbody is an ideal absorber: it absorbs all radiation incident on it and reflects none. In thermal equilibrium it is also an excellent emitter."
+  },
+  {
+    "id": "PHY211-NOTE-015",
+    "course": "PHY211",
+    "topic": "Blackbody Radiation",
+    "prompt": "Why is a small opening into a hollow cavity a useful approximation to a blackbody?",
+    "d": 2,
+    "options": [
+      {"t": "Radiation entering the opening is repeatedly reflected inside and is very likely to be absorbed", "ok": true},
+      {"t": "The opening emits only the light originally reflected from its surface", "tag": "Ignored absorption inside the cavity", "why": "Repeated internal reflections make the entering radiation unlikely to escape before being absorbed."},
+      {"t": "The cavity makes all incident radiation change to a single frequency", "tag": "Assumed frequency conversion", "why": "The cavity approximates an absorber; it does not force all radiation to one frequency."},
+      {"t": "The hole prevents the walls from reaching thermal equilibrium", "tag": "Reversed the cavity's role", "why": "A cavity at thermal equilibrium provides a stable setting in which blackbody radiation can be studied."}
+    ],
+    "explain": "A ray entering a small cavity opening undergoes many reflections; each reflection gives another chance of absorption. Only a small fraction escapes, so the opening behaves like an excellent absorber."
+  },
+  {
+    "id": "PHY211-NOTE-016",
+    "course": "PHY211",
+    "topic": "Blackbody Radiation",
+    "prompt": "What did Planck's quantum hypothesis say about the energy of an oscillator of frequency f?",
+    "d": 2,
+    "options": [
+      {"t": "Its allowed energies occur in discrete amounts proportional to hf", "ok": true},
+      {"t": "It can have any energy continuously, independent of frequency", "tag": "Used the classical continuous-energy picture", "why": "Planck introduced discrete energy elements proportional to frequency to account for the observed spectrum."},
+      {"t": "Its energy is always exactly h/f", "tag": "Inverted the frequency relation", "why": "The quantum energy is proportional to frequency: one quantum has energy hf."},
+      {"t": "Only the oscillator's temperature is quantized", "tag": "Quantized the wrong quantity", "why": "Planck's proposal quantized the allowed oscillator energies, not temperature."}
+    ],
+    "explain": "Planck proposed that oscillator energies are quantized, with allowed values in multiples of hf (often written E_n=nhf). This resolved the classical prediction's failure for blackbody radiation."
+  },
+  {
+    "id": "PHY211-NOTE-017",
+    "course": "PHY211",
+    "topic": "Blackbody Radiation",
+    "prompt": "As the temperature of a blackbody increases, how does the wavelength of peak emission change?",
+    "d": 2,
+    "options": [
+      {"t": "It becomes shorter", "ok": true},
+      {"t": "It becomes longer", "tag": "Reversed Wien's displacement trend", "why": "Wien's displacement law states that wavelength at peak emission is inversely proportional to absolute temperature."},
+      {"t": "It stays fixed because the material is unchanged", "tag": "Ignored temperature dependence", "why": "The peak wavelength depends on temperature even though the blackbody spectrum is independent of material."},
+      {"t": "It becomes zero at any finite temperature", "tag": "Overstated the high-temperature limit", "why": "The peak shifts toward shorter wavelengths as temperature rises but remains finite at finite temperature."}
+    ],
+    "explain": "Wien's displacement law is lambda_max T=b. Raising T therefore lowers the wavelength at which the spectrum peaks."
+  },
+  {
+    "id": "PHY211-NOTE-018",
+    "course": "PHY211",
+    "topic": "Blackbody Radiation",
+    "prompt": "According to the Stefan-Boltzmann law, how does the power radiated per unit area by an ideal blackbody vary with absolute temperature?",
+    "d": 2,
+    "options": [
+      {"t": "It is proportional to T^4", "ok": true},
+      {"t": "It is proportional to T", "tag": "Used a linear temperature dependence", "why": "The Stefan-Boltzmann law has a fourth-power dependence on absolute temperature."},
+      {"t": "It is proportional to 1/T^4", "tag": "Inverted the temperature dependence", "why": "The emitted power increases rapidly with temperature; it is not inversely proportional."},
+      {"t": "It is independent of temperature", "tag": "Ignored thermal emission", "why": "The total emitted power per unit area is sigma T^4 for an ideal blackbody."}
+    ],
+    "explain": "For an ideal blackbody the emitted power per unit area is P/A=sigma T^4, where sigma is the Stefan-Boltzmann constant."
+  },
+  {
+    "id": "PHY211-NOTE-019",
+    "course": "PHY211",
+    "topic": "Photoelectric Effect",
+    "prompt": "What is the photoelectric effect?",
+    "d": 1,
+    "options": [
+      {"t": "Emission of electrons from a material when suitable-frequency radiation shines on it", "ok": true},
+      {"t": "Emission of photons when electrons are heated in a vacuum", "tag": "Reversed the emitted particle", "why": "In the photoelectric effect, light incident on a surface causes electrons to be emitted."},
+      {"t": "Reflection of all light from a metal surface", "tag": "Confused emission with reflection", "why": "The effect concerns electron emission, not simply reflected light."},
+      {"t": "A change in an atom's nucleus caused by visible light", "tag": "Confused an electronic process with a nuclear one", "why": "Photoelectrons are emitted from the material's electronic structure; the process is not a nuclear reaction."}
+    ],
+    "explain": "In the photoelectric effect, incident radiation of suitable frequency transfers energy to electrons in a material, and some electrons escape from its surface."
+  },
+  {
+    "id": "PHY211-NOTE-020",
+    "course": "PHY211",
+    "topic": "Photoelectric Effect",
+    "prompt": "A photon of frequency f has what energy?",
+    "d": 1,
+    "options": [
+      {"t": "E=hf", "ok": true},
+      {"t": "E=h/f", "tag": "Inverted the frequency", "why": "Photon energy is directly proportional to frequency."},
+      {"t": "E=hf^2", "tag": "Squared the frequency", "why": "Planck's relation is linear in frequency: E=hf."},
+      {"t": "E=f/h", "tag": "Inverted Planck's constant", "why": "Multiplying frequency by Planck's constant gives the energy."}
+    ],
+    "explain": "The photon energy is E=hf, where h is Planck's constant. Since c=f lambda, higher frequency corresponds to shorter wavelength and greater photon energy."
+  },
+  {
+    "id": "PHY211-NOTE-021",
+    "course": "PHY211",
+    "topic": "Photoelectric Effect",
+    "prompt": "For a metal with work function phi, what is the threshold frequency for photoemission?",
+    "d": 2,
+    "options": [
+      {"t": "f0=phi/h", "ok": true},
+      {"t": "f0=h phi", "tag": "Multiplied instead of divided", "why": "At threshold, hf0=phi, so divide the work function by h."},
+      {"t": "f0=phi h^2", "tag": "Introduced an extra factor", "why": "The threshold follows directly from equating the photon energy hf0 to the work function."},
+      {"t": "f0=1/(h phi)", "tag": "Inverted both sides incorrectly", "why": "Solving hf0=phi for f0 gives phi/h."}
+    ],
+    "explain": "At threshold the photon supplies exactly the work function: hf0=phi. Therefore f0=phi/h."
+  },
+  {
+    "id": "PHY211-NOTE-022",
+    "course": "PHY211",
+    "topic": "Photoelectric Effect",
+    "prompt": "For light above the threshold frequency, which equation gives the maximum kinetic energy of an emitted photoelectron?",
+    "d": 2,
+    "options": [
+      {"t": "Kmax=hf-phi", "ok": true},
+      {"t": "Kmax=hf+phi", "tag": "Added the energy needed to escape", "why": "The work function is spent escaping the surface, leaving photon energy minus phi as kinetic energy."},
+      {"t": "Kmax=phi-hf", "tag": "Reversed the energy balance", "why": "For emission, hf is at least phi; the excess becomes the electron's kinetic energy."},
+      {"t": "Kmax=h/f-phi", "tag": "Used the wrong photon energy", "why": "The photon energy is hf, not h/f."}
+    ],
+    "explain": "Einstein's photoelectric equation is hf=phi+Kmax. The work function supplies the escape energy and the remainder becomes the maximum kinetic energy."
+  },
+  {
+    "id": "PHY211-NOTE-023",
+    "course": "PHY211",
+    "topic": "Photoelectric Effect",
+    "prompt": "For light already above a metal's threshold frequency, what is the main effect of increasing its intensity while keeping its frequency fixed?",
+    "d": 2,
+    "options": [
+      {"t": "More photoelectrons are emitted per unit time, while their maximum kinetic energy is unchanged", "ok": true},
+      {"t": "The maximum kinetic energy rises because each photon has more energy", "tag": "Confused intensity with photon energy", "why": "At fixed frequency, each photon still has energy hf; intensity mainly changes the photon flux."},
+      {"t": "Photoemission stops because the work function increases", "tag": "Made the material property depend on intensity", "why": "The work function is a property of the material and does not increase simply because light intensity is raised."},
+      {"t": "The threshold frequency falls to zero", "tag": "Changed the material threshold", "why": "Threshold frequency is determined by the work function, not by the incident intensity."}
+    ],
+    "explain": "At fixed frequency, increasing intensity increases the number of incident photons per unit time, and typically the emission rate. The energy per photon hf, and hence Kmax=hf-phi, is unchanged."
+  },
+  {
+    "id": "PHY211-NOTE-024",
+    "course": "PHY211",
+    "topic": "Photoelectric Effect",
+    "prompt": "What is the stopping potential Vs related to the maximum photoelectron kinetic energy Kmax?",
+    "d": 2,
+    "options": [
+      {"t": "eVs=Kmax", "ok": true},
+      {"t": "Vs=eKmax", "tag": "Multiplied by the electron charge", "why": "The stopping potential's energy is eVs, so divide kinetic energy by e to find Vs."},
+      {"t": "Vs=Kmax/e^2", "tag": "Used the charge twice", "why": "An electron's change in electric potential energy has magnitude eVs."},
+      {"t": "e/Vs=Kmax", "tag": "Reversed the potential-energy relation", "why": "Potential difference times charge gives energy: Kmax=eVs."}
+    ],
+    "explain": "A retarding potential stops even the most energetic photoelectrons when eVs=Kmax, where e is the magnitude of the electron charge."
+  },
+  {
+    "id": "PHY211-NOTE-025",
+    "course": "PHY211",
+    "topic": "Atomic Structure and Bohr Model",
+    "prompt": "Why does the Bohr model produce discrete emission and absorption lines for hydrogen?",
+    "d": 2,
+    "options": [
+      {"t": "Electrons occupy allowed energy levels and photons carry the energy difference between levels", "ok": true},
+      {"t": "Electrons can have any orbit energy but emit only one fixed photon energy", "tag": "Kept a continuous electron energy", "why": "The model quantizes allowed electron energies; transition energies are differences between those levels."},
+      {"t": "The nucleus emits a continuous range of electron energies", "tag": "Assigned the transition to the nucleus", "why": "In the Bohr model, spectral photons are emitted or absorbed during electron transitions between allowed states."},
+      {"t": "The atom's radius is fixed at every energy", "tag": "Ignored the different allowed orbits", "why": "The model allows different discrete orbits with different energies and radii."}
+    ],
+    "explain": "Only certain electron energies are allowed. A transition between two levels emits or absorbs a photon whose energy equals the difference, Delta E=hf, producing discrete spectral lines."
+  },
+  {
+    "id": "PHY211-NOTE-026",
+    "course": "PHY211",
+    "topic": "Atomic Structure and Bohr Model",
+    "prompt": "In the Bohr model, what happens when a hydrogen electron moves from a lower energy level to a higher one?",
+    "d": 1,
+    "options": [
+      {"t": "It absorbs a photon with energy equal to the level difference", "ok": true},
+      {"t": "It emits a photon and loses the level difference", "tag": "Reversed absorption and emission", "why": "Moving to a higher energy requires the atom to absorb energy; a downward transition emits a photon."},
+      {"t": "It emits a photon with an arbitrary energy", "tag": "Ignored quantized transitions", "why": "The photon energy must match the difference between the two allowed levels."},
+      {"t": "Its energy stays unchanged because the orbit is quantized", "tag": "Misread quantization", "why": "Quantization permits discrete energies; a transition between them changes the electron's energy."}
+    ],
+    "explain": "An upward transition requires energy input. The atom absorbs a photon whose energy equals the difference between the final and initial energy levels."
+  },
+  {
+    "id": "PHY211-NOTE-027",
+    "course": "PHY211",
+    "topic": "Atomic Structure and Bohr Model",
+    "prompt": "For hydrogen in the Bohr model, what is the energy of level n?",
+    "d": 2,
+    "options": [
+      {"t": "En=-13.6 eV/n^2", "ok": true},
+      {"t": "En=13.6 eV/n", "tag": "Lost the negative sign and squared denominator", "why": "Bound hydrogen levels are negative and vary as 1/n^2."},
+      {"t": "En=-13.6 eV times n^2", "tag": "Reversed the level dependence", "why": "The energy approaches zero from below as n increases; it is inversely proportional to n^2."},
+      {"t": "En=-13.6 eV for every n", "tag": "Treated all levels as degenerate", "why": "The ground state is -13.6 eV; higher levels have different, less negative energies."}
+    ],
+    "explain": "The Bohr energy levels of hydrogen are En=-13.6/n^2 eV. The negative sign indicates a bound state, and n=1 is the ground state."
+  },
+  {
+    "id": "PHY211-NOTE-028",
+    "course": "PHY211",
+    "topic": "Atomic Structure and Bohr Model",
+    "prompt": "A hydrogen atom's electron falls from n=3 to n=2. What is the emitted photon energy?",
+    "d": 3,
+    "options": [
+      {"t": "1.89 eV", "ok": true},
+      {"t": "5.67 eV", "tag": "Used the n=3 binding energy alone", "why": "The emitted photon energy is the difference between the n=3 and n=2 levels, not the energy of either level alone."},
+      {"t": "3.40 eV", "tag": "Used the n=2 binding energy alone", "why": "The photon carries the difference between -1.51 eV and -3.40 eV."},
+      {"t": "0.94 eV", "tag": "Halved the level difference", "why": "Subtract the two level energies directly; there is no additional factor of one half."}
+    ],
+    "explain": "E3=-13.6/9=-1.51 eV and E2=-13.6/4=-3.40 eV. The emitted photon has energy E3-E2=1.89 eV."
+  },
+  {
+    "id": "PHY211-NOTE-029",
+    "course": "PHY211",
+    "topic": "Atomic Structure and Bohr Model",
+    "prompt": "Which quantization condition for angular momentum is used in the Bohr model?",
+    "d": 2,
+    "options": [
+      {"t": "L=n h/(2 pi)=n hbar, where n is a positive integer", "ok": true},
+      {"t": "L=h/n for every real n", "tag": "Inverted the quantum number", "why": "The allowed angular momenta are integer multiples of hbar, not h divided by n."},
+      {"t": "L=0 for every allowed orbit", "tag": "Removed orbital angular momentum", "why": "The Bohr model assigns discrete, nonzero angular momenta to its allowed orbits."},
+      {"t": "L=n h^2", "tag": "Used the wrong units and power", "why": "Angular momentum is quantized in units of hbar=h/(2pi), not h squared."}
+    ],
+    "explain": "Bohr's angular-momentum condition is L=n hbar=n h/(2pi), with n=1,2,3,... . It restricts the electron to particular allowed orbits."
+  },
+  {
+    "id": "PHY211-NOTE-030",
+    "course": "PHY211",
+    "topic": "Atomic Structure and Bohr Model",
+    "prompt": "What is the Bohr-model radius of the hydrogen orbit with principal quantum number n=3, in terms of the ground-state radius a0?",
+    "d": 2,
+    "options": [
+      {"t": "9a0", "ok": true},
+      {"t": "3a0", "tag": "Used a linear dependence on n", "why": "Bohr orbit radii scale as n^2, so the third orbit has radius 3^2 a0."},
+      {"t": "a0/9", "tag": "Inverted the radius scaling", "why": "The radius grows with n^2; it is not inversely proportional to n^2."},
+      {"t": "27a0", "tag": "Used a cubic dependence", "why": "The Bohr radius scales as the square of the principal quantum number."}
+    ],
+    "explain": "For hydrogen, the Bohr orbit radius is rn=n^2a0. At n=3, r3=9a0."
+  },
+  {
+    "id": "PHY211-NOTE-031",
+    "course": "PHY211",
+    "topic": "de Broglie Matter Waves",
+    "prompt": "What is the de Broglie wavelength of a particle with momentum p?",
+    "d": 1,
+    "options": [
+      {"t": "lambda=h/p", "ok": true},
+      {"t": "lambda=hp", "tag": "Multiplied by momentum", "why": "The wavelength is inversely proportional to momentum."},
+      {"t": "lambda=p/h", "tag": "Inverted the ratio", "why": "Planck's constant divided by momentum has the units of length."},
+      {"t": "lambda=h/p^2", "tag": "Squared the momentum", "why": "The de Broglie relation contains momentum to the first power."}
+    ],
+    "explain": "De Broglie's relation assigns a matter wavelength lambda=h/p to a particle of momentum p. For a nonrelativistic particle, p=mv."
+  },
+  {
+    "id": "PHY211-NOTE-032",
+    "course": "PHY211",
+    "topic": "de Broglie Matter Waves",
+    "prompt": "An electron's momentum is doubled while its Planck constant remains the same. What happens to its de Broglie wavelength?",
+    "d": 1,
+    "options": [
+      {"t": "It is halved", "ok": true},
+      {"t": "It doubles", "tag": "Used direct proportionality", "why": "Because lambda=h/p, increasing momentum decreases wavelength inversely."},
+      {"t": "It is unchanged", "tag": "Ignored the momentum dependence", "why": "Matter wavelength depends inversely on the particle's momentum."},
+      {"t": "It becomes four times larger", "tag": "Squared the momentum change", "why": "The wavelength varies as 1/p, not 1/p^2."}
+    ],
+    "explain": "With lambda=h/p, doubling p changes the wavelength to h/(2p), which is half its original value."
+  },
+  {
+    "id": "PHY211-NOTE-033",
+    "course": "PHY211",
+    "topic": "de Broglie Matter Waves",
+    "prompt": "How does a standing matter wave around a Bohr orbit explain angular-momentum quantization?",
+    "d": 3,
+    "options": [
+      {"t": "The orbit circumference must contain an integer number of de Broglie wavelengths, giving 2 pi r=n lambda", "ok": true},
+      {"t": "The orbit must contain half a wavelength regardless of its radius", "tag": "Used a fixed wavelength condition", "why": "A stable circular standing wave requires an integer number of wavelengths around the circumference."},
+      {"t": "The wavelength must equal the orbit's diameter for every n", "tag": "Ignored the principal quantum number", "why": "The number of wavelengths around the orbit is an integer n, so different n values give different allowed orbits."},
+      {"t": "The electron's momentum must vanish at the orbit", "tag": "Confused wave quantization with zero motion", "why": "The orbiting electron has nonzero momentum; its matter wavelength must fit consistently around the orbit."}
+    ],
+    "explain": "A stable circular matter wave must join smoothly after one orbit: 2pi r=n lambda. Substituting lambda=h/(mv) gives mvr=nh/(2pi)=n hbar, the Bohr angular-momentum condition."
+  },
+  {
+    "id": "PHY211-NOTE-034",
+    "course": "PHY211",
+    "topic": "de Broglie Matter Waves",
+    "prompt": "What observation in the Davisson-Germer experiment supported de Broglie's matter-wave hypothesis?",
+    "d": 2,
+    "options": [
+      {"t": "Electrons scattered by a crystal produced a diffraction pattern", "ok": true},
+      {"t": "A heated metal emitted electrons below every threshold frequency", "tag": "Described the photoelectric effect", "why": "Davisson-Germer measured electron diffraction from a crystal, supporting the wave nature of electrons."},
+      {"t": "Hydrogen atoms emitted a continuous spectrum", "tag": "Contradicted discrete atomic spectra", "why": "The experiment concerned electron scattering and diffraction, not hydrogen emission spectra."},
+      {"t": "Light bent around a slit while electrons remained particle-like", "tag": "Reversed the experiment's result", "why": "The key evidence was the diffraction of electrons by a crystal lattice."}
+    ],
+    "explain": "Davisson and Germer observed diffraction of electrons by a crystal. The diffraction pattern is characteristic of waves and agreed with the electron wavelength predicted by de Broglie."
+  },
+  {
+    "id": "PHY211-NOTE-035",
+    "course": "PHY211",
+    "topic": "Heisenberg Uncertainty Principle",
+    "prompt": "Which inequality expresses the position-momentum uncertainty principle?",
+    "d": 2,
+    "options": [
+      {"t": "Delta x Delta p >= hbar/2", "ok": true},
+      {"t": "Delta x Delta p = 0", "tag": "Assumed both quantities can be exact", "why": "Quantum mechanics imposes a nonzero lower bound on the product of the uncertainties."},
+      {"t": "Delta x/Delta p >= hbar/2", "tag": "Used a ratio instead of a product", "why": "The uncertainty relation involves the product of position and momentum uncertainties."},
+      {"t": "Delta x Delta p <= hbar/2", "tag": "Reversed the bound", "why": "The product cannot fall below hbar/2."}
+    ],
+    "explain": "Heisenberg's position-momentum relation is Delta x Delta p >= hbar/2. The two uncertainties cannot both be made arbitrarily small in the same quantum state."
+  },
+  {
+    "id": "PHY211-NOTE-036",
+    "course": "PHY211",
+    "topic": "Heisenberg Uncertainty Principle",
+    "prompt": "If the position uncertainty of a particle is reduced, what must happen to its momentum uncertainty?",
+    "d": 2,
+    "options": [
+      {"t": "It must increase enough that Delta x Delta p remains at least hbar/2", "ok": true},
+      {"t": "It must also decrease to zero", "tag": "Tried to make incompatible uncertainties vanish together", "why": "The uncertainty product has a nonzero lower bound, so reducing one generally requires increasing the other."},
+      {"t": "It becomes exactly hbar/(2 Delta x) in every state", "tag": "Mistook a lower bound for an equality", "why": "The relation sets a minimum product; a particular state need not saturate the bound."},
+      {"t": "It stays constant for every possible state", "tag": "Assumed a fixed uncertainty product", "why": "The product is bounded below but can be larger than hbar/2."}
+    ],
+    "explain": "Since Delta x Delta p cannot be less than hbar/2, a smaller position uncertainty requires a sufficiently larger momentum uncertainty. The product can exceed, but not fall below, the bound."
+  },
+  {
+    "id": "PHY211-NOTE-037",
+    "course": "PHY211",
+    "topic": "Heisenberg Uncertainty Principle",
+    "prompt": "Why is the uncertainty principle usually negligible for everyday macroscopic objects?",
+    "d": 2,
+    "options": [
+      {"t": "For their large masses, the corresponding velocity uncertainties are typically too small to notice", "ok": true},
+      {"t": "The uncertainty relation stops applying above atomic size", "tag": "Restricted a universal quantum relation", "why": "The relation still applies, but its effects are generally negligible at macroscopic scales."},
+      {"t": "Macroscopic objects have no momentum", "tag": "Confused small uncertainty with zero motion", "why": "Macroscopic objects can have substantial momentum; their relative quantum uncertainties are usually tiny."},
+      {"t": "Measurement removes all uncertainty for large objects", "tag": "Attributed the scale difference to perfect instruments", "why": "The principle is intrinsic to quantum states, not a limitation that disappears with better instruments."}
+    ],
+    "explain": "The uncertainty principle applies generally. For a macroscopic mass, a given momentum uncertainty corresponds to an extremely small velocity uncertainty, so the effect is usually unobservable in everyday motion."
+  },
+  {
+    "id": "PHY211-NOTE-038",
+    "course": "PHY211",
+    "topic": "Heisenberg Uncertainty Principle",
+    "prompt": "Which statement best describes the quantum-mechanical uncertainty principle?",
+    "d": 2,
+    "options": [
+      {"t": "It is an intrinsic limit on jointly precise values of certain pairs of observables, such as position and momentum", "ok": true},
+      {"t": "It says every measurement device has a fixed calibration error", "tag": "Confused intrinsic uncertainty with instrument error", "why": "The uncertainty relation is a property of quantum states, not merely a defect in a measuring device."},
+      {"t": "It says particles have no definite state before measurement", "tag": "Overstated the principle", "why": "The uncertainty relation constrains the spread of measurement outcomes; it is not simply a claim that no state exists."},
+      {"t": "It applies only when the particle is moving at the speed of light", "tag": "Added an unrelated speed condition", "why": "The uncertainty principle applies to quantum systems regardless of whether they are relativistic."}
+    ],
+    "explain": "The uncertainty principle constrains the simultaneous statistical spreads of incompatible observables. It is not merely the result of imperfect measuring equipment."
+  },
+  {
+    "id": "PHY211-NOTE-039",
+    "course": "PHY211",
+    "topic": "Wave Function and Schrödinger Equation",
+    "prompt": "In the wave-function description, what does |Psi(x,t)|^2 represent?",
+    "d": 1,
+    "options": [
+      {"t": "The probability density for finding the particle near position x at time t", "ok": true},
+      {"t": "The particle's electric charge at x", "tag": "Assigned the wave function a material property", "why": "The Born interpretation gives |Psi|^2 as probability density, not electric charge."},
+      {"t": "The probability amplitude itself, including its phase", "tag": "Confused amplitude with probability density", "why": "Psi is the generally complex amplitude; its squared magnitude |Psi|^2 is the probability density."},
+      {"t": "The particle's velocity at x", "tag": "Confused a probability with a kinematic quantity", "why": "The wave function describes the quantum state; |Psi|^2 gives the position probability density."}
+    ],
+    "explain": "According to the Born interpretation, |Psi(x,t)|^2 is the probability density for position. Integrating it over a region gives the probability of finding the particle in that region."
+  },
+  {
+    "id": "PHY211-NOTE-040",
+    "course": "PHY211",
+    "topic": "Wave Function and Schrödinger Equation",
+    "prompt": "What condition must a normalized one-dimensional wave function satisfy at a fixed time?",
+    "d": 2,
+    "options": [
+      {"t": "The integral of |Psi(x,t)|^2 over all space equals 1", "ok": true},
+      {"t": "The integral of Psi(x,t) over all space equals 0", "tag": "Normalized the amplitude rather than probability", "why": "Normalization requires total probability, the integral of |Psi|^2, to equal one."},
+      {"t": "Psi(x,t) must equal 1 at every position", "tag": "Confused normalization with a constant wave function", "why": "Normalization constrains the total probability, not the value of the wave function at every point."},
+      {"t": "The integral of |Psi(x,t)|^2 must equal the particle's mass", "tag": "Assigned the wrong total quantity", "why": "The total probability of finding the particle somewhere is one."}
+    ],
+    "explain": "For a normalized state, integral from -infinity to infinity of |Psi(x,t)|^2 dx=1. This ensures the total probability of finding the particle somewhere is one."
+  },
+  {
+    "id": "PHY211-NOTE-041",
+    "course": "PHY211",
+    "topic": "Wave Function and Schrödinger Equation",
+    "prompt": "Which equation describes the time evolution of a quantum state in the time-dependent Schrödinger formulation?",
+    "d": 2,
+    "options": [
+      {"t": "H-hat Psi=i hbar partial Psi/partial t", "ok": true},
+      {"t": "H-hat Psi=0 for every state", "tag": "Removed the time evolution", "why": "The time-dependent Schrödinger equation relates the Hamiltonian acting on the state to its time derivative."},
+      {"t": "Psi=H-hat squared", "tag": "Replaced an evolution equation with an algebraic identity", "why": "The equation is a differential equation in time, not a square relation."},
+      {"t": "partial Psi/partial t=i hbar H-hat Psi", "tag": "Inverted the factor of i hbar", "why": "Rearranging the standard equation gives partial Psi/partial t=H-hat Psi/(i hbar), not i hbar times H-hat Psi."}
+    ],
+    "explain": "The time-dependent Schrödinger equation is H-hat Psi=i hbar partial Psi/partial t. The Hamiltonian operator determines how the quantum state changes with time."
+  },
+  {
+    "id": "PHY211-NOTE-042",
+    "course": "PHY211",
+    "topic": "Wave Function and Schrödinger Equation",
+    "prompt": "In quantum mechanics, how is a measurable observable such as energy represented?",
+    "d": 2,
+    "options": [
+      {"t": "By a linear Hermitian operator", "ok": true},
+      {"t": "By a complex probability with no associated operator", "tag": "Omitted the observable operator", "why": "The quantum-mechanics postulates associate observables with linear Hermitian operators."},
+      {"t": "By a coordinate transformation only", "tag": "Confused an observable with a frame change", "why": "Observables are represented by operators acting on states."},
+      {"t": "By an arbitrary nonlinear function of the wave function", "tag": "Ignored the operator postulate", "why": "The stated postulates use linear Hermitian operators for observables."}
+    ],
+    "explain": "The quantum postulates associate each classical observable with a linear Hermitian operator. Measurements yield eigenvalues of the corresponding operator."
+  },
+  {
+    "id": "PHY211-NOTE-043",
+    "course": "PHY211",
+    "topic": "Wave Function and Schrödinger Equation",
+    "prompt": "If an observable operator satisfies A-hat psi=a psi, what measurement value is associated with this eigenstate?",
+    "d": 2,
+    "options": [
+      {"t": "a", "ok": true},
+      {"t": "Psi", "tag": "Reported the state instead of the observable value", "why": "The eigenvalue a is the measurable value associated with the eigenstate."},
+      {"t": "A-hat squared", "tag": "Applied the operator again without reason", "why": "The eigenvalue equation already identifies the measurement value as a."},
+      {"t": "Zero for every eigenstate", "tag": "Assumed all measurement outcomes vanish", "why": "Eigenvalues can be nonzero and represent the possible measurement outcomes."}
+    ],
+    "explain": "An eigenstate of an observable's operator with eigenvalue a yields the value a when that observable is measured."
+  },
+  {
+    "id": "PHY211-NOTE-044",
+    "course": "PHY211",
+    "topic": "Foundations of Quantum Theory",
+    "prompt": "Why did quantum mechanics become necessary for describing atoms and subatomic particles?",
+    "d": 1,
+    "options": [
+      {"t": "Classical mechanics could not explain important observations at microscopic scales", "ok": true},
+      {"t": "Newtonian mechanics stopped working for planets", "tag": "Changed the scale of the problem", "why": "Classical mechanics remains highly useful for everyday and many astronomical systems; its limitations motivating quantum mechanics appeared at microscopic scales."},
+      {"t": "Quantum theory was introduced only to describe planetary orbits", "tag": "Applied quantum theory to the wrong domain", "why": "Quantum mechanics was developed to describe microscopic systems such as atoms and subatomic particles."},
+      {"t": "Classical mechanics could not describe any motion at all", "tag": "Overstated classical mechanics' limitations", "why": "Classical mechanics is successful in many regimes; quantum theory is needed where microscopic phenomena require it."}
+    ],
+    "explain": "Classical or Newtonian mechanics successfully describes many macroscopic phenomena but fails to account for observations involving atoms and subatomic particles. Quantum mechanics was developed to describe those microscopic systems."
+  },
+  {
+    "id": "PHY211-NOTE-045",
+    "course": "PHY211",
+    "topic": "Foundations of Quantum Theory",
+    "prompt": "Which statement captures wave-particle duality as used in modern physics?",
+    "d": 2,
+    "options": [
+      {"t": "Radiation and matter can show both wave-like and particle-like behavior in appropriate experiments", "ok": true},
+      {"t": "Only light can show wave behavior and only matter can show particle behavior", "tag": "Separated behaviors too strictly", "why": "Both light and matter can display wave-like and particle-like properties, depending on how they interact or are measured."},
+      {"t": "Every particle always follows a visible classical wave path", "tag": "Treated a matter wave as a material ripple", "why": "Wave-particle duality describes quantum behavior; it does not mean a particle is a tiny classical wave in space."},
+      {"t": "Wave behavior and particle behavior occur only at the same time in every measurement", "tag": "Ignored experimental context", "why": "Different experiments reveal different aspects of quantum systems."}
+    ],
+    "explain": "Modern quantum theory describes light and matter using both wave-like and particle-like aspects. The behavior revealed depends on the physical interaction and measurement."
+  },
+  {
+    "id": "PHY211-NOTE-046",
+    "course": "PHY211",
+    "topic": "Foundations of Quantum Theory",
+    "prompt": "Which relation connects a photon's energy E to its frequency f?",
+    "d": 1,
+    "options": [
+      {"t": "E=hf", "ok": true},
+      {"t": "E=hf/c", "tag": "Introduced an unnecessary speed factor", "why": "Photon energy is Planck's constant times frequency; c relates frequency to wavelength, not energy in this expression."},
+      {"t": "E=h/f", "tag": "Inverted the frequency", "why": "Photon energy increases with frequency according to E=hf."},
+      {"t": "E=f^2/h", "tag": "Changed both the power and the ratio", "why": "The photon energy relation is linear in f and proportional to h."}
+    ],
+    "explain": "A photon has energy E=hf, where h is Planck's constant. This quantized relation underlies the photon explanation of the photoelectric effect."
+  },
+  {
+    "id": "PHY211-NOTE-047",
+    "course": "PHY211",
+    "topic": "Special Relativity",
+    "prompt": "Which pair gives the Lorentz transformation from K to K' when K' moves at speed v along the positive x direction?",
+    "d": 2,
+    "options": [
+      {"t": "x'=gamma(x-vt), t'=gamma(t-vx/c^2)", "ok": true},
+      {"t": "x'=x-vt, t'=t", "tag": "Used the Galilean transformation", "why": "The Galilean equations are the low-speed approximation; the Lorentz transformation includes gamma and mixes space with time."},
+      {"t": "x'=gamma(x+vt), t'=gamma(t+vx/c^2)", "tag": "Used the opposite direction of motion", "why": "For K' moving in the positive x direction, the forward transformation uses minus signs."},
+      {"t": "x'=gamma x, t'=gamma t", "tag": "Omitted the relative-motion terms", "why": "The Lorentz transformation includes terms involving both v and the other coordinate."}
+    ],
+    "explain": "For relative motion along x, the Lorentz transformation is x'=gamma(x-vt) and t'=gamma(t-vx/c^2), with y'=y and z'=z."
+  },
+  {
+    "id": "PHY211-NOTE-048",
+    "course": "PHY211",
+    "topic": "Relativistic Velocity Addition",
+    "prompt": "An object has velocity u' along the x-axis in K', while K' moves at velocity v relative to K. Which formula gives the object's velocity in K?",
+    "d": 2,
+    "options": [
+      {"t": "u=(u'+v)/(1+u'v/c^2)", "ok": true},
+      {"t": "u=u'+v with no correction at any speed", "tag": "Used Galilean addition at relativistic speeds", "why": "Relativistic velocity addition includes the denominator 1+u'v/c^2."},
+      {"t": "u=(u'-v)/(1-u'v/c^2)", "tag": "Applied the opposite frame direction", "why": "For the stated direction, combine u' and v with plus signs in both parts of the formula."},
+      {"t": "u=(u'+v)/(1-u'v/c^2)", "tag": "Used the wrong denominator sign", "why": "For velocities in the same positive direction, the denominator is 1+u'v/c^2."}
+    ],
+    "explain": "For collinear velocities, u=(u'+v)/(1+u'v/c^2). When both speeds are much smaller than c, the denominator is approximately one and the formula approaches Galilean addition."
+  },
+  {
+    "id": "PHY211-NOTE-049",
+    "course": "PHY211",
+    "topic": "Relativistic Velocity Addition",
+    "prompt": "A probe moves at 0.60c relative to a spacecraft, which moves at 0.50c relative to Earth in the same direction. What is the probe's speed relative to Earth?",
+    "d": 3,
+    "options": [
+      {"t": "0.846c (approximately)", "ok": true},
+      {"t": "1.10c", "tag": "Added speeds using the Galilean rule", "why": "Relativistic velocity addition keeps the resulting speed below c."},
+      {"t": "0.30c", "tag": "Multiplied the speeds", "why": "The collinear velocity-addition law uses a sum divided by 1+u'v/c^2."},
+      {"t": "0.733c", "tag": "Used the wrong denominator", "why": "The denominator is 1+(0.60)(0.50)=1.30, so divide 1.10c by 1.30."}
+    ],
+    "explain": "u=(0.60c+0.50c)/(1+0.60*0.50)=1.10c/1.30=0.846c. Direct addition would incorrectly give a speed above c."
+  },
+  {
+    "id": "PHY211-NOTE-050",
+    "course": "PHY211",
+    "topic": "Relativistic Velocity Addition",
+    "prompt": "According to the relativistic velocity-addition law, what speed does an observer measure for a light pulse moving in the same direction as the observer's frame?",
+    "d": 2,
+    "options": [
+      {"t": "c", "ok": true},
+      {"t": "c+v", "tag": "Used Galilean addition for light", "why": "Relativistic velocity addition preserves the same vacuum light speed for every inertial observer."},
+      {"t": "c-v", "tag": "Subtracted the frame speed", "why": "The Lorentz transformation does not make an inertial observer measure a different vacuum light speed."},
+      {"t": "c/(1+v/c)", "tag": "Kept only part of the addition formula", "why": "Substituting u'=c into the full formula gives c exactly."}
+    ],
+    "explain": "Putting u'=c into u=(u'+v)/(1+u'v/c^2) gives u=(c+v)/(1+v/c)=c. This illustrates the invariance of the speed of light."
+  },
+  {
+    "id": "PHY211-NOTE-051",
+    "course": "PHY211",
+    "topic": "Blackbody Radiation",
+    "prompt": "A blackbody is at 3000 K. Using Wien's constant 2.898 x 10^-3 m K, estimate the wavelength of peak emission.",
+    "d": 2,
+    "options": [
+      {"t": "9.66 x 10^-7 m", "ok": true},
+      {"t": "8.69 m", "tag": "Multiplied by temperature", "why": "Wien's law gives lambda_max=b/T, so divide the constant by the absolute temperature."},
+      {"t": "9.66 x 10^-3 m", "tag": "Lost a factor of one thousand", "why": "2.898 x 10^-3 divided by 3000 is 9.66 x 10^-7 m."},
+      {"t": "3.00 x 10^3 m", "tag": "Reported the temperature as a wavelength", "why": "Convert the temperature through lambda_max T=b; the peak is in the infrared for this temperature."}
+    ],
+    "explain": "Wien's law is lambda_max=b/T. Thus lambda_max=(2.898 x 10^-3)/(3000)=9.66 x 10^-7 m."
+  },
+  {
+    "id": "PHY211-NOTE-052",
+    "course": "PHY211",
+    "topic": "Blackbody Radiation",
+    "prompt": "What was the ultraviolet catastrophe associated with the classical Rayleigh-Jeans prediction?",
+    "d": 2,
+    "options": [
+      {"t": "It predicted unbounded spectral energy at very short wavelengths, unlike observed blackbody spectra", "ok": true},
+      {"t": "It predicted zero radiation at every wavelength", "tag": "Misstated the classical prediction", "why": "The classical prediction became unphysical at short wavelengths by diverging rather than vanishing."},
+      {"t": "It predicted the peak wavelength was independent of temperature", "tag": "Confused the Wien-law observation with the catastrophe", "why": "The problem was the short-wavelength divergence of the classical spectrum."},
+      {"t": "It predicted atoms could emit only one wavelength", "tag": "Confused a continuous spectrum with line spectra", "why": "The classical blackbody calculation predicted too much radiation at high frequency, not a single spectral line."}
+    ],
+    "explain": "The Rayleigh-Jeans law agrees with measurements at long wavelengths but diverges at short wavelengths, predicting an infinite total radiated energy. Planck's quantized oscillator energies produce a finite spectrum consistent with observations."
+  },
+  {
+    "id": "PHY211-NOTE-053",
+    "course": "PHY211",
+    "topic": "Compton Effect",
+    "prompt": "What did Compton scattering reveal about a high-energy photon colliding with an electron?",
+    "d": 2,
+    "options": [
+      {"t": "The scattered photon can have a longer wavelength because energy and momentum are transferred to the electron", "ok": true},
+      {"t": "The photon always keeps exactly the same wavelength after scattering", "tag": "Used the classical wave prediction", "why": "Compton observed a wavelength shift, showing that the photon transfers energy and momentum in a collision."},
+      {"t": "The photon is absorbed and the electron's rest mass disappears", "tag": "Mistook scattering for particle destruction", "why": "The photon and electron scatter; energy and momentum are conserved in the interaction."},
+      {"t": "The scattered photon has a shorter wavelength for every collision", "tag": "Ignored the scattering-angle dependence", "why": "For the described photon-electron scattering, the Compton shift is nonnegative and depends on angle; forward scattering has zero shift."}
+    ],
+    "explain": "In Compton scattering, a photon transfers energy and momentum to an electron. The scattered photon generally has lower energy and therefore a longer wavelength; the shift depends on scattering angle."
+  },
+  {
+    "id": "PHY211-NOTE-054",
+    "course": "PHY211",
+    "topic": "Compton Effect",
+    "prompt": "Which expression gives the Compton wavelength shift when a photon scatters through angle theta from an initially stationary electron?",
+    "d": 3,
+    "options": [
+      {"t": "Delta lambda=h/(m_e c)(1-cos theta)", "ok": true},
+      {"t": "Delta lambda=h/(m_e c)(1+cos theta)", "tag": "Used the wrong angular dependence", "why": "The Compton shift is proportional to 1-cos(theta); it vanishes for forward scattering."},
+      {"t": "Delta lambda=m_e c/h(1-cos theta)", "tag": "Inverted the Compton wavelength", "why": "The electron Compton wavelength is h/(m_e c), not m_e c/h."},
+      {"t": "Delta lambda=h/(m_e c)cos theta", "tag": "Omitted the unshifted contribution", "why": "The change is the difference between initial and scattered wavelengths, giving the factor 1-cos(theta)."}
+    ],
+    "explain": "The Compton formula is lambda'-lambda=(h/(m_e c))(1-cos theta). It follows from conserving energy and momentum in a photon-electron collision."
+  },
+  {
+    "id": "PHY211-NOTE-055",
+    "course": "PHY211",
+    "topic": "Photoelectric Effect",
+    "prompt": "A metal has work function 2.3 eV and is illuminated with 200 nm light. Approximately what is the maximum photoelectron speed? Use hc=1240 eV nm and m_e=9.11 x 10^-31 kg.",
+    "d": 3,
+    "options": [
+      {"t": "1.17 x 10^6 m/s", "ok": true},
+      {"t": "2.08 x 10^6 m/s", "tag": "Used the full photon energy as kinetic energy", "why": "Subtract the 2.3 eV work function from the 6.2 eV photon energy before finding the speed."},
+      {"t": "5.85 x 10^5 m/s", "tag": "Used half the available kinetic energy", "why": "The photoelectron has Kmax=6.2-2.3=3.9 eV; then use K=mv^2/2."},
+      {"t": "3.90 x 10^6 m/s", "tag": "Used kinetic energy as a speed", "why": "Convert 3.9 eV to joules and solve v=sqrt(2K/m)."}
+    ],
+    "explain": "The photon energy is 1240/200=6.2 eV, so Kmax=6.2-2.3=3.9 eV=6.25 x 10^-19 J. Therefore v=sqrt(2K/m_e)=1.17 x 10^6 m/s."
+  },
+  {
+    "id": "PHY211-NOTE-056",
+    "course": "PHY211",
+    "topic": "Atomic Structure and Bohr Model",
+    "prompt": "In the Bohr model, what is the ground-state energy of a hydrogen-like ion with nuclear charge Z?",
+    "d": 2,
+    "options": [
+      {"t": "-13.6 Z^2 eV", "ok": true},
+      {"t": "-13.6 Z eV", "tag": "Used a linear nuclear-charge dependence", "why": "For a one-electron hydrogen-like ion, the Coulomb binding energy scales as Z squared."},
+      {"t": "-13.6/Z^2 eV", "tag": "Inverted the charge scaling", "why": "A larger nuclear charge binds the electron more strongly, increasing the magnitude of the ground-state energy by Z^2."},
+      {"t": "13.6 Z^2 eV", "tag": "Dropped the bound-state sign", "why": "Bound-state energies are negative when the zero of energy is defined at infinite separation."}
+    ],
+    "explain": "For a hydrogen-like ion, En=-13.6 Z^2/n^2 eV. Setting n=1 gives the ground-state energy -13.6 Z^2 eV."
+  },
+  {
+    "id": "PHY211-NOTE-057",
+    "course": "PHY211",
+    "topic": "de Broglie Matter Waves",
+    "prompt": "A nonrelativistic electron has kinetic energy 4.0 eV. Approximately what is its de Broglie wavelength? Use lambda(nm)=1.227/sqrt(K in eV).",
+    "d": 2,
+    "options": [
+      {"t": "0.614 nm", "ok": true},
+      {"t": "4.91 nm", "tag": "Multiplied by the square root of energy", "why": "For a nonrelativistic electron, wavelength is inversely proportional to the square root of kinetic energy."},
+      {"t": "0.307 nm", "tag": "Used twice the energy in the square root", "why": "Substitute K=4.0 eV into 1.227/sqrt(K), which gives 1.227/2 nm."},
+      {"t": "2.45 nm", "tag": "Divided by energy instead of its square root", "why": "The momentum is proportional to sqrt(K), so lambda varies as 1/sqrt(K)."}
+    ],
+    "explain": "For a nonrelativistic electron, p=sqrt(2m_e K) and lambda=h/p. Using the supplied conversion gives lambda=1.227/sqrt(4.0)=0.614 nm."
+  },
+  {
+    "id": "PHY211-NOTE-058",
+    "course": "PHY211",
+    "topic": "de Broglie Matter Waves",
+    "prompt": "An electron has kinetic energy 50 keV, comparable to its rest energy. Which momentum relation should be used to calculate its de Broglie wavelength?",
+    "d": 3,
+    "options": [
+      {"t": "(pc)^2=K(K+2m_e c^2), followed by lambda=h/p", "ok": true},
+      {"t": "p=sqrt(2m_e K) without checking the speed", "tag": "Assumed the electron is nonrelativistic", "why": "At kinetic energies that are a significant fraction of the electron rest energy, the relativistic energy-momentum relation is needed."},
+      {"t": "p=K/c for every massive particle", "tag": "Confused photon momentum with massive-particle momentum", "why": "For a massive particle with kinetic energy K, use the relativistic energy-momentum relation; p=E/c applies to a photon."},
+      {"t": "lambda=hp", "tag": "Used a wavelength directly proportional to momentum", "why": "Once p is determined, the de Broglie relation is lambda=h/p."}
+    ],
+    "explain": "For relativistic kinetic energy K and rest energy m_e c^2, p c=sqrt(K(K+2m_e c^2)). The wavelength is then lambda=h/p; the nonrelativistic formula is not accurate when K is a substantial fraction of the rest energy."
+  },
+  {
+    "id": "PHY211-NOTE-059",
+    "course": "PHY211",
+    "topic": "Heisenberg Uncertainty Principle",
+    "prompt": "An electron's position is known to within 0.050 nm. What is the minimum uncertainty in its velocity from Delta x Delta p >= hbar/2? Use m_e=9.11 x 10^-31 kg and hbar=1.055 x 10^-34 J s.",
+    "d": 3,
+    "options": [
+      {"t": "1.16 x 10^6 m/s", "ok": true},
+      {"t": "5.79 x 10^5 m/s", "tag": "Omitted the factor of two in the uncertainty bound", "why": "The lower bound is hbar/(2 Delta x m_e), not hbar/(4 Delta x m_e)."},
+      {"t": "1.16 x 10^3 m/s", "tag": "Converted nanometres incorrectly", "why": "0.050 nm is 5.0 x 10^-11 m; using this SI value gives about 1.16 x 10^6 m/s."},
+      {"t": "5.79 x 10^6 m/s", "tag": "Used h instead of hbar in the stated bound", "why": "The supplied relation uses hbar/2, which is h/(4 pi), not h/2."}
+    ],
+    "explain": "For a nonrelativistic electron, Delta p=m_e Delta v, so Delta v >= hbar/(2m_e Delta x). With Delta x=5.0 x 10^-11 m, the minimum is approximately 1.16 x 10^6 m/s."
+  },
+  {
+    "id": "PHY211-NOTE-060",
+    "course": "PHY211",
+    "topic": "Heisenberg Uncertainty Principle",
+    "prompt": "An excited state has a lifetime uncertainty of 2.0 x 10^-6 s. Using Delta E Delta t >= hbar/2, what is the minimum energy uncertainty in eV? Use hbar=1.055 x 10^-34 J s and 1 eV=1.602 x 10^-19 J.",
+    "d": 3,
+    "options": [
+      {"t": "1.65 x 10^-10 eV", "ok": true},
+      {"t": "3.29 x 10^-10 eV", "tag": "Omitted the factor of two", "why": "The specified lower bound is hbar/(2 Delta t), so halve hbar/Delta t."},
+      {"t": "1.65 x 10^-16 eV", "tag": "Used the joule-to-electronvolt conversion backwards", "why": "Convert joules to eV by dividing by 1.602 x 10^-19 J/eV."},
+      {"t": "1.65 x 10^-4 eV", "tag": "Misplaced the time exponent", "why": "Dividing hbar by a microsecond-scale lifetime gives an energy of order 10^-29 J, not 10^-23 J."}
+    ],
+    "explain": "Delta E_min=hbar/(2 Delta t)=1.055 x 10^-34/(4.0 x 10^-6)=2.64 x 10^-29 J. Dividing by 1.602 x 10^-19 J/eV gives 1.65 x 10^-10 eV."
+  },
+  {
+    "id": "PHY211-NOTE-061",
+    "course": "PHY211",
+    "topic": "Atomic Structure and Bohr Model",
+    "prompt": "What is the frequency of the photon emitted when hydrogen falls from n=2 to n=1? Use the level energies -13.6/n^2 eV and h=4.136 x 10^-15 eV s.",
+    "d": 3,
+    "options": [
+      {"t": "2.47 x 10^15 Hz", "ok": true},
+      {"t": "3.29 x 10^15 Hz", "tag": "Used the n=1 binding energy as the photon energy", "why": "The photon energy is the difference between the initial and final levels, 10.2 eV, not 13.6 eV."},
+      {"t": "8.23 x 10^14 Hz", "tag": "Used the energy of the n=2 level alone", "why": "The transition energy is 13.6-3.4=10.2 eV."},
+      {"t": "2.47 x 10^-15 Hz", "tag": "Inverted the frequency-energy relation", "why": "Since E=hf, frequency is E/h, not h/E."}
+    ],
+    "explain": "The levels are E1=-13.6 eV and E2=-3.40 eV, so the photon energy is 10.2 eV. The frequency is f=Delta E/h=10.2/(4.136 x 10^-15)=2.47 x 10^15 Hz."
+  }
+]
+

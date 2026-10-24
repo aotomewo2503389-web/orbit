@@ -72,7 +72,13 @@ const COURSES_BY_PROGRAM_LEVEL = {
   "Industrial Physics": {
     "100 level": ["PHY111","PHY113","MTH111"],
     "200 level": ["CIT211","CSC233","DLD111","ENT211","GST211","MTH213","PHY211","PHY213","PHY215","PHY218","PHY232","TMC211","TMC212"]
-  }
+  },
+  "Industrial Maths": {"200 level":["MTH213"]},
+  "Industrial Chemistry": {"200 level":["MTH213"]},
+  "Computer Science": {"200 level":["MTH213"]},
+  "Biology": {"200 level":["MTH213"]},
+  "Microbiology": {"200 level":["MTH213"]},
+  "Management Information Systems (MIS)": {"200 level":["MTH213"]}
 };
 const UNIVERSITY_LOGOS = {
   covenant:"covenant-university.jpeg",
@@ -115,6 +121,7 @@ const DEFAULT_PREFS = {count:10, timer:0, diff:"mixed", focus:"all", source:"all
 const LS_KEY = "orbit-cu-v2";
 let state = {onboard:null, courses:{}};
 const banks = {}; const realBank = {};
+const NOTE_BANK_COURSES = new Set(["MTH213","PHY211"]);
 let saveTimer = null, saveChain = Promise.resolve();
 let authed = false, uid = null, authUser = null, entering = null, pendingAuthError = "";
 let roomNS = null;
@@ -230,6 +237,7 @@ async function loadBanks(){
     q.topic = q.topic || "General"; q.explain = q.explain || "";
     const code = String(q.course || "").toUpperCase();
     if(!code || loadedIds.has(String(q.id))) return;
+    q.pastQuestion = pastQuestion;
     loadedIds.add(String(q.id));
     (banks[code] = banks[code] || []).push(q);
     if(pastQuestion) realBank[code] = true;
@@ -243,13 +251,15 @@ async function loadBanks(){
       from += size;
     }
   }catch(e){ console.warn("Orbit: couldn’t load questions, using the sample set", e); }
-  try{
-    const response = await fetch("questions/mth213.json");
-    if(!response.ok) throw new Error(`Question bank request failed (${response.status})`);
-    const localQuestions = await response.json();
-    if(!Array.isArray(localQuestions)) throw new Error("MTH213 question bank must be a JSON array");
-    localQuestions.forEach(q => addQuestion(q, false));
-  }catch(e){ console.warn("Orbit: couldn’t load the bundled MTH213 question bank", e); }
+  for(const code of NOTE_BANK_COURSES){
+    try{
+      const response = await fetch(`questions/${code.toLowerCase()}.json`);
+      if(!response.ok) throw new Error(`Question bank request failed (${response.status})`);
+      const localQuestions = await response.json();
+      if(!Array.isArray(localQuestions)) throw new Error(`${code} question bank must be a JSON array`);
+      localQuestions.forEach(q => addQuestion(q, false));
+    }catch(e){ console.warn(`Orbit: couldn’t load the bundled ${code} question bank`, e); }
+  }
 }
 async function connectRoom(){   // live duels still use the Claude room when the page runs inside Claude; otherwise challenge codes
   if(!window.claude || typeof window.claude.use !== "function") return;
@@ -571,10 +581,10 @@ function renderGrid(){
   $("grid").innerHTML = filteredCourses.length ? filteredCourses.map((c, i) => {
     const acc = courseAcc(c.code);
     const count = banks[c.code] ? banks[c.code].length : 0;
-    const st = count ? `${count} ${c.code === "MTH213" ? "practice questions" : "past questions"}` : "Sample set for now";
+    const st = count ? `${count} ${NOTE_BANK_COURSES.has(c.code) ? "practice questions" : "past questions"}` : "Sample set for now";
     const details = [c.credits === undefined ? "" : `${c.credits} credits`, c.category || ""].filter(Boolean).join(" · ");
     return `<button class="ccard glass" data-code="${c.code}" style="animation-delay:${reduce ? 0 : i * 40}ms">${courseMark(c, "course-mark--large")}<strong>${c.code}</strong>${c.name ? `<span class="course-name">${esc(c.name)}</span>` : ""}${details ? `<span class="course-details">${esc(details)}</span>` : ""}<span class="st">${acc === null ? st : Math.round(acc * 100) + "% accuracy"}</span>${acc === null ? "" : `<div class="meter"><i style="width:${Math.round(acc * 100)}%;background:var(--ink)"></i></div>`}</button>`;
-  }).join("") : `<p class="grid-empty">No Industrial Physics ${esc(level)} courses match “${esc($("courseSearch").value.trim())}”.</p>`;
+  }).join("") : `<p class="grid-empty">No ${esc(program)} ${esc(level)} courses match “${esc($("courseSearch").value.trim())}”.</p>`;
   $("grid").querySelectorAll(".ccard").forEach(b => b.addEventListener("click", () => openSheet(b.dataset.code)));
 }
 function filterCourses(event){
@@ -603,17 +613,19 @@ function openSheet(code){
   if(p.source === "past" && !realBank[code]) p.source = "all";
   const questionCount = banks[code] ? banks[code].length : 0;
   const questionSummary = questionCount
-    ? `${questionCount} ${code === "MTH213" ? "practice questions" : "past questions"}`
+    ? `${questionCount} ${NOTE_BANK_COURSES.has(code) ? "practice questions" : "past questions"}`
     : "Sample questions";
-  const sourceOptions = code === "MTH213"
-    ? [["all","All questions"],["topic","A topic"]]
-    : [["all","All"],["past","Past questions"],["topic","A topic"]];
+  const sourceOptions = [
+    ["all",NOTE_BANK_COURSES.has(code) ? "All questions" : "All"],
+    ...(realBank[code] ? [["past","Past questions"]] : []),
+    ["topic","A topic"]
+  ];
   const sheet = $("sheet");
   sheet.innerHTML = `<div class="grab"></div>
     <div class="sheet-head">${courseMark(c, "course-mark--sheet")}<div><strong>${code}</strong><span>${questionSummary}</span></div>
       <button class="close" id="sheetClose" aria-label="Close"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
-    ${code === "MTH213" ? `<p class="notice">Original practice questions based on your MTH213 lecture notes.</p>` : realBank[code] ? "" : `<p class="notice">No ${code} past questions have been added yet, so you’ll practise the sample set until they are.</p>`}
-    <div class="pref"><label>Questions from</label>${seg("source", sourceOptions, p.source, realBank[code] || code === "MTH213" ? [] : ["past"])}</div>
+    ${NOTE_BANK_COURSES.has(code) ? `<p class="notice">Original practice questions based on your ${code} lecture notes.</p>` : realBank[code] ? "" : `<p class="notice">No ${code} past questions have been added yet, so you’ll practise the sample set until they are.</p>`}
+    <div class="pref"><label>Questions from</label>${seg("source", sourceOptions, p.source, realBank[code] ? [] : ["past"])}</div>
     <label class="topic-select-wrap" id="topicSelectWrap" ${p.source === "topic" ? "" : "hidden"}><span>Choose a topic</span><select class="topic-select" id="topicSelect"><option value="">Select a topic</option>${topics.map(topic => `<option value="${esc(topic)}" ${p.topic === topic ? "selected" : ""}>${esc(topic)}</option>`).join("")}</select></label>
     <div class="pref"><label>Questions</label>${seg("count", [[5,"5"],[10,"10"],[15,"15"],[20,"20"],[60,"60"]], p.count)}</div>
     <div class="pref"><label>Session timer</label>${seg("timer", [[0,"Off"],[600,"10m"],[1200,"20m"],[1800,"30m"],[3600,"60m"]], p.timer)}</div>
@@ -655,7 +667,7 @@ function diffOf(q){ return q.d || 2; }
 function buildSet(code, cfg){
   const bank = bankFor(code); const r = cfg.seed != null ? rng(cfg.seed) : Math.random;
   let pool = bank;
-  if(cfg.source === "past") pool = realBank[code] ? banks[code] : [];
+  if(cfg.source === "past") pool = realBank[code] ? banks[code].filter(q => q.pastQuestion !== false) : [];
   if(cfg.source === "topic" && cfg.topic) pool = pool.filter(q => q.topic === cfg.topic);
   if(cfg.focus === "weak"){ const w = weakTopics(code); const f = pool.filter(q => w.includes(q.topic)); if(f.length) pool = f; }
   let ordered;
