@@ -188,6 +188,7 @@ let sb = null;
 try{
   if(window.supabase) sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, {auth:{persistSession:true, autoRefreshToken:true, detectSessionInUrl:true, flowType:"pkce"}});
 }catch(e){ console.warn("Orbit: Supabase didn’t start", e); }
+if(sb) roomNS = {join:joinSupabaseRoom};
 
 const lsKey = () => LS_KEY + ":" + uid;   // local cache is per account, so shared devices don’t mix progress
 function loadLocal(){
@@ -261,7 +262,7 @@ async function loadBanks(){
     }catch(e){ console.warn(`Orbit: couldn’t load the bundled ${code} question bank`, e); }
   }
 }
-async function connectRoom(){   // live duels still use the Claude room when the page runs inside Claude; otherwise challenge codes
+async function connectRoom(){   // Prefer the embedded room when available; Supabase Realtime is the web fallback.
   if(!window.claude || typeof window.claude.use !== "function") return;
   try{ roomNS = await window.claude.use("room"); if(current === "v-duel") renderDuel(); }catch(e){}
 }
@@ -1145,6 +1146,51 @@ function makeRequestId(){
     return (char === "x" ? random : (random & 3 | 8)).toString(16);
   });
 }
+async function joinSupabaseRoom(name){
+  if(!sb || !uid) throw new Error("Sign in again before starting a live duel.");
+  const clientId = makeRequestId();
+  const channel = sb.channel(name, {config:{private:true, presence:{key:clientId}}});
+  const listeners = new Set();
+  let trackedPresence = {};
+  const notifyPeers = () => listeners.forEach(listener => listener());
+  channel
+    .on("presence", {event:"sync"}, notifyPeers)
+    .on("presence", {event:"join"}, notifyPeers)
+    .on("presence", {event:"leave"}, notifyPeers);
+  const ready = new Promise((resolve, reject) => {
+    channel.subscribe(status => {
+      if(status === "SUBSCRIBED") resolve();
+      else if(status === "CHANNEL_ERROR" || status === "TIMED_OUT" || status === "CLOSED"){
+        reject(new Error("Couldn’t connect to live duels. Check your connection and try again."));
+      }
+    });
+  });
+  const room = {
+    async presence(next){
+      await ready;
+      trackedPresence = {...trackedPresence, ...next, clientId};
+      const status = await channel.track(trackedPresence);
+      if(status !== "ok") throw new Error("Couldn’t sync your live duel status. Try reconnecting.");
+    },
+    peers(){
+      return Object.values(channel.presenceState()).flatMap(presences => presences.map(presence => ({
+        isMe:presence.clientId === clientId,
+        presence
+      })));
+    },
+    onPeers(callback){
+      listeners.add(callback);
+      return () => listeners.delete(callback);
+    },
+    async leave(){
+      await ready;
+      const status = await channel.unsubscribe();
+      if(status !== "ok" && status !== "timed out") throw new Error("Couldn’t disconnect from the live duel cleanly.");
+    }
+  };
+  await ready;
+  return room;
+}
 async function syncCodeChallenge(target){
   if(target.challengeSyncPromise) return target.challengeSyncPromise;
   target.challengeSyncError = "";
@@ -1265,20 +1311,32 @@ function opponent(){
 function oppDone(){ const o = opponent(); return !!(o && o.presence.phase === "done"); }
 async function hostLive(code, p){
   const c = randCode();
-  try{ duelRoom = await roomNS.join("duel-" + c.toLowerCase()); }
-  catch(e){ $("duelErr").textContent = "Couldn’t open a live duel right now. Try a challenge code instead."; return; }
-  duel = {kind:"live", role:"host", code:c, cfg:{code, seed:randSeed(), count:p.count, diff:p.diff, timer:p.timer}, started:false};
-  duelRoom.presence({role:"host", name:cleanName(myName()), cfg:duel.cfg, phase:"lobby", i:0, score:0}).catch(() => {});
-  watchRoom(); renderLobby();
+  try{
+    duelRoom = await roomNS.join("duel-" + c.toLowerCase());
+    duel = {kind:"live", role:"host", code:c, cfg:{code, seed:randSeed(), count:p.count, diff:p.diff, timer:p.timer}, started:false};
+    await duelRoom.presence({role:"host", name:cleanName(myName()), cfg:duel.cfg, phase:"lobby", i:0, score:0});
+    watchRoom(); renderLobby();
+  }catch(error){
+    console.error("Orbit couldn’t open a live duel.", error);
+    if(duelRoom) duelRoom.leave().catch(leaveError => console.error("Orbit couldn’t leave the live duel room.", leaveError));
+    duelRoom = null; duel = null;
+    $("duelErr").textContent = error instanceof Error ? error.message : "Couldn’t open a live duel. Try a challenge code instead.";
+  }
 }
 async function joinLive(raw){
   const c = String(raw || "").trim().toUpperCase();
   if(!/^[A-Z0-9]{4}$/.test(c)){ $("duelErr").textContent = "Enter the 4-character brainrot code."; return; }
-  try{ duelRoom = await roomNS.join("duel-" + c.toLowerCase()); }
-  catch(e){ $("duelErr").textContent = "Couldn’t join that duel. Check the code and try again."; return; }
-  duel = {kind:"live", role:"guest", code:c, cfg:null, started:false};
-  duelRoom.presence({role:"guest", name:cleanName(myName()), phase:"lobby", i:0, score:0}).catch(() => {});
-  watchRoom(); renderLobby();
+  try{
+    duelRoom = await roomNS.join("duel-" + c.toLowerCase());
+    duel = {kind:"live", role:"guest", code:c, cfg:null, started:false};
+    await duelRoom.presence({role:"guest", name:cleanName(myName()), phase:"lobby", i:0, score:0});
+    watchRoom(); renderLobby();
+  }catch(error){
+    console.error("Orbit couldn’t join the live duel.", error);
+    if(duelRoom) duelRoom.leave().catch(leaveError => console.error("Orbit couldn’t leave the live duel room.", leaveError));
+    duelRoom = null; duel = null;
+    $("duelErr").textContent = error instanceof Error ? error.message : "Couldn’t join that duel. Check the code and try again.";
+  }
 }
 function watchRoom(){
   if(duelUnsub) duelUnsub();
@@ -1308,19 +1366,30 @@ function renderLobby(){
   p.innerHTML = `<p class="eyebrow">Live duel${cfg ? " in " + esc(cfg.code) : ""}</p><h2 class="title">${duel.role === "host" ? "Share this code" : "You’re in"}</h2>
     <div class="big-code">${esc(duel.code)}</div>${status}
     ${cfg ? `<p class="sub" style="text-align:center;font-size:14px">${cfg.count} questions, ${cfg.timer ? cfg.timer + "s each" : "no timer"}, ${DIFFS[cfg.diff].toLowerCase()} difficulty</p>` : ""}
-    <div class="stack">${btn}<button class="btn btn-soft wide" id="cancelLive">Leave duel</button></div>`;
-  const s = $("startLive"); if(s) s.onclick = () => { duelRoom.presence({phase:"play"}).catch(() => {}); startLive(); };
+    <p class="err" id="duelErr"></p><div class="stack">${btn}<button class="btn btn-soft wide" id="cancelLive">Leave duel</button></div>`;
+  const s = $("startLive"); if(s) s.onclick = async () => {
+    s.disabled = true;
+    try{ await duelRoom.presence({phase:"play"}); startLive(); }
+    catch(error){
+      console.error("Orbit couldn’t start the live duel.", error);
+      $("duelErr").textContent = error instanceof Error ? error.message : "Couldn’t start the live duel.";
+      s.disabled = false;
+    }
+  };
   $("cancelLive").onclick = () => { leaveDuel(); renderDuel(); };
 }
 function startLive(){
   if(!duel || !duel.cfg || duel.started) return;
   duel.started = true; activeCourse = duel.cfg.code;
-  duelRoom.presence({phase:"play", i:0, score:0}).catch(() => {});
+  if(duel.role !== "host"){
+    duelRoom.presence({phase:"play", i:0, score:0}).catch(error => console.error("Orbit couldn’t sync live duel progress.", error));
+  }
   sessionFrom(duel.cfg, "live");
 }
 function pushDuelProgress(){
   if(!session || session.mode !== "live" || !duelRoom) return;
-  duelRoom.presence({i:session.answers.length, score:session.correct, phase:session.done ? "done" : "play"}).catch(() => {});
+  duelRoom.presence({i:session.answers.length, score:session.correct, phase:session.done ? "done" : "play"})
+    .catch(error => console.error("Orbit couldn’t sync live duel progress.", error));
 }
 function renderHud(){
   const hud = $("hud");
@@ -1339,7 +1408,7 @@ function liveResultHtml(){
 }
 function leaveDuel(){
   if(duelUnsub){ duelUnsub(); duelUnsub = null; }
-  if(duelRoom){ duelRoom.leave().catch(() => {}); duelRoom = null; }
+  if(duelRoom){ duelRoom.leave().catch(error => console.error("Orbit couldn’t leave the live duel room.", error)); duelRoom = null; }
   duel = null;
 }
 

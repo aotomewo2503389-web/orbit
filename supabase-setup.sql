@@ -55,6 +55,17 @@ create policy "Users update their own progress"
 
 -- 3. Short-code challenges -----------------------------------------------
 -- Challenge codes are shareable, but match rows are visible only to participants.
+-- Private Realtime channels carry live-duel presence only to signed-in clients.
+drop policy if exists "Authenticated users can read live duel presence" on realtime.messages;
+create policy "Authenticated users can read live duel presence"
+  on realtime.messages for select to authenticated
+  using (topic ~ '^duel-[a-z0-9]{4}$');
+
+drop policy if exists "Authenticated users can publish live duel presence" on realtime.messages;
+create policy "Authenticated users can publish live duel presence"
+  on realtime.messages for insert to authenticated
+  with check (topic ~ '^duel-[a-z0-9]{4}$');
+
 create table if not exists public.challenge_matches (
   id                  uuid primary key default gen_random_uuid(),
   creator_request_id  uuid not null,

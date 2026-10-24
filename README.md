@@ -25,4 +25,4 @@ Configure `SUPABASE_SERVICE_ROLE_KEY` as a server-only environment variable in l
 
 ## Automatic challenge results
 
-Run the updated `supabase-setup.sql` in the Supabase SQL Editor to create the participant-only challenge table and authenticated RPCs. Short challenge codes (brainrot words or four digits) admit one opponent and expire after 30 days if unfinished. Once the second player finishes, both profiles receive the result automatically; no result code needs to be copied back.
+Run the updated `supabase-setup.sql` in the Supabase SQL Editor to create the participant-only challenge table, authenticated RPCs, and policies for private live-duel channels. Live duels use Supabase Realtime presence, so they work across browsers and devices without the embedded Claude room. Short challenge codes (brainrot words or four digits) admit one opponent and expire after 30 days if unfinished. Once the second player finishes, both profiles receive the result automatically; no result code needs to be copied back.
