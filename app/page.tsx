@@ -63,7 +63,7 @@ export default function HomePage() {
             </div>
             <h1><span className="ln"><span className="hero-line-mount" /></span><span className="ln soft"><span className="hero-line-mount" /></span><span className="ln"><span className="hero-line-mount" /></span><span className="ln"><span className="hero-line-mount" /></span></h1>
             <div className="hero-foot">
-              <p>Past questions for your Covenant University courses, asked cold. Miss one and Orbit shows you the exact mistake you made, then brings it back until it sticks.</p>
+              <p>Past questions for your courses, asked cold. Miss one and Orbit shows you the exact mistake you made, then brings it back until it sticks.</p>
               <button className="btn btn-primary" id="heroStart" data-start>Start practising</button>
             </div>
           </header>
