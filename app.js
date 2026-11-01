@@ -1,3 +1,4 @@
+// Test-only marker for checking JavaScript commit flow.
 /* ===================== Sample bank (stands in until past questions are added) ===================== */
 const SAMPLE = [
  {id:"q01",d:2,topic:"Electrostatics",prompt:"Two point charges, +2 μC and +3 μC, sit 0.30 m apart in air. What is the force between them? (k = 9.0 × 10⁹ N m² C⁻²)",
