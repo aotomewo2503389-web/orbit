@@ -52,6 +52,7 @@ export default function HomePage() {
         </a>
         <div className="nav-links">
           <a href="#how" className="land-only">How it works</a>
+          <a href="#tenskii" className="land-only">Tenskii</a>
           <a href="#courses" className="land-only">Courses</a>
           <button className="btn btn-primary" id="navStart" hidden>Start practising</button>
           <button className="btn btn-soft nav-install" id="navInstall" type="button" hidden>Install app</button>
@@ -113,6 +114,24 @@ export default function HomePage() {
             </div>
             <div id="phone-showcase-mount" />
           </section>
+          <section className="section tenskii-section" id="tenskii" aria-labelledby="tenskii-title">
+            <div className="tenskii-card">
+              <div className="tenskii-copy">
+                <p className="eyebrow">Your study companion</p>
+                <h2 id="tenskii-title">Meet Tenskii.</h2>
+                <p className="tenskii-description">A thoughtful AI tutor, right there when a question gets tricky. Ask for a hint, unpack a concept, or work through the reasoning, one clear step at a time.</p>
+                <p className="tenskii-note">Tenskii keeps the focus on learning the why, not just finding the answer.</p>
+                <button className="btn btn-primary" type="button" data-start>Study with Tenskii</button>
+              </div>
+              <div className="tenskii-art">
+                <div className="tenskii-orbit tenskii-orbit-one" aria-hidden="true" />
+                <div className="tenskii-orbit tenskii-orbit-two" aria-hidden="true" />
+                <img src="/grok-bot-icon-logo.png" alt="Tenskii AI tutor logo" className="tenskii-logo" />
+                <span className="tenskii-spark tenskii-spark-one" aria-hidden="true" />
+                <span className="tenskii-spark tenskii-spark-two" aria-hidden="true" />
+              </div>
+            </div>
+          </section>
           <section className="section"><div className="statement"><h2>Question<br />first.</h2><h2 className="right">Explanation<br />after.</h2><p>Most study tools hand you a summary and hope it sticks. Orbit asks the exam question first. Get it wrong and you see why that specific answer was wrong, followed by the working. Then a similar question comes back later to check the fix held.</p></div></section>
           <section className="section" id="universities">
             <div className="section-head"><h2>Universities in orbit</h2></div>
@@ -141,7 +160,7 @@ export default function HomePage() {
           <section className="section closing"><h2><span>Start</span><span>your orbit.</span></h2><button className="btn btn-primary" id="closingStart" data-start>Start practising</button></section>
           <footer className="glass">
             <div><div className="logo" style={{ marginBottom: 10 }}>orbit <small>by SLAWN</small></div><p>Exam practice for Covenant University courses, built from course papers and lecture notes.</p></div>
-            <div><h4>Product</h4><a href="#how">How it works</a><a href="#courses">Courses</a><a href="#" data-start>Start practising</a></div>
+            <div><h4>Product</h4><a href="#how">How it works</a><a href="#tenskii">Meet Tenskii</a><a href="#courses">Courses</a><a href="#" data-start>Start practising</a></div>
             <div><h4>Theme</h4><a href="#" data-theme-set="light">Light</a><a href="#" data-theme-set="dark">Dark</a></div>
             <div><h4>Legal</h4><a href="/legal/privacy.html">Privacy Policy</a><a href="/legal/terms.html">Terms of Service</a></div>
             <p className="fine">© 2026 Orbit by SLAWN. Your progress is saved privately to your account.</p>
