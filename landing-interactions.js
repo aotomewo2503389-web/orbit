@@ -9,7 +9,7 @@ const showcaseRoot = document.querySelector("#phone-showcase-mount");
 const h = React.createElement;
 
 document.querySelectorAll(".hero-line-mount").forEach((mount, index) => {
-  const text = ["Don’t study", "your notes.", "Practise", "your exam."][index];
+  const text = ["A better way", "to get exam-ready."][index];
   if (!text) return;
   createRoot(mount).render(React.createElement(motion.span, {
     className: "hero-line",

@@ -85,7 +85,8 @@ export default function HomePage() {
                 <g className="spin" style={{ animationDuration: "90s" }}><circle cx="20" cy="450" r="7" fill="var(--teal)" /></g>
               </svg>
             </div>
-            <h1><span className="ln"><span className="hero-line-mount" /></span><span className="ln soft"><span className="hero-line-mount" /></span><span className="ln"><span className="hero-line-mount" /></span><span className="ln"><span className="hero-line-mount" /></span></h1>
+            <p className="hero-kicker">A calmer way to prepare</p>
+            <h1><span className="ln"><span className="hero-line-mount" /></span><span className="ln soft"><span className="hero-line-mount" /></span></h1>
             <div className="hero-foot">
               <p>Past questions for your courses, asked cold. Miss one and Orbit shows you the exact mistake you made, then brings it back until it sticks.</p>
               <button className="btn btn-primary" id="heroStart" data-start>Start practising</button>
