@@ -406,7 +406,7 @@ function observeLanding(el){
   el.classList.add("reveal");
   landingRevealObserver.observe(el);
 }
-document.querySelectorAll(".section-head h2, .statement h2, .statement p, .closing h2 span, .story, .university-tile, .course-tile, .tenskii-card").forEach(observeLanding);
+document.querySelectorAll(".section-head h2, .statement h2, .statement p, .closing h2 span, .story, .university-tile, .course-tile").forEach(observeLanding);
 document.querySelectorAll("[data-start]").forEach(button => button.addEventListener("click", event => {
   if(typeof navigator.vibrate === "function") navigator.vibrate(12);
   if(reduce) return;
@@ -728,90 +728,9 @@ function renderQuestion(){
   card.innerHTML = `${session.i === 0 && session.note ? `<p class="notice" style="margin:0 0 16px">${esc(session.note)}</p>` : ""}
     <div class="qmeta"><span class="qtopic">${esc(session.code)} · ${esc(it.q.topic)}</span>${session.timer ? `<span class="timer" id="timer" aria-label="Session time remaining"><svg width="26" height="26" viewBox="0 0 26 26"><circle class="bg" cx="13" cy="13" r="10"/><circle class="fg" id="timerFg" cx="13" cy="13" r="10" stroke-dasharray="62.83" stroke-dashoffset="0"/></svg><span class="timer-label">Time remaining</span><span id="timerTxt">${sessionTimeText(Math.max(0, Math.ceil((session.timerEndsAt - Date.now()) / 1000)))}</span></span>` : ""}</div>
     <p class="qprompt">${esc(it.q.prompt)}</p>
-    <div class="opts" id="opts">${it.opts.map((o, i) => `<button class="opt${saved && o.ok ? " right" : ""}${saved && saved.pick === o ? " chosen" : ""}${saved && saved.pick === o && !saved.ok ? " wrong" : ""}" data-i="${i}"><kbd>${"ABCDE"[i]}</kbd><span>${esc(o.t)}</span></button>`).join("")}</div><div id="fb">${saved && !session.explainEnd ? answerFeedback(saved) : ""}</div>
-    ${session.mode === "solo" ? `<section class="tutor" aria-labelledby="tutorTitle">
-      <div class="tutor-heading">
-        <img class="tutor-avatar" src="/grok-bot-icon-logo.png" alt="">
-        <div class="tutor-heading-copy"><h3 id="tutorTitle">Tenskii</h3><p>Your AI study companion</p></div>
-        <span class="tutor-badge"><i></i> AI</span>
-      </div>
-      <div class="tutor-messages" id="tutorMessages" aria-live="polite">
-        <div class="tutor-reply"><img class="tutor-avatar tutor-avatar-small" src="/grok-bot-icon-logo.png" alt=""><p class="tutor-message assistant">Hi, I’m Tenskii. Need a hint or a clearer explanation? Ask me about this question.</p></div>
-      </div>
-      <p class="tutor-status" id="tutorStatus" role="status"></p>
-      <form class="tutor-form" id="tutorForm"><label class="sr-only" for="tutorInput">Ask about this question</label><textarea class="tutor-input" id="tutorInput" rows="1" maxlength="1000" placeholder="Message your tutor…" required></textarea><button class="tutor-send" type="submit" aria-label="Send message" title="Send message"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5m-6 6 6-6 6 6"/></svg></button></form>
-    </section>` : ""}`;
+    <div class="opts" id="opts">${it.opts.map((o, i) => `<button class="opt${saved && o.ok ? " right" : ""}${saved && saved.pick === o ? " chosen" : ""}${saved && saved.pick === o && !saved.ok ? " wrong" : ""}" data-i="${i}"><kbd>${"ABCDE"[i]}</kbd><span>${esc(o.t)}</span></button>`).join("")}</div><div id="fb">${saved && !session.explainEnd ? answerFeedback(saved) : ""}</div>`;
   card.classList.remove("step-in"); void card.offsetWidth; card.classList.add("step-in");
   card.querySelectorAll(".opt").forEach(b => b.addEventListener("click", () => answer(+b.dataset.i)));
-  const tutorForm = card.querySelector("#tutorForm");
-  if(tutorForm){
-    const tutorInput = card.querySelector("#tutorInput");
-    const tutorMessages = card.querySelector("#tutorMessages");
-    const tutorStatus = card.querySelector("#tutorStatus");
-    const conversation = [];
-    tutorForm.addEventListener("submit", async event => {
-      event.preventDefault();
-      const text = tutorInput.value.trim();
-      if(!text || tutorForm.querySelector("button").disabled) return;
-      if(!sb){ tutorStatus.textContent = "Sign in to use the AI tutor."; return; }
-      tutorStatus.textContent = "";
-      const submit = tutorForm.querySelector("button");
-      submit.disabled = true;
-      tutorInput.disabled = true;
-      const userMessage = document.createElement("p");
-      userMessage.className = "tutor-message user";
-      userMessage.textContent = text;
-      tutorMessages.append(userMessage);
-      tutorMessages.scrollTop = tutorMessages.scrollHeight;
-      tutorStatus.textContent = "Thinking…";
-      try{
-        const {data, error} = await sb.auth.getSession();
-        if(error) throw error;
-        const accessToken = data.session && data.session.access_token;
-        if(!accessToken) throw new Error("Your sign-in session expired. Sign in again to use the AI tutor.");
-        const messages = [...conversation, {role:"user", content:text}].slice(-8);
-        const response = await fetch("/api/tutor", {
-          method:"POST",
-          headers:{"Content-Type":"application/json", Authorization:`Bearer ${accessToken}`},
-          body:JSON.stringify({
-            topic:it.q.topic,
-            question:it.q.prompt,
-            options:it.q.options.map(option => option.t),
-            answer:it.q.options.find(option => option.ok)?.t || "",
-            explanation:it.q.explain,
-            studentAnswer:saved?.pick?.t || "",
-            messages
-          })
-        });
-        const result = await response.json().catch(() => ({}));
-        if(!response.ok) throw new Error(result.error || "The tutor could not respond. Please try again.");
-        if(typeof result.reply !== "string" || !result.reply.trim()) throw new Error("The tutor returned an empty response. Please try again.");
-        conversation.push({role:"user", content:text}, {role:"assistant", content:result.reply});
-        const replyRow = document.createElement("div");
-        replyRow.className = "tutor-reply";
-        const avatar = document.createElement("img");
-        avatar.className = "tutor-avatar tutor-avatar-small";
-        avatar.src = "/grok-bot-icon-logo.png";
-        avatar.alt = "";
-        const reply = document.createElement("p");
-        reply.className = "tutor-message assistant";
-        reply.textContent = result.reply;
-        replyRow.append(avatar, reply);
-        tutorMessages.append(replyRow);
-        tutorMessages.scrollTop = tutorMessages.scrollHeight;
-        tutorInput.value = "";
-        tutorStatus.textContent = "";
-      }catch(error){
-        console.error("Tenskii could not answer.", error);
-        userMessage.remove();
-        tutorStatus.textContent = error instanceof Error ? error.message : "The tutor could not respond. Please try again.";
-      }finally{
-        submit.disabled = false;
-        tutorInput.disabled = false;
-        tutorInput.focus();
-      }
-    });
-  }
   const prev = $("prevBtn"); if(prev) prev.hidden = session.i === 0;
   const next = $("nextBtn"); if(next){
     next.hidden = !saved;

@@ -17,10 +17,6 @@ The original `index.html` remains available as a static entry point. The Next.js
 
 Vercel is configured to use the Next.js framework preset. If the Vercel project has a custom Root Directory, set it to the repository root so it can read `package.json`, `vercel.json`, and `app/`.
 
-## AI tutor
-
-The practice screen includes Tenskii, an AI tutor powered by Groq. Set `GROQ_API_KEY` as a server-only environment variable for local development and deployment; never use a `NEXT_PUBLIC_` prefix. You can optionally set `GROQ_MODEL` to a model available to your Groq account. The default is `llama-3.3-70b-versatile`. The tutor route verifies the signed-in Supabase session and sends only the current question and conversation to Groq.
-
 ## Account deletion
 
 The profile page can permanently delete the signed-in Supabase Auth account. The server verifies the caller's access token before using the Supabase Admin API; deleting the Auth user also removes their `public.progress` row through its `ON DELETE CASCADE` foreign key.
