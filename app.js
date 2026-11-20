@@ -69,6 +69,7 @@ const COURSES = [
   {code:"PHY213",name:"Thin Film Technology and Solar Energy Laboratory",credits:2,category:"C",h:34,icon:"chemistry"},
   {code:"TMC212",h:52,icon:"general"}
 ];
+const DEDICATED_COURSES = new Set(["GST211","ENT211","TMC211","TMC212"]);
 const COURSES_BY_PROGRAM_LEVEL = {
   "Industrial Physics": {
     "100 level": ["PHY111","PHY113","MTH111"],
@@ -309,6 +310,7 @@ function go(id, opts = {}){
     window.scrollTo(0, 0);
     if(id === "v-onboard") renderOnboard();
     if(id === "v-system") renderGrid();
+    if(id === "v-course") renderCoursePage(activeCourse);
     if(id === "v-dash") renderDash();
     if(id === "v-duel") renderDuel();
   };
@@ -596,7 +598,10 @@ function renderGrid(){
     const details = [c.credits === undefined ? "" : `${c.credits} credits`, c.category || ""].filter(Boolean).join(" · ");
     return `<button class="ccard glass" data-code="${c.code}" style="animation-delay:${reduce ? 0 : i * 40}ms">${courseMark(c, "course-mark--large")}<strong>${c.code}</strong>${c.name ? `<span class="course-name">${esc(c.name)}</span>` : ""}${details ? `<span class="course-details">${esc(details)}</span>` : ""}<span class="st">${acc === null ? st : Math.round(acc * 100) + "% accuracy"}</span>${acc === null ? "" : `<div class="meter"><i style="width:${Math.round(acc * 100)}%;background:var(--ink)"></i></div>`}</button>`;
   }).join("") : `<p class="grid-empty">No ${esc(program)} ${esc(level)} courses match “${esc($("courseSearch").value.trim())}”.</p>`;
-  $("grid").querySelectorAll(".ccard").forEach(b => b.addEventListener("click", () => openSheet(b.dataset.code)));
+  $("grid").querySelectorAll(".ccard").forEach(b => b.addEventListener("click", () => {
+    if(DEDICATED_COURSES.has(b.dataset.code)) openCoursePage(b.dataset.code);
+    else openSheet(b.dataset.code);
+  }));
 }
 function filterCourses(event){
   event.preventDefault();
@@ -604,6 +609,135 @@ function filterCourses(event){
 }
 $("courseSearchForm").addEventListener("submit", filterCourses);
 $("courseSearch").addEventListener("input", renderGrid);
+
+/* ===================== Dedicated course pages ===================== */
+function openCoursePage(code){
+  activeCourse = code;
+  go("v-course");
+}
+function renderCoursePage(code){
+  const course = COURSES.find(item => item.code === code);
+  if(!course || !DEDICATED_COURSES.has(code)) return;
+  const prefs = prefsFor(code);
+  const bank = banks[code] || [];
+  const topics = [...new Set(bank.map(q => q.topic).filter(Boolean))].sort((a, b) => a.localeCompare(b));
+  const stats = topicStats(code);
+  const answered = stats.reduce((total, topic) => total + topic.seen, 0);
+  const accuracy = courseAcc(code);
+  const weak = weakTopics(code);
+  if(prefs.source === "past" && !realBank[code]) prefs.source = "all";
+  if(prefs.source === "topic" && !topics.includes(prefs.topic)) prefs.topic = "";
+  if(prefs.focus === "weak" && !weak.length) prefs.focus = "all";
+
+  const sourceOptions = [
+    ["all", NOTE_BANK_COURSES.has(code) ? "All questions" : "All"],
+    ...(realBank[code] ? [["past","Past questions"]] : []),
+    ...(topics.length ? [["topic","A topic"]] : [])
+  ];
+  const topicRows = topics.length ? topics.map(topic => {
+    const topicStat = stats.find(item => item.topic === topic);
+    const percent = topicStat && topicStat.acc !== null ? Math.round(topicStat.acc * 100) : null;
+    return `<article class="course-topic-row">
+      <div class="course-topic-copy"><strong>${esc(topic)}</strong><span>${topicStat ? `${topicStat.seen} answered` : "Ready to practise"}</span></div>
+      <div class="course-topic-meter meter"><i style="width:${percent === null ? 0 : percent}%;background:var(--ink)"></i></div>
+      <span class="course-topic-score">${percent === null ? "—" : `${percent}%`}</span>
+      <button class="course-topic-action" type="button" data-topic="${esc(topic)}" aria-label="Practise ${esc(topic)}">Practise <span aria-hidden="true">↗</span></button>
+    </article>`;
+  }).join("") : `<p class="course-empty-copy">Topic progress will appear here as course questions are added and you practise them.</p>`;
+  const questionRows = bank.length ? bank.slice(0, 6).map((question, index) => `
+    <article class="course-question-row">
+      <span class="course-question-number">${String(index + 1).padStart(2, "0")}</span>
+      <div><span class="course-question-topic">${esc(question.topic || "Course question")}</span><p>${esc(question.prompt)}</p></div>
+    </article>`).join("") : `<div class="course-empty glass"><span class="course-empty-mark" aria-hidden="true">${courseMark(course)}</span><div><strong>Your course space is ready.</strong><p>No course-specific questions are published yet. You can still explore a starter practice set while the question bank is prepared.</p></div></div>`;
+
+  $("coursePage").innerHTML = `
+    <header class="course-hero glass">
+      <div class="course-hero-copy">
+        <div class="course-university"><img src="/universities/covenant-university.jpeg" alt=""><span>Covenant University</span></div>
+        <p class="eyebrow">${esc(course.code)} · COURSE SPACE</p>
+        <h1 class="course-title">${esc(course.name || "Course practice")}</h1>
+        <p class="course-lede">A focused space for your ${esc(course.code)} revision. Choose a quick warm-up or shape a session around the way you want to study.</p>
+        <button class="btn btn-primary course-warmup" type="button" data-course-start="warmup">Start 10-minute warm-up <span aria-hidden="true">↗</span></button>
+      </div>
+      <div class="course-hero-mark">${courseMark(course, "course-mark--large")}<span>${esc(course.code)}</span><small>${course.credits === undefined ? "Course practice" : `${course.credits} credits`}</small></div>
+    </header>
+
+    <div class="course-stats" aria-label="${esc(course.code)} progress">
+      <article class="course-stat glass"><span>Current mastery</span><strong>${accuracy === null ? "—" : `${Math.round(accuracy * 100)}%`}</strong><small>${answered ? `${answered} answers recorded` : "Your progress starts here"}</small></article>
+      <article class="course-stat glass"><span>Questions solved</span><strong>${answered}</strong><small>Across your practice sessions</small></article>
+      <article class="course-stat glass"><span>Practice sessions</span><strong>${cs(code).sessions}</strong><small>${bank.length ? `${bank.length} course questions available` : "Starter practice set available"}</small></article>
+    </div>
+
+    <section class="course-section">
+      <div class="course-section-heading"><div><p class="eyebrow">CURATED PRACTICE</p><h2>Choose your next set</h2></div><span class="course-section-note">${bank.length ? `${bank.length} questions in your bank` : "A calm place to begin"}</span></div>
+      <div class="course-practice-grid">
+        <button class="course-practice-card course-practice-card--feature" type="button" data-course-start="warmup"><span class="course-card-icon" aria-hidden="true">◷</span><span class="course-card-kicker">10 MINUTES · 5 QUESTIONS</span><strong>Warm up your focus.</strong><small>A short timed set to get into the rhythm.</small><span class="course-card-arrow" aria-hidden="true">↗</span></button>
+        <button class="course-practice-card" type="button" data-jump-settings><span class="course-card-icon" aria-hidden="true">✳</span><span class="course-card-kicker">MADE FOR YOU</span><strong>Build a practice set.</strong><small>Choose topics, pace and difficulty for this session.</small><span class="course-card-arrow" aria-hidden="true">↗</span></button>
+      </div>
+    </section>
+
+    <div class="course-content-grid">
+      <section class="course-panel glass" id="courseSettings">
+        <div class="course-section-heading course-panel-heading"><div><p class="eyebrow">YOUR SESSION</p><h2>Set the pace.</h2></div></div>
+        <div class="course-pref"><label>Questions from</label>${seg("source", sourceOptions, prefs.source)}</div>
+        <label class="topic-select-wrap course-topic-select" id="courseTopicWrap" ${prefs.source === "topic" ? "" : "hidden"}><span>Choose a topic</span><select class="topic-select" id="courseTopic"><option value="">Select a topic</option>${topics.map(topic => `<option value="${esc(topic)}" ${prefs.topic === topic ? "selected" : ""}>${esc(topic)}</option>`).join("")}</select></label>
+        <div class="course-pref"><label>Questions</label>${seg("count", [[5,"5"],[10,"10"],[15,"15"],[20,"20"],[60,"60"]], prefs.count)}</div>
+        <div class="course-pref"><label>Session timer</label>${seg("timer", [[0,"Off"],[600,"10m"],[1200,"20m"],[1800,"30m"],[3600,"60m"]], prefs.timer)}</div>
+        <div class="course-pref"><label>Difficulty</label>${seg("diff", Object.entries(DIFFS), prefs.diff)}</div>
+        <div class="course-pref"><label>Focus</label>${seg("focus", [["all","All topics"],["weak","Weak spots"]], prefs.focus, weak.length ? [] : ["weak"])}</div>
+        <div class="course-pref"><label>Explanations</label>${seg("explain", [["each","After each"],["end","At the end"]], prefs.explain)}</div>
+        ${bank.length ? "" : `<p class="course-starter-note">This course has no published question bank yet; the starter set is used for practice.</p>`}
+        <div class="course-session-actions"><button class="btn btn-primary" id="courseStart" type="button" ${prefs.source === "topic" && !prefs.topic ? "disabled" : ""}>Start practice</button><button class="btn btn-soft" id="courseDuel" type="button">Duel a friend</button></div>
+        <button class="course-weak-link" id="courseWeakSpots" type="button" ${weak.length ? "" : "disabled"}>Review weak spots for ${esc(course.code)}</button>
+      </section>
+
+      <div class="course-side-column">
+        <section class="course-panel glass">
+          <div class="course-section-heading course-panel-heading"><div><p class="eyebrow">YOUR PROGRESS</p><h2>Topic map</h2></div></div>
+          <div class="course-topic-list">${topicRows}</div>
+        </section>
+        <section class="course-panel glass course-question-bank">
+          <div class="course-section-heading course-panel-heading"><div><p class="eyebrow">QUESTION BANK</p><h2>High-yield questions</h2></div><span class="course-section-note">${bank.length ? `${bank.length} total` : "Coming soon"}</span></div>
+          <div class="course-question-list">${questionRows}</div>
+        </section>
+      </div>
+    </div>`;
+
+  const root = $("coursePage");
+  root.querySelectorAll(".seg").forEach(control => control.addEventListener("click", event => {
+    const button = event.target.closest("button");
+    if(!button || !control.contains(button) || button.disabled) return;
+    const key = control.dataset.key;
+    let value = button.dataset.v;
+    if(key === "count" || key === "timer") value = +value;
+    cs(code).prefs = Object.assign(prefsFor(code), {[key]:value});
+    save();
+    control.querySelectorAll("button").forEach(item => item.setAttribute("aria-pressed", String(item === button)));
+    layoutThumbs(root);
+    if(key === "source"){
+      $("courseTopicWrap").hidden = value !== "topic";
+      $("courseStart").disabled = value === "topic" && !$("courseTopic").value;
+    }
+  }));
+  root.querySelectorAll(".seg").forEach(layoutThumbs);
+  $("courseTopic").addEventListener("change", event => {
+    cs(code).prefs = Object.assign(prefsFor(code), {topic:event.target.value});
+    save();
+    $("courseStart").disabled = !event.target.value;
+  });
+  $("courseStart").onclick = () => startSolo(code);
+  $("courseDuel").onclick = () => { duel = null; duelTab = "live"; go("v-duel"); };
+  $("courseWeakSpots").onclick = () => startSolo(code, {focus:"weak", label:"Weak-spot practice"});
+  root.querySelectorAll('[data-course-start="warmup"]').forEach(button => button.addEventListener("click", () => {
+    startSolo(code, {source:"all", topic:"", count:5, timer:600, focus:"all", label:"10-minute warm-up"});
+  }));
+  root.querySelectorAll("[data-jump-settings]").forEach(button => button.addEventListener("click", () => {
+    $("courseSettings").scrollIntoView({behavior:reduce ? "auto" : "smooth", block:"start"});
+  }));
+  root.querySelectorAll("[data-topic]").forEach(button => button.addEventListener("click", () => {
+    startSolo(code, {source:"topic", topic:button.dataset.topic, count:5, focus:"all", label:`${button.dataset.topic} practice`});
+  }));
+}
 
 /* ===================== Preferences sheet ===================== */
 function seg(key, options, value, disabled = []){
@@ -704,10 +838,11 @@ function buildSet(code, cfg){
 
 /* ===================== Practice ===================== */
 let session = null, timerInt = null;
-function startSolo(code){
-  const p = prefsFor(code);
+function startSolo(code, overrides = {}){
+  const p = Object.assign(prefsFor(code), overrides);
   const {items, note} = buildSet(code, p);
-  session = {mode:"solo", code, items, note, i:0, correct:0, tags:{}, answers:[], timer:p.timer, timerEndsAt:null, explainEnd:p.explain === "end"};
+  activeCourse = code;
+  session = {mode:"solo", code, items, note, i:0, correct:0, tags:{}, answers:[], timer:p.timer, timerEndsAt:null, explainEnd:p.explain === "end", title:p.label || "Practice session"};
   beginSession();
 }
 function beginSession(){
@@ -722,6 +857,9 @@ function sessionTimeText(seconds){
 function renderQuestion(){
   const it = session.items[session.i], n = session.items.length;
   const saved = session.answers[session.i];
+  const course = COURSES.find(item => item.code === session.code);
+  $("practiceCourse").textContent = `${session.code} · ${course && course.name ? course.name : "Course practice"}`;
+  $("practiceTitle").textContent = session.title;
   $("progBar").style.width = (session.i / n * 100) + "%";
   $("pqCount").textContent = `${session.i + 1} of ${n}`;
   const card = $("qcard");
@@ -802,6 +940,7 @@ function previousQuestion(){
 }
 if($("nextBtn")) $("nextBtn").addEventListener("click", nextQuestion);
 if($("prevBtn")) $("prevBtn").addEventListener("click", previousQuestion);
+if($("practiceLeave")) $("practiceLeave").addEventListener("click", appBack);
 document.addEventListener("keydown", e => {
   if(current !== "v-practice" || e.metaKey || e.ctrlKey) return;
   if(e.target && e.target.tagName === "INPUT") return;
