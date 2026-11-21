@@ -1,0 +1,711 @@
+[
+  {
+    "id":"GST211-NOTE-001","course":"GST211","topic":"Nature of Philosophy","prompt":"The word “philosophy” is commonly traced to which Greek roots and meaning?","d":1,
+    "options":[{"t":"Philo (love) and sophia (wisdom)","ok":true},{"t":"Logos (word) and ethos (character)","tag":"Mixed Greek roots","why":"Logos is associated with logic; ethos concerns character or custom."},{"t":"Meta (beyond) and physis (nature)","tag":"Confused a branch term","why":"Metaphysics is commonly explained through “meta” and “physics,” not the root of philosophy."},{"t":"Demos (people) and kratos (rule)","tag":"Confused a political term","why":"These roots are associated with democracy, not philosophy."}],
+    "explain":"Philosophy derives from the Greek philo (love) and sophia (wisdom), hence “love of wisdom.”"
+  },
+  {
+    "id":"GST211-NOTE-002","course":"GST211","topic":"Nature of Philosophy","prompt":"In the lecture notes, wisdom is best distinguished from merely possessing knowledge as:","d":2,
+    "options":[{"t":"The right application of knowledge to add value to life","ok":true},{"t":"The memorization of the greatest number of facts","tag":"Equated wisdom with recall","why":"The notes stress applying knowledge, not just accumulating it."},{"t":"A refusal to question inherited beliefs","tag":"Reversed philosophical inquiry","why":"Philosophical thinking examines beliefs rather than simply refusing to question them."},{"t":"Knowledge limited to laboratory results","tag":"Over-narrowed wisdom","why":"The notes describe wisdom as applicable across many areas of life."}],
+    "explain":"The course notes define wisdom as the appropriate use of acquired knowledge to improve life."
+  },
+  {
+    "id":"GST211-NOTE-003","course":"GST211","topic":"Nature of Philosophy","prompt":"Why do the lecture notes caution that no single definition fully captures philosophy?","d":2,
+    "options":[{"t":"Its scope is broad and people’s perspectives and areas of inquiry differ","ok":true},{"t":"Philosophy is restricted to one scientific discipline","tag":"Narrowed its scope","why":"The notes emphasize that philosophical questions reach across disciplines and life."},{"t":"Philosophy has no subject matter","tag":"Confused breadth with absence","why":"A broad subject still has characteristic questions and methods."},{"t":"Only ancient writers may define it","tag":"Added an unsupported restriction","why":"The notes allow definitions from different perspectives."}],
+    "explain":"Philosophy is wide-ranging; its questions and definitions reflect different perspectives and contexts."
+  },
+  {
+    "id":"GST211-NOTE-004","course":"GST211","topic":"Nature of Philosophy","prompt":"The lecturer’s idea that every discipline has a philosophy is chiefly based on the claim that disciplines:","d":1,
+    "options":[{"t":"Involve thinking about their subject matter and purposes","ok":true},{"t":"All use the same laboratory equipment","tag":"Confused a shared activity with shared tools","why":"The notes connect disciplines through thought, not identical equipment."},{"t":"Are all branches of metaphysics","tag":"Mistook a broad claim for a branch classification","why":"The point is that disciplines involve philosophical reflection, not that they are all metaphysics."},{"t":"Have no practical applications","tag":"Contradicted the lecture","why":"The examples connect philosophy with practical fields and decisions."}],
+    "explain":"The lecture presents philosophy as relevant throughout human inquiry because disciplines depend on thought and reflection."
+  },
+  {
+    "id":"GST211-NOTE-005","course":"GST211","topic":"Logic","prompt":"Which description best matches the lecture’s definition of logic?","d":1,
+    "options":[{"t":"Systematic, sequential reasoning that aims at consistency and clarity","ok":true},{"t":"A collection of persuasive emotional expressions","tag":"Confused persuasion with reasoning","why":"Logic evaluates reasoning and its structure, not emotional force alone."},{"t":"The study of beauty and artistic taste","tag":"Confused logic with aesthetics","why":"Aesthetics studies beauty, art, and taste."},{"t":"A method for avoiding all conclusions","tag":"Reversed the purpose of logic","why":"Logic helps assess whether conclusions follow from premises."}],
+    "explain":"The introductory notes describe logic as systematic reasoning and the art of being consistent, concise, and clear."
+  },
+  {
+    "id":"GST211-NOTE-006","course":"GST211","topic":"Human Existence","prompt":"In the introductory lecture, “human existence” is used primarily to refer to:","d":1,
+    "options":[{"t":"The human dimension of philosophy, including emotional and subjective experience","ok":true},{"t":"The study of stars without reference to human beings","tag":"Removed the human dimension","why":"The lecture explicitly centers human experience."},{"t":"The formal rules of symbolic notation alone","tag":"Confused human existence with formal logic","why":"Symbolic notation is part of logic, not the whole human-existence theme."},{"t":"The claim that emotions never affect judgment","tag":"Reversed the lecture’s point","why":"The notes emphasize people’s emotional and subjective nature."}],
+    "explain":"The course treats human existence as the human aspect of philosophy, including subjective and emotional life."
+  },
+  {
+    "id":"GST211-NOTE-007","course":"GST211","topic":"Branches of Philosophy","prompt":"Which branch asks what is real and what fundamentally exists?","d":1,
+    "options":[{"t":"Metaphysics","ok":true},{"t":"Epistemology","tag":"Confused reality with knowledge","why":"Epistemology investigates knowledge and its limits."},{"t":"Ethics","tag":"Confused reality with moral judgment","why":"Ethics examines moral value and conduct."},{"t":"Aesthetics","tag":"Confused reality with beauty","why":"Aesthetics studies art, beauty, and taste."}],
+    "explain":"Metaphysics investigates reality, existence, and the fundamental nature of things."
+  },
+  {
+    "id":"GST211-NOTE-008","course":"GST211","topic":"Branches of Philosophy","prompt":"A student asks, “What can I know, and how can I justify that I know it?” Which branch is most directly involved?","d":1,
+    "options":[{"t":"Epistemology","ok":true},{"t":"Ethics","tag":"Confused knowledge with right action","why":"Ethics concerns moral principles and conduct."},{"t":"Aesthetics","tag":"Confused knowledge with artistic value","why":"Aesthetics concerns beauty, art, and taste."},{"t":"Political philosophy","tag":"Confused knowledge with governance","why":"Political philosophy studies government, justice, rights, and society."}],
+    "explain":"Epistemology studies knowledge, its sources, justification, and limits."
+  },
+  {
+    "id":"GST211-NOTE-009","course":"GST211","topic":"Branches of Philosophy","prompt":"Which pairing of epistemological positions is correct?","d":2,
+    "options":[{"t":"Rationalism emphasizes reason; empiricism emphasizes sensory experience","ok":true},{"t":"Rationalism emphasizes the senses; empiricism rejects observation","tag":"Reversed the positions","why":"The lecture contrasts reason as a source of knowledge with experience through the senses."},{"t":"Both deny that knowledge is possible","tag":"Confused them with skepticism","why":"Rationalism and empiricism offer different accounts of how knowledge is acquired."},{"t":"Empiricism emphasizes innate ideas; rationalism emphasizes only experiments","tag":"Swapped their characteristic claims","why":"The notes associate innate or a priori knowledge with rationalism and sense experience with empiricism."}],
+    "explain":"Rationalism gives reason a central role in knowledge; empiricism grounds knowledge in experience and the senses."
+  },
+  {
+    "id":"GST211-NOTE-010","course":"GST211","topic":"Branches of Philosophy","prompt":"Knowledge justified independently of a particular sensory experience is commonly called:","d":2,
+    "options":[{"t":"A priori knowledge","ok":true},{"t":"A posteriori knowledge","tag":"Swapped the terms","why":"A posteriori knowledge depends on experience."},{"t":"Amphiboly","tag":"Confused epistemology with a fallacy","why":"Amphiboly is an ambiguity caused by grammatical structure."},{"t":"Material knowledge","tag":"Used an unrelated label","why":"This is not the standard term for knowledge independent of experience."}],
+    "explain":"A priori knowledge is known independently of particular sense experience; a posteriori knowledge depends on experience."
+  },
+  {
+    "id":"GST211-NOTE-011","course":"GST211","topic":"Branches of Philosophy","prompt":"Which question is primarily ethical?","d":1,
+    "options":[{"t":"What makes an action morally right or wrong?","ok":true},{"t":"What is the fundamental nature of time?","tag":"Confused ethics with metaphysics","why":"Questions about time and reality are metaphysical."},{"t":"How do we know that an object exists?","tag":"Confused ethics with epistemology","why":"This asks about knowledge and justification."},{"t":"What makes a painting beautiful?","tag":"Confused ethics with aesthetics","why":"Aesthetics studies beauty and artistic value."}],
+    "explain":"Ethics critically examines moral principles, right and wrong, and how people ought to act."
+  },
+  {
+    "id":"GST211-NOTE-012","course":"GST211","topic":"Branches of Philosophy","prompt":"The rational study of government, rights, justice, and social organization belongs to:","d":1,
+    "options":[{"t":"Political philosophy","ok":true},{"t":"Aesthetics","tag":"Confused social organization with art","why":"Aesthetics concerns beauty, art, and taste."},{"t":"Philosophy of language","tag":"Confused governance with meaning","why":"Philosophy of language studies meaning and language."},{"t":"Epistemology","tag":"Confused governance with knowledge","why":"Epistemology investigates knowledge."}],
+    "explain":"Political philosophy asks how society should be governed and how justice, rights, and authority should be organized."
+  },
+  {
+    "id":"GST211-NOTE-013","course":"GST211","topic":"Branches of Philosophy","prompt":"A debate about whether a work of art is beautiful or has artistic value is mainly a question in:","d":1,
+    "options":[{"t":"Aesthetics","ok":true},{"t":"Metaphysics","tag":"Confused beauty with existence","why":"Metaphysics asks about reality and existence."},{"t":"Logic","tag":"Confused beauty with validity","why":"Logic studies reasoning and argument."},{"t":"Epistemology","tag":"Confused beauty with knowledge","why":"Epistemology studies knowledge and justification."}],
+    "explain":"Aesthetics examines beauty, art, taste, and aesthetic experience."
+  },
+  {
+    "id":"GST211-NOTE-014","course":"GST211","topic":"Methods of Philosophy","prompt":"What is the central aim of the Socratic method as described in the lecture?","d":1,
+    "options":[{"t":"Use questions to help a person examine ideas and draw out understanding","ok":true},{"t":"Give the learner a conclusion to memorize without discussion","tag":"Reversed the questioning approach","why":"The Socratic method uses dialogue and questions rather than rote delivery."},{"t":"Test a theory only with laboratory instruments","tag":"Confused it with experimental science","why":"The method is a form of philosophical questioning."},{"t":"Replace reasons with appeals to popularity","tag":"Confused inquiry with persuasion","why":"Socratic questioning examines reasons and assumptions."}],
+    "explain":"The notes compare Socrates to a midwife: guided questioning helps a learner bring an idea to light."
+  },
+  {
+    "id":"GST211-NOTE-015","course":"GST211","topic":"Methods of Philosophy","prompt":"“All mammals are warm-blooded. Whales are mammals. Therefore, whales are warm-blooded.” This is an example of:","d":2,
+    "options":[{"t":"Deduction, applying general premises to a particular case","ok":true},{"t":"Induction, generalizing from a finite set of observations","tag":"Confused the direction of inference","why":"The argument begins with a general rule and applies it to one case."},{"t":"Phenomenology, suspending prior assumptions","tag":"Confused inference with a method of description","why":"Phenomenology focuses on the object’s essence while setting aside prior assumptions."},{"t":"Equivocation, shifting a word’s meaning","tag":"Confused inference with ambiguity","why":"The argument does not depend on a word changing meaning."}],
+    "explain":"Deduction reasons from general premises to a conclusion about a particular case; if the premises are true and the form valid, the conclusion follows necessarily."
+  },
+  {
+    "id":"GST211-NOTE-016","course":"GST211","topic":"Methods of Philosophy","prompt":"A researcher observes the same pattern in many individual cases and proposes a general rule. This is:","d":2,
+    "options":[{"t":"Induction","ok":true},{"t":"Deduction","tag":"Reversed the direction of reasoning","why":"Deduction applies general premises to a case; this example generalizes from cases."},{"t":"Socratic elenchus","tag":"Confused generalization with dialogue","why":"Socratic questioning tests ideas through questions and answers."},{"t":"Material implication","tag":"Confused an argument method with a connective","why":"Material implication is a logical connective, not empirical generalization."}],
+    "explain":"Induction moves from observed particular cases toward a general conclusion; the conclusion is supported but not guaranteed by the observations."
+  },
+  {
+    "id":"GST211-NOTE-017","course":"GST211","topic":"Methods of Philosophy","prompt":"Why is an inductive conclusion not logically certain merely because several observed cases agree?","d":2,
+    "options":[{"t":"Unobserved cases may differ, so the pattern could fail in the future","ok":true},{"t":"Induction never uses observations","tag":"Denied its basis","why":"Induction is based on observed cases."},{"t":"A general conclusion is always more specific than its evidence","tag":"Reversed the scope","why":"An inductive conclusion usually extends beyond the observed cases."},{"t":"The conclusion is certain whenever the sample is small","tag":"Misstated the effect of sample size","why":"A small sample usually makes a broad generalization less secure, not more certain."}],
+    "explain":"Induction projects beyond the cases examined, so even repeated observations do not deductively guarantee what every future case will be."
+  },
+  {
+    "id":"GST211-NOTE-018","course":"GST211","topic":"Methods of Philosophy","prompt":"Which method focuses on the clarity and sequence of language used to express knowledge?","d":2,
+    "options":[{"t":"Analytical method","ok":true},{"t":"Existential method","tag":"Confused language analysis with lived choice","why":"The existential method emphasizes human existence, intention, and choice."},{"t":"Inductive method","tag":"Confused expression with generalization","why":"Induction generalizes from particular observations."},{"t":"Cosmological method","tag":"Confused language with a causal proof","why":"A cosmological argument reasons from the world or its causes."}],
+    "explain":"The analytical method emphasizes clear, precise language and the analysis of how statements convey knowledge."
+  },
+  {
+    "id":"GST211-NOTE-019","course":"GST211","topic":"Methods of Philosophy","prompt":"Phenomenology, as presented in the lecture, asks the investigator to:","d":2,
+    "options":[{"t":"Set aside prior opinions and attend to the essence of the object studied","ok":true},{"t":"Begin with a universal rule and derive a case","tag":"Confused it with deduction","why":"That describes deductive reasoning."},{"t":"Treat personal preference as the only evidence","tag":"Confused object-focused inquiry with subjectivism","why":"The lecture emphasizes focusing on the object and suspending prior assumptions."},{"t":"Infer a rule from a small sample without qualification","tag":"Confused it with induction","why":"That describes an inductive generalization."}],
+    "explain":"The phenomenological method aims to describe the object’s essence or “whatness” by bracketing previous assumptions."
+  },
+  {
+    "id":"GST211-NOTE-020","course":"GST211","topic":"Methods of Philosophy","prompt":"The existential method in the course notes gives special weight to:","d":2,
+    "options":[{"t":"Human intention, choice, and the subjective involvement of the person who seeks to know","ok":true},{"t":"Only the formal validity of syllogisms","tag":"Confused existence with formal logic","why":"Formal validity is assessed by logic; existential inquiry foregrounds human involvement."},{"t":"Only sensory measurement, excluding human experience","tag":"Confused it with strict empiricism","why":"The notes emphasize subjective human involvement in the existential method."},{"t":"The grammatical ambiguity of a sentence","tag":"Confused it with a fallacy of ambiguity","why":"Grammatical ambiguity is a separate logical issue."}],
+    "explain":"The course describes existential inquiry as involving a deliberate human will and subjective involvement in knowing."
+  },
+  {
+    "id":"GST211-NOTE-021","course":"GST211","topic":"Methods of Philosophy","prompt":"Which statement best distinguishes a fact from a philosophical truth in the course compilation’s discussion of Socratic inquiry?","d":3,
+    "options":[{"t":"A fact is an objectively verifiable claim; philosophical inquiry also asks what broader meaning or principle it supports","ok":true},{"t":"A fact is always false, while truth is always measurable","tag":"Set up a false contrast","why":"The notes distinguish kinds of inquiry, not truth from falsehood in that way."},{"t":"Facts depend only on personal preference, while truths are laboratory readings","tag":"Reversed the distinction","why":"The notes describe facts as verifiable and philosophical truth as explored through reflection and dialogue."},{"t":"Facts and truths are unrelated to reasoning","tag":"Ignored the point of the discussion","why":"The comparison is used to motivate careful questioning and reasoning."}],
+    "explain":"The lecture compilation uses the contrast to encourage inquiry beyond isolated information toward meaning and principles."
+  },
+  {
+    "id":"GST211-NOTE-022","course":"GST211","topic":"Philosophical Positions","prompt":"Monism is the view that reality ultimately derives from:","d":1,
+    "options":[{"t":"One fundamental source or principle","ok":true},{"t":"Exactly two independent principles","tag":"Confused monism with dualism","why":"Dualism proposes two fundamental kinds or principles."},{"t":"Many unrelated fundamental sources","tag":"Confused monism with pluralism","why":"Pluralism recognizes multiple fundamental kinds or principles."},{"t":"No reality of any kind","tag":"Confused monism with nihilism","why":"Monism is a claim about the unity of reality, not the denial of reality."}],
+    "explain":"Monism explains reality through one fundamental source or kind; the course compilation uses Thales’s water as an ancient example."
+  },
+  {
+    "id":"GST211-NOTE-023","course":"GST211","topic":"Philosophical Positions","prompt":"A theory that treats mind and body as fundamentally distinct kinds of reality is an example of:","d":2,
+    "options":[{"t":"Dualism","ok":true},{"t":"Monism","tag":"Confused two kinds with one","why":"Monism posits one fundamental kind or source."},{"t":"Pluralism","tag":"Used a broader position","why":"Pluralism posits multiple fundamental kinds, not specifically two."},{"t":"Solipsism","tag":"Confused a claim about other minds","why":"Solipsism concerns whether anything beyond one’s own mind can be known or exists."}],
+    "explain":"Dualism distinguishes two fundamental kinds or principles; mind–body dualism is a familiar form."
+  },
+  {
+    "id":"GST211-NOTE-024","course":"GST211","topic":"Philosophical Positions","prompt":"Pluralism is most accurately described as the view that:","d":2,
+    "options":[{"t":"Reality contains more than one fundamental kind or principle","ok":true},{"t":"Everything is reducible to one source","tag":"Confused pluralism with monism","why":"Monism explains reality through one fundamental source."},{"t":"Only one person’s mind exists","tag":"Confused pluralism with solipsism","why":"Solipsism centers on the individual mind."},{"t":"No moral claims can be discussed","tag":"Confused metaphysics with moral skepticism","why":"Pluralism is a position about multiplicity, not a denial of moral discussion."}],
+    "explain":"Pluralism contrasts with monism by recognizing multiple fundamental kinds, sources, or principles."
+  },
+  {
+    "id":"GST211-NOTE-025","course":"GST211","topic":"Philosophical Positions","prompt":"Which position says that the existence or nature of reality depends on perception?","d":2,
+    "options":[{"t":"Idealism","ok":true},{"t":"Realism","tag":"Confused perception-dependence with mind-independent reality","why":"Realism generally holds that reality exists independently of being perceived."},{"t":"Materialism","tag":"Confused an account of matter with idealism","why":"Materialism treats matter or the physical as fundamental."},{"t":"Pragmatism","tag":"Confused truth with practical consequences","why":"Pragmatism emphasizes practical consequences or usefulness."}],
+    "explain":"The course textbook’s outline associates Berkeley with idealism, the view that reality is dependent on perception."
+  },
+  {
+    "id":"GST211-NOTE-026","course":"GST211","topic":"Philosophical Positions","prompt":"Which pair is correctly matched?","d":2,
+    "options":[{"t":"Relativism — standards vary with a culture or framework; subjectivism — judgment depends on the individual subject","ok":true},{"t":"Relativism — all standards are universal; subjectivism — standards are fixed by physics","tag":"Reversed both positions","why":"The lecture compilation distinguishes culturally shaped relativism from individual subjectivism."},{"t":"Relativism — one source of reality; subjectivism — two sources of reality","tag":"Confused moral positions with metaphysics","why":"These terms concern how judgments or standards are grounded."},{"t":"Relativism — reasoning from samples; subjectivism — reasoning from rules","tag":"Confused them with inference methods","why":"Induction and deduction describe those directions of reasoning."}],
+    "explain":"In the course’s moral discussion, relativism ties standards to cultures or contexts, while subjectivism ties them to an individual’s judgment."
+  },
+  {
+    "id":"GST211-NOTE-027","course":"GST211","topic":"Philosophical Positions","prompt":"Solipsism, in its strongest form, holds that:","d":3,
+    "options":[{"t":"Only one’s own mind or experience is certain or real","ok":true},{"t":"Reality consists of many independent substances","tag":"Confused it with pluralism","why":"Pluralism posits multiple fundamental kinds or principles."},{"t":"Moral rules are determined by social customs","tag":"Confused it with moral relativism","why":"Moral relativism concerns the cultural or contextual basis of moral standards."},{"t":"Truth is whatever proves practically useful","tag":"Confused it with pragmatism","why":"Pragmatism evaluates ideas by practical consequences."}],
+    "explain":"Solipsism gives a privileged or exclusive status to the self’s own mind or experience."
+  },
+  {
+    "id":"GST211-NOTE-028","course":"GST211","topic":"Philosophical Positions","prompt":"Which contrast is most accurate?","d":2,
+    "options":[{"t":"Free will emphasizes meaningful choice; determinism holds that events are fixed by prior causes","ok":true},{"t":"Free will denies that people act; determinism says every choice is random","tag":"Misstated both positions","why":"Neither definition captures the standard contrast presented in the course."},{"t":"Free will is the same as fatalism; determinism is the same as empiricism","tag":"Merged unrelated terms","why":"These terms address agency and causation, while empiricism concerns sources of knowledge."},{"t":"Free will concerns beauty; determinism concerns language","tag":"Confused unrelated branches","why":"These are not the subjects of the two positions."}],
+    "explain":"The course materials contrast human freedom of choice with explanations in terms of prior causes; fatalism is related but is not simply identical to determinism."
+  },
+  {
+    "id":"GST211-NOTE-029","course":"GST211","topic":"Philosophical Positions","prompt":"Egoism and altruism are contrasted because egoism centers on _____, while altruism gives weight to _____.","d":1,
+    "options":[{"t":"The self; the welfare of others","ok":true},{"t":"The group; personal advantage only","tag":"Reversed the contrast","why":"The course notes use egoism for self-interest and altruism for concern for others."},{"t":"Reason; sensory evidence","tag":"Confused ethics with epistemology","why":"That contrast is closer to rationalism and empiricism."},{"t":"One source; many sources","tag":"Confused ethics with metaphysics","why":"That contrast is monism and pluralism."}],
+    "explain":"Egoism prioritizes the self; altruism prioritizes or includes the welfare of others, with sacrifice presented in the compilation as an extreme form."
+  },
+  {
+    "id":"GST211-NOTE-030","course":"GST211","topic":"Philosophical Positions","prompt":"Pragmatism gives special importance to:","d":2,
+    "options":[{"t":"The practical consequences or usefulness of an idea","ok":true},{"t":"Whether an idea is innate before experience","tag":"Confused it with rationalism","why":"Rationalism emphasizes reason and may appeal to a priori knowledge."},{"t":"Whether a word has two meanings","tag":"Confused it with equivocation","why":"Equivocation is a fallacy of ambiguity."},{"t":"Whether there is one source of reality","tag":"Confused it with monism","why":"Monism is a metaphysical position about reality’s basic unity."}],
+    "explain":"The contemporary-philosophy slides describe pragmatism as evaluating ideas by their practical consequences and utility."
+  },
+  {
+    "id":"GST211-NOTE-031","course":"GST211","topic":"Philosophical Positions","prompt":"A worldview that denies or rejects the existence of God is commonly called:","d":2,
+    "options":[{"t":"Atheism","ok":true},{"t":"Deism","tag":"Confused it with a creator-belief","why":"Deism generally affirms a creator while rejecting or limiting ongoing divine intervention."},{"t":"Theism","tag":"Selected the opposite view","why":"Theism affirms belief in God or gods."},{"t":"Pantheism","tag":"Confused identity with denial","why":"Pantheism identifies or closely associates divinity with the universe, rather than denying divinity."}],
+    "explain":"Atheism is the position that denies or lacks belief in God or gods; it is distinct from deism and pantheism."
+  },
+  {
+    "id":"GST211-NOTE-032","course":"GST211","topic":"Philosophical Positions","prompt":"The contemporary-philosophy slides identify Auguste Comte with which movement?","d":2,
+    "options":[{"t":"Positivism","ok":true},{"t":"Existentialism","tag":"Confused Comte with existentialist themes","why":"The slides associate existentialism with existence, freedom, choice, and meaning."},{"t":"Deconstruction","tag":"Confused Comte with Derrida","why":"The slides associate deconstruction with Jacques Derrida."},{"t":"Utilitarianism","tag":"Confused Comte with an ethical theory","why":"The slides associate utilitarianism with Bentham and Mill."}],
+    "explain":"The slides identify Comte as the founder of modern positivism, which privileges empirical and verifiable knowledge."
+  },
+  {
+    "id":"GST211-NOTE-033","course":"GST211","topic":"Ethics","prompt":"According to utilitarianism as summarized in the course slides, an action is morally assessed mainly by:","d":2,
+    "options":[{"t":"Its consequences for overall happiness or suffering","ok":true},{"t":"Whether it follows a rule regardless of consequences","tag":"Confused it with duty ethics","why":"A duty-based theory assesses obligation rather than only outcomes."},{"t":"Whether the agent has never made a mistake","tag":"Confused it with a character ideal","why":"Utilitarianism is a consequentialist theory."},{"t":"Whether it is popular with the majority, regardless of effects","tag":"Confused utility with popularity","why":"Utilitarianism asks about welfare outcomes, not mere popularity."}],
+    "explain":"Classical utilitarianism evaluates actions by their contribution to general utility, often framed as maximizing happiness and reducing suffering."
+  },
+  {
+    "id":"GST211-NOTE-034","course":"GST211","topic":"Ethics","prompt":"Which pair of philosophers is identified in the slides as major utilitarian proponents?","d":1,
+    "options":[{"t":"Jeremy Bentham and John Stuart Mill","ok":true},{"t":"Sartre and Derrida","tag":"Confused contemporary thinkers","why":"The slides discuss Sartre and Derrida in contemporary philosophy, not as utilitarian founders."},{"t":"Augustine and Anselm","tag":"Confused medieval philosophers","why":"These are medieval philosophers in the course materials."},{"t":"Rawls and Heidegger","tag":"Confused justice and existential analysis with utilitarianism","why":"The slides associate Rawls with justice and Heidegger with Dasein and technology."}],
+    "explain":"Bentham gave utilitarianism a systematic account; Mill later refined and popularized the theory."
+  },
+  {
+    "id":"GST211-NOTE-035","course":"GST211","topic":"Ethics","prompt":"The course compilation describes Socrates’s account of morality primarily in terms of:","d":2,
+    "options":[{"t":"Virtue and living in accordance with one’s examined conscience","ok":true},{"t":"Maximizing wealth regardless of conduct","tag":"Confused virtue with self-interest","why":"The notes associate Socratic morality with virtue, not wealth maximization."},{"t":"Obeying whatever the crowd approves","tag":"Confused moral inquiry with conformity","why":"The compilation says Socrates urged people not to follow the crowd blindly."},{"t":"Avoiding every deliberate choice","tag":"Confused virtue with passivity","why":"The notes present moral reflection as guiding action."}],
+    "explain":"The notes associate Socrates with virtue, self-examination, and acting according to what one judges right."
+  },
+  {
+    "id":"GST211-NOTE-036","course":"GST211","topic":"Ethics","prompt":"In an ethical analysis, an amoral agent is best described as one who:","d":3,
+    "options":[{"t":"Is outside or indifferent to moral evaluation, rather than deliberately choosing evil","ok":true},{"t":"Always chooses the morally good action","tag":"Confused amorality with morality","why":"Moral conduct concerns judgments of right and wrong."},{"t":"Knowingly chooses what is wrong","tag":"Confused amorality with immorality","why":"Immorality involves acting contrary to moral standards."},{"t":"Rejects all facts as unknowable","tag":"Confused ethics with skepticism","why":"Skepticism concerns knowledge, not the meaning of amorality."}],
+    "explain":"The compilation distinguishes amorality (absence of or indifference to morality) from immorality (conduct judged morally wrong)."
+  },
+  {
+    "id":"GST211-NOTE-037","course":"GST211","topic":"Ethics","prompt":"The course compilation uses the Cain-and-Abel story in its introductory discussions mainly to illustrate:","d":1,
+    "options":[{"t":"Ethical questions about conduct and responsibility","ok":true},{"t":"The symbolic form of a conditional statement","tag":"Confused ethics with propositional logic","why":"Conditionals are logical connectives; the story is used in the notes to discuss morality."},{"t":"A proof that all knowledge is sensory","tag":"Confused ethics with empiricism","why":"The example concerns conduct, not a theory of knowledge."},{"t":"The difference between analytic and continental philosophy","tag":"Confused a moral example with contemporary schools","why":"The two schools are distinguished by their methods and emphases."}],
+    "explain":"The lecture compilation explicitly places the story in its discussion of ethics and moral behavior."
+  },
+  {
+    "id":"GST211-NOTE-038","course":"GST211","topic":"Ethics","prompt":"The maxim “love your neighbour as yourself” is used in the lecture compilation to support which ethical idea?","d":2,
+    "options":[{"t":"Responsibility to consider and help other people","ok":true},{"t":"The claim that only one’s own welfare matters","tag":"Confused it with egoism","why":"The maxim asks a person to consider a neighbor’s welfare."},{"t":"The claim that moral rules cannot guide action","tag":"Confused it with moral skepticism","why":"The example is offered as a moral direction for action."},{"t":"The claim that every decision is predetermined","tag":"Confused ethics with determinism","why":"The example concerns how one ought to treat others."}],
+    "explain":"The lecturer’s example connects moral duty with care for others and bearing one another’s burdens."
+  },
+  {
+    "id":"GST211-NOTE-039","course":"GST211","topic":"Ancient Philosophy","prompt":"The pre-Socratic philosophers are described in the compilation as focusing mainly on:","d":2,
+    "options":[{"t":"The cosmos and the natural origin or structure of the universe","ok":true},{"t":"Only the rules of modern symbolic logic","tag":"Placed a later subject in the wrong era","why":"The pre-Socratic period precedes formal modern logic."},{"t":"Only the individual’s freedom after the World Wars","tag":"Confused it with contemporary existentialism","why":"The slides associate that concern with contemporary philosophy."},{"t":"Only medieval theology","tag":"Confused historical periods","why":"Medieval philosophy centered strongly on theology and related questions."}],
+    "explain":"The compilation says pre-Socratic inquiry focused on the cosmos and a transition from mythological explanations toward natural inquiry."
+  },
+  {
+    "id":"GST211-NOTE-040","course":"GST211","topic":"Ancient Philosophy","prompt":"The course compilation identifies which thinker with the claim that water is the arche, or origin, of all things?","d":1,
+    "options":[{"t":"Thales of Miletus","ok":true},{"t":"Democritus","tag":"Confused water with atomism","why":"The notes associate Democritus with atoms."},{"t":"Pythagoras","tag":"Confused water with number","why":"The notes associate Pythagoras with numbers."},{"t":"Aristotle","tag":"Confused a later systematizer with Thales","why":"Aristotle is associated with logic, biology, and the four causes."}],
+    "explain":"Thales is identified in the compilation as an early Western philosopher who proposed water as the basic source of things."
+  },
+  {
+    "id":"GST211-NOTE-041","course":"GST211","topic":"Ancient Philosophy","prompt":"The Socratic era is characterized in the lecture compilation by a shift of attention toward:","d":1,
+    "options":[{"t":"Human beings, moral questions, and dialogue","ok":true},{"t":"The chemical classification of atoms alone","tag":"Confused the era’s focus","why":"The compilation says the Socratic era focused on humans and dialogue."},{"t":"The relation between medieval theology and time","tag":"Confused it with medieval topics","why":"Those topics are emphasized in the medieval lecture."},{"t":"The rejection of every question about human life","tag":"Reversed the lecture","why":"The Socratic era is described as focusing on human life."}],
+    "explain":"The compilation contrasts pre-Socratic cosmology with Socratic attention to human life and dialogical inquiry."
+  },
+  {
+    "id":"GST211-NOTE-042","course":"GST211","topic":"Ancient Philosophy","prompt":"Aristotle’s four causes are correctly listed as:","d":2,
+    "options":[{"t":"Material, formal, efficient, and final","ok":true},{"t":"Physical, mental, moral, and political","tag":"Substituted other categories","why":"The four causes explain what something is made of, its form, its source of change, and its end."},{"t":"Past, present, future, and eternal","tag":"Confused causes with accounts of time","why":"These are not Aristotle’s four causes."},{"t":"Thesis, antithesis, synthesis, and proof","tag":"Confused causes with a dialectical schema","why":"This is not the four-cause account taught in the materials."}],
+    "explain":"Material cause is what a thing is made of; formal cause is its form; efficient cause brings it about; final cause is its purpose or end."
+  },
+  {
+    "id":"GST211-NOTE-043","course":"GST211","topic":"Ancient Philosophy","prompt":"A sculptor makes a bronze statue. In Aristotle’s four-cause framework, the bronze is the _____ cause and the sculptor is the _____ cause.","d":3,
+    "options":[{"t":"Material; efficient","ok":true},{"t":"Formal; final","tag":"Confused shape and purpose with material and maker","why":"Bronze is the material; the maker is the source of the change."},{"t":"Efficient; material","tag":"Reversed the two roles","why":"The sculptor is the efficient cause, and bronze is the material cause."},{"t":"Final; formal","tag":"Used purpose and form incorrectly","why":"The final cause is the purpose; the formal cause is the design or structure."}],
+    "explain":"The material cause is the stuff from which the statue is made; the efficient cause is the agent who produces it."
+  },
+  {
+    "id":"GST211-NOTE-044","course":"GST211","topic":"Ancient Philosophy","prompt":"In Aristotle’s four causes, the final cause of an object refers to its:","d":2,
+    "options":[{"t":"Purpose or end","ok":true},{"t":"Raw material","tag":"Confused it with the material cause","why":"The material cause names what something is made from."},{"t":"Maker or initiating agent","tag":"Confused it with the efficient cause","why":"The efficient cause is what brings about the object."},{"t":"Shape or structure","tag":"Confused it with the formal cause","why":"The formal cause is the form or organization."}],
+    "explain":"The final cause answers what an object or process is for—its end or purpose."
+  },
+  {
+    "id":"GST211-NOTE-045","course":"GST211","topic":"Ancient Philosophy","prompt":"The “unmoved mover” in the lecture compilation is associated with:","d":2,
+    "options":[{"t":"Aristotle’s account of a first source of motion and the final cause","ok":true},{"t":"Thales’s claim that water is the arche","tag":"Confused two ancient thinkers","why":"The water arche is attributed to Thales."},{"t":"Derrida’s deconstruction of binary oppositions","tag":"Confused ancient and contemporary philosophy","why":"Derrida is a contemporary philosopher in the slides."},{"t":"Bentham’s greatest-happiness principle","tag":"Confused metaphysics with utilitarian ethics","why":"Bentham is associated with utilitarianism."}],
+    "explain":"The medieval and ancient materials connect Aristotle’s unmoved mover with the source that accounts for motion and order."
+  },
+  {
+    "id":"GST211-NOTE-046","course":"GST211","topic":"Ancient Philosophy","prompt":"The course compilation associates Democritus with which idea?","d":1,
+    "options":[{"t":"Everything is composed of atoms","ok":true},{"t":"Water is the origin of all things","tag":"Confused him with Thales","why":"The water arche is attributed to Thales."},{"t":"Meaning is determined by language games","tag":"Confused him with later Wittgenstein","why":"Language games are associated with Wittgenstein."},{"t":"The greatest happiness principle","tag":"Confused him with utilitarianism","why":"The greatest-happiness principle belongs to utilitarian ethics."}],
+    "explain":"The compilation presents Democritus as an early atomist and forerunner of modern chemistry."
+  },
+  {
+    "id":"GST211-NOTE-047","course":"GST211","topic":"Ancient Philosophy","prompt":"Stoicism, as summarized in the compilation, emphasizes:","d":2,
+    "options":[{"t":"Virtue, reason, and living in accordance with nature","ok":true},{"t":"Pleasure as the only practical test of every idea","tag":"Confused Stoicism with other doctrines","why":"The notes associate this emphasis with Stoicism’s virtue and reason."},{"t":"The denial that any knowledge is possible","tag":"Confused Stoicism with skepticism","why":"Skepticism concerns the possibility or certainty of knowledge."},{"t":"The view that language has no social use","tag":"Confused it with language philosophy","why":"This is not the Stoic emphasis in the course materials."}],
+    "explain":"The course compilation identifies Zeno of Citium as founder of Stoicism and highlights virtue, reason, and nature."
+  },
+  {
+    "id":"GST211-NOTE-048","course":"GST211","topic":"Medieval Philosophy","prompt":"The medieval period is placed approximately between which centuries in the lecture?","d":1,
+    "options":[{"t":"The 11th and the 14th/15th centuries","ok":true},{"t":"The 5th and 3rd centuries BCE","tag":"Confused medieval with ancient dates","why":"Those centuries precede the medieval period."},{"t":"The late 19th and early 20th centuries","tag":"Confused medieval with contemporary philosophy","why":"The slides date contemporary philosophy to this later period."},{"t":"The 16th and 17th centuries only","tag":"Confused medieval with the early modern period","why":"The lecture places medieval philosophy earlier."}],
+    "explain":"The medieval philosophy handout describes the era as roughly the 11th through 14th or 15th centuries."
+  },
+  {
+    "id":"GST211-NOTE-049","course":"GST211","topic":"Medieval Philosophy","prompt":"Which set of questions became especially prominent in the medieval lecture?","d":2,
+    "options":[{"t":"The relation between philosophy and theology, God’s existence, time, and evil","ok":true},{"t":"Only the validity of contemporary computer algorithms","tag":"Imported a modern technical topic","why":"The handout emphasizes theological and metaphysical questions."},{"t":"Only the origins of the cosmos before Socrates","tag":"Confused medieval and pre-Socratic concerns","why":"The pre-Socratics focused on the cosmos and its origin."},{"t":"Only language games and deconstruction","tag":"Confused medieval and contemporary themes","why":"These themes are associated with contemporary philosophy."}],
+    "explain":"The medieval handout highlights philosophy–theology, the existence of God, time, and the problem of evil."
+  },
+  {
+    "id":"GST211-NOTE-050","course":"GST211","topic":"Medieval Philosophy","prompt":"Augustine’s theodicy in the lecture materials attributes the source of evil chiefly to:","d":2,
+    "options":[{"t":"Human misuse of free will, rather than the good creator’s works","ok":true},{"t":"The claim that God’s creation is wholly evil","tag":"Reversed Augustine’s premise","why":"The notes state that God is perfect and creation is good."},{"t":"The passage of time itself","tag":"Confused the problem of evil with Augustine’s view of time","why":"Augustine’s account of time is a separate topic in the handout."},{"t":"The existence of sensory experience","tag":"Confused theodicy with empiricism","why":"The problem of evil concerns moral and theological explanation."}],
+    "explain":"The handout presents Augustine as holding that God is good and that evil arises when humans freely choose disobedience."
+  },
+  {
+    "id":"GST211-NOTE-051","course":"GST211","topic":"Medieval Philosophy","prompt":"Augustine’s account of time in the medieval handout treats time primarily as:","d":2,
+    "options":[{"t":"A feature of human consciousness used to describe memory, present experience, and expectation","ok":true},{"t":"A physical substance that exists independently in exactly three containers","tag":"Misrepresented the account","why":"The handout describes time as a creation or construct of the human mind."},{"t":"A synonym for moral law","tag":"Confused time with ethics","why":"The notes discuss time as memory, present experience, and expectation."},{"t":"A logical fallacy caused by ambiguous words","tag":"Confused time with logic","why":"The account is metaphysical, not a fallacy classification."}],
+    "explain":"The course handout presents Augustine’s view that past and future are understood through memory and expectation, with the present passing as it is experienced."
+  },
+  {
+    "id":"GST211-NOTE-052","course":"GST211","topic":"Medieval Philosophy","prompt":"The ontological argument for God is associated in the lecture with:","d":1,
+    "options":[{"t":"St. Anselm","ok":true},{"t":"St. Augustine","tag":"Confused two medieval arguments","why":"The handout associates Augustine with causal reasoning, morality, evil, and time."},{"t":"St. Thomas Aquinas","tag":"Confused it with Aquinas’s cosmological approach","why":"The handout characterizes Aquinas’s argument as cosmological."},{"t":"William of Ockham","tag":"Selected another medieval name without this argument","why":"Ockham is named among medieval thinkers, but the ontological proof is attributed to Anselm."}],
+    "explain":"Anselm reasons from the concept of God as the greatest conceivable being; the handout says that conceiving such a being is evidence of existence."
+  },
+  {
+    "id":"GST211-NOTE-053","course":"GST211","topic":"Medieval Philosophy","prompt":"Aquinas’s cosmological argument, as summarized in the handout, reasons from:","d":2,
+    "options":[{"t":"Motion, causation, and order in the world toward a first or necessary source","ok":true},{"t":"The definition of a perfect being alone","tag":"Confused Aquinas with Anselm","why":"The handout associates the ontological proof from the concept of a greatest being with Anselm."},{"t":"The claim that moral values are only personal preferences","tag":"Confused cosmology with subjectivism","why":"Aquinas’s argument concerns the world’s causes and motion."},{"t":"The use of language games in everyday life","tag":"Confused medieval and contemporary philosophy","why":"Language games are associated with Wittgenstein."}],
+    "explain":"The lecture describes Aquinas’s cosmological reasoning through necessary cause, unmoved mover, perfection, and order."
+  },
+  {
+    "id":"GST211-NOTE-054","course":"GST211","topic":"Medieval Philosophy","prompt":"In the medieval handout, Aquinas distinguishes philosophy from theology by emphasizing:","d":2,
+    "options":[{"t":"Reason in philosophy and faith in theology","ok":true},{"t":"Emotion in philosophy and sensation in theology","tag":"Substituted unrelated faculties","why":"The handout explicitly contrasts rationality and faith."},{"t":"Induction in philosophy and deduction in theology","tag":"Confused disciplines with inference methods","why":"The distinction given concerns faith and rational inquiry."},{"t":"Beauty in philosophy and justice in theology","tag":"Confused unrelated branches","why":"The course handout’s distinction is reason and faith."}],
+    "explain":"The lecture presents philosophy as proceeding through rationality and theology as grounded in faith."
+  },
+  {
+    "id":"GST211-NOTE-055","course":"GST211","topic":"Contemporary Philosophy","prompt":"The contemporary period in Western philosophy is dated in the slides to:","d":1,
+    "options":[{"t":"The late 19th and early 20th centuries onward","ok":true},{"t":"The 11th through 15th centuries","tag":"Confused it with medieval philosophy","why":"That is the approximate medieval period in the lecture."},{"t":"The 6th century BCE only","tag":"Confused it with early ancient philosophy","why":"The contemporary period is much later."},{"t":"The Renaissance alone","tag":"Confused it with an earlier transition","why":"The slides describe contemporary philosophy as emerging after modern philosophy."}],
+    "explain":"The contemporary-philosophy slides place its emergence at the end of the 19th and beginning of the 20th century."
+  },
+  {
+    "id":"GST211-NOTE-056","course":"GST211","topic":"Contemporary Philosophy","prompt":"Which contrast best captures the slides’ distinction between analytic and continental philosophy?","d":3,
+    "options":[{"t":"Analytic philosophy stresses logical and linguistic clarity; continental approaches stress historical context, experience, and social critique","ok":true},{"t":"Analytic philosophy rejects reasoning; continental philosophy uses only formal proofs","tag":"Reversed the emphases","why":"The slides link rigor and formal analysis with analytic philosophy."},{"t":"Both are names for medieval theology","tag":"Confused schools and periods","why":"They are contemporary traditions in the slides."},{"t":"Continental philosophy is limited to laboratory science","tag":"Misrepresented the continental tradition","why":"The slides emphasize history, human experience, and social critique."}],
+    "explain":"The slides contrast analytic clarity, logic, and language analysis with continental attention to history, experience, and social critique."
+  },
+  {
+    "id":"GST211-NOTE-057","course":"GST211","topic":"Contemporary Philosophy","prompt":"“Existence precedes essence” is identified in the slides with:","d":2,
+    "options":[{"t":"Jean-Paul Sartre","ok":true},{"t":"Bertrand Russell","tag":"Confused Sartre with logical atomism","why":"Russell is linked with logicism and logical atomism."},{"t":"John Rawls","tag":"Confused Sartre with justice theory","why":"Rawls is associated with the veil of ignorance and principles of justice."},{"t":"Auguste Comte","tag":"Confused Sartre with positivism","why":"Comte is associated with positivism."}],
+    "explain":"Sartre’s existentialism emphasizes human freedom and self-definition; the slides summarize this as “existence precedes essence.”"
+  },
+  {
+    "id":"GST211-NOTE-058","course":"GST211","topic":"Contemporary Philosophy","prompt":"In Sartre’s account as summarized in the slides, “bad faith” refers to:","d":3,
+    "options":[{"t":"Self-deception that denies or evades one’s freedom","ok":true},{"t":"A valid deduction from true premises","tag":"Confused existential ethics with logic","why":"Bad faith concerns how a person evades freedom, not argument validity."},{"t":"A scientific theory verified by experiment","tag":"Confused it with positivism","why":"The slides use bad faith as an existential concept."},{"t":"An appeal to pity in an argument","tag":"Confused it with ad misericordiam","why":"An appeal to pity is an informal fallacy."}],
+    "explain":"The slides describe bad faith as evading freedom through role-playing or self-deception."
+  },
+  {
+    "id":"GST211-NOTE-059","course":"GST211","topic":"Contemporary Philosophy","prompt":"John Rawls’s “veil of ignorance” is designed to help people:","d":2,
+    "options":[{"t":"Choose principles of justice without knowing their own social position","ok":true},{"t":"Prove that every action maximizes pleasure","tag":"Confused Rawls with utilitarianism","why":"Rawls develops principles of justice; utilitarianism evaluates overall utility."},{"t":"Explain how words acquire meaning through use","tag":"Confused Rawls with Wittgenstein","why":"Language games and meaning-as-use are associated with Wittgenstein."},{"t":"Reject every form of political reasoning","tag":"Reversed Rawls’s project","why":"Rawls develops a framework for just political principles."}],
+    "explain":"The veil of ignorance removes knowledge of one’s own status so that principles can be selected impartially."
+  },
+  {
+    "id":"GST211-NOTE-060","course":"GST211","topic":"Contemporary Philosophy","prompt":"Which principle in Rawls’s account, as summarized in the slides, supports the least advantaged?","d":3,
+    "options":[{"t":"The difference principle","ok":true},{"t":"The greatest-happiness principle","tag":"Confused Rawls with utilitarianism","why":"The greatest-happiness principle is associated with utilitarianism."},{"t":"The law of three stages","tag":"Confused Rawls with Comte","why":"The three stages belong to positivism."},{"t":"The principle of sufficient reason","tag":"Selected an unrelated principle","why":"The slide identifies Rawls’s difference principle as supporting the least advantaged."}],
+    "explain":"The slides pair Rawls’s liberty principle with the difference principle, which concerns benefits to the least advantaged."
+  },
+  {
+    "id":"GST211-NOTE-061","course":"GST211","topic":"Contemporary Philosophy","prompt":"The concept of “language games,” where meaning depends on use, is associated with:","d":2,
+    "options":[{"t":"Ludwig Wittgenstein","ok":true},{"t":"Jacques Derrida","tag":"Confused language games with deconstruction","why":"Derrida is associated with deconstruction and critiques of logocentrism."},{"t":"Martin Heidegger","tag":"Confused it with Dasein","why":"Heidegger is associated with Dasein, being-in-the-world, and temporality."},{"t":"John Rawls","tag":"Confused it with political justice","why":"Rawls is associated with justice and the veil of ignorance."}],
+    "explain":"The slides associate Wittgenstein’s later work with language games, forms of life, and meaning through practical use."
+  },
+  {
+    "id":"GST211-NOTE-062","course":"GST211","topic":"Contemporary Philosophy","prompt":"The slides describe Derrida’s deconstruction as a strategy that:","d":3,
+    "options":[{"t":"Examines texts and challenges binary hierarchies and assumptions in language","ok":true},{"t":"Reduces all mathematics to set theory","tag":"Confused Derrida with Russell","why":"The slides link Russell with logicism and set theory."},{"t":"Treats empirical verification as the only source of meaning","tag":"Confused Derrida with positivism","why":"Positivism emphasizes empirical verification."},{"t":"Proves the existence of God from motion","tag":"Confused Derrida with a cosmological argument","why":"The cosmological argument is associated with Aquinas in the handout."}],
+    "explain":"The slides present deconstruction as a critical reading strategy that questions binary hierarchies, logocentrism, and assumptions in texts."
+  },
+  {
+    "id":"GST211-NOTE-063","course":"GST211","topic":"Contemporary Philosophy","prompt":"Heidegger’s term “Dasein” is used in the slides for an analysis of:","d":2,
+    "options":[{"t":"Human being-in-the-world, care, and temporality","ok":true},{"t":"The mathematical foundation of number theory","tag":"Confused Heidegger with logicism","why":"The slides link Russell with logicism and mathematical logic."},{"t":"The greatest happiness of the majority","tag":"Confused Heidegger with utilitarianism","why":"Utilitarianism evaluates outcomes by utility."},{"t":"A word’s accidental ambiguity","tag":"Confused it with amphiboly","why":"Amphiboly is a fallacy of grammatical ambiguity."}],
+    "explain":"The slides associate Dasein with being-in-the-world, care, and temporality."
+  },
+  {
+    "id":"GST211-NOTE-064","course":"GST211","topic":"Contemporary Philosophy","prompt":"The slides use “enframing” to describe Heidegger’s concern that modern technology can:","d":3,
+    "options":[{"t":"Treat beings and nature as resources to be ordered and exploited","ok":true},{"t":"Make every argument formally valid","tag":"Confused technology critique with logic","why":"Enframing concerns how modern technology reveals and orders the world."},{"t":"Replace all sensory evidence with innate ideas","tag":"Confused it with rationalism","why":"The technology critique is not a theory of knowledge sources."},{"t":"Make moral rules identical in every society","tag":"Confused it with universal ethics","why":"Enframing is a critique of technological thinking."}],
+    "explain":"The slides summarize Heidegger’s critique as modern technology turning beings into exploitable standing-reserve."
+  },
+  {
+    "id":"GST211-NOTE-065","course":"GST211","topic":"Logic","prompt":"In logic, a proposition is best described as a sentence that:","d":1,
+    "options":[{"t":"Makes an assertion that can be assessed as true or false","ok":true},{"t":"Expresses a question only","tag":"Confused questions with declarative claims","why":"A question is not ordinarily true or false."},{"t":"Commands an action","tag":"Confused commands with propositions","why":"A command is not ordinarily true or false."},{"t":"Has emotional force regardless of its truth","tag":"Confused persuasion with truth-evaluability","why":"A proposition is evaluated by truth value, not emotional force."}],
+    "explain":"The logic slides identify declarative sentences as propositions because they can be assessed as true or false."
+  },
+  {
+    "id":"GST211-NOTE-066","course":"GST211","topic":"Logic","prompt":"In propositional logic, the dot (·) represents:","d":1,
+    "options":[{"t":"Conjunction (“and”)","ok":true},{"t":"Disjunction (“or”)","tag":"Confused conjunction and disjunction","why":"The slides represent disjunction with a vee (∨)."},{"t":"Negation (“not”)","tag":"Confused conjunction and negation","why":"Negation is represented by a tilde (¬ or ~)."},{"t":"Conditional (“if … then”)","tag":"Confused conjunction and implication","why":"The conditional is represented by a horseshoe or arrow."}],
+    "explain":"The logic slides encode “p and q” as p · q."
+  },
+  {
+    "id":"GST211-NOTE-067","course":"GST211","topic":"Logic","prompt":"Which symbol is used for disjunction (“or”) in the logic slides?","d":1,
+    "options":[{"t":"∨","ok":true},{"t":"·","tag":"Selected conjunction","why":"The dot represents conjunction (“and”)."},{"t":"~","tag":"Selected negation","why":"The tilde represents negation (“not”)."},{"t":"→","tag":"Selected implication","why":"The arrow represents a conditional."}],
+    "explain":"Disjunction is conventionally represented by ∨, the vee-shaped symbol."
+  },
+  {
+    "id":"GST211-NOTE-068","course":"GST211","topic":"Logic","prompt":"If p means “It is sunny,” what does ~p mean?","d":1,
+    "options":[{"t":"It is not sunny","ok":true},{"t":"It is sunny and warm","tag":"Added a conjunction","why":"Negation denies p; it does not add another proposition."},{"t":"If it is sunny, then it is warm","tag":"Added a conditional","why":"A conditional requires an antecedent and consequent."},{"t":"It is sunny or warm","tag":"Changed negation into disjunction","why":"The tilde negates the proposition."}],
+    "explain":"The tilde (~) is the negation sign, so ~p denies the proposition p."
+  },
+  {
+    "id":"GST211-NOTE-069","course":"GST211","topic":"Logic","prompt":"Which connective expresses “If p, then q”?","d":1,
+    "options":[{"t":"p → q","ok":true},{"t":"p · q","tag":"Selected conjunction","why":"The dot means p and q, not an if-then relation."},{"t":"p ∨ q","tag":"Selected disjunction","why":"The vee means p or q."},{"t":"~p","tag":"Selected negation","why":"The tilde negates a proposition."}],
+    "explain":"A conditional (“if p, then q”) is represented by a horseshoe or, in modern notation, an arrow."
+  },
+  {
+    "id":"GST211-NOTE-070","course":"GST211","topic":"Logic","prompt":"What does the biconditional p ↔ q assert?","d":2,
+    "options":[{"t":"p if and only if q; each implies the other","ok":true},{"t":"p and q are both false","tag":"Confused equivalence with a truth-value assignment","why":"A biconditional relates the truth conditions of p and q."},{"t":"p is true but q is false","tag":"Confused equivalence with a disagreement","why":"The biconditional is true when p and q have the same truth value."},{"t":"If p, then q, but not the reverse","tag":"Reduced a biconditional to one conditional","why":"“If and only if” includes both directions."}],
+    "explain":"A biconditional expresses material equivalence: p implies q and q implies p."
+  },
+  {
+    "id":"GST211-NOTE-071","course":"GST211","topic":"Logic","prompt":"In a valid deductive argument, what must be true if all premises are true?","d":2,
+    "options":[{"t":"The conclusion must be true","ok":true},{"t":"The conclusion must be popular","tag":"Confused validity with acceptance","why":"Validity concerns whether the conclusion follows from premises, not popularity."},{"t":"At least one premise must be false","tag":"Reversed validity","why":"Validity preserves truth from premises to conclusion."},{"t":"The argument must contain exactly three sentences","tag":"Confused form with a fixed sentence count","why":"Validity depends on logical form, not a required number of sentences."}],
+    "explain":"A deductive argument is valid when there is no possibility of true premises and a false conclusion."
+  },
+  {
+    "id":"GST211-NOTE-072","course":"GST211","topic":"Logic","prompt":"Consider: “All humans are mortal. Ada is human. Therefore, Ada is mortal.” The first two statements function as the:","d":1,
+    "options":[{"t":"Premises","ok":true},{"t":"Conclusion","tag":"Confused supporting claims with the result","why":"The conclusion is the claim that Ada is mortal."},{"t":"Fallacies","tag":"Confused argument components with errors","why":"The premises support a valid conclusion."},{"t":"Logical connectives","tag":"Confused statements with symbols linking them","why":"A connective joins propositions; these are premise statements."}],
+    "explain":"Premises are the supporting statements from which an argument’s conclusion is drawn."
+  },
+  {
+    "id":"GST211-NOTE-073","course":"GST211","topic":"Logic","prompt":"Which is one stated benefit of studying logic in the course slides?","d":1,
+    "options":[{"t":"It helps make thinking and expression clearer and more consistent","ok":true},{"t":"It ensures every conclusion is factually true regardless of premises","tag":"Overstated logic’s guarantee","why":"Logic assesses inference; it cannot make false premises true."},{"t":"It replaces the need for evidence","tag":"Contradicted the slides","why":"The slides say arguments should be supported by evidence."},{"t":"It prevents people from asking questions","tag":"Reversed the purpose of critical inquiry","why":"Logic supports careful reasoning and examination."}],
+    "explain":"The slides say logic aids truth-seeking, consistency, precision, clarity, and avoidance of tautology."
+  },
+  {
+    "id":"GST211-NOTE-074","course":"GST211","topic":"Fallacies","prompt":"A fallacy is best described as:","d":1,
+    "options":[{"t":"An error in reasoning that makes an argument unreliable or unsound","ok":true},{"t":"Any conclusion that a listener dislikes","tag":"Confused disagreement with error","why":"A conclusion can be unpopular yet well-supported."},{"t":"A premise that is necessarily true","tag":"Confused an error with a premise","why":"A fallacy is a defect in reasoning, not a guaranteed truth."},{"t":"A question that has no answer","tag":"Confused a fallacy with an open question","why":"Fallacies are errors in reasoning or argument."}],
+    "explain":"The slides describe fallacies as reasoning that violates logical rules or uses defective argumentation."
+  },
+  {
+    "id":"GST211-NOTE-075","course":"GST211","topic":"Fallacies","prompt":"A formal fallacy is primarily a defect in an argument’s:","d":1,
+    "options":[{"t":"Logical structure or form","ok":true},{"t":"Emotional impact only","tag":"Confused form with persuasion","why":"Formal fallacies concern inferential structure."},{"t":"Speaker’s accent","tag":"Confused form with one ambiguity fallacy","why":"Fallacy of accent is an informal ambiguity fallacy."},{"t":"Topic’s popularity","tag":"Confused form with ad populum","why":"Appeal to popularity is an informal material fallacy."}],
+    "explain":"Formal fallacies arise from an invalid structure, even when the subject matter is irrelevant."
+  },
+  {
+    "id":"GST211-NOTE-076","course":"GST211","topic":"Fallacies","prompt":"An informal fallacy is primarily identified by examining:","d":2,
+    "options":[{"t":"The content, language, relevance, or evidential support of the argument","ok":true},{"t":"Only whether the conclusion appears after the premises","tag":"Ignored content and relevance","why":"Informal fallacies depend on content, ambiguity, or relevance."},{"t":"Whether the argument is written in Greek letters","tag":"Confused notation with validity","why":"Informal fallacies do not depend on a special script."},{"t":"The number of premises alone","tag":"Confused quantity with argument quality","why":"A premise count does not determine whether an argument is fallacious."}],
+    "explain":"Informal fallacies involve defects in content, relevance, ambiguity, or evidence rather than logical form alone."
+  },
+  {
+    "id":"GST211-NOTE-077","course":"GST211","topic":"Fallacies","prompt":"A speaker uses the word “bank” first to mean a riverbank and later to mean a financial institution, then treats the meanings as identical. This is:","d":2,
+    "options":[{"t":"Equivocation","ok":true},{"t":"Amphiboly","tag":"Confused word ambiguity with grammatical ambiguity","why":"Amphiboly arises from ambiguous sentence structure."},{"t":"Composition","tag":"Confused a shift in meaning with a group inference","why":"Composition transfers a property from parts to a whole."},{"t":"Ad baculum","tag":"Confused ambiguity with a threat","why":"Ad baculum appeals to force or threat."}],
+    "explain":"Equivocation occurs when a key word shifts meaning during an argument."
+  },
+  {
+    "id":"GST211-NOTE-078","course":"GST211","topic":"Fallacies","prompt":"A sentence’s grammar permits two readings, and the argument relies on switching between them. Which fallacy is this?","d":2,
+    "options":[{"t":"Amphiboly","ok":true},{"t":"Equivocation","tag":"Confused sentence structure with one word’s meanings","why":"Equivocation shifts a word’s meaning; amphiboly depends on grammatical ambiguity."},{"t":"Accent","tag":"Confused grammar with emphasis","why":"Accent changes the apparent meaning through stress or emphasis."},{"t":"Division","tag":"Confused ambiguity with a part-whole error","why":"Division transfers a group property to each member."}],
+    "explain":"Amphiboly is ambiguity caused by sentence construction or grammar."
+  },
+  {
+    "id":"GST211-NOTE-079","course":"GST211","topic":"Fallacies","prompt":"The fallacy of accent occurs when:","d":2,
+    "options":[{"t":"Stress or emphasis changes how a statement is understood","ok":true},{"t":"A property of a group is assigned to every member","tag":"Confused it with division","why":"Division attributes a group property to its individual members."},{"t":"A word changes meaning within an argument","tag":"Confused it with equivocation","why":"Equivocation shifts a word’s sense."},{"t":"A claim is repeated until it sounds true","tag":"Selected a different persuasive error","why":"The slide’s fallacy of accent concerns emphasis or stress."}],
+    "explain":"Accent exploits emphasis or stress to alter the apparent meaning or force of a statement."
+  },
+  {
+    "id":"GST211-NOTE-080","course":"GST211","topic":"Fallacies","prompt":"“Every brick in this wall is small; therefore, the wall is small.” This commits:","d":3,
+    "options":[{"t":"Composition","ok":true},{"t":"Division","tag":"Reversed the direction of transfer","why":"Division infers that each part has a property of the whole; this argument infers a whole’s property from its parts."},{"t":"Equivocation","tag":"Confused a part-whole error with word ambiguity","why":"No term changes meaning."},{"t":"Ad misericordiam","tag":"Confused a part-whole error with pity","why":"An appeal to pity seeks acceptance by eliciting sympathy."}],
+    "explain":"Composition mistakenly transfers a property of individual parts to the whole they compose."
+  },
+  {
+    "id":"GST211-NOTE-081","course":"GST211","topic":"Fallacies","prompt":"“The team is excellent, so every player on it must be excellent.” This is an example of:","d":3,
+    "options":[{"t":"Division","ok":true},{"t":"Composition","tag":"Reversed the direction of transfer","why":"Composition infers a whole’s property from its parts; this argument transfers from whole to each part."},{"t":"False dilemma","tag":"Confused a part-whole error with restricted alternatives","why":"A false dilemma presents too few alternatives."},{"t":"Begging the question","tag":"Confused a part-whole error with circular support","why":"Begging the question assumes the conclusion."}],
+    "explain":"Division wrongly assumes that what is true of a group or whole must be true of each member or part."
+  },
+  {
+    "id":"GST211-NOTE-082","course":"GST211","topic":"Fallacies","prompt":"Treating an abstract concept such as “the economy” as if it were a living person that literally chooses and feels is an example of:","d":3,
+    "options":[{"t":"Reification","ok":true},{"t":"Equivocation","tag":"Confused abstraction with word-shifting","why":"Equivocation shifts a term’s meaning."},{"t":"Ad populum","tag":"Confused reification with popular appeal","why":"Ad populum appeals to what many people believe."},{"t":"Induction","tag":"Confused a fallacy with an inference method","why":"Induction generalizes from particular cases."}],
+    "explain":"Reification treats an abstraction or situation as though it were a concrete, living entity."
+  },
+  {
+    "id":"GST211-NOTE-083","course":"GST211","topic":"Fallacies","prompt":"A candidate answers criticism of a policy by insulting the critic’s age and character. This is:","d":2,
+    "options":[{"t":"Ad hominem","ok":true},{"t":"Ad populum","tag":"Confused personal attack with popular appeal","why":"Ad populum appeals to the beliefs or sentiments of a crowd."},{"t":"Ad verecundiam","tag":"Confused a personal attack with an authority appeal","why":"Ad verecundiam relies on authority or respect."},{"t":"Ad misericordiam","tag":"Confused a personal attack with pity","why":"Ad misericordiam appeals to sympathy."}],
+    "explain":"Ad hominem attacks the person instead of addressing the argument or issue."
+  },
+  {
+    "id":"GST211-NOTE-084","course":"GST211","topic":"Fallacies","prompt":"“Everyone in my class uses this brand, so it must be the best.” This is:","d":2,
+    "options":[{"t":"Ad populum (bandwagon appeal)","ok":true},{"t":"Ad baculum","tag":"Confused popularity with threat","why":"Ad baculum uses force or a threat."},{"t":"Ad verecundiam","tag":"Confused popularity with authority","why":"Ad verecundiam appeals to an authority or respected person."},{"t":"Accident","tag":"Confused popularity with misapplied general rule","why":"The fallacy of accident misapplies a general rule to an exceptional case."}],
+    "explain":"Ad populum treats popularity or group sentiment as evidence that a claim is true or best."
+  },
+  {
+    "id":"GST211-NOTE-085","course":"GST211","topic":"Fallacies","prompt":"“Agree with my conclusion or I will have you expelled.” This is an appeal to:","d":2,
+    "options":[{"t":"Force or threat (ad baculum)","ok":true},{"t":"Pity (ad misericordiam)","tag":"Confused threat with sympathy","why":"Ad misericordiam seeks acceptance by appealing to pity."},{"t":"Popularity (ad populum)","tag":"Confused threat with majority opinion","why":"Ad populum appeals to what the crowd believes."},{"t":"Authority (ad verecundiam)","tag":"Confused a threat with an expert’s testimony","why":"Ad verecundiam appeals to authority rather than coercion."}],
+    "explain":"Ad baculum attempts to secure agreement by force, intimidation, or threat rather than relevant evidence."
+  },
+  {
+    "id":"GST211-NOTE-086","course":"GST211","topic":"Fallacies","prompt":"A student says, “Please pass me because I have had a difficult week,” without addressing the quality of the work. This is:","d":2,
+    "options":[{"t":"Ad misericordiam","ok":true},{"t":"Ad baculum","tag":"Confused pity with threat","why":"Ad baculum relies on force or a threat."},{"t":"Ad hominem","tag":"Confused pity with personal attack","why":"Ad hominem attacks the person rather than the issue."},{"t":"False dilemma","tag":"Confused pity with restricted alternatives","why":"A false dilemma presents an unjustifiably limited set of choices."}],
+    "explain":"Ad misericordiam appeals to pity or sympathy instead of providing relevant support for the conclusion."
+  },
+  {
+    "id":"GST211-NOTE-087","course":"GST211","topic":"Fallacies","prompt":"“A famous actor says this medicine works, so it must work.” This is most directly an appeal to:","d":2,
+    "options":[{"t":"Authority (ad verecundiam)","ok":true},{"t":"Popularity (ad populum)","tag":"Confused celebrity status with a crowd’s opinion","why":"The argument relies on a claimed authority, not a majority vote."},{"t":"Force (ad baculum)","tag":"Confused endorsement with a threat","why":"No threat is made."},{"t":"Pity (ad misericordiam)","tag":"Confused endorsement with sympathy","why":"The argument does not appeal to pity."}],
+    "explain":"Ad verecundiam relies on a person’s authority or prestige; the appeal is weak when the person lacks relevant expertise."
+  },
+  {
+    "id":"GST211-NOTE-088","course":"GST211","topic":"Fallacies","prompt":"A speaker changes an opponent’s modest claim into an extreme version, then attacks that version. This is:","d":2,
+    "options":[{"t":"Straw man","ok":true},{"t":"Begging the question","tag":"Confused misrepresentation with circular reasoning","why":"Begging the question assumes what it is supposed to prove."},{"t":"Composition","tag":"Confused misrepresentation with part-whole transfer","why":"Composition infers a property of a whole from its parts."},{"t":"Statistical fallacy","tag":"Confused misrepresentation with sampling error","why":"A statistical fallacy draws an overbroad conclusion from inadequate data."}],
+    "explain":"A straw man misrepresents an opponent’s position to make it easier to attack."
+  },
+  {
+    "id":"GST211-NOTE-089","course":"GST211","topic":"Fallacies","prompt":"“This policy is fair because it is the just policy; it is just because it is fair.” This is:","d":3,
+    "options":[{"t":"Begging the question (circular reasoning)","ok":true},{"t":"False dilemma","tag":"Confused circular support with limited choices","why":"A false dilemma offers too few alternatives."},{"t":"Ad populum","tag":"Confused circular support with popularity","why":"Ad populum treats popularity as evidence."},{"t":"Amphiboly","tag":"Confused circular support with grammar ambiguity","why":"Amphiboly depends on ambiguous sentence structure."}],
+    "explain":"Begging the question assumes the conclusion, often restating it as a premise instead of independently supporting it."
+  },
+  {
+    "id":"GST211-NOTE-090","course":"GST211","topic":"Fallacies","prompt":"“Either you support this proposal exactly as written or you oppose progress.” This is likely:","d":2,
+    "options":[{"t":"A false dilemma","ok":true},{"t":"A valid disjunction","tag":"Mistook a limited choice for an exhaustive one","why":"The statement excludes other reasonable positions without justification."},{"t":"An appeal to pity","tag":"Confused restricted choices with sympathy","why":"No appeal to pity is made."},{"t":"An argument from analogy","tag":"Confused a false choice with comparison","why":"The statement offers alternatives; it does not reason by analogy."}],
+    "explain":"A false dilemma presents too few alternatives as if they were the only possibilities."
+  },
+  {
+    "id":"GST211-NOTE-091","course":"GST211","topic":"Fallacies","prompt":"A survey of five friends is used to claim that 90% of all university students share their opinion. This is:","d":2,
+    "options":[{"t":"A statistical fallacy or hasty generalization","ok":true},{"t":"A deductively valid argument","tag":"Overstated what a small sample establishes","why":"A tiny, unrepresentative sample cannot justify a population-wide percentage."},{"t":"An appeal to authority","tag":"Confused sampling with expertise","why":"The argument relies on a small sample, not an expert."},{"t":"An example of phenomenology","tag":"Confused a survey with an object-focused method","why":"Phenomenology brackets prior assumptions to study an object’s essence."}],
+    "explain":"A broad statistical conclusion from a small or unrepresentative sample is not well supported."
+  },
+  {
+    "id":"GST211-NOTE-092","course":"GST211","topic":"Fallacies","prompt":"“Have you stopped cheating on exams?” asked without evidence that the person ever cheated. The question presupposes a disputed claim and commits:","d":3,
+    "options":[{"t":"The fallacy of many questions (complex question)","ok":true},{"t":"Equivocation","tag":"Confused a presupposition with a word shift","why":"Equivocation uses a term in different senses."},{"t":"Division","tag":"Confused a presupposition with a part-whole error","why":"Division transfers a property from a group to its members."},{"t":"Ad populum","tag":"Confused a presupposition with popular appeal","why":"Ad populum appeals to crowd sentiment."}],
+    "explain":"A loaded or complex question embeds an unestablished assumption, making a direct answer seem to accept it."
+  },
+  {
+    "id":"GST211-NOTE-093","course":"GST211","topic":"Fallacies","prompt":"An argument offers facts about an opponent’s private life but never addresses the policy being debated. The main defect is:","d":2,
+    "options":[{"t":"Irrelevance—an ad hominem diversion from the issue","ok":true},{"t":"A valid rebuttal because any fact about a speaker settles a policy question","tag":"Mistook personal detail for relevant evidence","why":"The personal detail does not address the policy’s merits."},{"t":"A formal fallacy in every possible context","tag":"Misclassified the error","why":"The issue is irrelevant content, so this is an informal fallacy."},{"t":"A dilemma with two alternatives","tag":"Misidentified the argument’s structure","why":"No limited pair of alternatives is offered."}],
+    "explain":"The lecture groups material fallacies under irrelevance; a personal attack diverts attention from the question at hand."
+  },
+  {
+    "id":"GST211-NOTE-094","course":"GST211","topic":"Fallacies","prompt":"The general rule “Do not bring animals into the library” is applied to a guide dog accompanying a blind reader, with no consideration of the exception. This illustrates:","d":3,
+    "options":[{"t":"The fallacy of accident (misapplying a general rule to an exceptional case)","ok":true},{"t":"Composition","tag":"Confused rule application with a part-whole inference","why":"Composition transfers a property from parts to a whole."},{"t":"Equivocation","tag":"Confused rule application with word ambiguity","why":"The example does not depend on a term shifting meaning."},{"t":"Ad populum","tag":"Confused rule application with popularity","why":"No appeal to what most people believe is made."}],
+    "explain":"The fallacy of accident applies a general rule to a special case where the rule’s purpose or an exception matters."
+  },
+  {
+    "id":"GST211-NOTE-095","course":"GST211","topic":"Fallacies","prompt":"The lecture slides classify material fallacies as fallacies of irrelevance because they:","d":2,
+    "options":[{"t":"Fail to address the issue at hand or omit relevant support","ok":true},{"t":"Always contain an invalid syllogistic form","tag":"Confused informal with formal fallacies","why":"Material fallacies concern content and relevance, not only structure."},{"t":"Are arguments that contain no words","tag":"Misread the category","why":"They are arguments whose content fails to support the issue."},{"t":"Are true statements about material objects","tag":"Took “material” in the everyday sense","why":"Here “material fallacy” is a classification of informal reasoning errors."}],
+    "explain":"The slides define material fallacies as failing to address the question, either deliberately or by omission."
+  },
+  {
+    "id":"GST211-NOTE-096","course":"GST211","topic":"Fundamental Problems","prompt":"The mind–body problem asks:","d":2,
+    "options":[{"t":"How mental states relate to the physical body and whether they are reducible to physical states","ok":true},{"t":"Whether moral rules differ between cultures","tag":"Confused philosophy of mind with moral relativism","why":"The mind–body problem concerns mental and physical states."},{"t":"Whether an argument has a valid form","tag":"Confused metaphysics with logic","why":"Logic evaluates reasoning and validity."},{"t":"What makes a painting beautiful","tag":"Confused philosophy of mind with aesthetics","why":"Aesthetics studies beauty and artistic value."}],
+    "explain":"The fundamental-problems lecture asks whether mind and body are separate or whether mental states can be reduced to physical states."
+  },
+  {
+    "id":"GST211-NOTE-097","course":"GST211","topic":"Fundamental Problems","prompt":"The problem of personal identity asks what makes a person:","d":2,
+    "options":[{"t":"The same individual across time despite change","ok":true},{"t":"Morally good in every situation","tag":"Confused identity with ethics","why":"Personal identity concerns persistence, not moral evaluation."},{"t":"Able to prove every claim deductively","tag":"Confused identity with logic","why":"The question concerns what makes someone the same person."},{"t":"A member of one political party","tag":"Confused identity with political affiliation","why":"The philosophical problem concerns continuity of persons."}],
+    "explain":"The lecture identifies memory, the body, and other possible criteria as answers to the question of what preserves personal identity over time."
+  },
+  {
+    "id":"GST211-NOTE-098","course":"GST211","topic":"Fundamental Problems","prompt":"The problem of causality asks how:","d":2,
+    "options":[{"t":"Causes produce effects and what explains the connection between them","ok":true},{"t":"Words are spelled in a language","tag":"Confused causality with orthography","why":"Causality concerns the relation between causes and effects."},{"t":"A society chooses its art","tag":"Confused causality with aesthetics","why":"Aesthetics concerns beauty and artistic value."},{"t":"A speaker can appeal to popularity","tag":"Confused causality with a fallacy","why":"Ad populum is an informal fallacy."}],
+    "explain":"The fundamental-problems lecture asks whether causes are necessary or sufficient and how they explain effects."
+  },
+  {
+    "id":"GST211-NOTE-099","course":"GST211","topic":"Fundamental Problems","prompt":"Which is a stated practical relevance of studying fundamental philosophical problems?","d":1,
+    "options":[{"t":"It can clarify ethical choices, critical thinking, self-understanding, and justice","ok":true},{"t":"It guarantees that every disagreement disappears","tag":"Overstated philosophy’s effect","why":"Philosophy helps analyze disagreements; it does not guarantee their elimination."},{"t":"It makes evidence unnecessary in science","tag":"Reversed the stated relevance","why":"The notes say philosophy informs scientific inquiry."},{"t":"It proves that personal identity never changes","tag":"Confused inquiry with a predetermined answer","why":"The problem of identity is explored, not settled by definition."}],
+    "explain":"The lecture lists ethical guidance, critical thinking, self-understanding, scientific inquiry, social justice, and moral responsibility among philosophy’s contributions."
+  },
+  {
+    "id":"GST211-NOTE-100","course":"GST211","topic":"Course Applications","prompt":"The class compilation gives Covenant University’s motto as:","d":1,
+    "options":[{"t":"Raising a New Generation of Leaders","ok":true},{"t":"Knowledge, Truth, and Service","tag":"Substituted another institution’s motto","why":"The class compilation gives the motto as “Raising a New Generation of Leaders.”"},{"t":"Faith, Hope, and Charity","tag":"Confused a value statement with the motto","why":"The compilation lists this phrase as the motto instead."},{"t":"Leaders for a Better World","tag":"Paraphrased instead of recalling the stated wording","why":"The class notes emphasize learning the exact motto."}],
+    "explain":"The compilation records Covenant University’s motto as “Raising a New Generation of Leaders.”"
+  },
+  {
+    "id":"GST211-NOTE-101","course":"GST211","topic":"African Philosophy","prompt":"What is the sage-philosophy approach to African philosophy?","d":2,
+    "options":[{"t":"It collects the thoughtful sayings of a society-recognized wise and virtuous person","ok":true},{"t":"It accepts only Western-trained university professors","tag":"Narrowed the category","why":"Sage philosophy includes wise persons recognized within a community."},{"t":"It rejects oral traditions because they are not written","tag":"Misunderstood its method","why":"The notes emphasize that African thought has been transmitted and recorded in varied oral and written forms."},{"t":"It defines philosophy only through colonial constitutions","tag":"Missed the communal method","why":"Sage philosophy seeks the meaning of sayings accepted by a community."}],
+    "explain":"Sage philosophy studies meaningful sayings and reflections preserved or expressed by a community-recognized sage."
+  },
+  {
+    "id":"GST211-NOTE-102","course":"GST211","topic":"African Philosophy","prompt":"Ethno-philosophy is concerned with:","d":2,
+    "options":[{"t":"Customs, folklore, proverbs, myths, and community rules","ok":true},{"t":"The physics of subatomic particles","tag":"Confused it with natural science","why":"Ethno-philosophy studies communal thought and cultural reasoning."},{"t":"Only European logical notation","tag":"Confined it to one tradition","why":"The method is used to identify African communal philosophical thought."},{"t":"A person’s private dreams alone","tag":"Narrowed communal thought","why":"Ethno-philosophy includes shared customs and inherited beliefs."}],
+    "explain":"Ethno-philosophy identifies philosophical reasoning in the customs, proverbs, myths, and institutions of a people."
+  },
+  {
+    "id":"GST211-NOTE-103","course":"GST211","topic":"African Philosophy","prompt":"Nnamdi Azikiwe, Léopold Sédar Senghor, and Kwame Nkrumah are associated in the notes with:","d":3,
+    "options":[{"t":"Welfarism, negritude, and consciencism, as nationalist responses to colonial thought","ok":true},{"t":"Stoicism, Epicureanism, and scepticism","tag":"Used unrelated ancient schools","why":"The named African nationalist thinkers are connected with Africanist political ideas."},{"t":"Logical atomism, language games, and deconstruction","tag":"Used contemporary European traditions","why":"Those belong to other contemporary philosophical traditions."},{"t":"Rationalism, empiricism, and idealism only","tag":"Overreduced them to epistemology","why":"The notes emphasize nationalist manifestos and African political thought."}],
+    "explain":"Their work represents forms of African nationalist and anti-colonial thought emphasizing communal welfare and cultural recovery."
+  },
+  {
+    "id":"GST211-NOTE-104","course":"GST211","topic":"African Philosophy","prompt":"Which criticism challenged the view that only trained professionals could philosophize?","d":3,
+    "options":[{"t":"It argued that ordinary but wise or virtuous community members can offer philosophical reflection","ok":true},{"t":"It argued that nobody outside Europe can think","tag":"Misstated the debate","why":"The professional view is criticized for excluding non-professional voices."},{"t":"It argued that only laboratory scientists can reason","tag":"Narrowed philosophy to science","why":"The debate concerns who qualifies as a philosopher."},{"t":"It rejected all written philosophy","tag":"Confused a methodological dispute","why":"The criticism concerns professional gatekeeping, not writing itself."}],
+    "explain":"The notes present the professional-and-philosophy debate as a position that doubts or excludes untrained thinkers."
+  },
+  {
+    "id":"GST211-NOTE-105","course":"GST211","topic":"African Philosophy","prompt":"Why can oral evidence alone make African philosophy difficult to establish historically?","d":2,
+    "options":[{"t":"Memory loss and changing retellings can create gaps or disputes about facts","ok":true},{"t":"Oral thought is never evidence of reasoning","tag":"Dismissed oral traditions","why":"The notes argue that oral evidence is a form of evidence but can be incomplete."},{"t":"Oral traditions always preserve every fact exactly","tag":"Denied the weakness the notes mention","why":"The notes specifically identify memory and transmission problems."},{"t":"Africa has no written documents","tag":"Made an unsupported claim","why":"The argument is about difficulties of proof, not the absence of all writing."}],
+    "explain":"The week-11 deck notes that oral records may deteriorate, confuse, or lose details across generations."
+  },
+  {
+    "id":"GST211-NOTE-106","course":"GST211","topic":"Concepts","prompt":"A concept is best understood as:","d":1,
+    "options":[{"t":"An abstract idea or mental construct","ok":true},{"t":"Only a physical object","tag":"Confused concept with object","why":"Some concepts describe objects, but the concept itself is mental or abstract."},{"t":"A type of informal fallacy","tag":"Confused concept with fallacy","why":"A fallacy is an error in reasoning, not a concept."},{"t":"A moral rule that cannot change","tag":"Overrestricted concepts","why":"Concepts include ideas across metaphysics, ethics, logic, aesthetics, and other fields."}],
+    "explain":"Concepts are abstract ideas or mental constructs used to organize, communicate, and analyze experience."
+  },
+  {
+    "id":"GST211-NOTE-107","course":"GST211","topic":"Concepts","prompt":"Which philosophical concept primarily asks, “How do we know what is true?”","d":1,
+    "options":[{"t":"Epistemology","ok":true},{"t":"Aesthetics","tag":"Confused knowledge with beauty","why":"Aesthetics asks about beauty and taste."},{"t":"Metaphysics","tag":"Confused truth with existence","why":"Metaphysics asks what fundamentally exists."},{"t":"Ethics","tag":"Confused truth with moral action","why":"Ethics asks what is right or good."}],
+    "explain":"Epistemology concerns knowledge, justification, and limits of knowing."
+  },
+  {
+    "id":"GST211-NOTE-108","course":"GST211","topic":"Concepts","prompt":"Ontology and metaphysics overlap because both investigate:","d":2,
+    "options":[{"t":"The nature of existence and what fundamentally is","ok":true},{"t":"The number of valid logical fallacies","tag":"Confused reality with argument errors","why":"Fallacies belong to logic."},{"t":"The emotional effect of a painting","tag":"Confused reality with aesthetics","why":"Aesthetic judgments concern beauty and artistic experience."},{"t":"The popularity of an ethical rule","tag":"Confused reality with social appeal","why":"The quiz distinguishes metaphysics from social or ethical questions."}],
+    "explain":"Ontology studies being or existence; metaphysics broadly asks about reality and the fundamental nature of things."
+  },
+  {
+    "id":"GST211-NOTE-109","course":"GST211","topic":"Concepts","prompt":"Axiology is the study of:","d":2,
+    "options":[{"t":"Values, including ethics and aesthetics","ok":true},{"t":"Only laboratory measurements","tag":"Narrowed it to measurement","why":"Axiology concerns value broadly."},{"t":"Only the formal validity of arguments","tag":"Confused value with logic","why":"Logic concerns reasoning and inference."},{"t":"Only animal anatomy","tag":"Imported an unrelated field","why":"Axiology belongs to philosophical reflection on value."}],
+    "explain":"Axiology examines value, and its subjects often include moral and aesthetic value."
+  },
+  {
+    "id":"GST211-NOTE-110","course":"GST211","topic":"Renaissance Philosophy","prompt":"Approximately how far did the Renaissance period span in Europe?","d":1,"options":[{"t":"The 14th to 17th centuries","ok":true},{"t":"The 6th to 3rd centuries BCE","tag":"Used ancient dates","why":"The Renaissance is a later European period."},{"t":"The 11th to 15th centuries","tag":"Confused it with medieval philosophy","why":"The Renaissance overlaps with the late medieval period but is distinct."},{"t":"The late 19th to early 20th centuries","tag":"Used contemporary dates","why":"Contemporary philosophy emerged much later."}],
+    "explain":"The lecture places the Renaissance broadly from the 14th through the 17th century."
+  },
+  {
+    "id":"GST211-NOTE-111","course":"GST211","topic":"Renaissance Philosophy","prompt":"A central feature of Renaissance philosophy was:","d":1,"options":[{"t":"Humanism and confidence in human dignity and potential","ok":true},{"t":"The complete rejection of human freedom","tag":"Reversed Renaissance emphasis","why":"Renaissance humanism highlights individuality and human potential."},{"t":"The restriction of knowledge to monastic authority","tag":"Missed the period's challenge to scholasticism","why":"The Renaissance renewed classical study and critical inquiry."},{"t":"The claim that nature never deserves observation","tag":"Contradicted renewed empirical inquiry","why":"The period encouraged observation, art, science, and critical inquiry."}],
+    "explain":"Renaissance thought emphasized human dignity, individuality, classical learning, and critical inquiry."
+  },
+  {
+    "id":"GST211-NOTE-112","course":"GST211","topic":"Renaissance Philosophy","prompt":"Marsilio Ficino is especially associated with:","d":2,"options":[{"t":"Reviving Platonic and Neo-Platonic thought and translating Plato into Latin","ok":true},{"t":"Writing The Prince","tag":"Used Machiavelli’s work","why":"Machiavelli wrote The Prince."},{"t":"Developing Cartesian dualism","tag":"Used a modern thinker","why":"Cartesian dualism belongs to Descartes."},{"t":"Proposing the social contract after Hobbes","tag":"Used political contract theory","why":"Ficino’s contribution is chiefly in Platonic humanism."}],
+    "explain":"Ficino revived Platonism and Neo-Platonism and helped transmit Plato through Latin translation."
+  },
+  {
+    "id":"GST211-NOTE-113","course":"GST211","topic":"Renaissance Philosophy","prompt":"Giovanni Pico della Mirandola’s Oration on the Dignity of Man defended:","d":2,"options":[{"t":"Human potential, freedom, and dignity","ok":true},{"t":"The total helplessness of human beings","tag":"Reversed the oration’s theme","why":"The oration champions human potential."},{"t":"That politics should always be separated from ethics","tag":"Used Machiavelli’s theme","why":"That theme is associated with Machiavelli."},{"t":"That all knowledge is unknowable","tag":"Used scepticism","why":"Pico emphasized human capacity and synthesis."}],
+    "explain":"Pico championed human dignity and free possibility within Renaissance humanism."
+  },
+  {
+    "id":"GST211-NOTE-114","course":"GST211","topic":"Renaissance Philosophy","prompt":"Giordano Bruno’s Renaissance ideas included support for:","d":3,"options":[{"t":"An evolving and effectively infinite cosmos","ok":true},{"t":"The fixed medieval world and purely scholastic knowledge","tag":"Reversed Bruno’s challenge","why":"Bruno challenged dogmatic medieval cosmology."},{"t":"The categorical imperative as a moral law","tag":"Used Kant","why":"The categorical imperative belongs to Kant."},{"t":"Atomism as indivisible particles only","tag":"Used Democritus","why":"Bruno’s cosmology involved heliocentrism and an infinite cosmos."}],
+    "explain":"Bruno supported heliocentrism, an evolving cosmos, and an unlimited universe while challenging dogma."
+  },
+  {
+    "id":"GST211-NOTE-115","course":"GST211","topic":"Renaissance Philosophy","prompt":"Niccolò Machiavelli is associated with:","d":2,"options":[{"t":"Political realism, statecraft, and analysis of power","ok":true},{"t":"Reviving Platonic love and translating Plato","tag":"Used Ficino","why":"Ficino translated Plato and revived Neo-Platonism."},{"t":"Formulating the categorical imperative","tag":"Used Kant","why":"The categorical imperative belongs to Kant."},{"t":"Advancing empirical skepticism of causality","tag":"Used Hume","why":"Hume is associated with empiricism and skepticism."}],
+    "explain":"Machiavelli wrote about power, leadership, and political practice, especially in The Prince."
+  },
+  {
+    "id":"GST211-NOTE-116","course":"GST211","topic":"Renaissance Philosophy","prompt":"Desiderius Erasmus promoted:","d":2,"options":[{"t":"Christian humanism, education reform, and criticism of church corruption","ok":true},{"t":"A strong Leviathan and absolute central authority","tag":"Used Hobbes","why":"The Leviathan is associated with Hobbes."},{"t":"A theory of metaphysical monads","tag":"Used Leibniz","why":"Leibniz developed monads."},{"t":"The rejection of every classical text","tag":"Reversed Erasmus’s work","why":"Erasmus edited and translated classical works."}],
+    "explain":"Erasmus combined classical scholarship with Christian humanism and criticized corruption and dogma."
+  },
+  {
+    "id":"GST211-NOTE-117","course":"GST211","topic":"Renaissance Philosophy","prompt":"Which invention helped spread Renaissance ideas quickly?","d":1,"options":[{"t":"The printing press","ok":true},{"t":"The steam engine","tag":"Used a later invention","why":"The steam engine belongs to the industrial age."},{"t":"The microscope alone","tag":"Selected one scientific tool","why":"The press was especially important for diffusion of texts."},{"t":"The telescope alone","tag":"Selected one scientific tool","why":"The telescope aided observation but did not provide the main diffusion mechanism."}],
+    "explain":"Printing made books and ideas easier to reproduce and distribute across Europe."
+  },
+  {
+    "id":"GST211-NOTE-118","course":"GST211","topic":"Modern Philosophy","prompt":"Modern philosophy in the deck is described as originating in:","d":1,"options":[{"t":"Late 16th-century Europe and extending into the 18th century","ok":true},{"t":"Ancient Greece before the Socratic era","tag":"Used ancient history","why":"Modern philosophy followed medieval and Renaissance thought."},{"t":"The 11th-century Muslim world only","tag":"Used a different period","why":"The lecture specifies late-16th-century Europe."},{"t":"The late 19th-century analytic movement only","tag":"Used contemporary philosophy","why":"Analytic philosophy is contemporary, while modern philosophy begins earlier."}],
+    "explain":"The modern-period deck locates modern philosophy between the late 16th and 18th centuries."
+  },
+  {
+    "id":"GST211-NOTE-119","course":"GST211","topic":"Modern Philosophy","prompt":"René Descartes is considered:","d":1,"options":[{"t":"The father of modern philosophy","ok":true},{"t":"The father of Renaissance humanism","tag":"Used Petrarch","why":"Petrarch is traditionally linked with Renaissance humanism."},{"t":"The founder of Stoicism","tag":"Used Zeno","why":"Zeno founded Stoicism."},{"t":"The founder of utilitarianism","tag":"Used Bentham","why":"Bentham is associated with utilitarianism."}],
+    "explain":"Descartes is identified in both quiz and lecture decks as a founder of modern philosophy."
+  },
+  {
+    "id":"GST211-NOTE-120","course":"GST211","topic":"Modern Philosophy","prompt":"Descartes grounded knowledge in:","d":2,"options":[{"t":"Clear and distinct ideas reached through methodological doubt","ok":true},{"t":"Sensory experience alone","tag":"Used strict empiricism","why":"Descartes emphasized reason and innate intellectual clarity."},{"t":"Popular opinion","tag":"Used ad populum","why":"Popular consensus is not Descartes’s epistemic foundation."},{"t":"The authority of tradition","tag":"Opposed Cartesian method","why":"Descartes begins with doubt and reconstructs knowledge through reason."}],
+    "explain":"Descartes’s method uses systematic doubt to find a foundation, famously expressed as “I think, therefore I am.”"
+  },
+  {
+    "id":"GST211-NOTE-121","course":"GST211","topic":"Modern Philosophy","prompt":"Cartesian dualism is the view that:","d":2,"options":[{"t":"Mind and body are distinct substances or realities","ok":true},{"t":"Reality has only one substance","tag":"Used monism","why":"Descartes’s traditional dualism distinguishes mind and body."},{"t":"Everything is composed of atoms","tag":"Used Democritus","why":"Atomism is a different ancient doctrine."},{"t":"God and nature are identical","tag":"Used pantheism","why":"Pantheism belongs to thinkers such as Spinoza."}],
+    "explain":"Descartes developed substance dualism by distinguishing thinking mind from extended matter."
+  },
+  {
+    "id":"GST211-NOTE-122","course":"GST211","topic":"Modern Philosophy","prompt":"John Locke’s empiricist theory treats the mind initially as:","d":2,"options":[{"t":"A tabula rasa or blank slate","ok":true},{"t":"Fully filled with innate ideas","tag":"Used a rationalist claim","why":"Locke emphasized experience as the source of ideas."},{"t":"A set of eternal Platonic Forms","tag":"Used Plato","why":"Locke rejects innate knowledge in favour of experience."},{"t":"A divine substance identical with nature","tag":"Used Spinoza","why":"Locke’s mind as blank slate is an empiricist account."}],
+    "explain":"Locke proposed that ideas arise through sensation and reflection rather than a pre-equipped store of innate knowledge."
+  },
+  {
+    "id":"GST211-NOTE-123","course":"GST211","topic":"Modern Philosophy","prompt":"Kant’s Categorical Imperative belongs primarily to:","d":2,"options":[{"t":"Deontological ethics","ok":true},{"t":"Utilitarianism","tag":"Used consequence-based ethics","why":"Utilitarianism assesses outcomes rather than duty alone."},{"t":"Virtue ethics of ancient Greece","tag":"Used character ethics","why":"Kant formulates duty through universalizable principles."},{"t":"Cultural relativism","tag":"Used context-based morality","why":"The categorical imperative seeks principles independent of private preference."}],
+    "explain":"Kant argued that moral duty should follow universal principles, such as acting only by a maxim one could will as a law."
+  },
+  {
+    "id":"GST211-NOTE-124","course":"GST211","topic":"Modern Philosophy","prompt":"David Hume is noted for his empiricism and skepticism about:","d":3,"options":[{"t":"Causality, induction, and other limits of knowledge","ok":true},{"t":"The existence of the mind alone","tag":"Used a different problem","why":"Hume is known for examining causation and induction."},{"t":"The distinction between mind and body","tag":"Used Descartes","why":"Descartes developed mind–body dualism."},{"t":"Monads and pre-established harmony","tag":"Used Leibniz","why":"Those concepts belong to Leibniz."}],
+    "explain":"Hume questioned whether experience establishes necessary causal connections and therefore challenged the certainty of induction."
+  },
+  {
+    "id":"GST211-NOTE-125","course":"GST211","topic":"Modern Philosophy","prompt":"Baruch Spinoza is associated with:","d":3,"options":[{"t":"Pantheism and metaphysical monism","ok":true},{"t":"Mind–body dualism and methodological doubt","tag":"Used Descartes","why":"Descartes, not Spinoza, developed Cartesian dualism."},{"t":"A strong sovereign required to prevent disorder","tag":"Used Hobbes","why":"Spinoza’s metaphysical monism differs from Hobbesian politics."},{"t":"Monads and pre-established harmony","tag":"Used Leibniz","why":"Those belong to Leibniz."}],
+    "explain":"Spinoza treated God and nature as one substance and proposed reason-based ethics."
+  },
+  {
+    "id":"GST211-NOTE-126","course":"GST211","topic":"Modern Philosophy","prompt":"Thomas Hobbes proposed a social contract in order to:","d":2,"options":[{"t":"Escape a state of insecurity and maintain order through strong authority","ok":true},{"t":"Eliminate every form of government","tag":"Reversed Hobbes’s political position","why":"Hobbes defended a sovereign authority."},{"t":"Defend direct democracy by chance alone","tag":"Added an unsupported proposal","why":"The deck emphasizes strong central authority and Leviathan."},{"t":"Argue that mind and body are identical","tag":"Used a metaphysical theory","why":"Hobbes is associated with materialism and social contract."}],
+    "explain":"Hobbes used the social-contract idea to explain why people accept a sovereign to prevent disorder."
+  },
+  {
+    "id":"GST211-NOTE-127","course":"GST211","topic":"Modern Philosophy","prompt":"Gottfried Wilhelm Leibniz developed:","d":3,"options":[{"t":"Monads and pre-established harmony","ok":true},{"t":"The tabula rasa and liberal empiricism","tag":"Used Locke","why":"Locke proposed the tabula rasa."},{"t":"A theory of forms and an Academy","tag":"Used Plato","why":"Plato founded the Academy and developed the Theory of Forms."},{"t":"Existence precedes essence","tag":"Used Sartre","why":"The existentialist claim is associated with Sartre."}],
+    "explain":"Leibniz proposed that reality consists of simple substances called monads and that their relations reflect pre-established harmony."
+  },
+  {
+    "id":"GST211-NOTE-128","course":"GST211","topic":"Ancient Philosophy","prompt":"Parmenides is associated in the weekly quiz with the belief in:","d":2,"options":[{"t":"The unity and continuity of reality, opposing change in its deepest sense","ok":true},{"t":"Four material elements alone","tag":"Used Empedocles","why":"Empedocles proposed four roots or elements."},{"t":"Indivisible atoms","tag":"Used Leucippus or Democritus","why":"Atomism belongs to different pre-Socratic thinkers."},{"t":"The basic substance of air","tag":"Used Anaximenes","why":"Anaximenes proposed air."}],
+    "explain":"In the pre-Socratic period, Parmenides defended the unity and permanence of what is against a deepest-level reality of change."
+  },
+  {
+    "id":"GST211-NOTE-129","course":"GST211","topic":"Ancient Philosophy","prompt":"Heraclitus is associated with the statement that:","d":2,"options":[{"t":"No person steps into the same river twice","ok":true},{"t":"Reality is permanently motionless","tag":"Used Parmenides","why":"Heraclitus emphasized change and becoming."},{"t":"Everything is made of water","tag":"Used Thales","why":"Thales proposed water as the arche."},{"t":"Humans are governed only by divine will","tag":"Used a medieval theme","why":"The river aphorism illustrates Heraclitean change."}],
+    "explain":"Heraclitus emphasized change and becoming; the river aphorism illustrates that life is continuously in flux."
+  },
+  {
+    "id":"GST211-NOTE-130","course":"GST211","topic":"Ancient Philosophy","prompt":"Plato’s central metaphysical doctrine is the theory of:","d":1,"options":[{"t":"Eternal Forms or Ideas","ok":true},{"t":"The four causes","tag":"Used Aristotle","why":"The four causes belong to Aristotle."},{"t":"Indivisible atoms","tag":"Used atomism","why":"Atomism is associated with Democritus."},{"t":"Pre-established harmony","tag":"Used Leibniz","why":"That doctrine belongs to Leibniz."}],
+    "explain":"Plato held that enduring Forms or Ideas are the most fundamental realities, of which sensible things are imperfect copies."
+  },
+  {
+    "id":"GST211-NOTE-131","course":"GST211","topic":"Ancient Philosophy","prompt":"Plato’s Republic and his theory of knowledge are linked by:","d":3,"options":[{"t":"The relationship between justice, the soul, education, and knowledge of the Forms","ok":true},{"t":"The four causes alone","tag":"Used an Aristotelian topic","why":"The Republic primarily develops Plato’s political and epistemic ideas."},{"t":"The calculation of infinite decimals","tag":"Used a separate mathematical issue","why":"The quiz item concerns Plato’s political philosophy."},{"t":"The social contract of Hobbes","tag":"Used modern political theory","why":"The Republic predates and differs from Hobbes’s social contract."}],
+    "explain":"Plato connects knowledge of Forms with the structure of the soul and the just organization of society."
+  },
+  {
+    "id":"GST211-NOTE-132","course":"GST211","topic":"Ancient Philosophy","prompt":"Epicurus taught that pleasure should be understood chiefly as:","d":2,"options":[{"t":"Ataraxia: tranquility and freedom from pain or unnecessary fear","ok":true},{"t":"Constant bodily excess and fame","tag":"Misrepresented Epicureanism","why":"Epicurus favored simple pleasures and freedom from anxiety."},{"t":"Unbending control of external events","tag":"Used Stoicism","why":"Stoicism emphasizes control of judgment and acceptance of externals."},{"t":"Submission to every social desire","tag":"Misunderstood simplicity","why":"Epicurus sought to avoid unnecessary desires."}],
+    "explain":"Epicurean pleasure is a settled, painless life, especially free from fear of gods and death."
+  },
+  {
+    "id":"GST211-NOTE-133","course":"GST211","topic":"Ancient Philosophy","prompt":"The Aristotelian Golden Mean is the idea that virtue often lies:","d":2,"options":[{"t":"Between excess and deficiency","ok":true},{"t":"At the absolute maximum of every action","tag":"Confused virtue with excess","why":"Aristotle’s mean avoids extremes."},{"t":"Outside all habitual behavior","tag":"Confused character with isolated acts","why":"Aristotelian virtue is cultivated through habit."},{"t":"Only in pleasure and amusement","tag":"Used Epicurean excess","why":"The mean concerns a range of virtuous feelings and actions."}],
+    "explain":"Aristotle describes virtues as stable dispositions aiming at a rational mean between opposite deficiencies or excesses."
+  },
+  {
+    "id":"GST211-NOTE-134","course":"GST211","topic":"Ancient Philosophy","prompt":"Plato founded the Academy; Aristotle founded:","d":1,"options":[{"t":"The Lyceum","ok":true},{"t":"The Stoic Porch","tag":"Used Zeno","why":"Zeno taught in the Stoa, giving Stoicism its name."},{"t":"The Epicurean Garden","tag":"Used Epicurus","why":"Epicurus founded a school called the Garden."},{"t":"The Neo-Platonic school of Alexandria","tag":"Used Plotinus","why":"Plotinus later developed Neo-Platonism."}],
+    "explain":"Aristotle founded the Lyceum in Athens after being a student at Plato’s Academy."
+  },
+  {
+    "id":"GST211-NOTE-135","course":"GST211","topic":"Ancient Philosophy","prompt":"Anaximander introduced the Apeiron as:","d":3,"options":[{"t":"An indefinite or boundless first source","ok":true},{"t":"A fixed number describing every person","tag":"Used Pythagorean identity","why":"The Apeiron is a cosmological source."},{"t":"The rational soul of every human","tag":"Used later anthropology","why":"The Apeiron is an early account of a primordial substance."},{"t":"A formal system of four causes","tag":"Used Aristotle","why":"Anaximander’s account predates Aristotle."}],
+    "explain":"Anaximander proposed the Apeiron, an indefinite and boundless origin from which opposites arise."
+  },
+  {
+    "id":"GST211-NOTE-136","course":"GST211","topic":"Ancient Philosophy","prompt":"The Pythagorean contribution emphasized:","d":2,"options":[{"t":"Numbers, harmony, balance, and their relation to reality","ok":true},{"t":"Atoms and modern chemical matter","tag":"Used Democritus","why":"Atomism is associated with Democritus."},{"t":"A strongest social sovereign","tag":"Used Hobbes","why":"Hobbes is a modern political philosopher."},{"t":"The indefinable One as Neo-Platonic source","tag":"Used Plotinus","why":"Plotinus developed The One, not Pythagorean numerology."}],
+    "explain":"Pythagoras and his school linked number and proportion with harmony and cosmic order."
+  },
+  {
+    "id":"GST211-NOTE-137","course":"GST211","topic":"Medieval Philosophy","prompt":"The medieval debate about universals is often represented by:","d":3,"options":[{"t":"Realism versus nominalism","ok":true},{"t":"Idealism versus empiricism","tag":"Used modern epistemology","why":"Those positions concern sources of knowledge."},{"t":"Monism versus atheism","tag":"Used unrelated categories","why":"Universals concern whether general concepts have a real basis."},{"t":"Composition versus division","tag":"Used fallacies","why":"Composition and division are logical fallacies."}],
+    "explain":"The medieval universals debate asks whether general kinds exist independently or only as names or concepts."
+  },
+  {
+    "id":"GST211-NOTE-138","course":"GST211","topic":"Medieval Philosophy","prompt":"Aquinas’s Summa Theologica is associated with:","d":2,"options":[{"t":"A systematic scholastic synthesis of theology and rational argument","ok":true},{"t":"A Renaissance essay on political statecraft","tag":"Used Machiavelli","why":"The Prince is Machiavelli’s political work."},{"t":"A Neo-Platonic account of The One","tag":"Used Plotinus","why":"Plotinus wrote about emanation from The One."},{"t":"A utilitarian defense of maximum pleasure","tag":"Used Bentham or Mill","why":"The Summa is a medieval theological synthesis."}],
+    "explain":"Aquinas’s Summa Theologica is a major scholastic work integrating faith and philosophical reasoning."
+  },
+  {
+    "id":"GST211-NOTE-139","course":"GST211","topic":"Medieval Philosophy","prompt":"Boethius is identified in the weekly quiz as the author of:","d":2,"options":[{"t":"The Consolation of Philosophy","ok":true},{"t":"The Republic","tag":"Used Plato","why":"Plato wrote The Republic."},{"t":"The Prince","tag":"Used Machiavelli","why":"Machiavelli wrote The Prince."},{"t":"Summa Theologica","tag":"Used Aquinas","why":"Aquinas wrote the Summa Theologica."}],
+    "explain":"Boethius wrote The Consolation of Philosophy, an important medieval text on fortune, providence, and happiness."
+  },
+  {
+    "id":"GST211-NOTE-140","course":"GST211","topic":"Ethics","prompt":"Which ethical principle means acting with the patient’s informed choice and independence respected?","d":2,"options":[{"t":"Autonomy","ok":true},{"t":"Beneficence","tag":"Used the duty to benefit","why":"Beneficence means promoting welfare."},{"t":"Non-maleficence","tag":"Used the duty not to harm","why":"Non-maleficence means avoiding harm."},{"t":"Utilitarianism","tag":"Used outcome evaluation","why":"Autonomy is a specific principle concerning self-direction."}],
+    "explain":"Autonomy respects an individual’s capacity to decide for themselves, while beneficence and non-maleficence concern welfare and harm."
+  },
+  {
+    "id":"GST211-NOTE-141","course":"GST211","topic":"Ethics","prompt":"Which principle says we should promote the well-being of others?","d":1,"options":[{"t":"Beneficence","ok":true},{"t":"Non-maleficence","tag":"Used the duty to avoid harm","why":"Non-maleficence is “do no harm,” while beneficence is actively promoting good."},{"t":"Amorality","tag":"Used indifference","why":"Amorality is indifference to moral evaluation."},{"t":"A posteriori reasoning","tag":"Used epistemology","why":"Beneficence is an ethical principle."}],
+    "explain":"Beneficence obliges us to act for others’ benefit; non-maleficence forbids or minimizes avoidable harm."
+  },
+  {
+    "id":"GST211-NOTE-142","course":"GST211","topic":"Ethics","prompt":"Deontology differs from utilitarianism mainly because it emphasizes:","d":2,"options":[{"t":"Duty and moral rules independently of, or in addition to, consequences","ok":true},{"t":"Popularity and fashion","tag":"Used ad populum","why":"Deontology concerns duty rather than popularity."},{"t":"Only subjective pleasure","tag":"Used a narrow utilitarian view","why":"Utilitarianism is consequence-based, but deontology does not reduce morality to pleasure."},{"t":"The physical world alone","tag":"Used metaphysics","why":"Deontology is an ethical theory of duty."}],
+    "explain":"Deontological theories judge acts by duties or rules; utilitarianism judges them by consequences."
+  },
+  {
+    "id":"GST211-NOTE-143","course":"GST211","topic":"Ethics","prompt":"Virtue ethics chiefly asks:","d":2,"options":[{"t":"What kind of person should I be?","ok":true},{"t":"Which act has the largest net pleasure?","tag":"Used utilitarianism","why":"Utilitarianism asks about consequences."},{"t":"Which rule must never be broken?","tag":"Used deontology","why":"Deontology emphasizes duties and rules."},{"t":"Which opinion is most common?","tag":"Used ad populum","why":"Virtue ethics focuses on character and habits."}],
+    "explain":"Virtue ethics evaluates character traits and practices that cultivate a flourishing life."
+  },
+  {
+    "id":"GST211-NOTE-144","course":"GST211","topic":"Course Applications","prompt":"Covenant University’s vision is:","d":2,"options":[{"t":"To be a leading world-class Christian Mission University raising a new generation of leaders","ok":true},{"t":"To produce leaders only in engineering","tag":"Narrowed the vision","why":"The stated vision covers all fields of human endeavor."},{"t":"To operate only within Nigeria","tag":"Narrowed the vision","why":"The vision describes a world-class mission university."},{"t":"To eliminate every other institution","tag":"Made an unsupported claim","why":"The vision emphasizes leadership and excellence."}],
+    "explain":"The compilation records the vision as a leading world-class Christian Mission University committed to leadership in all fields."
+  },
+  {
+    "id":"GST211-NOTE-145","course":"GST211","topic":"Course Applications","prompt":"Covenant University’s mission is:","d":2,"options":[{"t":"To create knowledge and restore the dignity of the Black race","ok":true},{"t":"To train only music directors","tag":"Narrowed the mission","why":"The recorded mission is broader."},{"t":"To replace every university in Africa","tag":"Made an unsupported claim","why":"The mission does not state institutional replacement."},{"t":"To avoid scientific inquiry","tag":"Contradicted knowledge creation","why":"The mission explicitly promotes knowledge creation."}],
+    "explain":"The lecture compilation records the mission as creating knowledge and restoring dignity."
+  },
+  {
+    "id":"GST211-NOTE-146","course":"GST211","topic":"Course Applications","prompt":"Covenant University was founded on:","d":1,"options":[{"t":"21 October 2002","ok":true},{"t":"21 October 2010","tag":"Used an incorrect year","why":"The course compilation states 2002."},{"t":"15 October 2005","tag":"Used convocation timing","why":"Convocation and founding are distinct dates."},{"t":"1 January 1999","tag":"Used an invented date","why":"The founding date given in the notes is 21 October 2002."}],
+    "explain":"The compilation lists 21 October 2002 as Covenant University’s founding date."
+  },
+  {
+    "id":"GST211-NOTE-147","course":"GST211","topic":"Course Applications","prompt":"Which of the following is part of the CU core values given in the class compilation?","d":1,"options":[{"t":"Spirituality, possibility mentality, capacity building, integrity, responsibility, diligence, and sacrifice","ok":true},{"t":"Profit, popularity, secrecy, and rivalry","tag":"Used unrelated values","why":"The notes give the seven CU values named in the answer."},{"t":"Luxury, obedience, silence, and isolation","tag":"Used invented values","why":"None of these is the recorded value list."},{"t":"Competition, hierarchy, consumption, and imitation","tag":"Used unrelated concepts","why":"The course values emphasize character, responsibility, and growth."}],
+    "explain":"The notes list seven Covenant University core values, beginning with spirituality and ending with sacrifice."
+  },
+  {
+    "id":"GST211-NOTE-148","course":"GST211","topic":"Course Applications","prompt":"The Covenant University Chancellor identified in the compilation is:","d":1,"options":[{"t":"Dr. David O. Oyedepo","ok":true},{"t":"Dr. Timothy Anake","tag":"Used the Vice-Chancellor","why":"Dr. Anake is identified as Vice-Chancellor."},{"t":"Pastor Adebisi Aboluwade","tag":"Used the Chaplain","why":"Aboluwade is identified as Chaplain."},{"t":"Dr. Lanre Amodu","tag":"Used the Deputy-Vice-Chancellor","why":"Amodu is identified as Deputy Vice-Chancellor."}],
+    "explain":"The compilation identifies Dr. David O. Oyedepo as Chancellor and Dr. Timothy Anake as Vice-Chancellor."
+  },
+  {
+    "id":"GST211-NOTE-149","course":"GST211","topic":"Course Applications","prompt":"How many stanzas does the CU anthem have, according to the class compilation?","d":2,"options":[{"t":"Two","ok":true},{"t":"One","tag":"Used a smaller count","why":"The compilation explicitly says two stanzas."},{"t":"Three","tag":"Used a larger count","why":"The listed answer is two."},{"t":"Four","tag":"Used a larger count","why":"The listed answer is two."}],
+    "explain":"The class compilation states that the Covenant University anthem has two stanzas."
+  },
+  {
+    "id":"GST211-NOTE-150","course":"GST211","topic":"Course Applications","prompt":"The official CU eagle symbol is described as representing:","d":2,"options":[{"t":"Strength, speed, and absolute secrecy","tag":"Used a generalized eagle symbol","why":"The class notes specifically connect the CU eagle with leadership and high flight."},{"t":"Leadership and high flight","ok":true},{"t":"Comfort and low ambition","tag":"Contradicted the symbol meaning","why":"The eagle represents vision, spirituality, excellence, leadership, and high flight."},{"t":"Isolation and secrecy","tag":"Used a negative interpretation","why":"The compilation emphasizes high flight and leadership."}],
+    "explain":"The compilation connects the eagle with vision, spirituality, excellence, leadership, and high flight."
+  }
+]

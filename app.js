@@ -1,129 +1,11 @@
-// Test-only marker for checking JavaScript commit flow.
-/* ===================== Sample bank (stands in until past questions are added) ===================== */
-const SAMPLE = [
- {id:"q01",d:2,topic:"Electrostatics",prompt:"Two point charges, +2 μC and +3 μC, sit 0.30 m apart in air. What is the force between them? (k = 9.0 × 10⁹ N m² C⁻²)",
-  options:[{t:"0.60 N, repulsive",ok:true},{t:"0.60 N, attractive",tag:"Force direction",why:"Like charges repel. Both charges are positive, so the force pushes them apart."},{t:"0.18 N, repulsive",tag:"Forgot to square r",why:"You divided by r = 0.30 m instead of r² = 0.09 m². Coulomb’s law falls off with the square of distance."},{t:"6.0 × 10¹¹ N, repulsive",tag:"Dropped a unit prefix",why:"1 μC is 10⁻⁶ C. Leaving the prefix out inflates the answer by 10¹²."}],
-  explain:"F = kq₁q₂/r² = (9.0 × 10⁹)(2 × 10⁻⁶)(3 × 10⁻⁶)/(0.30)² = 0.054/0.09 = 0.60 N. Both charges are positive, so they repel."},
- {id:"q02",d:1,topic:"Electrostatics",prompt:"What is the magnitude of the electric field 2.0 m from a point charge of 8.0 nC? (k = 9.0 × 10⁹ N m² C⁻²)",
-  options:[{t:"18 N/C",ok:true},{t:"36 N/C",tag:"Forgot to square r",why:"You divided by r = 2 m once. The field goes as 1/r², so divide by 4 m²."},{t:"72 N/C",tag:"Left out the distance",why:"72 is just kq. The field still has to be divided by r²."},{t:"1.8 × 10¹⁰ N/C",tag:"Dropped a unit prefix",why:"1 nC is 10⁻⁹ C. Without it the answer is a billion times too big."}],
-  explain:"E = kq/r² = (9.0 × 10⁹)(8.0 × 10⁻⁹)/(2.0)² = 72/4 = 18 N/C."},
- {id:"q03",d:2,topic:"Electrostatics",prompt:"A closed surface encloses a charge +q and a charge −q. What is the net electric flux through the surface?",
-  options:[{t:"Zero",ok:true},{t:"2q/ε₀",tag:"Ignored charge sign",why:"Gauss’s law uses the net enclosed charge. +q and −q add to zero, not 2q."},{t:"q/ε₀",tag:"Counted one charge only",why:"Both charges are inside the surface, so both count toward the enclosed charge."},{t:"It depends on the shape of the surface",tag:"Thinks flux depends on shape",why:"For a closed surface, flux depends only on the enclosed charge, never on the surface’s shape or size."}],
-  explain:"Φ = Q_enc/ε₀, and Q_enc = (+q) + (−q) = 0, so the net flux is zero. Field lines leave near +q and re-enter near −q."},
- {id:"q04",d:1,topic:"Capacitance",prompt:"A 2.0 μF and a 3.0 μF capacitor are connected in series. What is the equivalent capacitance?",
-  options:[{t:"1.2 μF",ok:true},{t:"5.0 μF",tag:"Series and parallel swapped",why:"Adding capacitances directly is the parallel rule. In series, the reciprocals add."},{t:"0.83 μF",tag:"Forgot to invert",why:"1/2 + 1/3 = 0.83 is 1/C. Flip it to get C = 1.2 μF."},{t:"6.0 μF",tag:"Product without the sum",why:"For two in series, C = C₁C₂/(C₁ + C₂). You used the top half only."}],
-  explain:"1/C = 1/2 + 1/3 = 5/6, so C = 6/5 = 1.2 μF. Series capacitance is always smaller than the smallest capacitor."},
- {id:"q05",d:2,topic:"Capacitance",prompt:"A 10 μF capacitor is charged to 20 V. How much energy does it store?",
-  options:[{t:"2.0 mJ",ok:true},{t:"4.0 mJ",tag:"Forgot the ½",why:"Stored energy is ½CV². Without the ½ you get double."},{t:"0.10 mJ",tag:"Forgot to square",why:"You used ½CV. Energy depends on V², so 20 V becomes 400 V²."},{t:"2000 J",tag:"Dropped a unit prefix",why:"10 μF is 10 × 10⁻⁶ F. Treating it as 10 F makes the answer a million times too big."}],
-  explain:"U = ½CV² = ½(10 × 10⁻⁶)(20)² = ½(10⁻⁵)(400) = 2.0 × 10⁻³ J = 2.0 mJ."},
- {id:"q06",d:1,topic:"Circuits",prompt:"A 12 Ω resistor is connected across a 6.0 V supply. What power does it dissipate?",
-  options:[{t:"3.0 W",ok:true},{t:"72 W",tag:"Multiplied V by R",why:"V × R isn’t a power formula. Use P = V²/R or P = IV."},{t:"0.50 W",tag:"Gave current, not power",why:"6/12 = 0.5 is the current in amperes. Multiply by V to get power."},{t:"0.25 W",tag:"Stopped halfway",why:"0.25 is I². Multiply by R = 12 Ω: P = I²R = 3.0 W."}],
-  explain:"P = V²/R = 36/12 = 3.0 W. Check: I = V/R = 0.5 A, and P = IV = 0.5 × 6 = 3.0 W."},
- {id:"q07",d:1,topic:"Magnetism",prompt:"An electron moves parallel to a uniform magnetic field. What force does the field exert on it?",
-  options:[{t:"No force",ok:true},{t:"Maximum force, qvB",tag:"Ignored the angle",why:"F = qvB sin θ. Moving parallel means θ = 0, and sin 0 = 0."},{t:"A force along the field direction",tag:"Treated B like an E-field",why:"Magnetic force is always perpendicular to both v and B, never along B."},{t:"A force that speeds it up",tag:"Thinks B does work",why:"Magnetic force is perpendicular to velocity, so it never changes speed, only direction."}],
-  explain:"F = qvB sin θ with θ = 0°, so F = 0. The electron carries on in a straight line at constant speed."},
- {id:"q08",d:3,topic:"Magnetism",prompt:"A long straight wire carries 10 A. What is the magnetic field 5.0 cm from it? (μ₀ = 4π × 10⁻⁷ T m A⁻¹)",
-  options:[{t:"4.0 × 10⁻⁵ T",ok:true},{t:"2.5 × 10⁻⁴ T",tag:"Dropped the 2π",why:"The field of a long wire is μ₀I/(2πr). Leaving out 2π makes it about six times too big."},{t:"2.0 × 10⁻⁵ T",tag:"Doubled the distance",why:"r is the distance from the wire, 0.05 m. Using 0.10 m halves the field."},{t:"2.0 × 10⁻⁶ T",tag:"Left out the distance",why:"μ₀I/2π = 2 × 10⁻⁶ T m. You still need to divide by r = 0.05 m."}],
-  explain:"B = μ₀I/(2πr) = (4π × 10⁻⁷)(10)/(2π × 0.05) = (2 × 10⁻⁶)/0.05 = 4.0 × 10⁻⁵ T."},
- {id:"q09",d:2,topic:"Induction",prompt:"The flux through each turn of a 200-turn coil falls from 0.030 Wb to 0.010 Wb in 0.10 s. What is the average induced emf?",
-  options:[{t:"40 V",ok:true},{t:"0.20 V",tag:"Forgot the number of turns",why:"That’s the emf per turn. Faraday’s law multiplies by N = 200."},{t:"4.0 V",tag:"Didn’t divide by time",why:"200 × 0.020 = 4.0 Wb is the change in flux linkage. Divide by 0.10 s for the rate."},{t:"60 V",tag:"Used one flux value, not the change",why:"The emf depends on the change in flux, 0.030 − 0.010 = 0.020 Wb, not the starting value."}],
-  explain:"ε = NΔΦ/Δt = 200 × (0.030 − 0.010)/0.10 = 200 × 0.20 = 40 V."},
- {id:"q10",d:2,topic:"Induction",prompt:"The north pole of a bar magnet is pushed towards one end of a coil. What does that end of the coil become while the magnet is moving?",
-  options:[{t:"A north pole",ok:true},{t:"A south pole",tag:"Lenz direction flipped",why:"A south pole would pull the magnet in, creating energy for free. The induced current opposes the change instead."},{t:"Nothing, because there’s no battery",tag:"Thinks induction needs a source",why:"The changing flux itself drives the current. No battery is needed."},{t:"A north pole only if the magnet moves fast",tag:"Speed decides direction",why:"Speed changes the size of the emf, not its direction."}],
-  explain:"Lenz’s law: the induced current opposes the change causing it. To push back on an approaching north pole, the near end becomes a north pole."},
- {id:"q11",d:1,topic:"Transformers",prompt:"An ideal transformer has 1200 primary turns and 60 secondary turns. The primary is connected to 240 V a.c. What is the secondary voltage?",
-  options:[{t:"12 V",ok:true},{t:"4800 V",tag:"Inverted turns ratio",why:"Fewer secondary turns means a step-down. You used Np/Ns instead of Ns/Np."},{t:"240 V",tag:"Thinks it stays the same",why:"A transformer changes voltage in proportion to the turns ratio."},{t:"20 V",tag:"Gave the ratio, not the answer",why:"20 is Np/Ns. Divide 240 V by it to get the secondary voltage."}],
-  explain:"Vs/Vp = Ns/Np, so Vs = 240 × 60/1200 = 12 V."},
- {id:"q12",d:3,topic:"Transformers",prompt:"In the same ideal transformer (1200 primary turns, 60 secondary turns), the secondary delivers 2.0 A. What current flows in the primary?",
-  options:[{t:"0.10 A",ok:true},{t:"40 A",tag:"Inverted turns ratio",why:"Current steps the opposite way to voltage. A step-down transformer has the smaller current on the primary side."},{t:"2.0 A",tag:"Thinks it stays the same",why:"Power in equals power out. If voltage drops 20 times, the primary current is 20 times smaller than the secondary current."}],
-  explain:"For an ideal transformer, VpIp = VsIs, so Ip = VsIs/Vp = (12 × 2.0)/240 = 0.10 A. Equivalently, Ip = Is × Ns/Np = 2.0 × 60/1200."},
- {id:"q13",d:2,topic:"Transformers",prompt:"A steady d.c. supply is connected to a transformer’s primary. After the moment of switch-on, what is the secondary output?",
-  options:[{t:"Zero",ok:true},{t:"Stepped-down d.c.",tag:"Thinks transformers work on d.c.",why:"Steady d.c. gives a constant flux. No change in flux means no induced emf."},{t:"Stepped-down a.c.",tag:"Thinks transformers make a.c.",why:"A transformer can’t turn steady current into alternating current. It only passes on changes in flux."}],
-  explain:"Transformers rely on a changing flux. Steady d.c. sets up a constant flux after switch-on, so dΦ/dt = 0 and the secondary emf is zero."},
- {id:"q14",d:2,topic:"Inductors",prompt:"A 0.20 H inductor carries a steady 3.0 A. How much energy is stored in its magnetic field?",
-  options:[{t:"0.90 J",ok:true},{t:"1.8 J",tag:"Forgot the ½",why:"Stored energy is ½LI². Without the ½ you get double."},{t:"0.30 J",tag:"Forgot to square",why:"You used ½LI. Energy depends on I², so 3 A becomes 9 A²."},{t:"0.60 J",tag:"Used LI",why:"LI is the flux linkage, not the energy. Energy is ½LI²."}],
-  explain:"U = ½LI² = ½ × 0.20 × 3.0² = 0.10 × 9 = 0.90 J."},
- {id:"q15",d:2,topic:"Inductors",prompt:"The current in a 0.50 H inductor rises at 4.0 A/s. What emf is induced across it?",
-  options:[{t:"2.0 V",ok:true},{t:"8.0 V",tag:"Divided instead of multiplied",why:"4.0/0.50 = 8. Self-induced emf is L × dI/dt, not dI/dt ÷ L."},{t:"0.125 V",tag:"Divided instead of multiplied",why:"0.50/4.0 = 0.125. Multiply L by the rate of change of current."},{t:"Zero, because the current isn’t reversing",tag:"Confused change with reversal",why:"Any change in current induces an emf, not just a reversal."}],
-  explain:"|ε| = L dI/dt = 0.50 × 4.0 = 2.0 V, directed to oppose the rising current."},
- {id:"q16",d:3,topic:"Inductors",prompt:"An RL circuit has L = 2.0 H and R = 4.0 Ω. What is its time constant?",
-  options:[{t:"0.50 s",ok:true},{t:"8.0 s",tag:"Multiplied L and R",why:"LR isn’t a time. The RL time constant is τ = L/R."},{t:"2.0 s",tag:"Inverted L/R",why:"4/2 = 2 is R/L, which has units of s⁻¹. Flip it."}],
-  explain:"τ = L/R = 2.0/4.0 = 0.50 s. After one time constant the current reaches about 63% of its final value."}
-];
-const COURSES = [
-  {code:"PHY211",name:"Elementary Modern Physics",credits:2,category:"C",h:262,icon:"physics"},
-  {code:"PHY232",name:"Electric Circuit and Electronics",credits:2,category:"C",h:32,icon:"physics"},
-  {code:"MTH213",name:"Elementary Differential Equations",credits:2,category:"C",h:168,icon:"maths"},
-  {code:"PHY215",name:"Thermal Physics",credits:2,category:"C",h:345,icon:"physics"},
-  {code:"PHY212",h:212,icon:"physics"},
-  {code:"PHY218",name:"Experimental Physics I",credits:1,category:"C",h:12,icon:"physics"},
-  {code:"GST211",name:"Philosophy, Logic and Human Existence",credits:2,category:"U",h:140,icon:"general"},
-  {code:"DLD111",name:"Introduction to Leadership Development",credits:0,category:"V",h:290,icon:"general"},
-  {code:"TMC211",name:"Success Parameters",credits:1,category:"V",h:48,icon:"general"},
-  {code:"CIT211",name:"Oracle - Java Foundations",credits:0,category:"V",h:196,icon:"computing"},
-  {code:"CSC233",name:"Programming with C++",credits:3,category:"C",h:220,icon:"computing"},
-  {code:"ENT211",name:"Entrepreneurial Development and Innovation",credits:2,category:"U",h:28,icon:"engineering"},
-  {code:"MTH111",name:"Elementary Mathematics I",credits:2,category:"C",h:185,icon:"maths"},
-  {code:"PHY111",name:"General Physics I",credits:2,category:"C",h:226,icon:"physics"},
-  {code:"PHY113",name:"General Physics III",credits:2,category:"C",h:244,icon:"physics"},
-  {code:"PHY213",name:"Thin Film Technology and Solar Energy Laboratory",credits:2,category:"C",h:34,icon:"chemistry"},
-  {code:"TMC212",h:52,icon:"general"}
-];
-const DEDICATED_COURSES = new Set(["GST211","ENT211","TMC211","TMC212"]);
-const COURSES_BY_PROGRAM_LEVEL = {
-  "Industrial Physics": {
-    "100 level": ["PHY111","PHY113","MTH111"],
-    "200 level": ["CIT211","CSC233","DLD111","ENT211","GST211","MTH213","PHY211","PHY213","PHY215","PHY218","PHY232","TMC211","TMC212"]
-  },
-  "Industrial Maths": {"200 level":["MTH213"]},
-  "Industrial Chemistry": {"200 level":["MTH213"]},
-  "Computer Science": {"200 level":["MTH213"]},
-  "Biology": {"200 level":["MTH213"]},
-  "Microbiology": {"200 level":["MTH213"]},
-  "Management Information Systems (MIS)": {"200 level":["MTH213"]}
-};
-const UNIVERSITY_LOGOS = {
-  covenant:"covenant-university.jpeg",
-  unilag:"unilag.jpeg",
-  landmark:"landmark-university.jpeg"
-};
-function universityLogoPath(university){
-  const base = location.protocol === "file:" ? "public/universities/" : "/universities/";
-  return base + UNIVERSITY_LOGOS[university];
-}
-const LANDING_COURSES = [
-  {name:"Maths",h:262,icon:"maths"},{name:"Physics",h:32,icon:"physics"},{name:"Computer Science",h:168,icon:"computing"},
-  {name:"Computer Engineering",h:345,icon:"engineering"},{name:"Biology",h:212,icon:"biology"}
-];
-const COURSE_ICONS = {
-  maths: '<svg viewBox="0 0 32 32"><text x="2" y="13">+</text><text x="18" y="13">−</text><text x="2" y="28">×</text><text x="18" y="28">÷</text></svg>',
-  chemistry: '<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4h8M14 4v9l-6.4 10.2A3 3 0 0 0 10.1 28h11.8a3 3 0 0 0 2.5-4.8L18 13V4"/><path d="M11 21h10"/><circle cx="15" cy="18" r=".8" fill="currentColor" stroke="none"/><circle cx="19" cy="16" r=".7" fill="currentColor" stroke="none"/></svg>',
-  physics: '<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><ellipse cx="16" cy="16" rx="12" ry="5"/><ellipse cx="16" cy="16" rx="12" ry="5" transform="rotate(60 16 16)"/><ellipse cx="16" cy="16" rx="12" ry="5" transform="rotate(120 16 16)"/><circle cx="16" cy="16" r="2.2" fill="currentColor" stroke="none"/></svg>',
-  computing: '<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="8" width="16" height="16" rx="3"/><path d="M12 12h8v8h-8zM12 3v5m8-5v5M12 24v5m8-5v5M3 12h5m-5 8h5m16-8h5m-5 8h5"/></svg>',
-  engineering: '<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 25 23 8l3 3L9 28H6zM19 7l3-3 6 6-3 3M5 21l6 6M8 18l3 3"/></svg>',
-  biology: '<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M26 5C15 5 7 9 7 18a9 9 0 0 0 9 9c9 0 10-11 10-22Z"/><path d="M5 28c4-8 9-12 17-17M11 20l-1-6m7 1 5 1"/></svg>',
-  general: '<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 9c-3-2-7-2-11-1v17c4-1 8-1 11 1 3-2 7-2 11-1V8c-4-1-8-1-11 1Z"/><path d="M16 9v17"/></svg>'
-};
-function courseIconKind(course){
-  if(course.icon) return course.icon;
-  if(/^(CHM|CHE|BCH)/i.test(course.code || course.name || "")) return "chemistry";
-  if(/^MTH|math/i.test(course.code || course.name || "")) return "maths";
-  if(/^PHY|physics/i.test(course.code || course.name || "")) return "physics";
-  return "general";
-}
-function courseMark(course, size = ""){
-  const icon = COURSE_ICONS[courseIconKind(course)] || COURSE_ICONS.general;
-  return `<span class="course-mark ${size}" style="--h:${course.h}" aria-hidden="true">${icon}</span>`;
-}
-const DIFFS = {mixed:"Mixed", easy:"Easy", standard:"Standard", hard:"Hard"};
-const DIFF_N = {easy:1, standard:2, hard:3};
-const DEFAULT_PREFS = {count:10, timer:0, diff:"mixed", focus:"all", source:"all", topic:"", explain:"each"};
+import {SAMPLE, COURSES, COURSES_BY_PROGRAM_LEVEL, UNIVERSITY_LOGOS, LANDING_COURSES, DIFFS, DIFF_N, DEFAULT_PREFS} from "./app/orbit-data.js";
+import {createOnboarding} from "./app/onboarding.js";
+import {createPracticeModule} from "./app/practice.js";
 
-/* ===================== State ===================== */
+const NOTE_BANK_COURSES = new Set(["MTH213","PHY211","GST211"]);
 const LS_KEY = "orbit-cu-v2";
 let state = {onboard:null, courses:{}};
 const banks = {}; const realBank = {};
-const NOTE_BANK_COURSES = new Set(["MTH213","PHY211"]);
 let saveTimer = null, saveChain = Promise.resolve();
 let authed = false, uid = null, authUser = null, entering = null, pendingAuthError = "";
 let roomNS = null;
@@ -431,122 +313,16 @@ document.querySelectorAll("[data-start]").forEach(button => button.addEventListe
 }));
 
 /* ===================== Onboarding ===================== */
-const PROGRAMS = [
-  "Industrial Physics",
-  "Industrial Maths",
-  "Industrial Chemistry",
-  "Computer Science",
-  "Biology",
-  "Microbiology",
-  "Management Information Systems (MIS)",
-  "Computer Engineering",
-  "Electrical Engineering",
-  "Mechanical Engineering",
-  "Civil Engineering",
-  "Petroleum Engineering",
-  "Mechatronics Engineering",
-  "Architecture",
-  "Building Technology",
-  "Estate Management",
-  "Accounting",
-  "Banking and Finance",
-  "Business Administration",
-  "Economics",
-  "Industrial Relations and Human Resources Management",
-  "Law",
-  "International Relations",
-  "Psychology",
-  "Political Science",
-  "English Language",
-  "Medicine and Surgery",
-  "Nursing Science",
-  "Medical Laboratory Science",
-  "Anatomy",
-  "Physiology"
-];
-let ob = {step:0, university:"", name:"", level:"", program:"", exam:""};
-const OB_STEPS = [
-  {key:"university", title:"Choose your university", sub:"Covenant University is available now. More universities are coming soon.", type:"university"},
-  {key:"name", title:"What should we call you?", sub:"Just your first name is fine. Friends see it when you go head to head.", type:"text"},
-  {key:"level", title:"Which level are you in?", sub:"This sets which courses come into orbit first.", type:"choice", options:["100 level","200 level","300 level","400 level"]},
-  {key:"program", title:"What program are you offering?", sub:"Choose your Covenant University program. It’ll appear as a tag on your page.", type:"program"},
-  {key:"exam", title:"When’s your next exam?", sub:"Orbit paces your sessions around it.", type:"choice", options:["This week","This month","Later this semester","Not sure yet"]}
-];
-function saveOnboardingDraft(){
-  state.onboard = {
-    ...(state.onboard || {}),
-    university:ob.university,
-    name:ob.name,
-    level:ob.level,
-    program:ob.program,
-    exam:ob.exam
-  };
-  save();
-}
-function renderOnboard(){
-  const p = $("obPanel");
-  if(ob.step >= OB_STEPS.length){
-    p.innerHTML = `<div class="launch step-in"><div class="planet ringed"></div><h2 class="title">Building your orbit</h2><p class="sub">Lining up your courses, ${esc(ob.name || "there")}.</p></div>`;
-    saveOnboardingDraft();
-    setTimeout(() => go("v-system", {replaceHistory:true}), reduce ? 300 : 1500);
-    return;
-  }
-  const s = OB_STEPS[ob.step];
-  const dots = OB_STEPS.map((_, i) => `<i class="${i <= ob.step ? "on" : ""}"></i>`).join("");
-  const body = s.type === "text"
-    ? `<input class="field" id="obInput" type="text" autocomplete="given-name" maxlength="24" placeholder="Your name" value="${esc(ob[s.key])}">`
-    : s.type === "university"
-      ? `<div class="university-choices">
-          <button class="university-choice" type="button" data-v="covenant" aria-pressed="${ob.university === "covenant"}">
-            <img src="${universityLogoPath("covenant")}" alt=""><span>Covenant University</span><small>Available now</small>
-          </button>
-          <button class="university-choice" type="button" disabled aria-label="UNILAG, unavailable">
-            <img src="${universityLogoPath("unilag")}" alt=""><span>UNILAG</span><small>Unavailable</small>
-          </button>
-          <button class="university-choice" type="button" disabled aria-label="Landmark University, unavailable">
-            <img src="${universityLogoPath("landmark")}" alt=""><span>Landmark University</span><small>Unavailable</small>
-          </button>
-        </div>`
-      : s.type === "program"
-        ? `<label class="program-select-label" for="obProgram">Your program</label><div class="program-select-wrap"><select class="field program-select" id="obProgram" required><option value="" disabled ${ob.program ? "" : "selected"}>Select your program</option>${PROGRAMS.map(program => `<option value="${esc(program)}" ${ob.program === program ? "selected" : ""}>${esc(program)}</option>`).join("")}</select></div>`
-      : `<div class="choices">${s.options.map(o => `<button class="choice" aria-pressed="${ob[s.key] === o}" data-v="${esc(o)}">${esc(o)}</button>`).join("")}</div>`;
-  p.innerHTML = `<div class="ob-dots">${dots}</div><div class="step-in"><h2 class="title">${s.title}</h2><p class="sub">${s.sub}</p>${body}
-    <div class="ob-actions">${ob.step ? '<button class="ghost" id="obBack">Back</button>' : "<span></span>"}<button class="btn btn-primary" id="obNext" ${ob[s.key] ? "" : "disabled"}>${ob.step === OB_STEPS.length - 1 ? "Finish" : "Continue"}</button></div></div>`;
-  const next = $("obNext");
-  if(s.type === "text"){
-    const inp = $("obInput"); setTimeout(() => inp.focus(), 50);
-    inp.addEventListener("input", () => { ob.name = inp.value.trim(); next.disabled = !ob.name; saveOnboardingDraft(); });
-    inp.addEventListener("keydown", e => { if(e.key === "Enter" && ob.name){ ob.step++; renderOnboard(); } });
-  } else if(s.type === "university"){
-    p.querySelectorAll(".university-choice:not(:disabled)").forEach(b => b.addEventListener("click", () => {
-      ob.university = b.dataset.v;
-      p.querySelectorAll(".university-choice").forEach(x => x.setAttribute("aria-pressed", String(x === b)));
-      next.disabled = false;
-      saveOnboardingDraft();
-    }));
-  } else if(s.type === "program"){
-    $("obProgram").addEventListener("change", event => {
-      ob.program = event.target.value;
-      next.disabled = !ob.program;
-      saveOnboardingDraft();
-    });
-  } else {
-    p.querySelectorAll(".choice").forEach(b => b.addEventListener("click", () => {
-      ob[s.key] = b.dataset.v; p.querySelectorAll(".choice").forEach(x => x.setAttribute("aria-pressed", x === b)); next.disabled = false; saveOnboardingDraft();
-    }));
-  }
-  next.addEventListener("click", () => { saveOnboardingDraft(); ob.step++; renderOnboard(); });
-  const bk = $("obBack"); if(bk) bk.addEventListener("click", () => { saveOnboardingDraft(); ob.step--; renderOnboard(); });
-}
-function hasCompletedOnboarding(){
-  const details = state.onboard;
-  return Boolean(details && details.university === "covenant" && details.name && details.level && details.program && details.exam);
-}
-function profileProgramTag(){
-  const program = state.onboard && state.onboard.program;
-  return program ? `<span class="program-tag">${esc(program)}</span>` : "";
-}
-
+const onboarding = createOnboarding({
+  $,
+  getState:() => state,
+  save,
+  go:(...args) => go(...args),
+  esc,
+  reduce,
+  universityLogoPath:code => "/universities/" + UNIVERSITY_LOGOS[code]
+});
+const {renderOnboard, hasCompletedOnboarding, profileProgramTag} = onboarding;
 /* ===================== Course grid + decorative orbit band ===================== */
 (function buildBand(){
   const svg = $("band"); const cx = 380, cy = 90; const rings = [[160,46],[262,64],[362,84]];
@@ -598,10 +374,7 @@ function renderGrid(){
     const details = [c.credits === undefined ? "" : `${c.credits} credits`, c.category || ""].filter(Boolean).join(" · ");
     return `<button class="ccard glass" data-code="${c.code}" style="animation-delay:${reduce ? 0 : i * 40}ms">${courseMark(c, "course-mark--large")}<strong>${c.code}</strong>${c.name ? `<span class="course-name">${esc(c.name)}</span>` : ""}${details ? `<span class="course-details">${esc(details)}</span>` : ""}<span class="st">${acc === null ? st : Math.round(acc * 100) + "% accuracy"}</span>${acc === null ? "" : `<div class="meter"><i style="width:${Math.round(acc * 100)}%;background:var(--ink)"></i></div>`}</button>`;
   }).join("") : `<p class="grid-empty">No ${esc(program)} ${esc(level)} courses match “${esc($("courseSearch").value.trim())}”.</p>`;
-  $("grid").querySelectorAll(".ccard").forEach(b => b.addEventListener("click", () => {
-    if(DEDICATED_COURSES.has(b.dataset.code)) openCoursePage(b.dataset.code);
-    else openSheet(b.dataset.code);
-  }));
+  $("grid").querySelectorAll(".ccard").forEach(b => b.addEventListener("click", () => openCoursePage(b.dataset.code)));
 }
 function filterCourses(event){
   event.preventDefault();
@@ -611,132 +384,13 @@ $("courseSearchForm").addEventListener("submit", filterCourses);
 $("courseSearch").addEventListener("input", renderGrid);
 
 /* ===================== Dedicated course pages ===================== */
-function openCoursePage(code){
-  activeCourse = code;
-  go("v-course");
-}
-function renderCoursePage(code){
-  const course = COURSES.find(item => item.code === code);
-  if(!course || !DEDICATED_COURSES.has(code)) return;
-  const prefs = prefsFor(code);
-  const bank = banks[code] || [];
-  const topics = [...new Set(bank.map(q => q.topic).filter(Boolean))].sort((a, b) => a.localeCompare(b));
-  const stats = topicStats(code);
-  const answered = stats.reduce((total, topic) => total + topic.seen, 0);
-  const accuracy = courseAcc(code);
-  const weak = weakTopics(code);
-  if(prefs.source === "past" && !realBank[code]) prefs.source = "all";
-  if(prefs.source === "topic" && !topics.includes(prefs.topic)) prefs.topic = "";
-  if(prefs.focus === "weak" && !weak.length) prefs.focus = "all";
-
-  const sourceOptions = [
-    ["all", NOTE_BANK_COURSES.has(code) ? "All questions" : "All"],
-    ...(realBank[code] ? [["past","Past questions"]] : []),
-    ...(topics.length ? [["topic","A topic"]] : [])
-  ];
-  const topicRows = topics.length ? topics.map(topic => {
-    const topicStat = stats.find(item => item.topic === topic);
-    const percent = topicStat && topicStat.acc !== null ? Math.round(topicStat.acc * 100) : null;
-    return `<article class="course-topic-row">
-      <div class="course-topic-copy"><strong>${esc(topic)}</strong><span>${topicStat ? `${topicStat.seen} answered` : "Ready to practise"}</span></div>
-      <div class="course-topic-meter meter"><i style="width:${percent === null ? 0 : percent}%;background:var(--ink)"></i></div>
-      <span class="course-topic-score">${percent === null ? "—" : `${percent}%`}</span>
-      <button class="course-topic-action" type="button" data-topic="${esc(topic)}" aria-label="Practise ${esc(topic)}">Practise <span aria-hidden="true">↗</span></button>
-    </article>`;
-  }).join("") : `<p class="course-empty-copy">Topic progress will appear here as course questions are added and you practise them.</p>`;
-  const questionRows = bank.length ? bank.slice(0, 6).map((question, index) => `
-    <article class="course-question-row">
-      <span class="course-question-number">${String(index + 1).padStart(2, "0")}</span>
-      <div><span class="course-question-topic">${esc(question.topic || "Course question")}</span><p>${esc(question.prompt)}</p></div>
-    </article>`).join("") : `<div class="course-empty glass"><span class="course-empty-mark" aria-hidden="true">${courseMark(course)}</span><div><strong>Your course space is ready.</strong><p>No course-specific questions are published yet. You can still explore a starter practice set while the question bank is prepared.</p></div></div>`;
-
-  $("coursePage").innerHTML = `
-    <header class="course-hero glass">
-      <div class="course-hero-copy">
-        <div class="course-university"><img src="/universities/covenant-university.jpeg" alt=""><span>Covenant University</span></div>
-        <p class="eyebrow">${esc(course.code)} · COURSE SPACE</p>
-        <h1 class="course-title">${esc(course.name || "Course practice")}</h1>
-        <p class="course-lede">A focused space for your ${esc(course.code)} revision. Choose a quick warm-up or shape a session around the way you want to study.</p>
-        <button class="btn btn-primary course-warmup" type="button" data-course-start="warmup">Start 10-minute warm-up <span aria-hidden="true">↗</span></button>
-      </div>
-      <div class="course-hero-mark">${courseMark(course, "course-mark--large")}<span>${esc(course.code)}</span><small>${course.credits === undefined ? "Course practice" : `${course.credits} credits`}</small></div>
-    </header>
-
-    <div class="course-stats" aria-label="${esc(course.code)} progress">
-      <article class="course-stat glass"><span>Current mastery</span><strong>${accuracy === null ? "—" : `${Math.round(accuracy * 100)}%`}</strong><small>${answered ? `${answered} answers recorded` : "Your progress starts here"}</small></article>
-      <article class="course-stat glass"><span>Questions solved</span><strong>${answered}</strong><small>Across your practice sessions</small></article>
-      <article class="course-stat glass"><span>Practice sessions</span><strong>${cs(code).sessions}</strong><small>${bank.length ? `${bank.length} course questions available` : "Starter practice set available"}</small></article>
-    </div>
-
-    <section class="course-section">
-      <div class="course-section-heading"><div><p class="eyebrow">CURATED PRACTICE</p><h2>Choose your next set</h2></div><span class="course-section-note">${bank.length ? `${bank.length} questions in your bank` : "A calm place to begin"}</span></div>
-      <div class="course-practice-grid">
-        <button class="course-practice-card course-practice-card--feature" type="button" data-course-start="warmup"><span class="course-card-icon" aria-hidden="true">◷</span><span class="course-card-kicker">10 MINUTES · 5 QUESTIONS</span><strong>Warm up your focus.</strong><small>A short timed set to get into the rhythm.</small><span class="course-card-arrow" aria-hidden="true">↗</span></button>
-        <button class="course-practice-card" type="button" data-jump-settings><span class="course-card-icon" aria-hidden="true">✳</span><span class="course-card-kicker">MADE FOR YOU</span><strong>Build a practice set.</strong><small>Choose topics, pace and difficulty for this session.</small><span class="course-card-arrow" aria-hidden="true">↗</span></button>
-      </div>
-    </section>
-
-    <div class="course-content-grid">
-      <section class="course-panel glass" id="courseSettings">
-        <div class="course-section-heading course-panel-heading"><div><p class="eyebrow">YOUR SESSION</p><h2>Set the pace.</h2></div></div>
-        <div class="course-pref"><label>Questions from</label>${seg("source", sourceOptions, prefs.source)}</div>
-        <label class="topic-select-wrap course-topic-select" id="courseTopicWrap" ${prefs.source === "topic" ? "" : "hidden"}><span>Choose a topic</span><select class="topic-select" id="courseTopic"><option value="">Select a topic</option>${topics.map(topic => `<option value="${esc(topic)}" ${prefs.topic === topic ? "selected" : ""}>${esc(topic)}</option>`).join("")}</select></label>
-        <div class="course-pref"><label>Questions</label>${seg("count", [[5,"5"],[10,"10"],[15,"15"],[20,"20"],[60,"60"]], prefs.count)}</div>
-        <div class="course-pref"><label>Session timer</label>${seg("timer", [[0,"Off"],[600,"10m"],[1200,"20m"],[1800,"30m"],[3600,"60m"]], prefs.timer)}</div>
-        <div class="course-pref"><label>Difficulty</label>${seg("diff", Object.entries(DIFFS), prefs.diff)}</div>
-        <div class="course-pref"><label>Focus</label>${seg("focus", [["all","All topics"],["weak","Weak spots"]], prefs.focus, weak.length ? [] : ["weak"])}</div>
-        <div class="course-pref"><label>Explanations</label>${seg("explain", [["each","After each"],["end","At the end"]], prefs.explain)}</div>
-        ${bank.length ? "" : `<p class="course-starter-note">This course has no published question bank yet; the starter set is used for practice.</p>`}
-        <div class="course-session-actions"><button class="btn btn-primary" id="courseStart" type="button" ${prefs.source === "topic" && !prefs.topic ? "disabled" : ""}>Start practice</button><button class="btn btn-soft" id="courseDuel" type="button">Duel a friend</button></div>
-        <button class="course-weak-link" id="courseWeakSpots" type="button" ${weak.length ? "" : "disabled"}>Review weak spots for ${esc(course.code)}</button>
-      </section>
-
-      <div class="course-side-column">
-        <section class="course-panel glass">
-          <div class="course-section-heading course-panel-heading"><div><p class="eyebrow">YOUR PROGRESS</p><h2>Topic map</h2></div></div>
-          <div class="course-topic-list">${topicRows}</div>
-        </section>
-        <section class="course-panel glass course-question-bank">
-          <div class="course-section-heading course-panel-heading"><div><p class="eyebrow">QUESTION BANK</p><h2>High-yield questions</h2></div><span class="course-section-note">${bank.length ? `${bank.length} total` : "Coming soon"}</span></div>
-          <div class="course-question-list">${questionRows}</div>
-        </section>
-      </div>
-    </div>`;
-
-  const root = $("coursePage");
-  root.querySelectorAll(".seg").forEach(control => control.addEventListener("click", event => {
-    const button = event.target.closest("button");
-    if(!button || !control.contains(button) || button.disabled) return;
-    const key = control.dataset.key;
-    let value = button.dataset.v;
-    if(key === "count" || key === "timer") value = +value;
-    cs(code).prefs = Object.assign(prefsFor(code), {[key]:value});
-    save();
-    control.querySelectorAll("button").forEach(item => item.setAttribute("aria-pressed", String(item === button)));
-    layoutThumbs(root);
-    if(key === "source"){
-      $("courseTopicWrap").hidden = value !== "topic";
-      $("courseStart").disabled = value === "topic" && !$("courseTopic").value;
-    }
-  }));
-  root.querySelectorAll(".seg").forEach(layoutThumbs);
-  $("courseTopic").addEventListener("change", event => {
-    cs(code).prefs = Object.assign(prefsFor(code), {topic:event.target.value});
-    save();
-    $("courseStart").disabled = !event.target.value;
+async function renderCoursePage(code){
+  const {renderDedicatedCoursePage} = await import("./app/course-page.js");
+  await renderDedicatedCoursePage(code, {
+    $, COURSES, NOTE_BANK_COURSES, DIFFS, realBank, reduce,
+    esc, prefsFor, bankFor, topicStats, courseAcc, weakTopics, courseMark, cs, save, seg, layoutThumbs,
+    startSolo, openDuel: () => { duel = null; duelTab = "live"; go("v-duel"); }
   });
-  $("courseStart").onclick = () => startSolo(code);
-  $("courseDuel").onclick = () => { duel = null; duelTab = "live"; go("v-duel"); };
-  $("courseWeakSpots").onclick = () => startSolo(code, {focus:"weak", label:"Weak-spot practice"});
-  root.querySelectorAll('[data-course-start="warmup"]').forEach(button => button.addEventListener("click", () => {
-    startSolo(code, {source:"all", topic:"", count:5, timer:600, focus:"all", label:"10-minute warm-up"});
-  }));
-  root.querySelectorAll("[data-jump-settings]").forEach(button => button.addEventListener("click", () => {
-    $("courseSettings").scrollIntoView({behavior:reduce ? "auto" : "smooth", block:"start"});
-  }));
-  root.querySelectorAll("[data-topic]").forEach(button => button.addEventListener("click", () => {
-    startSolo(code, {source:"topic", topic:button.dataset.topic, count:5, focus:"all", label:`${button.dataset.topic} practice`});
-  }));
 }
 
 /* ===================== Preferences sheet ===================== */
@@ -805,155 +459,16 @@ $("scrim").addEventListener("click", closeSheet);
 document.addEventListener("keydown", e => { if(e.key === "Escape" && $("sheet").classList.contains("on")) closeSheet(); });
 window.addEventListener("resize", () => { if($("sheet").classList.contains("on")) layoutThumbs($("sheet")); });
 
-/* ===================== Question selection ===================== */
-function rng(seed){ let a = seed >>> 0; return () => { a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
-function shuffleWith(arr, r){ const a = arr.slice(); for(let i = a.length - 1; i > 0; i--){ const j = Math.floor(r() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
-function diffOf(q){ return q.d || 2; }
-function buildSet(code, cfg){
-  const bank = bankFor(code); const r = cfg.seed != null ? rng(cfg.seed) : Math.random;
-  let pool = bank;
-  if(cfg.source === "past") pool = realBank[code] ? banks[code].filter(q => q.pastQuestion !== false) : [];
-  if(cfg.source === "topic" && cfg.topic) pool = pool.filter(q => q.topic === cfg.topic);
-  if(cfg.focus === "weak"){ const w = weakTopics(code); const f = pool.filter(q => w.includes(q.topic)); if(f.length) pool = f; }
-  let ordered;
-  if(cfg.seed != null){
-    ordered = shuffleWith(pool.slice().sort((a, b) => String(a.id).localeCompare(String(b.id))), r);
-  } else {
-    const att = cs(code).attempts; const stats = Object.fromEntries(topicStats(code).map(t => [t.topic, t]));
-    ordered = pool.map(q => { const a = att[q.id], t = stats[q.topic]; let w = 1;
-      if(!a) w += 1.5; else { if(a.lastWrong) w += 2.5; w += (a.wrong / a.seen) * 2; }
-      if(t && t.acc !== null) w += (1 - t.acc) * 3;
-      return {q, k: Math.random() ** (1 / w)}; }).sort((x, y) => y.k - x.k).map(x => x.q);
-  }
-  let note = "";
-  if(cfg.diff !== "mixed"){
-    const want = DIFF_N[cfg.diff]; const match = ordered.filter(q => diffOf(q) === want);
-    if(match.length < cfg.count) note = `Only ${match.length} ${DIFFS[cfg.diff].toLowerCase()} question${match.length === 1 ? "" : "s"} available, so the rest are mixed in.`;
-    ordered = match.concat(ordered.filter(q => diffOf(q) !== want));
-  }
-  const n = Math.min(cfg.count, ordered.length);
-  if(n < cfg.count && !note) note = `This course has ${n} questions so far, so the session is ${n} long.`;
-  return {items: ordered.slice(0, n).map(q => ({q, opts: shuffleWith(q.options, r)})), note};
-}
-
 /* ===================== Practice ===================== */
-let session = null, timerInt = null;
-function startSolo(code, overrides = {}){
-  const p = Object.assign(prefsFor(code), overrides);
-  const {items, note} = buildSet(code, p);
-  activeCourse = code;
-  session = {mode:"solo", code, items, note, i:0, correct:0, tags:{}, answers:[], timer:p.timer, timerEndsAt:null, explainEnd:p.explain === "end", title:p.label || "Practice session"};
-  beginSession();
-}
-function beginSession(){
-  if(session.timer) session.timerEndsAt = Date.now() + session.timer * 1000;
-  go("v-practice"); renderQuestion(); renderHud();
-  if(session.timer) startTimer();
-}
-function sessionTimeText(seconds){
-  const minutes = Math.floor(seconds / 60), remainder = seconds % 60;
-  return minutes ? `${minutes}:${String(remainder).padStart(2, "0")}` : `${remainder}s`;
-}
-function renderQuestion(){
-  const it = session.items[session.i], n = session.items.length;
-  const saved = session.answers[session.i];
-  const course = COURSES.find(item => item.code === session.code);
-  $("practiceCourse").textContent = `${session.code} · ${course && course.name ? course.name : "Course practice"}`;
-  $("practiceTitle").textContent = session.title;
-  $("progBar").style.width = (session.i / n * 100) + "%";
-  $("pqCount").textContent = `${session.i + 1} of ${n}`;
-  const card = $("qcard");
-  card.innerHTML = `${session.i === 0 && session.note ? `<p class="notice" style="margin:0 0 16px">${esc(session.note)}</p>` : ""}
-    <div class="qmeta"><span class="qtopic">${esc(session.code)} · ${esc(it.q.topic)}</span>${session.timer ? `<span class="timer" id="timer" aria-label="Session time remaining"><svg width="26" height="26" viewBox="0 0 26 26"><circle class="bg" cx="13" cy="13" r="10"/><circle class="fg" id="timerFg" cx="13" cy="13" r="10" stroke-dasharray="62.83" stroke-dashoffset="0"/></svg><span class="timer-label">Time remaining</span><span id="timerTxt">${sessionTimeText(Math.max(0, Math.ceil((session.timerEndsAt - Date.now()) / 1000)))}</span></span>` : ""}</div>
-    <p class="qprompt">${esc(it.q.prompt)}</p>
-    <div class="opts" id="opts">${it.opts.map((o, i) => `<button class="opt${saved && o.ok ? " right" : ""}${saved && saved.pick === o ? " chosen" : ""}${saved && saved.pick === o && !saved.ok ? " wrong" : ""}" data-i="${i}"><kbd>${"ABCDE"[i]}</kbd><span>${esc(o.t)}</span></button>`).join("")}</div><div id="fb">${saved && !session.explainEnd ? answerFeedback(saved) : ""}</div>`;
-  card.classList.remove("step-in"); void card.offsetWidth; card.classList.add("step-in");
-  card.querySelectorAll(".opt").forEach(b => b.addEventListener("click", () => answer(+b.dataset.i)));
-  const prev = $("prevBtn"); if(prev) prev.hidden = session.i === 0;
-  const next = $("nextBtn"); if(next){
-    next.hidden = !saved;
-    next.textContent = session.i === n - 1 ? "See results" : "Next question";
-  }
-}
-function answerFeedback(response){
-  return response.ok
-    ? `<div class="feedback ok glass"><h4>Correct</h4><p class="working" style="border:0;padding:0;margin:0"><b>The working:</b> ${esc(response.q.explain)}</p></div>`
-    : `<div class="feedback no glass"><h4>${response.pick ? "Not quite" : "Time’s up"}</h4>${response.tag ? `<p><span class="mtag">${esc(response.tag)}</span></p>` : ""}<p>${esc(response.why || "")}</p><p class="working"><b>The working:</b> ${esc(response.q.explain)}</p></div>`;
-}
-function startTimer(){
-  stopTimer();
-  const total = session.timer;
-  timerInt = setInterval(() => {
-    if(current !== "v-practice"){ stopTimer(); return; }
-    const left = Math.max(0, session.timerEndsAt - Date.now());
-    const fg = $("timerFg"), tx = $("timerTxt"), tm = $("timer");
-    if(fg && tx && tm){
-      fg.style.strokeDashoffset = 62.83 * (1 - left / (total * 1000));
-      tx.textContent = sessionTimeText(Math.ceil(left / 1000));
-      tm.classList.toggle("low", left < 60 * 1000);
-    }
-    if(left <= 0){
-      stopTimer();
-      if(!session.answers[session.i]) answer(null);
-      finishSession();
-    }
-  }, 100);
-}
-function stopTimer(){ clearInterval(timerInt); timerInt = null; }
-function answer(idx){
-  const box = $("opts"); if(!box) return;
-  const it = session.items[session.i], q = it.q, pick = idx == null ? null : it.opts[idx];
-  const ok = !!(pick && pick.ok);
-  const tag = pick ? pick.tag : "Ran out of time";
-  const why = pick ? pick.why : "The timer ran out before you picked an answer.";
-  const previous = session.answers[session.i];
-  const c = cs(session.code), a = c.attempts[q.id] || {seen:0, wrong:0};
-  if(!previous) a.seen++;
-  if(previous && previous.ok !== ok) a.wrong = Math.max(0, a.wrong + (ok ? -1 : 1));
-  if(previous && !previous.ok && previous.tag && (ok || previous.tag !== tag)) c.tags[previous.tag] = Math.max(0, (c.tags[previous.tag] || 0) - 1);
-  if(!ok && tag && (!previous || previous.ok || previous.tag !== tag)) c.tags[tag] = (c.tags[tag] || 0) + 1;
-  a.last = Date.now(); a.lastWrong = !ok;
-  if(!ok && !previous) a.wrong++;
-  c.attempts[q.id] = a; save();
-  session.answers[session.i] = {q, pick, ok, tag, why};
-  session.correct = session.answers.reduce((score, answer) => score + (answer && answer.ok ? 1 : 0), 0);
-  session.tags = session.answers.reduce((tags, answer) => {
-    if(answer && !answer.ok && answer.tag) tags[answer.tag] = (tags[answer.tag] || 0) + 1;
-    return tags;
-  }, {});
-  pushDuelProgress();
-  renderHud();
-  renderQuestion();
-  $("nextBtn").focus({preventScroll:true});
-  if(!session.explainEnd) setTimeout(() => $("fb").scrollIntoView({behavior: reduce ? "auto" : "smooth", block:"nearest"}), 120);
-}
-function nextQuestion(){
-  if(current !== "v-practice") return;
-  session.i++;
-  if(session.i >= session.items.length){ finishSession(); return; }
-  renderQuestion(); window.scrollTo({top:0, behavior: reduce ? "auto" : "smooth"});
-}
-function previousQuestion(){
-  if(current !== "v-practice" || session.i === 0) return;
-  session.i--;
-  renderQuestion(); window.scrollTo({top:0, behavior: reduce ? "auto" : "smooth"});
-}
-if($("nextBtn")) $("nextBtn").addEventListener("click", nextQuestion);
-if($("prevBtn")) $("prevBtn").addEventListener("click", previousQuestion);
-if($("practiceLeave")) $("practiceLeave").addEventListener("click", appBack);
-document.addEventListener("keydown", e => {
-  if(current !== "v-practice" || e.metaKey || e.ctrlKey) return;
-  if(e.target && e.target.tagName === "INPUT") return;
-  const k = e.key.toUpperCase(); let i = "ABCDE".indexOf(k); if(i < 0) i = ["1","2","3","4","5"].indexOf(k);
-  const box = $("opts"); if(i >= 0 && box && !box.classList.contains("locked") && box.children[i]) answer(i);
+let session = null;
+const practice = createPracticeModule({
+  $, esc, reduce, COURSES, DIFFS, DIFF_N, bankFor, banks, realBank, weakTopics, cs, topicStats, prefsFor, save, go,
+  currentView:() => current, renderHud, pushDuelProgress, recordChallengeOutcome, syncCodeChallenge,
+  setActiveCourse:code => { activeCourse = code; }, setSession:value => { session = value; },
+  renderSummary:() => renderSummary(), appBack
 });
-function finishSession(){
-  if(!session || session.done) return;
-  stopTimer(); cs(session.code).sessions++; save();
-  session.done = true; recordChallengeOutcome(); pushDuelProgress();
-  go("v-summary"); renderSummary();
-  if(session.mode === "code-create" || session.mode === "code-accept") syncCodeChallenge(session);
-}
+const {buildSet, startSolo, stopTimer} = practice;
+practice.bindEvents();
 
 /* ===================== Summary ===================== */
 function recordChallengeOutcome(){
@@ -1395,7 +910,8 @@ async function syncCodeChallenge(target){
 function sessionFrom(cfg, mode, extra = {}){
   const {items, note} = buildSet(cfg.code, {count:cfg.count, diff:cfg.diff, focus:"all", seed:cfg.seed});
   session = Object.assign({mode, code:cfg.code, seed:cfg.seed, diff:cfg.diff, items, note, i:0, correct:0, tags:{}, answers:[], timer:cfg.timer, explainEnd:true}, extra);
-  beginSession();
+  practice.session = session;
+  practice.beginSession();
 }
 function renderDuel(){
   const code = activeCourse || COURSES[0].code; const p = prefsFor(code);
@@ -1609,16 +1125,7 @@ function enter(user){
       go("v-system", {instant:true, replaceHistory:true});
       return;
     }
-    const saved = state.onboard || {};
-    ob = {
-      step:0,
-      university: saved.university === "covenant" ? "covenant" : "",
-      name: String(saved.name || firstName(user)).slice(0, 24),
-      level: saved.level || "",
-      program: PROGRAMS.includes(saved.program) ? saved.program : "",
-      exam: saved.exam || ""
-    };
-    ob.step = !ob.university ? 0 : !ob.name ? 1 : !ob.level ? 2 : !ob.program ? 3 : !ob.exam ? 4 : 0;
+    onboarding.initialize(state.onboard || {}, firstName(user));
     go("v-onboard", {instant:true, replaceHistory:true});
   })();
   return entering;
@@ -1629,9 +1136,9 @@ function leave(){   // the only way back to the landing page: signing out
   clearInterval(challengePollTimer); challengePollTimer = null;
   viewHistory.length = 0;
   authed = false; uid = null; authUser = null; entering = null;
-  state = {onboard:null, courses:{}}; ob = {step:0, university:"", name:"", level:"", program:"", exam:""};
+  state = {onboard:null, courses:{}}; onboarding.reset();
   Object.keys(banks).forEach(k => delete banks[k]); Object.keys(realBank).forEach(k => delete realBank[k]);
-  stopTimer(); leaveDuel(); closeSheet(); session = null; activeCourse = null;
+  stopTimer(); leaveDuel(); closeSheet(); practice.session = null; activeCourse = null;
   go("v-landing", {instant:true, replaceHistory:true});
 }
 async function syncSession(){

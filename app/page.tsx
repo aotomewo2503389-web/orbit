@@ -84,16 +84,32 @@ export default function HomePage() {
                 <g className="spin" style={{ animationDuration: "90s" }}><circle cx="20" cy="450" r="7" fill="var(--teal)" /></g>
               </svg>
             </div>
-            <p className="hero-kicker">A calmer way to prepare</p>
-            <h1><span className="ln"><span className="hero-line-mount" /></span><span className="ln soft"><span className="hero-line-mount" /></span></h1>
-            <div className="hero-foot">
-              <p>Past questions for your courses, asked cold. Miss one and Orbit shows you the exact mistake you made, then brings it back until it sticks.</p>
-              <button className="btn btn-primary" id="heroStart" data-start>Start practising</button>
+            <div className="hero-layout">
+              <div className="hero-copy">
+                <p className="hero-kicker">A calmer way to prepare</p>
+                <h1><span className="ln"><span className="hero-line-mount" /></span><span className="ln soft"><span className="hero-line-mount" /></span></h1>
+                <div className="hero-foot">
+                  <p>Practise real course questions, understand every miss, and spend your time where it makes the biggest difference.</p>
+                  <button className="btn btn-primary" id="heroStart" data-start>Start practising</button>
+                  <span className="hero-proof"><i aria-hidden="true">✓</i> Made for Covenant University courses</span>
+                </div>
+              </div>
+              <aside className="hero-preview" aria-label="Orbit practice session preview">
+                <div className="preview-topbar"><span className="preview-brand"><i /> orbit</span><span className="preview-course">PHY211 · PHYSICS</span><span className="preview-avatar">A</span></div>
+                <div className="preview-progress"><span /></div>
+                <p className="preview-label">QUESTION 04 <span>04 / 10</span></p>
+                <h2>A north pole is pushed towards a coil. What happens at the near end?</h2>
+                <div className="preview-answer"><i>A</i> It becomes a south pole</div>
+                <div className="preview-answer selected"><i>B</i> It becomes a north pole <b aria-hidden="true">✓</b></div>
+                <div className="preview-answer"><i>C</i> Nothing happens</div>
+                <div className="preview-bottom"><span>One question at a time</span><span className="preview-next">Next <b aria-hidden="true">→</b></span></div>
+                <div className="preview-note"><span>✦</span><div><b>Good reasoning</b><small>Lenz’s law explains why the coil pushes back.</small></div></div>
+              </aside>
             </div>
           </header>
           <section className="section" id="how">
             <div className="section-head">
-              <h2>How Orbit works</h2>
+              <div><p className="eyebrow">From first question to exam day</p><h2>How Orbit works</h2></div>
               <div className="section-tools">
                 <div className="drag-hint"><i className="glass"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5" /></svg></i>Swipe or drag</div>
                 <div id="rail-controls" />
@@ -114,7 +130,14 @@ export default function HomePage() {
             </div>
             <div id="phone-showcase-mount" />
           </section>
-          <section className="section"><div className="statement"><h2>Question<br />first.</h2><h2 className="right">Explanation<br />after.</h2><p>Most study tools hand you a summary and hope it sticks. Orbit asks the exam question first. Get it wrong and you see why that specific answer was wrong, followed by the working. Then a similar question comes back later to check the fix held.</p></div></section>
+          <section className="section feature-highlights" aria-labelledby="feature-highlights-title">
+            <div className="section-head"><div><p className="eyebrow">Built for better study sessions</p><h2 id="feature-highlights-title">A little structure goes a long way.</h2></div></div>
+            <div className="highlight-grid">
+              <article className="highlight-card"><span>01</span><h3>Keep your courses together</h3><p>Course pages bring question banks, settings, and progress into one focused space.</p></article>
+              <article className="highlight-card"><span>02</span><h3>Learn from the miss</h3><p>See the reasoning behind an answer and the specific misconception to watch for next time.</p></article>
+              <article className="highlight-card"><span>03</span><h3>Make progress visible</h3><p>Use your topic map to choose what to practise next, without guessing where to start.</p></article>
+            </div>
+          </section>
           <section className="section" id="universities">
             <div className="section-head"><h2>Universities in orbit</h2></div>
             <div className="university-list">
@@ -139,10 +162,19 @@ export default function HomePage() {
             <div className="section-head"><h2>Courses in orbit</h2></div>
             <div className="lineup" id="lineup" aria-label="Courses" />
           </section>
+          <section className="section faq-section" id="faq" aria-labelledby="faq-title">
+            <div className="section-head"><div><p className="eyebrow">Good to know</p><h2 id="faq-title">A few straight answers.</h2></div></div>
+            <div className="faq-list">
+              <details><summary>What is Orbit?</summary><p>Orbit is a course-based exam practice app. Choose a course, answer questions, and review clear explanations and progress by topic.</p></details>
+              <details><summary>Which courses can I practise?</summary><p>Orbit currently focuses on Covenant University courses. Available question banks and course details are shown in the course catalogue.</p></details>
+              <details><summary>Can I practise with a friend?</summary><p>Yes. Head-to-head sessions let you challenge a friend on the same question set and compare results.</p></details>
+              <details><summary>Will Orbit remember my progress?</summary><p>Your progress is saved to your account so you can return to your course sessions later.</p></details>
+            </div>
+          </section>
           <section className="section closing"><h2><span>Start</span><span>your orbit.</span></h2><button className="btn btn-primary" id="closingStart" data-start>Start practising</button></section>
           <footer className="glass">
             <div><div className="logo" style={{ marginBottom: 10 }}>orbit <small>by SLAWN</small></div><p>Exam practice for Covenant University courses, built from course papers and lecture notes.</p></div>
-            <div><h4>Product</h4><a href="#how">How it works</a><a href="#courses">Courses</a><a href="#" data-start>Start practising</a></div>
+            <div><h4>Product</h4><a href="#how">How it works</a><a href="#courses">Courses</a><a href="#faq">FAQ</a><a href="#" data-start>Start practising</a></div>
             <div><h4>Theme</h4><a href="#" data-theme-set="light">Light</a><a href="#" data-theme-set="dark">Dark</a></div>
             <div><h4>Legal</h4><a href="/legal/privacy.html">Privacy Policy</a><a href="/legal/terms.html">Terms of Service</a></div>
             <p className="fine">© 2026 Orbit by SLAWN. Your progress is saved privately to your account.</p>
