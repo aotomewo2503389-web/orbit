@@ -89,7 +89,7 @@ export default function HomePage() {
               <p className="hero-kicker">Exam practice, built around your courses</p>
               <h1><span className="ln"><span className="hero-line-mount" /></span><span className="ln soft"><span className="hero-line-mount" /></span></h1>
               <p className="hero-description">Choose a course, practise the questions that matter, and see what to work on next.</p>
-              <div className="hero-actions"><button className="btn btn-primary" id="heroStart" data-start>Get started</button><span>For Covenant University students</span></div>
+              <div className="hero-actions"><button className="btn btn-primary" id="heroStart" data-start>Get started</button><a className="hero-link" href="#how">See how it works</a><span>For Covenant University students</span></div>
             </div>
             <div className="hero-product" role="img" aria-label="Orbit course dashboard preview showing GST211, ENT211 and TMC211">
               <div className="product-window-bar"><span className="window-dots"><i /><i /><i /></span><span>orbit.study</span><span className="product-avatar">A</span></div>
