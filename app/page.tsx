@@ -53,7 +53,8 @@ export default function HomePage() {
         <div className="nav-links">
           <a href="#how" className="land-only">How it works</a>
           <a href="#courses" className="land-only">Courses</a>
-          <button className="btn btn-primary" id="navStart" hidden>Start practising</button>
+          <a href="#faq" className="land-only">FAQ</a>
+          <button className="btn btn-primary" id="navStart" hidden>Get started</button>
           <button className="btn btn-soft nav-install" id="navInstall" type="button" hidden>Install app</button>
           <button className="btn btn-soft" id="navProfile" type="button" hidden>Profile</button>
           <button className="theme-toggle" id="navTheme" type="button" aria-label="Switch to dark mode" aria-pressed="false" title="Switch to dark mode" hidden>
@@ -84,97 +85,61 @@ export default function HomePage() {
                 <g className="spin" style={{ animationDuration: "90s" }}><circle cx="20" cy="450" r="7" fill="var(--teal)" /></g>
               </svg>
             </div>
-            <div className="hero-layout">
-              <div className="hero-copy">
-                <p className="hero-kicker">A calmer way to prepare</p>
-                <h1><span className="ln"><span className="hero-line-mount" /></span><span className="ln soft"><span className="hero-line-mount" /></span></h1>
-                <div className="hero-foot">
-                  <p>Practise real course questions, understand every miss, and spend your time where it makes the biggest difference.</p>
-                  <button className="btn btn-primary" id="heroStart" data-start>Start practising</button>
-                  <span className="hero-proof"><i aria-hidden="true">✓</i> Made for Covenant University courses</span>
-                </div>
+            <div className="hero-copy">
+              <p className="hero-kicker">Exam practice, built around your courses</p>
+              <h1><span className="ln"><span className="hero-line-mount" /></span><span className="ln soft"><span className="hero-line-mount" /></span></h1>
+              <p className="hero-description">Choose a course, practise the questions that matter, and see what to work on next.</p>
+              <div className="hero-actions"><button className="btn btn-primary" id="heroStart" data-start>Get started</button><span>For Covenant University students</span></div>
+            </div>
+            <div className="hero-product" role="img" aria-label="Orbit course dashboard preview showing GST211, ENT211 and TMC211">
+              <div className="product-window-bar"><span className="window-dots"><i /><i /><i /></span><span>orbit.study</span><span className="product-avatar">A</span></div>
+              <div className="product-layout">
+                <aside className="product-sidebar"><span className="product-logo"><i /> orbit</span><span className="sidebar-label">YOUR SPACE</span><span className="sidebar-link active">◫ &nbsp; My courses</span><span className="sidebar-link">◷ &nbsp; Recent practice</span><span className="sidebar-link">⌁ &nbsp; Progress</span><div className="sidebar-profile"><i>A</i><span>Alex Morgan<small>200 level</small></span></div></aside>
+                <div className="product-main"><div className="product-greeting"><div><span>MONDAY, 9 JUNE</span><h2>Good morning, Alex.</h2><p>Ready to make a little progress?</p></div><b>☼</b></div><div className="product-section-label">YOUR COURSES <span>See all →</span></div><div className="product-course-list"><div className="product-course"><i className="course-icon gst">G</i><span><b>GST211</b><small>Philosophy, Logic and Human Existence</small></span><em>Continue →</em></div><div className="product-course"><i className="course-icon ent">E</i><span><b>ENT211</b><small>Entrepreneurial Development</small></span><em>Start →</em></div><div className="product-course"><i className="course-icon tmc">T</i><span><b>TMC211</b><small>Success Parameters</small></span><em>Start →</em></div></div><div className="product-progress"><div><span>THIS WEEK</span><b>You're building a good rhythm.</b></div><strong>4 <small>sessions</small></strong><i><span /></i></div></div>
               </div>
-              <aside className="hero-preview" aria-label="Orbit practice session preview">
-                <div className="preview-topbar"><span className="preview-brand"><i /> orbit</span><span className="preview-course">PHY211 · PHYSICS</span><span className="preview-avatar">A</span></div>
-                <div className="preview-progress"><span /></div>
-                <p className="preview-label">QUESTION 04 <span>04 / 10</span></p>
-                <h2>A north pole is pushed towards a coil. What happens at the near end?</h2>
-                <div className="preview-answer"><i>A</i> It becomes a south pole</div>
-                <div className="preview-answer selected"><i>B</i> It becomes a north pole <b aria-hidden="true">✓</b></div>
-                <div className="preview-answer"><i>C</i> Nothing happens</div>
-                <div className="preview-bottom"><span>One question at a time</span><span className="preview-next">Next <b aria-hidden="true">→</b></span></div>
-                <div className="preview-note"><span>✦</span><div><b>Good reasoning</b><small>Lenz’s law explains why the coil pushes back.</small></div></div>
-              </aside>
             </div>
           </header>
-          <section className="section" id="how">
-            <div className="section-head">
-              <div><p className="eyebrow">From first question to exam day</p><h2>How Orbit works</h2></div>
-              <div className="section-tools">
-                <div className="drag-hint"><i className="glass"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5" /></svg></i>Swipe or drag</div>
-                <div id="rail-controls" />
-              </div>
+          <section className="section walkthrough" id="how">
+            <div className="section-head"><div><p className="eyebrow">One good session at a time</p><h2>From course page to exam day.</h2></div></div>
+            <div className="walkthrough-list">
+              <article className="walkthrough-step"><div className="walkthrough-copy"><span>01</span><h3>Start with your courses.</h3><p>Keep the subjects you’re working on together. Open GST211, ENT211, or TMC211 and see what’s ready to practise.</p></div><div className="walkthrough-visual course-picker" aria-hidden="true"><div className="mock-heading"><span>YOUR COURSES</span><b>See all →</b></div><div className="mock-course"><i>G</i><span><b>GST211</b><small>Philosophy, Logic and Human Existence</small></span><em>Open ↗</em></div><div className="mock-course"><i>E</i><span><b>ENT211</b><small>Entrepreneurial Development</small></span><em>Open ↗</em></div><div className="mock-course"><i>T</i><span><b>TMC211</b><small>Success Parameters</small></span><em>Open ↗</em></div></div></article>
+              <article className="walkthrough-step"><div className="walkthrough-copy"><span>02</span><h3>Choose a way to practise.</h3><p>Warm up with a short set or shape a session by topic, difficulty, and pace. You decide what to work on.</p></div><div className="walkthrough-visual session-picker" aria-hidden="true"><div className="mock-window-top"><i /><i /><i /><span>GST211 · PRACTICE</span></div><p className="mock-eyebrow">CHOOSE YOUR NEXT SET</p><h4>What would you like to focus on?</h4><div className="mock-session-card"><i>◷</i><span><b>Quick warm-up</b><small>5 questions · about 10 minutes</small></span><strong>→</strong></div><div className="mock-session-card"><i>⌘</i><span><b>Build your own</b><small>Pick topics and set the pace</small></span><strong>→</strong></div></div></article>
+              <article className="walkthrough-step"><div className="walkthrough-copy"><span>03</span><h3>Try the question first.</h3><p>Answer one question at a time. If you miss it, Orbit shows the working and the idea behind the correct answer.</p></div><div className="walkthrough-visual question-preview" aria-hidden="true"><div className="mock-window-top"><i /><i /><i /><span>QUESTION 04 OF 10</span></div><div className="mock-progress"><i /></div><p className="mock-eyebrow">GST211 · LOGIC</p><h4>Which statement best describes a valid argument?</h4><div className="mock-option"><i>A</i> A conclusion supported by true premises</div><div className="mock-option correct"><i>B</i> A conclusion that follows from its premises <b>✓</b></div><div className="mock-option"><i>C</i> A statement most people agree with</div><div className="mock-explanation"><b>That’s the idea.</b><span>Validity is about the connection between premises and conclusion.</span></div></div></article>
+              <article className="walkthrough-step"><div className="walkthrough-copy"><span>04</span><h3>See your progress take shape.</h3><p>Review your accuracy by topic, revisit recurring mistakes, and use your results to choose what comes next.</p></div><div className="walkthrough-visual progress-preview" aria-hidden="true"><div className="mock-heading"><span>YOUR GST211 PROGRESS</span><b>This month⌄</b></div><div className="mock-score"><strong>78%</strong><span>accuracy so far<small>↑ 12% from last week</small></span></div><div className="mock-topic"><span>Deductive reasoning</span><i><b style={customWidth("78%")} /></i><strong>78%</strong></div><div className="mock-topic"><span>Ethics</span><i><b style={customWidth("62%")} /></i><strong>62%</strong></div><div className="mock-topic"><span>Human existence</span><i><b style={customWidth("44%")} /></i><strong>44%</strong></div><div className="mock-next">NEXT UP <b>Review human existence →</b></div></div></article>
             </div>
-            <div className="rail" id="rail">
-              <article className="story s1"><div className="art"><div className="paper-stack"><div className="paper"><b>Past question</b>Define magnetic flux density and state its SI unit.</div><div className="paper"><b>Past question</b>State Lenz’s law and explain how it follows from conservation of energy.</div><div className="paper"><b>Past question</b>A transformer steps 240 V down to 12 V. If the primary has 1200 turns, how many turns are on the secondary?</div></div></div><div className="cap glass"><span>Question bank</span><h3>Built from course papers and lecture notes</h3></div></article>
-              <article className="story s2"><div className="art"><div className="mini-q"><p>The north pole of a magnet is pushed into a coil. The near end becomes…</p><div>A south pole</div><div className="pick">A north pole</div><div>Nothing, there’s no battery</div></div></div><div className="cap glass"><span>Practice first</span><h3>The question comes before the explanation</h3></div></article>
-              <article className="story s3"><div className="art"><div className="chips"><div className="chip">Inverted turns ratio <em>×3</em></div><div className="chip">Forgot to square r <em>×2</em></div><div className="chip">Lenz direction flipped <em>×1</em></div></div></div><div className="cap glass"><span>Mistake tagging</span><h3>Every wrong answer gets a name, so you can fix the habit</h3></div></article>
-              <article className="story s4"><div className="art"><div className="bars"><div>Transformers<s style={customWidth("38%")} /></div><div>Induction<s style={customWidth("54%")} /></div><div>Capacitance<s style={customWidth("72%")} /></div><div>Electrostatics<s style={customWidth("88%")} /></div></div></div><div className="cap glass"><span>Weak-spot map</span><h3>See where you lose marks, then practise only that</h3></div></article>
-              <article className="story s5"><div className="art"><div className="vs"><div>You<s style={customWidth("70%")} /><b>7</b></div><div>Tolu<s style={customWidth("60%")} /><b>6</b></div></div></div><div className="cap glass"><span>Head to head</span><h3>Same questions as a friend, live or by challenge code</h3></div></article>
-            </div>
-          </section>
-          <section className="section phone-showcase" aria-labelledby="phone-showcase-title">
-            <div className="section-head">
-              <div><p className="eyebrow">A closer look</p><h2 id="phone-showcase-title">Made for the way you practise.</h2></div>
-              <p className="showcase-intro">Three small glimpses of a calmer, more useful study session.</p>
-            </div>
-            <div id="phone-showcase-mount" />
           </section>
           <section className="section feature-highlights" aria-labelledby="feature-highlights-title">
-            <div className="section-head"><div><p className="eyebrow">Built for better study sessions</p><h2 id="feature-highlights-title">A little structure goes a long way.</h2></div></div>
+            <div className="section-head"><div><p className="eyebrow">Made for how you study</p><h2 id="feature-highlights-title">Everything you need to keep moving.</h2></div></div>
             <div className="highlight-grid">
-              <article className="highlight-card"><span>01</span><h3>Keep your courses together</h3><p>Course pages bring question banks, settings, and progress into one focused space.</p></article>
-              <article className="highlight-card"><span>02</span><h3>Learn from the miss</h3><p>See the reasoning behind an answer and the specific misconception to watch for next time.</p></article>
-              <article className="highlight-card"><span>03</span><h3>Make progress visible</h3><p>Use your topic map to choose what to practise next, without guessing where to start.</p></article>
+              <article className="highlight-card"><span>↗</span><h3>Course-specific questions</h3><p>Practise with question banks organized around your actual courses.</p></article>
+              <article className="highlight-card"><span>⌘</span><h3>Sessions that fit your day</h3><p>Choose a quick warm-up or customize a longer practice set.</p></article>
+              <article className="highlight-card"><span>✓</span><h3>Explanations that teach</h3><p>See the reasoning and working after each answer—not just a score.</p></article>
+              <article className="highlight-card"><span>⌁</span><h3>A map of your weak spots</h3><p>Find topics that need more attention and practise them directly.</p></article>
+              <article className="highlight-card"><span>◎</span><h3>Progress worth coming back to</h3><p>Your account keeps your course practice and results together.</p></article>
+              <article className="highlight-card"><span>↔</span><h3>Challenge a friend</h3><p>Go head to head on the same set and compare how you did.</p></article>
             </div>
           </section>
-          <section className="section" id="universities">
-            <div className="section-head"><h2>Universities in orbit</h2></div>
-            <div className="university-list">
-              <article className="university-tile glass" aria-label="Covenant University, available now">
-                <img className="university-logo" src="/universities/covenant-university.jpeg" alt="" aria-hidden="true" />
-                <h3>Covenant University</h3>
-                <span className="university-status">Available now</span>
-              </article>
-              <article className="university-tile glass coming-soon" tabIndex={0} aria-label="UNILAG, coming soon">
-                <img className="university-logo" src="/universities/unilag.jpeg" alt="" aria-hidden="true" />
-                <h3>UNILAG</h3>
-                <span className="university-status" aria-hidden="true">Coming soon</span>
-              </article>
-              <article className="university-tile glass coming-soon" tabIndex={0} aria-label="Landmark University, coming soon">
-                <img className="university-logo" src="/universities/landmark-university.jpeg" alt="" aria-hidden="true" />
-                <h3>Landmark University</h3>
-                <span className="university-status" aria-hidden="true">Coming soon</span>
-              </article>
-            </div>
-          </section>
-          <section className="section" id="courses">
-            <div className="section-head"><h2>Courses in orbit</h2></div>
+          <section className="section courses-section" id="courses">
+            <div className="section-head"><div><p className="eyebrow">Your course space</p><h2>Start with the courses in orbit.</h2></div><p className="showcase-intro">Choose your course after signing in to see its question bank and practice options.</p></div>
             <div className="lineup" id="lineup" aria-label="Courses" />
           </section>
           <section className="section faq-section" id="faq" aria-labelledby="faq-title">
-            <div className="section-head"><div><p className="eyebrow">Good to know</p><h2 id="faq-title">A few straight answers.</h2></div></div>
+            <div className="section-head"><div><p className="eyebrow">Frequently asked questions</p><h2 id="faq-title">A few straight answers.</h2></div></div>
             <div className="faq-list">
-              <details><summary>What is Orbit?</summary><p>Orbit is a course-based exam practice app. Choose a course, answer questions, and review clear explanations and progress by topic.</p></details>
-              <details><summary>Which courses can I practise?</summary><p>Orbit currently focuses on Covenant University courses. Available question banks and course details are shown in the course catalogue.</p></details>
-              <details><summary>Can I practise with a friend?</summary><p>Yes. Head-to-head sessions let you challenge a friend on the same question set and compare results.</p></details>
-              <details><summary>Will Orbit remember my progress?</summary><p>Your progress is saved to your account so you can return to your course sessions later.</p></details>
+              <details><summary>What is Orbit?</summary><p>Orbit is a course-based exam practice app. Choose a course, answer questions, and review explanations and progress by topic.</p></details>
+              <details><summary>Which courses are available?</summary><p>Orbit currently focuses on Covenant University courses. Available course pages and question banks are listed in the course catalogue.</p></details>
+              <details><summary>How do I get started?</summary><p>Sign in with Google, complete the short course setup, and choose a course to open its practice space.</p></details>
+              <details><summary>Can I choose what to practise?</summary><p>Yes. Depending on the course bank, you can build a set by topic, difficulty, question count, and timer—or start a short warm-up.</p></details>
+              <details><summary>What happens when I get a question wrong?</summary><p>Orbit shows the correct answer, explains the underlying idea, and records the topic so you can review it later.</p></details>
+              <details><summary>Can I practise with a friend?</summary><p>Yes. Start a live duel or create a challenge code to compare results on the same question set.</p></details>
+              <details><summary>Will Orbit save my progress?</summary><p>Your practice history and course progress are saved to your account so you can pick up where you left off.</p></details>
+              <details><summary>Can I use Orbit on my phone?</summary><p>Yes. Orbit runs in a mobile browser and can be installed from the browser when supported.</p></details>
             </div>
           </section>
-          <section className="section closing"><h2><span>Start</span><span>your orbit.</span></h2><button className="btn btn-primary" id="closingStart" data-start>Start practising</button></section>
+          <section className="section closing"><p className="eyebrow">Your next session starts here</p><h2><span>Bring your courses.</span><span>We’ll take it from there.</span></h2><button className="btn btn-primary" id="closingStart" data-start>Get started</button></section>
           <footer className="glass">
-            <div><div className="logo" style={{ marginBottom: 10 }}>orbit <small>by SLAWN</small></div><p>Exam practice for Covenant University courses, built from course papers and lecture notes.</p></div>
-            <div><h4>Product</h4><a href="#how">How it works</a><a href="#courses">Courses</a><a href="#faq">FAQ</a><a href="#" data-start>Start practising</a></div>
+            <div><div className="logo" style={{ marginBottom: 10 }}>orbit <small>by SLAWN</small></div><p>Study, practise, and prepare for the courses ahead.</p></div>
+            <div><h4>Product</h4><a href="#how">How it works</a><a href="#courses">Courses</a><a href="#faq">FAQ</a><a href="#" data-start>Get started</a></div>
             <div><h4>Theme</h4><a href="#" data-theme-set="light">Light</a><a href="#" data-theme-set="dark">Dark</a></div>
             <div><h4>Legal</h4><a href="/legal/privacy.html">Privacy Policy</a><a href="/legal/terms.html">Terms of Service</a></div>
             <p className="fine">© 2026 Orbit by SLAWN. Your progress is saved privately to your account.</p>

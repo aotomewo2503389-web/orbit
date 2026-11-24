@@ -16,6 +16,20 @@ function cs(code){ state.courses[code] = state.courses[code] || {attempts:{}, ta
 function prefsFor(code){ return Object.assign({}, DEFAULT_PREFS, cs(code).prefs); }
 function bankFor(code){ return banks[code] && banks[code].length ? banks[code] : SAMPLE; }
 function myName(){ return (state.onboard && state.onboard.name) || "You"; }
+function courseMark(course, extraClass = ""){
+  const code = String(course.code || course.name || "ORBIT").replace(/[^A-Z0-9]/gi, "").slice(0, 4).toUpperCase();
+  const icon = String(course.icon || "general");
+  const paths = {
+    maths:`<circle cx="16" cy="16" r="11"/><path d="M10 11h12M13 8v16M19 8v16"/>`,
+    physics:`<ellipse cx="16" cy="16" rx="13" ry="5"/><ellipse cx="16" cy="16" rx="5" ry="13"/><circle cx="16" cy="16" r="2"/>`,
+    computing:`<rect x="5" y="7" width="22" height="15" rx="3"/><path d="M10 27h12M16 22v5M10 12l3 3-3 3M17 18h5"/>`,
+    engineering:`<path d="M8 25V13l8-5 8 5v12M12 25v-8h8v8M16 8V4M13 4h6"/>`,
+    chemistry:`<path d="M13 6h6M14 6v7l-6 10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3l-6-10V6"/><path d="M11 20h10"/>`,
+    biology:`<path d="M16 28V12M16 12c-5 0-8-3-8-7 5 0 8 3 8 7Zm0 5c5 0 8-3 8-7-5 0-8 3-8 7Zm0 5c-4 0-7-2-7-6-5 1-7 5-5 9 2 3 6 4 12 3Z"/>`,
+    general:`<circle cx="16" cy="16" r="11"/><path d="M16 9v14M9 16h14"/><circle cx="16" cy="16" r="4"/>`
+  };
+  return `<span class="course-mark ${esc(extraClass)}" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round">${paths[icon] || paths.general}</svg></span>`;
+}
 const PROFILE_EQUIPMENT = [
   {id:"hint-potion", name:"Hint Potion", description:"A hint-themed loadout cosmetic"},
   {id:"study-compass", name:"Study Compass", description:"A suggestion-themed loadout cosmetic"},
@@ -183,7 +197,7 @@ function go(id, opts = {}){
     }
     current = id;
     document.body.classList.toggle("in-app", id !== "v-landing");
-    $("navStart").hidden = id !== "v-landing" || !landingStartUnlocked;
+    $("navStart").hidden = id !== "v-landing";
     $("navTheme").hidden = !authed;
     $("navOut").hidden = !authed;
     $("navProfile").hidden = !authed || !hasCompletedOnboarding() || id === "v-practice" || id === "v-duel";
@@ -273,6 +287,7 @@ document.addEventListener("pointermove", e => {
 
 (function(){
   const rail = $("rail"); let down = false, sx = 0, sl = 0;
+  if(!rail) return;
   rail.addEventListener("pointerdown", e => { if(e.pointerType !== "mouse") return; down = true; sx = e.clientX; sl = rail.scrollLeft; rail.classList.add("dragging"); });
   window.addEventListener("pointermove", e => { if(down) rail.scrollLeft = sl - (e.clientX - sx); });
   window.addEventListener("pointerup", () => { if(!down) return; down = false; rail.classList.remove("dragging"); });
@@ -1138,7 +1153,7 @@ function leave(){   // the only way back to the landing page: signing out
   authed = false; uid = null; authUser = null; entering = null;
   state = {onboard:null, courses:{}}; onboarding.reset();
   Object.keys(banks).forEach(k => delete banks[k]); Object.keys(realBank).forEach(k => delete realBank[k]);
-  stopTimer(); leaveDuel(); closeSheet(); practice.session = null; activeCourse = null;
+  stopTimer(); leaveDuel(); closeSheet(); session = null; practice.session = null; activeCourse = null;
   go("v-landing", {instant:true, replaceHistory:true});
 }
 async function syncSession(){
