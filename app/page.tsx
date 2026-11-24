@@ -7,6 +7,14 @@ const customWidth = (width: string): WidthStyle => ({ "--w": width });
 
 export default function HomePage() {
   useEffect(() => {
+    let stopMotion: (() => void) | undefined;
+    let cancelled = false;
+    import("./landing-motion.js")
+      .then((motion) => {
+        if (!cancelled) stopMotion = motion.initLandingMotion();
+      })
+      .catch((error: unknown) => console.error("Landing motion could not start.", error));
+
     const loadOrbit = async () => {
       const globalWindow = window as Window & { supabase?: unknown };
 
@@ -33,6 +41,11 @@ export default function HomePage() {
     loadOrbit().catch((error: unknown) => {
       console.error("Orbit could not initialize.", error);
     });
+
+    return () => {
+      cancelled = true;
+      stopMotion?.();
+    };
   }, []);
 
   return (
@@ -140,7 +153,6 @@ export default function HomePage() {
           <footer className="glass">
             <div><div className="logo" style={{ marginBottom: 10 }}>orbit <small>by SLAWN</small></div><p>Study, practise, and prepare for the courses ahead.</p></div>
             <div><h4>Product</h4><a href="#how">How it works</a><a href="#courses">Courses</a><a href="#faq">FAQ</a><a href="#" data-start>Get started</a></div>
-            <div><h4>Theme</h4><a href="#" data-theme-set="light">Light</a><a href="#" data-theme-set="dark">Dark</a></div>
             <div><h4>Legal</h4><a href="/legal/privacy.html">Privacy Policy</a><a href="/legal/terms.html">Terms of Service</a></div>
             <p className="fine">© 2026 Orbit by SLAWN. Your progress is saved privately to your account.</p>
           </footer>
