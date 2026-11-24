@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
 import Script from "next/script";
 import "../styles.css";
+import "./apple.css";
 
 export const metadata: Metadata = {
   title: "Orbit by SLAWN — Practise your exam",
